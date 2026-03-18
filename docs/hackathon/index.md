@@ -150,14 +150,6 @@ Population-level data, outbreak analysis, and health equity.
 - [GBD Disease Burden Visualiser](projects/gbd-visualiser.md) -- IHME data to DALYs, prevalence, and regional trends
 - [Antimicrobial Resistance Profiler](projects/amr-profiler.md) -- detect AMR genes from metagenomic reads (CARD database)
 
-### Track F: Databricks
-
-Databricks is sponsoring this hackathon with a **week of dedicated Solutions Architect time** to help productionise the best output. Build skills designed to scale.
-
-- [Genomics ETL on Databricks](projects/databricks-genomics-etl.md) -- prepare VCF/23andMe data as Delta Lake tables
-- [Cohort Analytics Dashboard](projects/databricks-cohort-dashboard.md) -- batch PharmGx across a cohort, produce population-level dashboard
-- [Variant Warehouse](projects/databricks-variant-warehouse.md) -- multi-source variant ingestion into a queryable warehouse
-
 ---
 
 ## Not Sure Which Track?
