@@ -2,8 +2,8 @@ site_name: ClawBio Documentation
 site_url: https://docs.clawbio.ai
 site_description: The reference repository for biological AI agent skills. Curated. Reproducible. Open.
 site_author: Manuel Corpas
-repo_url: https://github.com/ClawBio/docs
-repo_name: ClawBio/docs
+repo_url: https://github.com/ClawBio/ClawBio
+repo_name: ClawBio/ClawBio
 
 theme:
   name: material
