@@ -35,6 +35,15 @@ description: Build AI-powered bioinformatics skills at Imperial College London. 
   <p class="tutorial-card__desc">Intro slides covering ClawBio, SKILL.md, and what to build today.</p>
 </a>
 
+<a class="tutorial-card" href="hackathon/agentic-tools/">
+  <div class="tutorial-card__header">
+    <span class="difficulty-badge difficulty-badge--tutorial">Tutorial</span>
+    <span class="time-estimate">15 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Agentic Tools Tutorial</h3>
+  <p class="tutorial-card__desc">Use Claude Code and AI coding assistants to build skills faster.</p>
+</a>
+
 <a class="tutorial-card" href="hackathon/setup/">
   <div class="tutorial-card__header">
     <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
@@ -69,21 +78,6 @@ description: Build AI-powered bioinformatics skills at Imperial College London. 
   </div>
   <h3 class="tutorial-card__title">Test & Submit</h3>
   <p class="tutorial-card__desc">Validate your skill, run tests, and submit your hackathon entry.</p>
-</a>
-
-</div>
-
-<h2 class="section-heading">Resources</h2>
-
-<div class="tutorial-cards">
-
-<a class="tutorial-card" href="hackathon/agentic-tools/">
-  <div class="tutorial-card__header">
-    <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
-    <span class="time-estimate">15 min</span>
-  </div>
-  <h3 class="tutorial-card__title">Agentic Tools Tutorial</h3>
-  <p class="tutorial-card__desc">Use Claude Code and AI coding assistants to build skills faster.</p>
 </a>
 
 </div>

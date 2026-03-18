@@ -642,6 +642,11 @@
   background: rgba(165, 214, 255, 0.15);
 }
 
+.difficulty-badge--tutorial {
+  color: #d2a8ff;
+  background: rgba(210, 168, 255, 0.15);
+}
+
 /* Light theme badge overrides */
 [data-md-color-scheme="default"] .difficulty-badge--beginner {
   color: #16a34a;
@@ -661,6 +666,11 @@
 [data-md-color-scheme="default"] .difficulty-badge--event {
   color: #2563eb;
   background: #dbeafe;
+}
+
+[data-md-color-scheme="default"] .difficulty-badge--tutorial {
+  color: #7c3aed;
+  background: #ede9fe;
 }
 
 /* ============================================================
