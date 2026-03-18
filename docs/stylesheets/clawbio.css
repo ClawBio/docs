@@ -437,8 +437,8 @@
 
 .tutorial-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
   margin: 1rem 0 2.5rem;
 }
 
@@ -446,8 +446,8 @@
 .tutorial-card {
   display: flex;
   flex-direction: column;
-  border-radius: 12px;
-  padding: 1.5rem;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
   text-decoration: none !important;
   color: inherit !important;
   transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
@@ -467,7 +467,7 @@
 
 [data-md-color-scheme="clawbio"] .tutorial-card:hover {
   border-color: #3fb950;
-  box-shadow: 0 4px 16px rgba(63, 185, 80, 0.1);
+  box-shadow: 0 4px 20px rgba(63, 185, 80, 0.12);
 }
 
 /* Light theme cards */
@@ -487,23 +487,31 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
   flex-wrap: wrap;
 }
 
-.tutorial-card__number {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #8b949e;
+/* Step number */
+.tutorial-card__step {
+  font-size: 0.75rem;
+  font-weight: 800;
   letter-spacing: 0.04em;
-  min-width: 1.8rem;
+  margin-right: auto;
+}
+
+[data-md-color-scheme="clawbio"] .tutorial-card__step {
+  color: #484f58;
+}
+
+[data-md-color-scheme="default"] .tutorial-card__step {
+  color: #94a3b8;
 }
 
 /* Card title */
 .tutorial-card__title {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  margin: 0 0 0.25rem;
+  margin: 0 0 0.35rem;
   line-height: 1.3;
 }
 
@@ -519,7 +527,7 @@
 .tutorial-card__desc {
   font-size: 0.88rem;
   color: #8b949e;
-  line-height: 1.6;
+  line-height: 1.55;
   margin: 0;
   flex: 1;
 }
@@ -688,7 +696,7 @@
    Responsive: single column below 480px
    ============================================================ */
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .tutorial-cards,
   .section-cards {
     grid-template-columns: 1fr;

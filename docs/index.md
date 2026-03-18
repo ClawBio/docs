@@ -48,6 +48,7 @@ description: Build AI-powered bioinformatics skills at Imperial College London. 
   <div class="tutorial-card__header">
     <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
     <span class="time-estimate">10 min</span>
+    <span class="tutorial-card__step">STEP 1</span>
   </div>
   <h3 class="tutorial-card__title">Setup</h3>
   <p class="tutorial-card__desc">Clone ClawBio, install dependencies, and run your first demo skill.</p>
@@ -57,6 +58,7 @@ description: Build AI-powered bioinformatics skills at Imperial College London. 
   <div class="tutorial-card__header">
     <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
     <span class="time-estimate">20 min</span>
+    <span class="tutorial-card__step">STEP 2</span>
   </div>
   <h3 class="tutorial-card__title">Your First Skill</h3>
   <p class="tutorial-card__desc">Write a SKILL.md from scratch and see it run end-to-end.</p>
@@ -66,6 +68,7 @@ description: Build AI-powered bioinformatics skills at Imperial College London. 
   <div class="tutorial-card__header">
     <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
     <span class="time-estimate">20 min</span>
+    <span class="tutorial-card__step">STEP 3</span>
   </div>
   <h3 class="tutorial-card__title">Add Python</h3>
   <p class="tutorial-card__desc">Add a Python implementation to your skill with real bioinformatics logic.</p>
@@ -75,6 +78,7 @@ description: Build AI-powered bioinformatics skills at Imperial College London. 
   <div class="tutorial-card__header">
     <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
     <span class="time-estimate">10 min</span>
+    <span class="tutorial-card__step">STEP 4</span>
   </div>
   <h3 class="tutorial-card__title">Test & Submit</h3>
   <p class="tutorial-card__desc">Validate your skill, run tests, and submit your hackathon entry.</p>
