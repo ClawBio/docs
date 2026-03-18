@@ -9,16 +9,16 @@ ClawBio ships with **24+ skills** spanning pharmacogenomics, population genetics
 
 ## Production-Ready Skills
 
-- **[PharmGx Reporter](/skills/pharmgx-reporter)** — Pharmacogenomics report from 23andMe/AncestryDNA/VCF data. CPIC guideline-backed drug-gene interactions.
-- **[scRNA Orchestrator](/skills/scrna-orchestrator)** — End-to-end single-cell RNA-seq pipeline: QC, normalisation, clustering, marker genes, doublet removal.
-- **[Equity Scorer (HEIM)](/skills/equity-scorer)** — Health Equity Impact Metric — measures genomic dataset diversity and population representation.
-- **[NutriGx Advisor](/skills/nutrigx-advisor)** — Personalised nutrition report from genetic data. 40+ nutritionally-relevant SNPs.
-- **[Genome Compare](/skills/genome-compare)** — Pairwise genome comparison with IBS scoring. Compare against George Church's genome.
-- **[GWAS PRS](/skills/gwas-prs)** — Polygenic risk scores from consumer genetic data. 6 curated traits.
-- **[GWAS Lookup](/skills/gwas-lookup)** — Federated variant query across 9 genomic databases.
-- **[Illumina Bridge](/skills/illumina-bridge)** — Integration with Illumina Connected Analytics (ICA) platform.
-- **[Galaxy Bridge](/skills/galaxy-bridge)** — Search, inspect, and run Galaxy tools from ClawBio.
-- **[RNA-seq DE](/skills/rnaseq-de)** — Bulk and pseudo-bulk RNA-seq differential expression with PyDESeq2.
+- **[PharmGx Reporter](pharmgx-reporter.md)** — Pharmacogenomics report from 23andMe/AncestryDNA/VCF data. CPIC guideline-backed drug-gene interactions.
+- **[scRNA Orchestrator](scrna-orchestrator.md)** — End-to-end single-cell RNA-seq pipeline: QC, normalisation, clustering, marker genes, doublet removal.
+- **[Equity Scorer (HEIM)](equity-scorer.md)** — Health Equity Impact Metric — measures genomic dataset diversity and population representation.
+- **[NutriGx Advisor](nutrigx-advisor.md)** — Personalised nutrition report from genetic data. 40+ nutritionally-relevant SNPs.
+- **[Genome Compare](genome-compare.md)** — Pairwise genome comparison with IBS scoring. Compare against George Church's genome.
+- **[GWAS PRS](gwas-prs.md)** — Polygenic risk scores from consumer genetic data. 6 curated traits.
+- **[GWAS Lookup](gwas-lookup.md)** — Federated variant query across 9 genomic databases.
+- **[Illumina Bridge](illumina-bridge.md)** — Integration with Illumina Connected Analytics (ICA) platform.
+- **[Galaxy Bridge](galaxy-bridge.md)** — Search, inspect, and run Galaxy tools from ClawBio.
+- **[RNA-seq DE](rnaseq-de.md)** — Bulk and pseudo-bulk RNA-seq differential expression with PyDESeq2.
 
 ## Additional Skills
 

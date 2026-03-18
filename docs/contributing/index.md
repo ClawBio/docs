@@ -9,8 +9,8 @@ ClawBio is an open project. Anyone can contribute a skill -- from a simple SKILL
 
 ## Ways to Contribute
 
-- **[Author a Skill](/contributing/author-journey)** — Create a new bioinformatics skill from scratch using our scaffolding tools.
-- **[Integrate a Framework](/contributing/framework-integration)** — Connect your agent framework to ClawBio's registry and MCP bridge.
+- **[Author a Skill](author-journey.md)** — Create a new bioinformatics skill from scratch using our scaffolding tools.
+- **[Integrate a Framework](framework-integration.md)** — Connect your agent framework to ClawBio's registry and MCP bridge.
 
 ## Quick Start
 

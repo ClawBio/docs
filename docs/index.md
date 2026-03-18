@@ -84,4 +84,4 @@ description: Build AI-powered bioinformatics skills at Imperial College London. 
 
 ---
 
-[Skill Library](skills/) · [SKILL.md Spec](reference/skillmd-spec/) · [Contributing](contributing/) · [All Tutorials](tutorials/)
+[Skill Library](skills/index.md) · [SKILL.md Spec](reference/skillmd-spec.md) · [Contributing](contributing/index.md) · [All Tutorials](tutorials/index.md)
