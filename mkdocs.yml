@@ -26,26 +26,21 @@ theme:
   features:
     - navigation.tabs
     - navigation.tabs.sticky
-    - navigation.sections
-    - navigation.expand
     - navigation.top
     - navigation.footer
     - search.suggest
-    - search.highlight
     - content.code.copy
-    - content.tabs.link
     - header.autohide
   font: false
 
 nav:
-  - Home: index.md
-  - Get Started:
-    - Welcome: start/index.md
-    - Quickstart: start/quickstart.md
-    - Installation: start/install.md
-    - What is SKILL.md?: start/what-is-skillmd.md
-    - Architecture: start/architecture.md
-    - Trust Model: start/trust-model.md
+  - Hackathon:
+    - Guide: hackathon/index.md
+    - Setup: hackathon/setup.md
+    - Build a Skill: hackathon/first-skill.md
+    - Add Python: hackathon/add-python.md
+    - Submit: hackathon/submit.md
+    - Agentic Tools: hackathon/agentic-tools.md
   - Skills:
     - Skill Library: skills/index.md
     - PharmGx Reporter: skills/pharmgx-reporter.md
@@ -55,23 +50,13 @@ nav:
     - Genome Compare: skills/genome-compare.md
     - GWAS PRS: skills/gwas-prs.md
     - GWAS Lookup: skills/gwas-lookup.md
-    - Illumina Bridge: skills/illumina-bridge.md
     - Galaxy Bridge: skills/galaxy-bridge.md
     - RNA-seq DE: skills/rnaseq-de.md
   - Reference:
-    - SKILL.md Specification: reference/skillmd-spec.md
-    - CLI Reference: reference/cli.md
+    - SKILL.md Spec: reference/skillmd-spec.md
+    - CLI: reference/cli.md
     - Security: reference/security.md
-  - Hackathon:
-    - Guide: hackathon/index.md
-    - Setup: hackathon/setup.md
-    - Your First Skill: hackathon/first-skill.md
-    - Add Python: hackathon/add-python.md
-    - Test and Submit: hackathon/submit.md
-  - Contributing:
-    - Overview: contributing/index.md
-    - Author Journey: contributing/author-journey.md
-    - Framework Integration: contributing/framework-integration.md
+    - Contributing: contributing/index.md
 
 plugins:
   - search

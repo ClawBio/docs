@@ -60,7 +60,8 @@ Food and drinks will be provided (pizza at 13:30).
 | **12:00** | **Doors open** | Arrive, get set up, connect to WiFi |
 | **12:30** | **Welcome** | Nathan Skene (Imperial) and Manuel Corpas (Westminster) |
 | **12:45** | **[Overview of the day](presentation/)** | Themes, tracks, how submissions work |
-| **13:15** | **Guided Tutorial** | Hands-on with helpers. Follow the [Skills Cookbook](https://neurogenomics.github.io/agentic-life-sciences-tutorial/) and the [ClawBio Setup](setup.md) |
+| **13:00** | **Databricks** | Toz Ozturk (Databricks) -- genomics on Databricks (~15 min) |
+| **13:15** | **Guided Tutorial** | Hands-on with helpers. Follow the [Agentic Tools tutorial](agentic-tools.md) and the [ClawBio Setup](setup.md) |
 | **13:30** | **Pizza** | Lunch break, keep hacking if you want |
 | **14:00** | **Build** | Work on your skill (solo or in teams). Helpers circulate. |
 | **15:30** | **Breakout Tables** | Rotate between themed discussions (pick 1-2): |
@@ -78,8 +79,8 @@ Food and drinks will be provided (pizza at 13:30).
 
 Two guided tutorials are available to get you started:
 
-1. **[Skills Cookbook](https://neurogenomics.github.io/agentic-life-sciences-tutorial/)** (Jay Moore, Imperial) -- Setup OpenCode, explore datasets with AI, build journal club slides, single-cell portals, and context management. Great for learning agentic workflows from scratch.
-2. **[ClawBio Tutorial](setup.md)** (this site) -- Clone ClawBio, run a demo skill, then build your own following the step-by-step guide.
+1. **[Agentic Tools Tutorial](agentic-tools.md)** -- How AI coding agents work, setup options (GitHub Copilot, Claude Code, OpenCode), your first AI-assisted analysis, and context management tips. Adapted from Jay Moore's Skills Cookbook.
+2. **[ClawBio Setup](setup.md)** -- Clone ClawBio, run a demo skill, then build your own following the step-by-step guide.
 
 Both paths converge at the same goal: a working skill you can submit as a PR.
 

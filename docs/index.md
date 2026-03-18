@@ -1,20 +1,15 @@
 ---
 title: ClawBio Documentation
-description: The reference repository for biological AI agent skills
+description: Bioinformatics AI agent skills. Curated. Reproducible. Open.
 ---
 
 # ClawBio Documentation
 
-**ClawBio** is a curated, reproducible, open-source repository of bioinformatics skills that any AI agent can call.
+**ClawBio** is a curated, reproducible, open-source repository of bioinformatics skills that any AI agent can run.
 
-- **[Quickstart](start/quickstart.md)** -- Get running in under 5 minutes
-- **[Skill Library](skills/index.md)** -- Browse 24+ bioinformatics skills
-- **[Hackathon Guide](hackathon/index.md)** -- Build a skill at the ClawBio Hackathon
-- **[SKILL.md Spec](reference/skillmd-spec.md)** -- Understand the specification
-- **[Contributing](contributing/index.md)** -- Submit a skill via PR
+**Today: [Hackathon at Imperial College London](hackathon/index.md)** | 19 March 2026
 
-## Quick Links
-
-- **Repository**: [github.com/ClawBio/ClawBio](https://github.com/ClawBio/ClawBio)
-- **Website**: [clawbio.ai](https://clawbio.ai)
-- **Discord**: [Join the community](https://discord.gg/clawbio)
+- **[Hackathon Guide](hackathon/index.md)** -- Setup, build a skill, submit a PR
+- **[Skill Library](skills/index.md)** -- Browse 28 bioinformatics skills
+- **[SKILL.md Spec](reference/skillmd-spec.md)** -- The specification behind every skill
+- **[GitHub](https://github.com/ClawBio/ClawBio)** -- Source code and issues
