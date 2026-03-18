@@ -16,16 +16,22 @@ Organised by **Jay Moore**, **Manuel Corpas**, **Nathan Skene**, and **Josh Beal
 
 ---
 
+## The Problem
+
+Modern bioinformatics knowledge is fragmented across papers, scripts, and private pipelines. Reproducing even simple analyses often requires reconstructing hidden decisions from incomplete documentation. Only about 1 in 4 computational biology papers can be reproduced without contacting the authors (Garijo et al., PLOS ONE 2013; Collberg and Proebsting, 2016). Meanwhile, general-purpose LLMs hallucinate gene-drug associations, use outdated clinical guidelines, and produce results with no audit trail.
+
 ## What is ClawBio?
 
-ClawBio is an open-source library of small, reproducible bioinformatics tools called **skills**. Each skill includes:
+ClawBio proposes a different unit of knowledge: a **skill** that packages the code, the scientific assumptions, the test data, and the execution contract in one inspectable artefact.
+
+Each skill includes:
 
 - A **SKILL.md** contract that explains the scientific decisions the tool makes (thresholds, databases, safety rules)
 - **Demo data** that anyone can run without their own files
 - A **Python script** with `--input`, `--output`, and `--demo` flags
 - A **reproducibility bundle**: `commands.sh`, `environment.yml`, and `checksums.sha256`
 
-A skill is not a wrapper around someone else's code. It encodes domain judgement: the decisions a trained scientist would make, written down so that an AI agent (or a colleague) can execute them correctly and reproducibly.
+SKILL.md is not just documentation. It is the contract that tells humans and AI agents how the skill should be used, what assumptions it makes, and when it should refuse to run.
 
 ---
 
@@ -50,7 +56,11 @@ A skill is not a wrapper around someone else's code. It encodes domain judgement
 | 3. [Add Python](add-python.md) | 20 min | Implement the skill logic with a CLI endpoint |
 | 4. [Test and Submit](submit.md) | 10 min | Validate, test, open a PR |
 
-These timings assume your environment is already set up. First-time Git or GitHub users should allow extra time; helpers will be available throughout.
+Most participants will submit their first skill in **90 to 120 minutes**. The times above assume your environment is already set up. First-time Git or GitHub users should allow extra time; helpers will be available throughout.
+
+**Starter template**: copy `templates/SKILL-TEMPLATE.md` into your skill directory to get the correct structure immediately. See [Your First Skill](first-skill.md) for the full walkthrough.
+
+**Example completed skill**: see the [NutriGx Advisor PR](https://github.com/ClawBio/ClawBio/pull/1) by @drdaviddelorenzo, the first community contribution. It shows exactly what a successful submission looks like: SKILL.md with domain decisions, demo data, Python script, and a clean PR.
 
 ---
 
