@@ -65,47 +65,41 @@ skills/my-awesome-skill/
     test_my_skill.py
 ```
 
-## 4. Fork and Branch
+## 4. Submit Your Skill
+
+Two options. Use whichever you are more comfortable with.
+
+### Option A: Terminal (if you have `gh` installed)
 
 ```bash
-# If you haven't already forked
+# Fork and clone
 gh repo fork ClawBio/ClawBio --clone
+cd ClawBio
 
-# Create a feature branch
+# Create a branch
 git checkout -b skill/my-awesome-skill
 
 # Add your files
 git add skills/my-awesome-skill/
 git commit -m "Add my-awesome-skill: one-line description"
 
-# Push
+# Push and open PR
 git push -u origin skill/my-awesome-skill
-```
-
-## 5. Open a Pull Request
-
-```bash
 gh pr create \
   --title "Add skill: my-awesome-skill" \
-  --body "## New Skill
-
-- **Name**: my-awesome-skill
-- **Domain**: genomics
-- **Description**: One-line description
-
-## Checklist
-- [x] SKILL.md with frontmatter and all three sections
-- [x] Python script with --demo flag
-- [x] Synthetic demo data (no real patient data)
-- [x] Safety disclaimer in report output
-- [x] Demo runs successfully
-
-## Demo output
-\`\`\`
-paste your demo output here
-\`\`\`
-"
+  --body "SKILL.md + demo data + runnable --demo command"
 ```
+
+### Option B: GitHub web interface (no CLI needed)
+
+1. Go to [github.com/ClawBio/ClawBio](https://github.com/ClawBio/ClawBio) and click **Fork** (top right)
+2. In your fork, click **Add file > Upload files**
+3. Drag your entire `skills/my-awesome-skill/` folder into the upload area
+4. Write a commit message and commit to a new branch
+5. GitHub will show a **"Compare & pull request"** banner. Click it.
+6. Write a short description and click **Create pull request**
+
+If you get stuck on either route, ask a helper.
 
 ## What Happens Next
 

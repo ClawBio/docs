@@ -216,7 +216,7 @@ html, body {
 <body>
 
 <div id="progress-bar"></div>
-<div id="counter">1 / 9</div>
+<div id="counter">1 / 11</div>
 <div id="hint">arrow keys or swipe to navigate</div>
 
 <button class="nav-btn" id="btn-prev" aria-label="Previous">&#8592;</button>
@@ -312,8 +312,32 @@ html, body {
     </div>
   </div>
 
-  <!-- SLIDE 4: THE SOLUTION -->
+  <!-- SLIDE 4: ANATOMY OF A SKILL -->
   <div class="slide" id="slide-4">
+    <div class="label">What You Are Building</div>
+    <h2 class="title">Anatomy of a <span class="em">ClawBio skill</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:800px;width:100%;margin-top:0.5rem;">
+      <div class="card" style="border-top:3px solid var(--green);">
+        <div class="card-heading">SKILL.md</div>
+        <div class="card-body">The contract. YAML frontmatter (name, inputs, outputs) plus three sections: <strong style="color:var(--text);">Domain Decisions</strong>, <strong style="color:var(--text);">Safety Rules</strong>, <strong style="color:var(--text);">Agent Boundary</strong>. This is the part that makes it a skill and not just a script.</div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--blue);">
+        <div class="card-heading">Demo Data</div>
+        <div class="card-body">Synthetic test data so anyone can run the skill without their own files. Never real patient data. Should exercise at least one edge case.</div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--purple);">
+        <div class="card-heading">Python Script</div>
+        <div class="card-body"><code style="color:var(--green);">--input</code>, <code style="color:var(--green);">--output</code>, <code style="color:var(--green);">--demo</code> flags. Reads input, runs analysis, writes a report. Paths derived from <code>__file__</code>, never hardcoded.</div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--orange);">
+        <div class="card-heading">Pull Request</div>
+        <div class="card-body">Fork the repo, add your skill directory, open a PR. Terminal or GitHub web interface, both work. That is your submission.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: THE SOLUTION -->
+  <div class="slide" id="slide-5">
     <div class="label">The Solution</div>
     <h2 class="title">ClawBio: <span class="em">the execution layer</span> for biological AI.</h2>
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.5rem 2rem;max-width:700px;width:100%;font-family:'Cascadia Code','Fira Code',monospace;font-size:0.9rem;line-height:2;margin-bottom:1.5rem;">
@@ -333,7 +357,7 @@ html, body {
   </div>
 
   <!-- SLIDE 5: TRACTION -->
-  <div class="slide" id="slide-5">
+  <div class="slide" id="slide-6">
     <div class="label">Traction &middot; 3 weeks since launch</div>
     <h2 class="title">11,000 views. 444 stars. <span class="em">Zero marketing.</span></h2>
     <div class="traction-grid">
@@ -367,7 +391,7 @@ html, body {
   </div>
 
   <!-- SLIDE 6: THREE THEMES -->
-  <div class="slide" id="slide-6">
+  <div class="slide" id="slide-7">
     <div class="label">Today's Challenge</div>
     <h2 class="title">Three themes. <span class="em">Your skill.</span></h2>
     <div class="theme-grid">
@@ -394,7 +418,7 @@ html, body {
   </div>
 
   <!-- SLIDE 7: TRACKS -->
-  <div class="slide" id="slide-7">
+  <div class="slide" id="slide-8">
     <div class="label">Choose Your Track</div>
     <h2 class="title">Five tracks. <span class="em">All levels welcome.</span></h2>
     <div class="track-grid">
@@ -429,8 +453,26 @@ html, body {
     </div>
   </div>
 
-  <!-- SLIDE 8: GO BUILD -->
-  <div class="slide" id="slide-8">
+  <!-- SLIDE 9: WHAT COUNTS -->
+  <div class="slide" id="slide-9">
+    <div class="label">Minimum Viable Submission</div>
+    <h2 class="title">What counts as <span class="em">done</span>?</h2>
+    <div style="max-width:600px;width:100%;margin-top:1rem;">
+      <div style="display:flex;flex-direction:column;gap:1rem;font-size:1rem;">
+        <div style="display:flex;align-items:center;gap:1rem;"><div style="width:36px;height:36px;border-radius:8px;background:var(--bg2);border:1px solid var(--green);display:flex;align-items:center;justify-content:center;color:var(--green);font-weight:700;font-size:1.1rem;">&#10003;</div><div>A new <code style="background:var(--bg2);padding:0.15rem 0.5rem;border-radius:4px;border:1px solid var(--border);">skills/your-skill/</code> directory</div></div>
+        <div style="display:flex;align-items:center;gap:1rem;"><div style="width:36px;height:36px;border-radius:8px;background:var(--bg2);border:1px solid var(--green);display:flex;align-items:center;justify-content:center;color:var(--green);font-weight:700;font-size:1.1rem;">&#10003;</div><div><strong>SKILL.md</strong> with Domain Decisions, Safety Rules, Agent Boundary</div></div>
+        <div style="display:flex;align-items:center;gap:1rem;"><div style="width:36px;height:36px;border-radius:8px;background:var(--bg2);border:1px solid var(--green);display:flex;align-items:center;justify-content:center;color:var(--green);font-weight:700;font-size:1.1rem;">&#10003;</div><div><strong>Synthetic demo data</strong> (never real patient data)</div></div>
+        <div style="display:flex;align-items:center;gap:1rem;"><div style="width:36px;height:36px;border-radius:8px;background:var(--bg2);border:1px solid var(--green);display:flex;align-items:center;justify-content:center;color:var(--green);font-weight:700;font-size:1.1rem;">&#10003;</div><div>A runnable <code style="background:var(--bg2);padding:0.15rem 0.5rem;border-radius:4px;border:1px solid var(--border);">--demo</code> command that produces output</div></div>
+        <div style="display:flex;align-items:center;gap:1rem;"><div style="width:36px;height:36px;border-radius:8px;background:var(--bg2);border:1px solid var(--green);display:flex;align-items:center;justify-content:center;color:var(--green);font-weight:700;font-size:1.1rem;">&#10003;</div><div>A <strong>pull request</strong> to ClawBio/ClawBio</div></div>
+      </div>
+    </div>
+    <div style="margin-top:2rem;font-size:0.95rem;color:var(--muted);text-align:center;max-width:600px;">
+      A focused, well-documented skill with clear domain decisions is better than an ambitious but incomplete one.
+    </div>
+  </div>
+
+  <!-- SLIDE 10: GO BUILD -->
+  <div class="slide" id="slide-10">
     <div class="label">Let's Go</div>
     <div class="title" style="font-size:clamp(2.2rem,4vw,3.5rem);">The best skills come from<br><span class="em">scratching your own itch.</span></div>
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.5rem 2rem;max-width:600px;width:100%;font-family:'Cascadia Code','Fira Code',monospace;font-size:0.85rem;line-height:2.2;margin-bottom:1.5rem;">

@@ -16,38 +16,87 @@ Organised by **Jay Moore**, **Manuel Corpas**, **Nathan Skene**, and **Josh Beal
 
 ---
 
+## What is ClawBio?
+
+ClawBio is an open-source library of small, reproducible bioinformatics tools called **skills**. Each skill includes:
+
+- A **SKILL.md** contract that explains the scientific decisions the tool makes (thresholds, databases, safety rules)
+- **Demo data** that anyone can run without their own files
+- A **Python script** with `--input`, `--output`, and `--demo` flags
+- A **reproducibility bundle**: `commands.sh`, `environment.yml`, and `checksums.sha256`
+
+A skill is not a wrapper around someone else's code. It encodes domain judgement: the decisions a trained scientist would make, written down so that an AI agent (or a colleague) can execute them correctly and reproducibly.
+
+---
+
+## Who is this for?
+
+| You are... | You already know | You do not need to know | Good first project |
+|------------|-----------------|------------------------|--------------------|
+| **AI / software engineer** | APIs, Python, automation | Any biology or genomics | [PubMed Summariser](projects/pubmed-summariser.md), [Clinical Trial Finder](projects/clinical-trial-finder.md) |
+| **Genomics researcher** | VCFs, pipelines, domain expertise | Agentic AI or SKILL.md | [Variant Annotation](projects/variant-annotation.md), [QC Report](projects/qc-report.md) |
+| **Proteomics / multi-omics** | Mass spec, protein databases | ClawBio (no skills exist yet) | [Protein Interaction Mapper](projects/protein-interaction.md), [Protein Domain Annotator](projects/protein-domain.md) |
+| **Clinical / diagnostics** | Variant classification, PGx | Agent frameworks | [PGx Interaction Checker](projects/pgx-interaction-checker.md) |
+| **Epidemiology / public health** | Population data, outbreak analysis | Python scripting (helpers available) | [Vaccine Equity Scorer](projects/vaccine-equity.md), [GBD Visualiser](projects/gbd-visualiser.md) |
+
+---
+
 ## Objectives
 
 By the end of this hackathon, you will have:
 
-1. **Built a working bioinformatics skill** that any AI agent can discover and run, with a SKILL.md contract, demo data, and a CLI endpoint
-2. **Experienced agentic development first-hand** using coding assistants and AI agents to accelerate your work, not replace it
-3. **Contributed to an open-source project** with a pull request to the ClawBio repository that others can use and build on
+1. **Built a working bioinformatics skill** with a SKILL.md contract, demo data, and a runnable endpoint
+2. **Experienced agentic development first-hand** using coding assistants and AI agents to accelerate your work
+3. **Contributed to an open-source project** with a pull request to the ClawBio repository
 4. **Connected with a cross-disciplinary community** spanning AI engineering, genomics, proteomics, clinical diagnostics, and epidemiology across Imperial, KCL, the Crick, UCL, and industry
 
-Whether you are an AI engineer who has never touched genomic data or a genomics researcher who has never used an AI agent, you will leave with a concrete, publishable artefact and practical experience bridging both worlds.
+Whether you are an AI engineer new to genomics or a genomics researcher new to agentic tools, you will leave with a concrete open-source artefact: a working skill, a documented scientific contract, and a pull request.
+
+---
+
+## What counts as a successful submission?
+
+A valid hackathon submission is:
+
+- [ ] One new skill directory under `skills/`
+- [ ] A `SKILL.md` with frontmatter (name, version, inputs, outputs) and three body sections (Domain Decisions, Safety Rules, Agent Boundary)
+- [ ] Synthetic demo data (never real patient data)
+- [ ] A runnable `--demo` command that produces output
+- [ ] A pull request to [github.com/ClawBio/ClawBio](https://github.com/ClawBio/ClawBio)
+
+That is it. You do not need tests, figures, or a complete pipeline. A focused, well-documented skill with clear domain decisions is better than an ambitious but incomplete one.
 
 ---
 
 ## Three Themes
 
-This hackathon explores the intersection of genomics and agentic AI:
-
-1. **Gaps in genomics tools**: Where do current bioinformatics pipelines fail? What analyses are still manual, brittle, or unreproducible? Build a skill that fills one of those gaps.
-2. **Trustworthy agentic approaches**: How do we make AI agents safe for genomics? Encode domain decisions, safety rules, and reproducibility into skills that agents can call without hallucinating.
-3. **Accessible complexity**: Genomics generates vast, complex data. Build skills that present results clearly, so researchers and clinicians can act on them.
+1. **Gaps in genomics tools**: What analyses are still manual, brittle, or unreproducible? Build a skill that fills one of those gaps.
+2. **Trustworthy agentic approaches**: How do we make AI agents safe for biology? Encode domain decisions and safety rules into SKILL.md so agents execute with proven logic, not hallucinations.
+3. **Accessible complexity**: Genomics data is vast and complex. Build skills that present results so clearly that a non-specialist can act on them.
 
 ---
 
-## What You'll Build
-
-A **ClawBio skill**: a self-contained bioinformatics module that any AI agent can discover, understand, and run. Each skill is defined by a `SKILL.md` file that encodes domain expertise in a machine-readable format.
-
 ## What to Bring
 
-- A laptop with Python 3.11+ installed
-- A GitHub account
-- Curiosity about genomics, bioinformatics, or agentic AI (no genomics background required for several tracks below)
+- A laptop with **Python 3.11+** and **Git** installed
+- A **GitHub account**
+- Curiosity about genomics, bioinformatics, or agentic AI (no genomics background required for several tracks)
+
+**Recommended before arrival** (saves time on the day):
+
+```bash
+# Install GitHub CLI and authenticate
+brew install gh          # macOS
+gh auth login            # follow the prompts
+
+# Clone the repo and run a demo
+git clone https://github.com/ClawBio/ClawBio.git
+cd ClawBio
+pip install -r requirements.txt
+python skills/pharmgx-reporter/pharmgx_reporter.py --demo
+```
+
+If you do not have `gh` installed, you can submit your PR through the GitHub web interface instead. Both routes are covered in the [Submit](submit.md) guide.
 
 Food and drinks will be provided (pizza at 13:30).
 
@@ -95,49 +144,72 @@ Both paths converge at the same goal: a working skill you can submit as a PR.
 | 3. [Add Python](add-python.md) | 20 min | Implement the skill logic with a CLI endpoint |
 | 4. [Test and Submit](submit.md) | 10 min | Validate, test, open a PR |
 
+These timings assume your environment is already set up. First-time Git or GitHub users should allow extra time; helpers will be available throughout.
+
 Also see the [Presentation](presentation/) for the full-screen slide deck.
 
 ---
 
 ## Choose Your Track
 
-We have attendees ranging from AI agent engineers with no genomics background to researchers with 40+ years in computational biology. Pick the track that fits you.
+We have attendees ranging from AI agent engineers with no genomics background to researchers with 40+ years in computational biology. Pick the track that fits you. Each project is labelled as a **90-minute build** (achievable in the afternoon) or a **stretch build** (ambitious, likely a prototype).
 
 ### Track A: AI Engineers New to Genomics
 
 You build agents, automation, and APIs professionally. You just haven't touched genomic data before. These skills let you apply your engineering strengths to biology using public APIs, no wet-lab knowledge required.
 
+**90-minute builds:**
+
 - [PubMed Research Summariser](projects/pubmed-summariser.md) -- query PubMed API, return structured summary of recent findings
 - [Clinical Trial Finder](projects/clinical-trial-finder.md) -- query ClinicalTrials.gov, return active trials with phase and eligibility
-- [Drug Label Parser](projects/drug-label-parser.md) -- extract PGx warnings from FDA drug labels (DailyMed API)
 - [Variant Frequency Dashboard](projects/variant-frequency.md) -- query gnomAD, visualise allele frequencies across populations
+- [Protein Domain Annotator](projects/protein-domain.md) -- UniProt + InterPro + AlphaFold domain map
+
+**Stretch builds:**
+
+- [Drug Label Parser](projects/drug-label-parser.md) -- extract PGx warnings from FDA drug labels (DailyMed API)
 - [Multi-Database Aggregator](projects/multi-db-aggregator.md) -- federate queries across ClinVar, gnomAD, Open Targets
 
 ### Track B: Genomics Researchers New to Agentic AI
 
 You work with genomic data daily. Wrap your existing expertise into a skill that anyone can run reproducibly.
 
-- [Variant Annotation Pipeline](projects/variant-annotation.md) -- annotate a VCF with ClinVar significance, gnomAD frequencies, gene impact
+**90-minute builds:**
+
 - [QC Report Generator](projects/qc-report.md) -- parse FastQC output, produce pass/fail report with thresholds
-- [Differential Expression Wrapper](projects/de-wrapper.md) -- PyDESeq2 workflow with volcano plots and sensible defaults
 - [Gene Set Enrichment](projects/gene-set-enrichment.md) -- Enrichr API for KEGG/Reactome/GO pathway ranking
+- [Differential Expression Wrapper](projects/de-wrapper.md) -- PyDESeq2 workflow with volcano plots and sensible defaults
+
+**Stretch builds:**
+
+- [Variant Annotation Pipeline](projects/variant-annotation.md) -- annotate a VCF with ClinVar significance, gnomAD frequencies, gene impact
 - [Single-Cell Cluster Annotator](projects/cell-type-annotator.md) -- suggest cell type labels from marker gene databases
 
 ### Track C: Proteomics and Multi-Omics
 
-ClawBio currently has zero proteomics skills. Build the first one.
+ClawBio currently has zero proteomics skills. Build the first one. If you need a starting point, the [Protein Interaction Mapper](projects/protein-interaction.md) is a good template: it follows the same pattern as existing skills but queries the STRING API instead of genomic databases.
+
+**90-minute builds:**
 
 - [Protein Interaction Mapper](projects/protein-interaction.md) -- STRING API to PPI network with hub scores and figures
+- [Protein Domain Annotator](projects/protein-domain.md) -- UniProt + InterPro + AlphaFold domain map
+
+**Stretch builds:**
+
 - [Mass Spec QC Skill](projects/mass-spec-qc.md) -- parse MaxQuant/DIA-NN output, generate quality report
 - [Phosphoproteomics Enricher](projects/phospho-enricher.md) -- kinase-substrate enrichment from phosphosite list
-- [Protein Domain Annotator](projects/protein-domain.md) -- UniProt + InterPro + AlphaFold domain map
 
 ### Track D: Clinical and Diagnostic Applications
 
-For clinical genomics, molecular diagnostics, and health data backgrounds.
+For clinical genomics, molecular diagnostics, and health data backgrounds. **All clinical track outputs are educational prototypes only. They must not be used for clinical decision-making or patient management.**
 
-- [ACMG Variant Classifier](projects/acmg-classifier.md) -- implement the 28-criteria ACMG/AMP pathogenicity framework
+**90-minute builds:**
+
 - [Pharmacogenomics Interaction Checker](projects/pgx-interaction-checker.md) -- genotype + medication list to CPIC interaction report
+
+**Stretch builds (prototype scope only):**
+
+- [ACMG Variant Classifier](projects/acmg-classifier.md) -- prototype a subset of the 28-criteria ACMG/AMP pathogenicity framework
 - [Diagnostic Yield Calculator](projects/diagnostic-yield.md) -- HPO phenotype terms to ranked candidate genes
 - [Tumour Mutational Burden](projects/tmb-calculator.md) -- somatic VCF to TMB score with MSI estimation
 
@@ -145,9 +217,14 @@ For clinical genomics, molecular diagnostics, and health data backgrounds.
 
 Population-level data, outbreak analysis, and health equity.
 
-- [Outbreak Phylogenetic Clusterer](projects/outbreak-clusterer.md) -- consensus sequences to NJ tree and transmission clusters
+**90-minute builds:**
+
 - [Vaccine Equity Scorer](projects/vaccine-equity.md) -- vaccination coverage equity analysis using HEIM framework
 - [GBD Disease Burden Visualiser](projects/gbd-visualiser.md) -- IHME data to DALYs, prevalence, and regional trends
+
+**Stretch builds:**
+
+- [Outbreak Phylogenetic Clusterer](projects/outbreak-clusterer.md) -- consensus sequences to NJ tree and transmission clusters
 - [Antimicrobial Resistance Profiler](projects/amr-profiler.md) -- detect AMR genes from metagenomic reads (CARD database)
 
 ---
