@@ -78,7 +78,7 @@ Food and drinks will be provided (pizza at 13:30).
 
 Two guided tutorials are available to get you started:
 
-1. **[Skills Cookbook](https://neurogenomics.github.io/agentic-life-sciences-tutorial/)** (Nathan Skene's lab, Imperial) -- Setup OpenCode, explore datasets with AI, build journal club slides, single-cell portals, and context management. Great for learning agentic workflows from scratch.
+1. **[Skills Cookbook](https://neurogenomics.github.io/agentic-life-sciences-tutorial/)** (Jay Moore, Imperial) -- Setup OpenCode, explore datasets with AI, build journal club slides, single-cell portals, and context management. Great for learning agentic workflows from scratch.
 2. **[ClawBio Tutorial](setup.md)** (this site) -- Clone ClawBio, run a demo skill, then build your own following the step-by-step guide.
 
 Both paths converge at the same goal: a working skill you can submit as a PR.
