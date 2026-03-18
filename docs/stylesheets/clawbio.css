@@ -632,6 +632,11 @@
   background: rgba(248, 81, 73, 0.15);
 }
 
+.difficulty-badge--event {
+  color: #a5d6ff;
+  background: rgba(165, 214, 255, 0.15);
+}
+
 /* Light theme badge overrides */
 [data-md-color-scheme="default"] .difficulty-badge--beginner {
   color: #16a34a;
@@ -648,6 +653,11 @@
   background: #fee2e2;
 }
 
+[data-md-color-scheme="default"] .difficulty-badge--event {
+  color: #2563eb;
+  background: #dbeafe;
+}
+
 /* ============================================================
    Time Estimate
    ============================================================ */
@@ -657,6 +667,28 @@
   font-size: 0.8rem;
   color: #6e7681;
   margin-left: 0.5rem;
+}
+
+/* ============================================================
+   Video Embeds (responsive 16:9)
+   ============================================================ */
+
+.video-embed {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+}
+
+.video-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
 }
 
 /* ============================================================

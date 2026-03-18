@@ -17,6 +17,24 @@ description: Build AI-powered bioinformatics skills at Imperial College London. 
 
 <div class="tutorial-cards">
 
+<a class="tutorial-card" href="hackathon/">
+  <div class="tutorial-card__header">
+    <span class="difficulty-badge difficulty-badge--event">Event</span>
+    <span class="time-estimate">5 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Hackathon Guide</h3>
+  <p class="tutorial-card__desc">Full timetable, tracks, judging criteria, and project ideas.</p>
+</a>
+
+<a class="tutorial-card" href="hackathon/presentation/">
+  <div class="tutorial-card__header">
+    <span class="difficulty-badge difficulty-badge--event">Event</span>
+    <span class="time-estimate">10 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Presentation Slides</h3>
+  <p class="tutorial-card__desc">Intro slides covering ClawBio, SKILL.md, and what to build today.</p>
+</a>
+
 <a class="tutorial-card" href="hackathon/setup/">
   <div class="tutorial-card__header">
     <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
@@ -66,24 +84,6 @@ description: Build AI-powered bioinformatics skills at Imperial College London. 
   </div>
   <h3 class="tutorial-card__title">Agentic Tools Tutorial</h3>
   <p class="tutorial-card__desc">Use Claude Code and AI coding assistants to build skills faster.</p>
-</a>
-
-<a class="tutorial-card" href="hackathon/">
-  <div class="tutorial-card__header">
-    <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
-    <span class="time-estimate">5 min</span>
-  </div>
-  <h3 class="tutorial-card__title">Hackathon Guide</h3>
-  <p class="tutorial-card__desc">Full timetable, tracks, judging criteria, and project ideas.</p>
-</a>
-
-<a class="tutorial-card" href="hackathon/presentation/">
-  <div class="tutorial-card__header">
-    <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
-    <span class="time-estimate">10 min</span>
-  </div>
-  <h3 class="tutorial-card__title">Presentation Slides</h3>
-  <p class="tutorial-card__desc">Intro slides covering ClawBio, SKILL.md, and what to build today.</p>
 </a>
 
 </div>
