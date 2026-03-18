@@ -34,6 +34,7 @@ theme:
   font: false
 
 nav:
+  - Home: index.md
   - Hackathon:
     - Guide: hackathon/index.md
     - Setup: hackathon/setup.md
@@ -41,6 +42,17 @@ nav:
     - Add Python: hackathon/add-python.md
     - Submit: hackathon/submit.md
     - Agentic Tools: hackathon/agentic-tools.md
+  - Tutorials:
+    - Overview: tutorials/index.md
+    - Run Your First Skill: tutorials/run-your-first-skill.md
+    - Build a Skill: tutorials/build-a-skill.md
+    - Telegram Bot: tutorials/telegram-bot.md
+    - Context Management: tutorials/context-management.md
+  - Deployment:
+    - Overview: deployment/index.md
+    - Docker: deployment/docker.md
+    - Railway: deployment/railway.md
+    - Private Cloud: deployment/private-cloud.md
   - Skills:
     - Skill Library: skills/index.md
     - PharmGx Reporter: skills/pharmgx-reporter.md

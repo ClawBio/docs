@@ -371,3 +371,305 @@
 .md-typeset img {
   margin-bottom: 1rem;
 }
+
+/* ============================================================
+   Hero Section
+   ============================================================ */
+
+.hero {
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid #21262d;
+  margin-bottom: 2rem;
+}
+
+.hero__title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+}
+
+.hero__subtitle {
+  font-size: 1.1rem;
+  color: #8b949e;
+  margin: 0;
+  max-width: 560px;
+}
+
+[data-md-color-scheme="clawbio"] .hero {
+  border-bottom-color: #21262d;
+}
+
+[data-md-color-scheme="clawbio"] .hero__title {
+  color: #3fb950;
+}
+
+[data-md-color-scheme="default"] .hero__title {
+  color: #1b5e20;
+}
+
+[data-md-color-scheme="default"] .hero__subtitle {
+  color: #475569;
+}
+
+[data-md-color-scheme="default"] .hero {
+  border-bottom-color: #e0e0e0;
+}
+
+/* ============================================================
+   Section Heading for Card Grids
+   ============================================================ */
+
+.section-heading {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 2.5rem 0 1rem;
+}
+
+/* ============================================================
+   Tutorial Card Grid
+   ============================================================ */
+
+.tutorial-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 1rem 0 2.5rem;
+}
+
+/* Individual card */
+.tutorial-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-decoration: none !important;
+  color: inherit !important;
+  transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.tutorial-card:hover,
+.tutorial-card:focus-visible {
+  transform: translateY(-2px);
+  text-decoration: none !important;
+}
+
+/* Dark theme cards */
+[data-md-color-scheme="clawbio"] .tutorial-card {
+  background: #161b22;
+  border: 1px solid #30363d;
+}
+
+[data-md-color-scheme="clawbio"] .tutorial-card:hover {
+  border-color: #3fb950;
+  box-shadow: 0 4px 16px rgba(63, 185, 80, 0.1);
+}
+
+/* Light theme cards */
+[data-md-color-scheme="default"] .tutorial-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+[data-md-color-scheme="default"] .tutorial-card:hover {
+  border-color: #2e7d32;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Card header row */
+.tutorial-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tutorial-card__number {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #8b949e;
+  letter-spacing: 0.04em;
+  min-width: 1.8rem;
+}
+
+/* Card title */
+.tutorial-card__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+
+[data-md-color-scheme="clawbio"] .tutorial-card__title {
+  color: #e6edf3;
+}
+
+[data-md-color-scheme="default"] .tutorial-card__title {
+  color: #1a1a1a;
+}
+
+/* Card description */
+.tutorial-card__desc {
+  font-size: 0.88rem;
+  color: #8b949e;
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+[data-md-color-scheme="default"] .tutorial-card__desc {
+  color: #475569;
+}
+
+/* ============================================================
+   Section Cards (non-tutorial: deployment, reference links)
+   ============================================================ */
+
+.section-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 1rem 0 2.5rem;
+}
+
+.section-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-decoration: none !important;
+  color: inherit !important;
+  transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.section-card:hover,
+.section-card:focus-visible {
+  transform: translateY(-2px);
+  text-decoration: none !important;
+}
+
+[data-md-color-scheme="clawbio"] .section-card {
+  background: #161b22;
+  border: 1px solid #30363d;
+}
+
+[data-md-color-scheme="clawbio"] .section-card:hover {
+  border-color: #3fb950;
+  box-shadow: 0 4px 16px rgba(63, 185, 80, 0.1);
+}
+
+[data-md-color-scheme="default"] .section-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+[data-md-color-scheme="default"] .section-card:hover {
+  border-color: #2e7d32;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.section-card__icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.section-card__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+
+[data-md-color-scheme="clawbio"] .section-card__title {
+  color: #e6edf3;
+}
+
+[data-md-color-scheme="default"] .section-card__title {
+  color: #1a1a1a;
+}
+
+.section-card__desc {
+  font-size: 0.88rem;
+  color: #8b949e;
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+[data-md-color-scheme="default"] .section-card__desc {
+  color: #475569;
+}
+
+/* ============================================================
+   Difficulty Badges
+   ============================================================ */
+
+.difficulty-badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+}
+
+.difficulty-badge--beginner {
+  color: #3fb950;
+  background: rgba(63, 185, 80, 0.15);
+}
+
+.difficulty-badge--intermediate {
+  color: #d29922;
+  background: rgba(210, 153, 34, 0.15);
+}
+
+.difficulty-badge--advanced {
+  color: #f85149;
+  background: rgba(248, 81, 73, 0.15);
+}
+
+/* Light theme badge overrides */
+[data-md-color-scheme="default"] .difficulty-badge--beginner {
+  color: #16a34a;
+  background: #dcfce7;
+}
+
+[data-md-color-scheme="default"] .difficulty-badge--intermediate {
+  color: #d97706;
+  background: #fef3c7;
+}
+
+[data-md-color-scheme="default"] .difficulty-badge--advanced {
+  color: #dc2626;
+  background: #fee2e2;
+}
+
+/* ============================================================
+   Time Estimate
+   ============================================================ */
+
+.time-estimate {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: #6e7681;
+  margin-left: 0.5rem;
+}
+
+/* ============================================================
+   Responsive: single column below 480px
+   ============================================================ */
+
+@media (max-width: 480px) {
+  .tutorial-cards,
+  .section-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__title {
+    font-size: 1.75rem;
+  }
+}
