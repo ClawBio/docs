@@ -274,3 +274,94 @@
   color: #3fb950;
   border: 1px solid rgba(63, 185, 80, 0.4);
 }
+
+/* ============================================================
+   Layout: Breathing Room
+   More whitespace, larger line-height, spacious sections
+   ============================================================ */
+
+/* Wider line-height for body text */
+.md-typeset {
+  font-size: 0.85rem;
+  line-height: 1.8;
+}
+
+/* More space above headings */
+.md-typeset h1 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+}
+
+.md-typeset h2 {
+  margin-top: 3rem;
+  margin-bottom: 1.2rem;
+  padding-top: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.md-typeset h3 {
+  margin-top: 2.2rem;
+  margin-bottom: 1rem;
+  font-size: 1.15rem;
+}
+
+/* Paragraphs breathe */
+.md-typeset p {
+  margin-bottom: 1.2rem;
+}
+
+/* Horizontal rules as spacious section dividers */
+.md-typeset hr {
+  margin: 3rem 0;
+  border: none;
+  border-top: 1px solid #21262d;
+}
+
+/* Lists: more space between items */
+.md-typeset ul li,
+.md-typeset ol li {
+  margin-bottom: 0.5rem;
+}
+
+/* Nested list items slightly less */
+.md-typeset ul ul li,
+.md-typeset ol ol li {
+  margin-bottom: 0.3rem;
+}
+
+/* Tables: more padding in cells */
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+  padding: 0.9rem 1.1rem;
+}
+
+/* Code blocks: more breathing room */
+.md-typeset pre {
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+}
+
+/* Admonitions: more internal space */
+.md-typeset .admonition,
+.md-typeset details {
+  margin: 1.8rem 0;
+  padding: 0 1.2rem 1rem;
+}
+
+/* Content max-width for readability */
+.md-content__inner {
+  max-width: 52rem;
+}
+
+/* Bold items in lists stand out as mini-headings */
+.md-typeset li > strong:first-child {
+  color: #e6edf3;
+  display: inline;
+}
+
+/* Space after the banner image */
+.md-typeset img {
+  margin-bottom: 1rem;
+}
