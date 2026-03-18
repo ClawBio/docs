@@ -59,7 +59,7 @@ Food and drinks will be provided (pizza at 13:30).
 |------|------|---------|
 | **12:00** | **Doors open** | Arrive, get set up, connect to WiFi |
 | **12:30** | **Welcome** | Nathan Skene (Imperial) and Manuel Corpas (Westminster) |
-| **12:45** | **Overview of the day** | Themes, tracks, how submissions work |
+| **12:45** | **[Overview of the day](presentation/)** | Themes, tracks, how submissions work |
 | **13:15** | **Guided Tutorial** | Hands-on with helpers. Follow the [Skills Cookbook](https://neurogenomics.github.io/agentic-life-sciences-tutorial/) and the [ClawBio Setup](setup.md) |
 | **13:30** | **Pizza** | Lunch break, keep hacking if you want |
 | **14:00** | **Build** | Work on your skill (solo or in teams). Helpers circulate. |
