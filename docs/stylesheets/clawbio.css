@@ -42,6 +42,11 @@
   --md-shadow-z3: none;
 }
 
+/* Hide broken stars/forks count (GitHub API client-side fetch unreliable) */
+.md-source__fact {
+  display: none;
+}
+
 /* --- Header --- */
 
 [data-md-color-scheme="clawbio"] .md-header {
