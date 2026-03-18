@@ -60,10 +60,10 @@ Food and drinks will be provided (pizza at 13:30).
 | **12:00** | **Doors open** | Arrive, get set up, connect to WiFi |
 | **12:30** | **Welcome** | Nathan Skene (Imperial) and Manuel Corpas (Westminster) |
 | **12:45** | **[Overview of the day](presentation/)** | Themes, tracks, how submissions work |
-| **13:15** | **Pizza** | Lunch break, keep hacking if you want |
-| **13:45** | **Guided Tutorial** | Hands-on with helpers. Follow the [Agentic Tools tutorial](agentic-tools.md) and the [ClawBio Setup](setup.md) |
+| **13:15** | **Databricks** | Toz Ozturk (Databricks) -- genomics on Databricks (~15 min) |
+| **13:30** | **Pizza** | Lunch break, keep hacking if you want |
+| **14:00** | **Guided Tutorial** | Hands-on with helpers. Follow the [Agentic Tools tutorial](agentic-tools.md) and the [ClawBio Setup](setup.md) |
 | **14:30** | **Build** | Work on your skill (solo or in teams). Helpers circulate. |
-| **15:15** | **Databricks** | Toz Ozturk (Databricks) -- genomics on Databricks (~15 min) |
 | **15:30** | **Breakout Tables** | Rotate between themed discussions (pick 1-2): |
 |  | | *The future of reproducibility in biological research* |
 |  | | *Handling sensitive biodata with OpenClaw/ClawBio* |
