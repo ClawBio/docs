@@ -1,0 +1,111 @@
+site_name: ClawBio Documentation
+site_url: https://docs.clawbio.ai
+site_description: The reference repository for biological AI agent skills. Curated. Reproducible. Open.
+site_author: Manuel Corpas
+repo_url: https://github.com/ClawBio/docs
+repo_name: ClawBio/docs
+
+theme:
+  name: material
+  favicon: assets/favicon.ico
+  logo: assets/clawbio-logo.jpeg
+  palette:
+    - scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+  font:
+    text: Inter
+    code: JetBrains Mono
+
+nav:
+  - Get Started:
+    - Welcome: start/index.md
+    - Quickstart: start/quickstart.md
+    - Installation: start/install.md
+    - What is SKILL.md?: start/what-is-skillmd.md
+    - Architecture: start/architecture.md
+    - Trust Model: start/trust-model.md
+  - Skills:
+    - Skill Library: skills/index.md
+    - PharmGx Reporter: skills/pharmgx-reporter.md
+    - scRNA Orchestrator: skills/scrna-orchestrator.md
+    - Equity Scorer (HEIM): skills/equity-scorer.md
+    - NutriGx Advisor: skills/nutrigx-advisor.md
+    - Genome Compare: skills/genome-compare.md
+    - GWAS PRS: skills/gwas-prs.md
+    - GWAS Lookup: skills/gwas-lookup.md
+    - Illumina Bridge: skills/illumina-bridge.md
+    - Galaxy Bridge: skills/galaxy-bridge.md
+    - RNA-seq DE: skills/rnaseq-de.md
+  - Reference:
+    - SKILL.md Specification: reference/skillmd-spec.md
+    - CLI Reference: reference/cli.md
+    - Registry API: reference/api.md
+    - MCP Integration: reference/mcp.md
+    - Security: reference/security.md
+  - Roadmap:
+    - Strategic Roadmap 2026: roadmap/index.md
+    - Q1 — Specification: roadmap/2026-q1.md
+    - Q2 — Platform: roadmap/2026-q2.md
+    - Q3 — Community + Evidence: roadmap/2026-q3.md
+    - Q4 — Scale + Clinical: roadmap/2026-q4.md
+    - Benchmarks: roadmap/benchmarks.md
+    - Governance: roadmap/governance.md
+    - Funding: roadmap/funding.md
+  - Hackathon:
+    - Guide: hackathon/index.md
+    - Setup: hackathon/setup.md
+    - Your First Skill: hackathon/first-skill.md
+    - Add Python: hackathon/add-python.md
+    - Test and Submit: hackathon/submit.md
+  - Contributing:
+    - Overview: contributing/index.md
+    - Author Journey: contributing/author-journey.md
+    - Framework Integration: contributing/framework-integration.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - tables
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ClawBio/ClawBio
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/clawbio
+  generator: false
+
+copyright: "&copy; 2026 ClawBio — Research and educational tool. Not a medical device."
