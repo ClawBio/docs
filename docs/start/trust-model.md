@@ -1,70 +1,41 @@
 ---
 title: Trust Model
-description: Three-tier validation system for ClawBio skills
+description: How ClawBio skills earn trust through transparency and reproducibility
 ---
 
 # Trust Model
 
-An agent framework author needs guarantees before routing clinical or research queries to an external skill. ClawBio provides three tiers of trust, each with explicit guarantees.
+ClawBio skills earn trust through transparency, not black boxes. Every skill ships with its methodology, demo data, and reproducibility bundle so you can verify before you rely on it.
 
-## Validation Tiers
+## What Every Skill Provides
 
-| Guarantee | Community | Verified | Clinical-grade |
-|-----------|-----------|----------|----------------|
-| SKILL.md schema-valid | ✅ | ✅ | ✅ |
-| Demo runs to completion | ✅ | ✅ | ✅ |
-| Output checksums match | ✅ | ✅ | ✅ |
-| Reproducibility bundle present | ✅ | ✅ | ✅ |
-| Security scan clean | ✅ | ✅ | ✅ |
-| Domain-expert review | | ✅ | ✅ |
-| Guideline version declared and monitored | | ✅ | ✅ |
-| DOI minted | | ✅ | ✅ |
-| Cryptographically signed package | | | ✅ |
-| Safety rules audited | | | ✅ |
-| BioCompute Object (IEEE 2791) compliant | | | ✅ |
-| Sandbox-ready (Docker/Singularity) | | | ✅ |
+| Guarantee | How |
+|-----------|-----|
+| Methodology is readable | SKILL.md documents all domain decisions, thresholds, and data sources |
+| Demo data included | Every skill ships synthetic test data so you can run it immediately |
+| Output is reproducible | `commands.sh` and `environment.yml` let you reproduce without the agent |
+| Checksums verify integrity | SHA-256 checksums on outputs confirm nothing changed |
+| Safety rules are explicit | SKILL.md declares what the agent must NOT override |
+| Source is open | MIT licensed, full source code, no hidden dependencies |
 
-## Community Tier
+## How to Evaluate a Skill
 
-The baseline for all submitted skills. Automated checks only:
+Before using a skill on real data:
 
-- SKILL.md passes schema validation
-- Demo data runs and produces expected output
-- Output checksums are generated and match
-- Reproducibility bundle (commands.sh, environment.yml, checksums.sha256) is present
-- Security scan passes: no network calls, no filesystem access outside declared paths
+1. **Read the SKILL.md** -- check that domain decisions cite real sources (CPIC guidelines, published papers, established databases)
+2. **Run the demo** -- use `--demo` to verify the skill runs cleanly on your system
+3. **Check the output** -- review the report for the safety disclaimer and sensible results
+4. **Inspect the code** -- the Python implementation is open source, read it if you need to
 
-## Verified Tier
+## Safety Rules
 
-Adds human review by domain experts:
+Every skill must include a Safety Rules section in its SKILL.md. These rules constrain what the AI agent can do:
 
-- Advisory board member reviews domain decisions, parameter sources, and safety rules
-- Guideline versions are declared and automatically monitored for updates
-- DOI minted via Zenodo integration
-- Skills flagged when source guidelines publish updates; badges suspended until skill is updated
+- The agent dispatches and explains; the skill executes
+- The agent must not override thresholds defined in SKILL.md
+- The agent must not invent gene-drug associations or clinical interpretations
+- Every report must include the research-use disclaimer
 
-## Clinical-grade Tier
+## Limitations
 
-For skills destined for clinical research or pre-clinical pathways:
-
-- All Verified guarantees plus:
-- Cryptographically signed packages
-- Safety rules independently audited
-- BioCompute Object (IEEE 2791) compliance
-- Containerised execution (Docker/Singularity)
-
-## Security Threat Model
-
-| Threat | Mitigation |
-|--------|-----------|
-| Malicious skill submission | Automated scan on submission (no network calls, no fs access outside declared paths) |
-| Prompt injection via crafted inputs | Input validation, sandboxed execution |
-| Data exfiltration via network calls | Network access blocked during execution |
-| Supply chain attack | Signed packages at Clinical tier; community flagging; no-execute-on-install policy |
-
-## Governance
-
-- **Advisory board**: 4+ domain experts (clinical pharmacogenomics, population genetics, single-cell biology, statistical genetics)
-- **Schema evolution**: SKILL.md schema evolves via RFCs with 30-day public comment periods. Changes require 2+ advisory board approvals
-- **Guideline monitoring**: Automated alerts when declared guideline sources publish updates
-- **Deprecation policy**: Deprecated skills remain accessible for reproducibility, marked with pointer to successor
+ClawBio is a research and educational tool. It is not a medical device and does not provide clinical diagnoses. Skills have not been validated for clinical use. Always consult a healthcare professional before making medical decisions based on genomic data.
