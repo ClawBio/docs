@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ClawBio Documentation">
+  <meta property="og:title" content="{{ page.title }} - ClawBio">
+  <meta property="og:description" content="{{ config.site_description }}">
+  <meta property="og:image" content="https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=1200,height=630/event-covers/ue/48e9b48f-4f12-493c-8740-d1b7fe78b6ff.png">
+  <meta property="og:url" content="{{ page.canonical_url }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page.title }} - ClawBio">
+  <meta name="twitter:description" content="{{ config.site_description }}">
+  <meta name="twitter:image" content="https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=1200,height=630/event-covers/ue/48e9b48f-4f12-493c-8740-d1b7fe78b6ff.png">
+{% endblock %}

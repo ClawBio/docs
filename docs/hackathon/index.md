@@ -105,50 +105,58 @@ We have attendees ranging from AI agent engineers with no genomics background to
 
 ### Track A: AI Engineers New to Genomics
 
-You build agents, automation, and APIs professionally. You know how to wire systems together. You just haven't touched genomic data before. These skills let you apply your engineering strengths to real biological problems using public APIs and databases, no wet-lab knowledge required.
+You build agents, automation, and APIs professionally. You just haven't touched genomic data before. These skills let you apply your engineering strengths to biology using public APIs, no wet-lab knowledge required.
 
-- **PubMed Research Summariser**: given a gene name or disease, query the PubMed API and return a structured summary of recent findings. You know API orchestration; PubMed is just another endpoint.
-- **Clinical Trial Finder**: query ClinicalTrials.gov for active trials matching a gene or condition. Return structured results with eligibility, phase, and location.
-- **Drug Label Parser**: extract pharmacogenomic warnings from FDA drug labels (DailyMed API). Turn unstructured PDF data into structured, queryable output.
-- **Variant Frequency Dashboard**: given an rsID, query gnomAD and return allele frequencies across populations with a clear visual. Pure API work, high clinical value.
-- **Multi-Database Aggregator**: federate queries across two or more public genomics APIs (ClinVar, gnomAD, Open Targets) and return a unified report. This is orchestration engineering applied to biology.
+- [PubMed Research Summariser](projects/pubmed-summariser.md) -- query PubMed API, return structured summary of recent findings
+- [Clinical Trial Finder](projects/clinical-trial-finder.md) -- query ClinicalTrials.gov, return active trials with phase and eligibility
+- [Drug Label Parser](projects/drug-label-parser.md) -- extract PGx warnings from FDA drug labels (DailyMed API)
+- [Variant Frequency Dashboard](projects/variant-frequency.md) -- query gnomAD, visualise allele frequencies across populations
+- [Multi-Database Aggregator](projects/multi-db-aggregator.md) -- federate queries across ClinVar, gnomAD, Open Targets
 
 ### Track B: Genomics Researchers New to Agentic AI
 
-You work with genomic data daily. You know what good analysis looks like. You may have scripts that do useful things but are not packaged for anyone else to run. Wrap your domain expertise into a skill that an AI agent (or any colleague) can call reproducibly.
+You work with genomic data daily. Wrap your existing expertise into a skill that anyone can run reproducibly.
 
-- **Variant Annotation Pipeline**: take a VCF and annotate variants with ClinVar significance, gnomAD frequencies, and gene impact. You already know how to do this; now make it a one-command skill.
-- **QC Report Generator**: take FASTQ quality metrics (from FastQC or similar) and produce a pass/fail report with clear thresholds. Encode the QC decisions you make by eye every day.
-- **Differential Expression Wrapper**: wrap your DESeq2/PyDESeq2 workflow into a ClawBio skill with sensible defaults, contrasts, and volcano plots. Make your analysis reproducible by someone who has never used R or Python.
-- **Gene Set Enrichment**: take a gene list, run enrichment against KEGG/Reactome/GO, return ranked pathways with figures. Package the analysis you do after every experiment.
-- **Single-Cell Cluster Annotator**: given a Scanpy AnnData object with clusters, suggest cell type labels using marker gene databases. Extend the existing scRNA Orchestrator skill.
+- [Variant Annotation Pipeline](projects/variant-annotation.md) -- annotate a VCF with ClinVar significance, gnomAD frequencies, gene impact
+- [QC Report Generator](projects/qc-report.md) -- parse FastQC output, produce pass/fail report with thresholds
+- [Differential Expression Wrapper](projects/de-wrapper.md) -- PyDESeq2 workflow with volcano plots and sensible defaults
+- [Gene Set Enrichment](projects/gene-set-enrichment.md) -- Enrichr API for KEGG/Reactome/GO pathway ranking
+- [Single-Cell Cluster Annotator](projects/cell-type-annotator.md) -- suggest cell type labels from marker gene databases
 
 ### Track C: Proteomics and Multi-Omics
 
-Several attendees work in proteomics and multi-omics. ClawBio currently has no proteomics skills, making this a high-impact area.
+ClawBio currently has zero proteomics skills. Build the first one.
 
-- **Protein Interaction Mapper**: given a gene or protein list, query STRING API and return a PPI network with visualisation and hub scores. No proteomics data needed, just API calls.
-- **Mass Spec QC Skill**: parse MaxQuant or DIA-NN output and generate a quality report (peptide counts, missing values, CV distributions). If you work with mass spec data, you know what to check.
-- **Phosphoproteomics Enricher**: take a list of phosphosites, run kinase-substrate enrichment, return activated kinases with confidence scores.
-- **Protein Domain Annotator**: given a UniProt ID, fetch domain architecture, known variants, and structural data. Combine UniProt, InterPro, and AlphaFold APIs.
+- [Protein Interaction Mapper](projects/protein-interaction.md) -- STRING API to PPI network with hub scores and figures
+- [Mass Spec QC Skill](projects/mass-spec-qc.md) -- parse MaxQuant/DIA-NN output, generate quality report
+- [Phosphoproteomics Enricher](projects/phospho-enricher.md) -- kinase-substrate enrichment from phosphosite list
+- [Protein Domain Annotator](projects/protein-domain.md) -- UniProt + InterPro + AlphaFold domain map
 
 ### Track D: Clinical and Diagnostic Applications
 
-For those with clinical genomics, molecular diagnostics, or health data backgrounds.
+For clinical genomics, molecular diagnostics, and health data backgrounds.
 
-- **ACMG Variant Classifier**: implement the ACMG/AMP evidence framework for variant pathogenicity classification. Encode the 28 criteria as explicit rules in SKILL.md.
-- **Pharmacogenomics Interaction Checker**: given a patient genotype and a medication list, flag all gene-drug interactions with CPIC evidence levels. Extend the existing PharmGx Reporter.
-- **Diagnostic Yield Calculator**: given a set of variants and phenotype terms (HPO), calculate the diagnostic yield and rank candidate genes. Useful for rare disease panels.
-- **Tumour Mutational Burden**: calculate TMB from a somatic VCF with configurable filters (VAF, depth, region). Output includes MSI estimation and immunotherapy relevance score.
+- [ACMG Variant Classifier](projects/acmg-classifier.md) -- implement the 28-criteria ACMG/AMP pathogenicity framework
+- [Pharmacogenomics Interaction Checker](projects/pgx-interaction-checker.md) -- genotype + medication list to CPIC interaction report
+- [Diagnostic Yield Calculator](projects/diagnostic-yield.md) -- HPO phenotype terms to ranked candidate genes
+- [Tumour Mutational Burden](projects/tmb-calculator.md) -- somatic VCF to TMB score with MSI estimation
 
 ### Track E: Epidemiology and Public Health
 
-For researchers working with population-level data, outbreak analysis, or health equity.
+Population-level data, outbreak analysis, and health equity.
 
-- **Outbreak Phylogenetic Clusterer**: given consensus sequences, build a quick neighbour-joining tree and identify transmission clusters. Visualise with a timeline.
-- **Vaccine Equity Scorer**: analyse vaccination coverage data across demographic groups. Apply the HEIM equity framework from the existing Equity Scorer to public health data.
-- **GBD Disease Burden Visualiser**: query the IHME Global Burden of Disease data for a condition and produce a clear summary of DALYs, prevalence, and trends across regions.
-- **Antimicrobial Resistance Profiler**: detect AMR genes from metagenomic reads using public databases (CARD/ResFinder). Build on the existing Metagenomics Profiler.
+- [Outbreak Phylogenetic Clusterer](projects/outbreak-clusterer.md) -- consensus sequences to NJ tree and transmission clusters
+- [Vaccine Equity Scorer](projects/vaccine-equity.md) -- vaccination coverage equity analysis using HEIM framework
+- [GBD Disease Burden Visualiser](projects/gbd-visualiser.md) -- IHME data to DALYs, prevalence, and regional trends
+- [Antimicrobial Resistance Profiler](projects/amr-profiler.md) -- detect AMR genes from metagenomic reads (CARD database)
+
+### Track F: Databricks
+
+Databricks is sponsoring this hackathon with a **week of dedicated Solutions Architect time** to help productionise the best output. Build skills designed to scale.
+
+- [Genomics ETL on Databricks](projects/databricks-genomics-etl.md) -- prepare VCF/23andMe data as Delta Lake tables
+- [Cohort Analytics Dashboard](projects/databricks-cohort-dashboard.md) -- batch PharmGx across a cohort, produce population-level dashboard
+- [Variant Warehouse](projects/databricks-variant-warehouse.md) -- multi-source variant ingestion into a queryable warehouse
 
 ---
 
