@@ -3,24 +3,19 @@ title: ClawBio Hackathon — Agentic Genomics
 description: Build AI-powered bioinformatics skills at Imperial College London. 19 March 2026.
 ---
 
-<div class="hero" markdown>
-
-# ClawBio Hackathon: Agentic Genomics
-{: .hero__title }
-
-19 March 2026 · Imperial College London · Build AI skills for bioinformatics
-{: .hero__subtitle }
-
-[Register on Luma](https://luma.com/kolhdoi9){ .md-button .md-button--primary }
-&nbsp;
-[Hackathon Guide](hackathon/index.md){ .md-button }
-
+<div class="hero">
+  <h1 class="hero__title">ClawBio Hackathon: Agentic Genomics</h1>
+  <p class="hero__subtitle">19 March 2026 · Imperial College London · Build AI skills for bioinformatics</p>
+  <p>
+    <a href="https://luma.com/kolhdoi9" class="md-button md-button--primary">Register on Luma</a>
+    &nbsp;
+    <a href="hackathon/" class="md-button">Hackathon Guide</a>
+  </p>
 </div>
 
-## Quick Path
-{: .section-heading }
+<h2 class="section-heading">Quick Path</h2>
 
-<div class="tutorial-cards" markdown>
+<div class="tutorial-cards">
 
 <a class="tutorial-card" href="hackathon/setup/">
   <div class="tutorial-card__header">
@@ -60,10 +55,9 @@ description: Build AI-powered bioinformatics skills at Imperial College London. 
 
 </div>
 
-## Resources
-{: .section-heading }
+<h2 class="section-heading">Resources</h2>
 
-<div class="tutorial-cards" markdown>
+<div class="tutorial-cards">
 
 <a class="tutorial-card" href="hackathon/agentic-tools/">
   <div class="tutorial-card__header">
