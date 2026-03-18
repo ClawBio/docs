@@ -94,7 +94,7 @@ Both paths converge at the same goal: a working skill you can submit as a PR.
 | 3. [Add Python](add-python.md) | 20 min | Implement the skill logic with a CLI endpoint |
 | 4. [Test and Submit](submit.md) | 10 min | Validate, test, open a PR |
 
-Also see the [Presentation](presentation.md) for context on what ClawBio is and why it exists.
+Also see the [Presentation](presentation/) for the full-screen slide deck.
 
 ---
 
