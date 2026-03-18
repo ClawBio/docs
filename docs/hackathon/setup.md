@@ -48,16 +48,6 @@ cat /tmp/pharmgx_demo/report.md
 
 You should see a pharmacogenomics report with drug recommendations. If this works, your environment is ready.
 
-## 5. (Optional) Install Claude Code Plugin
-
-If you use Claude Code, install the ClawBio plugin for agent-assisted skill development:
-
-```bash
-claude plugin install ClawBio/ClawBio
-```
-
-This lets Claude discover and run ClawBio skills directly.
-
 ## Troubleshooting
 
 ### `ModuleNotFoundError: No module named 'pandas'`

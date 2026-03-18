@@ -112,7 +112,6 @@ paste your demo output here
 1. **CI runs**: automated tests check your SKILL.md structure and demo execution
 2. **Review**: a maintainer reviews domain correctness and code quality
 3. **Merge**: once approved, your skill is live in the ClawBio catalog
-4. **DOI**: verified skills get a Zenodo DOI for citation
 
 ## Tips for a Strong Submission
 

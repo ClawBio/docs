@@ -5,6 +5,13 @@ description: What ClawBio is, why it exists, and how to build a skill
 
 # ClawBio Hackathon Presentation
 
+![ClawBio Hackathon Banner](https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=500,height=500/event-covers/ue/48e9b48f-4f12-493c-8740-d1b7fe78b6ff.png){ width="100%" style="border-radius: 12px; margin-bottom: 1.5rem;" }
+
+**ClawBio Hackathon: Agentic Genomics**
+19 March 2026 | Sir Michael Uren Hub, Imperial College London
+
+---
+
 ## The Problem
 
 Reproducing a single figure from a published paper should take 30 seconds. Instead it takes weeks, or fails entirely.
@@ -172,7 +179,7 @@ Follow the [Setup Guide](setup.md) to get started, then work through [Your First
 - **Repository**: [github.com/ClawBio/ClawBio](https://github.com/ClawBio/ClawBio)
 - **Website**: [clawbio.ai](https://clawbio.ai)
 - **Documentation**: [docs.clawbio.ai](https://docs.clawbio.ai)
-- **Discord**: [Join the community](https://discord.gg/EEp4Neaz)
+- **Discord**: [discord.gg/EEp4Neaz](https://discord.gg/EEp4Neaz)
 - **Telegram**: [ClawBio Contributors](https://t.me/ClawBioContributors)
 
 ---
