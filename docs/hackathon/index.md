@@ -16,6 +16,19 @@ Organised by **Jay Moore**, **Manuel Corpas**, **Nathan Skene**, and **Josh Beal
 
 ---
 
+## Objectives
+
+By the end of this hackathon, you will have:
+
+1. **Built a working bioinformatics skill** that any AI agent can discover and run, with a SKILL.md contract, demo data, and a CLI endpoint
+2. **Experienced agentic development first-hand** using coding assistants and AI agents to accelerate your work, not replace it
+3. **Contributed to an open-source project** with a pull request to the ClawBio repository that others can use and build on
+4. **Connected with a cross-disciplinary community** spanning AI engineering, genomics, proteomics, clinical diagnostics, and epidemiology across Imperial, KCL, the Crick, UCL, and industry
+
+Whether you are an AI engineer who has never touched genomic data or a genomics researcher who has never used an AI agent, you will leave with a concrete, publishable artefact and practical experience bridging both worlds.
+
+---
+
 ## Three Themes
 
 This hackathon explores the intersection of genomics and agentic AI:
@@ -36,7 +49,39 @@ A **ClawBio skill**: a self-contained bioinformatics module that any AI agent ca
 - A GitHub account
 - Curiosity about genomics, bioinformatics, or agentic AI (no genomics background required for several tracks below)
 
-Food and drinks will be provided.
+Food and drinks will be provided (pizza at 13:30).
+
+---
+
+## Timetable
+
+| Time | What | Details |
+|------|------|---------|
+| **12:30** | **Doors open** | Arrive, get set up, connect to WiFi |
+| **12:45** | **Welcome** | Nathan Skene (Imperial) and Manuel Corpas (Westminster) |
+| **13:00** | **Overview of the day** | Themes, tracks, how submissions work |
+| **13:15** | **Guided Tutorial** | Hands-on with helpers. Follow the [Skills Cookbook](https://neurogenomics.github.io/agentic-life-sciences-tutorial/) and the [ClawBio Setup](setup.md) |
+| **13:30** | **Pizza** | Lunch break, keep hacking if you want |
+| **14:00** | **Build** | Work on your skill (solo or in teams). Helpers circulate. |
+| **15:30** | **Breakout Tables** | Rotate between themed discussions (pick 1-2): |
+|  | | *The future of reproducibility in biological research* |
+|  | | *Handling sensitive biodata with OpenClaw/ClawBio* |
+|  | | *Your Theme?* (propose your own) |
+| **16:30** | **Build** | Final stretch. Polish your skill, write SKILL.md, test demo mode. |
+| **17:30** | **Show and Tell** | Each team/individual presents their skill (~3 min each) |
+| **18:30** | **Menti Poll and Wrap-up** | Community vote, closing remarks |
+| **19:00** | **End** | |
+
+---
+
+## Resources
+
+Two guided tutorials are available to get you started:
+
+1. **[Skills Cookbook](https://neurogenomics.github.io/agentic-life-sciences-tutorial/)** (Nathan Skene's lab, Imperial) -- Setup OpenCode, explore datasets with AI, build journal club slides, single-cell portals, and context management. Great for learning agentic workflows from scratch.
+2. **[ClawBio Tutorial](setup.md)** (this site) -- Clone ClawBio, run a demo skill, then build your own following the step-by-step guide.
+
+Both paths converge at the same goal: a working skill you can submit as a PR.
 
 ---
 
