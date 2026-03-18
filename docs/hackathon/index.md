@@ -41,16 +41,28 @@ A skill is not a wrapper around someone else's code. It encodes domain judgement
 
 ---
 
-## Objectives
+## Quick Path
 
-By the end of this hackathon, you will have:
+| Step | Time | What |
+|------|------|------|
+| 1. [Setup](setup.md) | 10 min | Clone repo, install dependencies, run a demo |
+| 2. [Your First Skill](first-skill.md) | 20 min | Scaffold a skill, write SKILL.md, add demo data |
+| 3. [Add Python](add-python.md) | 20 min | Implement the skill logic with a CLI endpoint |
+| 4. [Test and Submit](submit.md) | 10 min | Validate, test, open a PR |
 
-1. **Built a working bioinformatics skill** with a SKILL.md contract, demo data, and a runnable endpoint
-2. **Experienced agentic development first-hand** using coding assistants and AI agents to accelerate your work
-3. **Contributed to an open-source project** with a pull request to the ClawBio repository
-4. **Connected with a cross-disciplinary community** spanning AI engineering, genomics, proteomics, clinical diagnostics, and epidemiology across Imperial, KCL, the Crick, UCL, and industry
+These timings assume your environment is already set up. First-time Git or GitHub users should allow extra time; helpers will be available throughout.
 
-Whether you are an AI engineer new to genomics or a genomics researcher new to agentic tools, you will leave with a concrete open-source artefact: a working skill, a documented scientific contract, and a pull request.
+---
+
+## What You'll Walk Away With
+
+- **If you are a genomics researcher**: your existing pipeline wrapped as a one-command, reproducible tool that any AI agent or colleague can run without calling you.
+- **If you are an AI engineer**: a working bioinformatics skill built on real public APIs, with domain decisions you can point to as evidence you understand the biology.
+- **If you work in proteomics**: the first proteomics skill in ClawBio. Pioneer status.
+- **If you work in clinical diagnostics**: a prototype skill with explicit safety rules and CPIC evidence levels, demonstrating how agentic tools can handle sensitive domain logic.
+- **If you work in epidemiology or public health**: a population-level analysis tool with visual output that non-specialists can act on.
+
+Everyone leaves with a concrete open-source artefact: a working skill, a documented scientific contract, and a pull request.
 
 ---
 
@@ -109,7 +121,7 @@ Food and drinks will be provided (pizza at 13:30).
 | **12:00** | **Doors open** | Arrive, get set up, connect to WiFi |
 | **12:30** | **Welcome** | Nathan Skene (Imperial) and Manuel Corpas (Westminster) |
 | **12:45** | **[Overview of the day](presentation/)** | Themes, tracks, how submissions work |
-| **13:15** | **Databricks** | Toz Ozturk (Databricks) -- genomics on Databricks (~15 min) |
+| **13:15** | **Scaling genomics** | Toz Ozturk (Databricks) -- how cloud infrastructure handles large-scale genomic workloads (~15 min) |
 | **13:30** | **Pizza** | Lunch break, keep hacking if you want |
 | **14:00** | **Guided Tutorial (Jay Moore)** | Hands-on with helpers. Follow the [Agentic Tools tutorial](agentic-tools.md) and the [ClawBio Setup](setup.md) |
 | **14:30** | **Build** | Work on your skill (solo or in teams). Helpers circulate. |
@@ -132,21 +144,6 @@ Two guided tutorials are available to get you started:
 2. **[ClawBio Setup](setup.md)** -- Clone ClawBio, run a demo skill, then build your own following the step-by-step guide.
 
 Both paths converge at the same goal: a working skill you can submit as a PR.
-
----
-
-## Quick Path
-
-| Step | Time | What |
-|------|------|------|
-| 1. [Setup](setup.md) | 10 min | Clone repo, install dependencies, run a demo |
-| 2. [Your First Skill](first-skill.md) | 20 min | Scaffold a skill, write SKILL.md, add demo data |
-| 3. [Add Python](add-python.md) | 20 min | Implement the skill logic with a CLI endpoint |
-| 4. [Test and Submit](submit.md) | 10 min | Validate, test, open a PR |
-
-These timings assume your environment is already set up. First-time Git or GitHub users should allow extra time; helpers will be available throughout.
-
-Also see the [Presentation](presentation/) for the full-screen slide deck.
 
 ---
 
@@ -231,9 +228,14 @@ Population-level data, outbreak analysis, and health equity.
 
 ## Not Sure Which Track?
 
-Start with [Setup](setup.md) and run a few demos. See what clicks. Then pick a skill idea, or invent your own. The best skills come from scratching your own itch: what analysis do you do repeatedly that could be a one-command tool?
+- You have never written a bioinformatics pipeline: **Track A**
+- You work with VCF files or NGS data daily: **Track B**
+- Your primary data is protein or mass spec: **Track C**
+- You interpret genetic variants in a clinical context: **Track D**
+- Your work involves populations, surveillance, or disease burden: **Track E**
+- None of the above: **pick any 90-minute build** from any track, or invent your own
 
-If you want to team up, find someone from a different track. An AI engineer paired with a genomics researcher is a powerful combination.
+The best skills come from scratching your own itch: what analysis do you do repeatedly that could be a one-command tool? If you want to team up, find someone from a different track. An AI engineer paired with a genomics researcher is a powerful combination.
 
 ---
 
@@ -250,7 +252,6 @@ Skills will be evaluated on:
 
 ## Communication
 
-- **On the day**: WhatsApp group (link shared at the venue) and Discord with RoboTerri
-- **GitHub**: [ClawBio/ClawBio Discussions](https://github.com/ClawBio/ClawBio/discussions)
-- **Discord**: [discord.gg/EEp4Neaz](https://discord.gg/EEp4Neaz)
-- **Telegram**: [ClawBio Contributors](https://t.me/ClawBioContributors)
+- **Primary channel**: [Discord](https://discord.gg/EEp4Neaz) -- for technical help, PR reviews, and post-event community. Monitored by maintainers.
+- **On the day**: WhatsApp group (link shared at the venue) for logistics
+- **GitHub**: [ClawBio/ClawBio Discussions](https://github.com/ClawBio/ClawBio/discussions) for longer-form questions and skill proposals
