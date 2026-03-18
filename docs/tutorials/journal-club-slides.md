@@ -12,6 +12,8 @@ description: Create presentations from papers — feed a PDF to an agent and get
 
 This tutorial shows how to use an AI coding agent to create a PowerPoint presentation from a scientific paper.
 
+[:fontawesome-brands-youtube: Watch the video tutorial](https://www.youtube.com/watch?v=V6p3ArpIOQo){ .md-button }
+
 ---
 
 ## What You'll Learn

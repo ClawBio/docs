@@ -12,6 +12,8 @@ description: Apply for GitHub Education benefits and activate Copilot Pro with C
 
 GitHub Education gives verified students and faculty free access to GitHub Copilot Pro, which unlocks powerful AI models including Anthropic's Claude.
 
+[:fontawesome-brands-youtube: Watch the video tutorial](https://www.youtube.com/watch?v=mZh3Vw9bh-0){ .md-button }
+
 ---
 
 ## What You'll Learn

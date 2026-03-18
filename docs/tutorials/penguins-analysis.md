@@ -12,6 +12,8 @@ description: Data analysis with AI assistants — explore a real dataset and pro
 
 This tutorial walks you through using an AI coding agent to analyse the Palmer Penguins dataset and create visualisations.
 
+[:fontawesome-brands-youtube: Watch the video tutorial](https://www.youtube.com/watch?v=xHuNzT9VA94){ .md-button }
+
 ---
 
 ## What You'll Learn

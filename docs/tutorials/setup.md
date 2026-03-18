@@ -12,6 +12,8 @@ description: Install an AI coding agent, connect to a provider, and run your fir
 
 Coding agents are distinct from chatbots because they can read and write files on your computer. This tutorial explains the stack and gets you set up.
 
+[:fontawesome-brands-youtube: Watch the video tutorial](https://www.youtube.com/watch?v=qXYD9_I7_A0){ .md-button }
+
 ---
 
 ## How AI Coding Tools Work

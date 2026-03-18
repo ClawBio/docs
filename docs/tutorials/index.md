@@ -7,8 +7,7 @@ description: Step-by-step guides — from AI tool setup to advanced context mana
 
 Hands-on guides to get productive with AI coding tools and ClawBio. Each tutorial includes difficulty ratings and time estimates.
 
-## Basics — AI Coding Tools
-{: .section-heading }
+<h2 class="section-heading">Basics — AI Coding Tools</h2>
 
 <div class="tutorial-cards" markdown>
 
@@ -74,8 +73,7 @@ Hands-on guides to get productive with AI coding tools and ClawBio. Each tutoria
 
 </div>
 
-## Extras — AI Coding Tools
-{: .section-heading }
+<h2 class="section-heading">Extras — AI Coding Tools</h2>
 
 <div class="tutorial-cards" markdown>
 
@@ -117,8 +115,7 @@ Hands-on guides to get productive with AI coding tools and ClawBio. Each tutoria
 
 </div>
 
-## ClawBio Tutorials
-{: .section-heading }
+<h2 class="section-heading">ClawBio Tutorials</h2>
 
 <div class="tutorial-cards" markdown>
 

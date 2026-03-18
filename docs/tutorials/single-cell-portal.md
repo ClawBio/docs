@@ -12,6 +12,8 @@ description: Build an interactive scRNA-seq viewer using AI and public CELLxGENE
 
 Build an interactive viewer for single-cell RNA sequencing data using public datasets from the [CZ CELLxGENE](https://cellxgene.cziscience.com/) data portal.
 
+[:fontawesome-brands-youtube: Watch the video tutorial](https://www.youtube.com/watch?v=VB-CsQeYs5o){ .md-button }
+
 ---
 
 ## Organise Project
