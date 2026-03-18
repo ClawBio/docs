@@ -9,28 +9,32 @@ theme:
   name: material
   favicon: assets/favicon.ico
   logo: assets/clawbio-logo.jpeg
+  custom_dir: overrides
   palette:
-    - scheme: default
-      primary: blue
-      accent: blue
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    - scheme: slate
-      primary: blue
-      accent: light blue
+    - scheme: clawbio
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+    - scheme: default
+      primary: green
+      accent: green
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
   features:
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
     - navigation.expand
     - navigation.top
+    - navigation.footer
     - search.suggest
     - search.highlight
     - content.code.copy
     - content.tabs.link
+    - header.autohide
   font:
     text: Inter
     code: JetBrains Mono
@@ -99,6 +103,9 @@ markdown_extensions:
   - md_in_html
   - toc:
       permalink: true
+
+extra_css:
+  - stylesheets/clawbio.css
 
 extra:
   social:
