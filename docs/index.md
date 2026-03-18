@@ -49,7 +49,74 @@ Curated, reproducible, open-source bioinformatics skills that any AI agent can r
 
 </div>
 
-## Tutorials
+## Tutorials — AI Coding Tools
+{: .section-heading }
+
+<div class="tutorial-cards" markdown>
+
+<a class="tutorial-card" href="tutorials/setup/">
+  <div class="tutorial-card__header">
+    <span class="tutorial-card__number">01</span>
+    <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
+    <span class="time-estimate">20 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Setup</h3>
+  <p class="tutorial-card__desc">Get started with AI coding tools — install an agent, connect to a provider, and run your first prompt.</p>
+</a>
+
+<a class="tutorial-card" href="tutorials/penguins-analysis/">
+  <div class="tutorial-card__header">
+    <span class="tutorial-card__number">02</span>
+    <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
+    <span class="time-estimate">30 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Penguins Analysis</h3>
+  <p class="tutorial-card__desc">Data analysis with AI assistants — explore a real dataset, write code, and produce publication-ready plots.</p>
+</a>
+
+<a class="tutorial-card" href="tutorials/journal-club-slides/">
+  <div class="tutorial-card__header">
+    <span class="tutorial-card__number">03</span>
+    <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
+    <span class="time-estimate">25 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Journal Club Slides</h3>
+  <p class="tutorial-card__desc">Create presentations from papers — feed a PDF to an agent and receive a slide deck ready to present.</p>
+</a>
+
+<a class="tutorial-card" href="tutorials/single-cell-portal/">
+  <div class="tutorial-card__header">
+    <span class="tutorial-card__number">04</span>
+    <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
+    <span class="time-estimate">30 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Single Cell Portal</h3>
+  <p class="tutorial-card__desc">Build an interactive scRNA-seq viewer from CELLxGENE data using AI-assisted development.</p>
+</a>
+
+<a class="tutorial-card" href="tutorials/context-management/">
+  <div class="tutorial-card__header">
+    <span class="tutorial-card__number">05</span>
+    <span class="difficulty-badge difficulty-badge--advanced">Advanced</span>
+    <span class="time-estimate">20 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Context Management</h3>
+  <p class="tutorial-card__desc">Understand context windows, cost scaling, and how to use <code>/compact</code> to keep runs cheap and accurate.</p>
+</a>
+
+<a class="tutorial-card" href="tutorials/apm/">
+  <div class="tutorial-card__header">
+    <span class="tutorial-card__number">06</span>
+    <span class="difficulty-badge difficulty-badge--advanced">Advanced</span>
+    <span class="time-estimate">30 min</span>
+  </div>
+  <h3 class="tutorial-card__title">APM</h3>
+  <p class="tutorial-card__desc">Dependency manager for AI context — declare, version, and inject context modules automatically.</p>
+</a>
+
+</div>
+
+## Tutorials — ClawBio
 {: .section-heading }
 
 <div class="tutorial-cards" markdown>
@@ -82,16 +149,6 @@ Curated, reproducible, open-source bioinformatics skills that any AI agent can r
   </div>
   <h3 class="tutorial-card__title">Telegram Bot</h3>
   <p class="tutorial-card__desc">Deploy RoboTerri — a Telegram bot that runs ClawBio skills via any LLM provider.</p>
-</a>
-
-<a class="tutorial-card" href="tutorials/context-management/">
-  <div class="tutorial-card__header">
-    <span class="tutorial-card__number">04</span>
-    <span class="difficulty-badge difficulty-badge--advanced">Advanced</span>
-    <span class="time-estimate">20 min</span>
-  </div>
-  <h3 class="tutorial-card__title">Context Management</h3>
-  <p class="tutorial-card__desc">Understand context windows, cost scaling, and how to use <code>/compact</code> to keep runs cheap and accurate.</p>
 </a>
 
 </div>

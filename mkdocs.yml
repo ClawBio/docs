@@ -44,10 +44,22 @@ nav:
     - Agentic Tools: hackathon/agentic-tools.md
   - Tutorials:
     - Overview: tutorials/index.md
-    - Run Your First Skill: tutorials/run-your-first-skill.md
-    - Build a Skill: tutorials/build-a-skill.md
-    - Telegram Bot: tutorials/telegram-bot.md
-    - Context Management: tutorials/context-management.md
+    - Basics:
+      - Setup: tutorials/setup.md
+      - Penguins Analysis: tutorials/penguins-analysis.md
+      - Journal Club Slides: tutorials/journal-club-slides.md
+      - Single Cell Portal: tutorials/single-cell-portal.md
+      - Context Management: tutorials/context-management.md
+      - APM: tutorials/apm.md
+    - Extras:
+      - Rules and Memory: tutorials/rules.md
+      - GitHub Education: tutorials/github-education.md
+      - Building Custom Agents: tutorials/making-agents.md
+      - tmux Sessions: tutorials/tmux-sessions.md
+    - ClawBio:
+      - Run Your First Skill: tutorials/run-your-first-skill.md
+      - Build a Skill: tutorials/build-a-skill.md
+      - Telegram Bot: tutorials/telegram-bot.md
   - Deployment:
     - Overview: deployment/index.md
     - Docker: deployment/docker.md
