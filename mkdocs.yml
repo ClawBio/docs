@@ -40,6 +40,7 @@ theme:
     code: JetBrains Mono
 
 nav:
+  - Home: index.md
   - Get Started:
     - Welcome: start/index.md
     - Quickstart: start/quickstart.md
