@@ -280,6 +280,12 @@
    More whitespace, larger line-height, spacious sections
    ============================================================ */
 
+/* System fonts — no external font loading */
+:root {
+  --md-text-font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --md-code-font: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+}
+
 /* Wider line-height for body text */
 .md-typeset {
   font-size: 0.85rem;
