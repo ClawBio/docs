@@ -81,7 +81,7 @@ print(meta["outputs"])  # What the skill produces
 clawbio list
 
 # Run a demo skill to test the execution path
-python skills/pharmgx-reporter/pharmgx_reporter.py --demo --output /tmp/test
+python3 skills/pharmgx-reporter/pharmgx_reporter.py --demo --output /tmp/test
 
 # Check output was produced
 ls /tmp/test/

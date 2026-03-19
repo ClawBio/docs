@@ -151,8 +151,8 @@ gh auth login            # follow the prompts
 # Clone the repo and run a demo
 git clone https://github.com/ClawBio/ClawBio.git
 cd ClawBio
-pip install -r requirements.txt
-python skills/pharmgx-reporter/pharmgx_reporter.py --demo
+pip3 install -r requirements.txt
+python3 skills/pharmgx-reporter/pharmgx_reporter.py --demo
 ```
 
 If you do not have `gh` installed, you can submit your PR through the GitHub web interface instead. Both routes are covered in the [Submit](submit.md) guide.

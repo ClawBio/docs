@@ -171,7 +171,7 @@ if __name__ == "__main__":
 ## 5. Test It
 
 ```bash
-python skills/my-awesome-skill/my_skill.py \
+python3 skills/my-awesome-skill/my_skill.py \
   --input skills/my-awesome-skill/demo_input.txt \
   --output /tmp/my-skill-demo
 ```
@@ -188,7 +188,7 @@ cat /tmp/my-skill-demo/summary.json
 Check that the SKILL.md parses correctly:
 
 ```bash
-python -c "
+python3 -c "
 import yaml
 from pathlib import Path
 

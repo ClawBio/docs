@@ -20,7 +20,7 @@ Make sure your SKILL.md and Python script are correct:
 
 ```bash
 # Validate SKILL.md structure
-python -c "
+python3 -c "
 import yaml
 from pathlib import Path
 
@@ -55,7 +55,7 @@ else:
 ## 2. Test Demo Mode
 
 ```bash
-python skills/my-awesome-skill/my_skill.py --demo --output /tmp/submission_test
+python3 skills/my-awesome-skill/my_skill.py --demo --output /tmp/submission_test
 ```
 
 Verify:

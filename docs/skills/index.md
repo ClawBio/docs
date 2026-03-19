@@ -97,10 +97,10 @@ ClawBio ships with **24+ skills** spanning pharmacogenomics, population genetics
 Every skill has demo data. Just add `--demo`:
 
 ```bash
-python skills/pharmgx-reporter/pharmgx_reporter.py \
+python3 skills/pharmgx-reporter/pharmgx_reporter.py \
   --input skills/pharmgx-reporter/demo_patient.txt --output /tmp/demo
 
-python skills/gwas-prs/gwas_prs.py --demo --output /tmp/demo
-python skills/scrna-orchestrator/scrna_orchestrator.py --demo --output /tmp/demo
-python skills/clinpgx/clinpgx.py --demo --output /tmp/demo
+python3 skills/gwas-prs/gwas_prs.py --demo --output /tmp/demo
+python3 skills/scrna-orchestrator/scrna_orchestrator.py --demo --output /tmp/demo
+python3 skills/clinpgx/clinpgx.py --demo --output /tmp/demo
 ```

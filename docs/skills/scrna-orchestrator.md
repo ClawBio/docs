@@ -10,18 +10,18 @@ End-to-end single-cell RNA-seq pipeline built on Scanpy. QC filtering, normalisa
 ## Quick Demo
 
 ```bash
-python skills/scrna-orchestrator/scrna_orchestrator.py --demo --output /tmp/scrna_demo
+python3 skills/scrna-orchestrator/scrna_orchestrator.py --demo --output /tmp/scrna_demo
 ```
 
 ## CLI Reference
 
 ```bash
-python skills/scrna-orchestrator/scrna_orchestrator.py \
+python3 skills/scrna-orchestrator/scrna_orchestrator.py \
   --input <data.h5ad> \
   --output <report_dir>
 
 # With doublet detection
-python skills/scrna-orchestrator/scrna_orchestrator.py \
+python3 skills/scrna-orchestrator/scrna_orchestrator.py \
   --demo --doublet-method scrublet --output /tmp/scrna_doublet_demo
 ```
 

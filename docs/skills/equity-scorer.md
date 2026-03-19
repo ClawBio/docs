@@ -10,7 +10,7 @@ Compute the HEIM (Health Equity Index Metric) score for a genomic dataset. Measu
 ## Quick Demo
 
 ```bash
-python skills/equity-scorer/equity_scorer.py \
+python3 skills/equity-scorer/equity_scorer.py \
   --input examples/demo_populations.vcf \
   --pop-map examples/demo_population_map.csv \
   --output /tmp/equity_demo
@@ -20,18 +20,18 @@ python skills/equity-scorer/equity_scorer.py \
 
 ```bash
 # From a multi-sample VCF with population map
-python skills/equity-scorer/equity_scorer.py \
+python3 skills/equity-scorer/equity_scorer.py \
   --input <vcf_or_csv> \
   --pop-map <population_map.csv> \
   --output <report_dir>
 
 # From an ancestry CSV (no VCF needed)
-python skills/equity-scorer/equity_scorer.py \
+python3 skills/equity-scorer/equity_scorer.py \
   --input <ancestry.csv> \
   --output <report_dir>
 
 # Custom dimension weights
-python skills/equity-scorer/equity_scorer.py \
+python3 skills/equity-scorer/equity_scorer.py \
   --input <vcf_or_csv> \
   --pop-map <csv> \
   --weights 0.35,0.25,0.20,0.20 \

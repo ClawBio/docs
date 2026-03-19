@@ -10,7 +10,7 @@ Query a variant by rsID across nine genomic databases in a single call: GWAS Cat
 ## Quick Demo
 
 ```bash
-python skills/gwas-lookup/gwas_lookup.py \
+python3 skills/gwas-lookup/gwas_lookup.py \
   --demo \
   --output /tmp/gwas_lookup_demo
 ```
@@ -19,18 +19,18 @@ python skills/gwas-lookup/gwas_lookup.py \
 
 ```bash
 # Look up a single variant
-python skills/gwas-lookup/gwas_lookup.py \
+python3 skills/gwas-lookup/gwas_lookup.py \
   --rsid rs3798220 \
   --output <report_dir>
 
 # Skip specific databases
-python skills/gwas-lookup/gwas_lookup.py \
+python3 skills/gwas-lookup/gwas_lookup.py \
   --rsid rs3798220 \
   --skip gtex,bbj \
   --output <report_dir>
 
 # Demo mode (pre-fetched rs3798220)
-python skills/gwas-lookup/gwas_lookup.py \
+python3 skills/gwas-lookup/gwas_lookup.py \
   --demo \
   --output /tmp/gwas_lookup_demo
 ```

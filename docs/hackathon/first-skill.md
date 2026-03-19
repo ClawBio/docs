@@ -125,7 +125,7 @@ EOF
 Check that your SKILL.md is well-formed:
 
 ```bash
-python -c "
+python3 -c "
 import yaml
 from pathlib import Path
 

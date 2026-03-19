@@ -123,7 +123,7 @@ Tokens cost money on paid plans. A 50-message conversation at 150k tokens on Cla
 Now that you have an agent running, use it to build a ClawBio skill:
 
 1. **Clone the repo**: ask your agent to `git clone https://github.com/ClawBio/ClawBio.git`
-2. **Run a demo**: `python skills/pharmgx-reporter/pharmgx_reporter.py --demo`
+2. **Run a demo**: `python3 skills/pharmgx-reporter/pharmgx_reporter.py --demo`
 3. **Build your skill**: follow the [Setup](setup.md) and [Build a Skill](first-skill.md) guides, using your agent to help write the code
 
 The agent writes the Python. You provide the domain decisions. Together, that is a ClawBio skill.

@@ -77,7 +77,7 @@ if __name__ == "__main__":
 clawbio validate skills/my-skill-name/
 
 # Run demo mode
-python skills/my-skill-name/my_skill_name.py --demo --output /tmp/demo
+python3 skills/my-skill-name/my_skill_name.py --demo --output /tmp/demo
 
 # Create a branch and submit
 git checkout -b skill/my-skill-name

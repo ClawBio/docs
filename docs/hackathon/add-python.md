@@ -143,13 +143,13 @@ Never hardcode `/Users/yourname/...` or absolute paths. Use `Path(__file__).pare
 
 ```bash
 # Run with demo data
-python skills/my-awesome-skill/my_skill.py --demo --output /tmp/test_output
+python3 skills/my-awesome-skill/my_skill.py --demo --output /tmp/test_output
 
 # Check output
 cat /tmp/test_output/report.md
 
 # Run with your own data
-python skills/my-awesome-skill/my_skill.py \
+python3 skills/my-awesome-skill/my_skill.py \
   --input path/to/your/data.txt \
   --output /tmp/test_output_2
 ```

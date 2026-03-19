@@ -57,7 +57,7 @@ curl -sSL https://raw.githubusercontent.com/microsoft/apm/main/install.sh | sh
 brew install microsoft/apm/apm
 
 # Or via pip
-pip install apm-cli
+pip3 install apm-cli
 ```
 
 Verify:

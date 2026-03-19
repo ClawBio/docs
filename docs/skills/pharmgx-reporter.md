@@ -10,7 +10,7 @@ Generate a personalised pharmacogenomics report from 23andMe, AncestryDNA, or VC
 ## Quick Demo
 
 ```bash
-python skills/pharmgx-reporter/pharmgx_reporter.py \
+python3 skills/pharmgx-reporter/pharmgx_reporter.py \
   --input skills/pharmgx-reporter/demo_patient.txt \
   --output /tmp/pharmgx_demo
 ```
@@ -26,7 +26,7 @@ python skills/pharmgx-reporter/pharmgx_reporter.py \
 ## CLI Reference
 
 ```bash
-python skills/pharmgx-reporter/pharmgx_reporter.py \
+python3 skills/pharmgx-reporter/pharmgx_reporter.py \
   --input <patient_file> \
   --output <report_dir>
 ```

@@ -28,7 +28,7 @@ Create a virtual environment and install the required packages:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## 3. Run the PharmGx Demo
@@ -36,7 +36,7 @@ pip install -r requirements.txt
 Every ClawBio skill ships with synthetic demo data. Run the **PharmGx Reporter** — it generates a pharmacogenomics report from a sample 23andMe-format file:
 
 ```bash
-python skills/pharmgx-reporter/pharmgx_reporter.py \
+python3 skills/pharmgx-reporter/pharmgx_reporter.py \
   --input skills/pharmgx-reporter/demo_patient.txt \
   --output /tmp/pharmgx-demo
 ```
@@ -73,13 +73,13 @@ Run any other skill with `--demo`:
 
 ```bash
 # Polygenic risk scores
-python skills/gwas-prs/gwas_prs.py --demo --output /tmp/demo
+python3 skills/gwas-prs/gwas_prs.py --demo --output /tmp/demo
 
 # Single-cell RNA-seq pipeline
-python skills/scrna-orchestrator/scrna_orchestrator.py --demo --output /tmp/demo
+python3 skills/scrna-orchestrator/scrna_orchestrator.py --demo --output /tmp/demo
 
 # Health equity scoring
-python skills/equity-scorer/equity_scorer.py --demo --output /tmp/demo
+python3 skills/equity-scorer/equity_scorer.py --demo --output /tmp/demo
 ```
 
 ## 6. Understand the Flow

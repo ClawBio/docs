@@ -10,32 +10,32 @@ Search, inspect, and run tools on a Galaxy server (usegalaxy.org) from the ClawB
 ## Quick Demo
 
 ```bash
-python skills/galaxy-bridge/galaxy_bridge.py --demo
+python3 skills/galaxy-bridge/galaxy_bridge.py --demo
 ```
 
 ## CLI Reference
 
 ```bash
 # Search for tools
-python skills/galaxy-bridge/galaxy_bridge.py \
+python3 skills/galaxy-bridge/galaxy_bridge.py \
   --search "metagenomics profiling"
 
 # List tool categories
-python skills/galaxy-bridge/galaxy_bridge.py \
+python3 skills/galaxy-bridge/galaxy_bridge.py \
   --list-categories
 
 # Get tool details
-python skills/galaxy-bridge/galaxy_bridge.py \
+python3 skills/galaxy-bridge/galaxy_bridge.py \
   --tool-details <tool_id>
 
 # Run a tool
-python skills/galaxy-bridge/galaxy_bridge.py \
+python3 skills/galaxy-bridge/galaxy_bridge.py \
   --run <tool_id> \
   --input <file> \
   --output <dir>
 
 # Demo mode (offline FastQC example)
-python skills/galaxy-bridge/galaxy_bridge.py --demo
+python3 skills/galaxy-bridge/galaxy_bridge.py --demo
 ```
 
 | Argument | Required | Description |

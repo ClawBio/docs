@@ -10,7 +10,7 @@ Compare two personal genomes and compute identity-by-state (IBS) similarity. The
 ## Quick Demo
 
 ```bash
-python skills/genome-compare/genome_compare.py \
+python3 skills/genome-compare/genome_compare.py \
   --demo \
   --output /tmp/demo
 ```
@@ -19,12 +19,12 @@ python skills/genome-compare/genome_compare.py \
 
 ```bash
 # Compare your genome against the reference (George Church)
-python skills/genome-compare/genome_compare.py \
+python3 skills/genome-compare/genome_compare.py \
   --input <23andme_file> \
   --output <report_dir>
 
 # Demo mode (Corpas vs Church)
-python skills/genome-compare/genome_compare.py \
+python3 skills/genome-compare/genome_compare.py \
   --demo \
   --output <report_dir>
 ```

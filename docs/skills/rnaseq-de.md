@@ -10,7 +10,7 @@ Run differential expression analysis on bulk or pseudo-bulk RNA-seq count matric
 ## Quick Demo
 
 ```bash
-python skills/rnaseq-de/rnaseq_de.py \
+python3 skills/rnaseq-de/rnaseq_de.py \
   --demo \
   --output /tmp/rnaseq_de_demo
 ```
@@ -19,7 +19,7 @@ python skills/rnaseq-de/rnaseq_de.py \
 
 ```bash
 # Standard DE analysis
-python skills/rnaseq-de/rnaseq_de.py \
+python3 skills/rnaseq-de/rnaseq_de.py \
   --counts <counts.csv> \
   --metadata <metadata.csv> \
   --formula "~ batch + condition" \
@@ -27,7 +27,7 @@ python skills/rnaseq-de/rnaseq_de.py \
   --output <report_dir>
 
 # Demo mode
-python skills/rnaseq-de/rnaseq_de.py \
+python3 skills/rnaseq-de/rnaseq_de.py \
   --demo \
   --output /tmp/rnaseq_de_demo
 ```

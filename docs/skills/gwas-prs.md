@@ -10,7 +10,7 @@ Calculate polygenic risk scores (PRS) from 23andMe or AncestryDNA data using cur
 ## Quick Demo
 
 ```bash
-python skills/gwas-prs/gwas_prs.py \
+python3 skills/gwas-prs/gwas_prs.py \
   --demo \
   --output /tmp/prs_demo
 ```
@@ -19,19 +19,19 @@ python skills/gwas-prs/gwas_prs.py \
 
 ```bash
 # Score by trait name
-python skills/gwas-prs/gwas_prs.py \
+python3 skills/gwas-prs/gwas_prs.py \
   --input <23andme_file> \
   --trait "type 2 diabetes" \
   --output <report_dir>
 
 # Score by PGS Catalog ID
-python skills/gwas-prs/gwas_prs.py \
+python3 skills/gwas-prs/gwas_prs.py \
   --input <23andme_file> \
   --pgs-id PGS000013 \
   --output <report_dir>
 
 # Demo mode
-python skills/gwas-prs/gwas_prs.py \
+python3 skills/gwas-prs/gwas_prs.py \
   --demo \
   --output /tmp/prs_demo
 ```

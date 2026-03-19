@@ -33,7 +33,7 @@ aws ec2 run-instances \
 ssh -i your-key.pem ubuntu@<instance-ip>
 git clone https://github.com/ClawBio/ClawBio.git
 cd ClawBio
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 For GPU skills, use a `g5.xlarge` (NVIDIA A10G) or `p3.2xlarge` (V100) instance.

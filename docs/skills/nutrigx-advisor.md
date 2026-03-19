@@ -10,7 +10,7 @@ Generate personalised nutrigenomics recommendations from 23andMe or AncestryDNA 
 ## Quick Demo
 
 ```bash
-python skills/nutrigx_advisor/nutrigx_advisor.py \
+python3 skills/nutrigx_advisor/nutrigx_advisor.py \
   --input skills/nutrigx_advisor/synthetic_patient.txt \
   --output /tmp/nutrigx_demo
 ```
@@ -18,7 +18,7 @@ python skills/nutrigx_advisor/nutrigx_advisor.py \
 ## CLI Reference
 
 ```bash
-python skills/nutrigx_advisor/nutrigx_advisor.py \
+python3 skills/nutrigx_advisor/nutrigx_advisor.py \
   --input <patient_file> \
   --output <report_dir>
 ```

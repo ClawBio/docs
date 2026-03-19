@@ -10,22 +10,22 @@ Connect ClawBio to the Illumina Connected Analytics (ICA) platform. List project
 ## Quick Demo
 
 ```bash
-python skills/illumina-bridge/illumina_bridge.py --demo
+python3 skills/illumina-bridge/illumina_bridge.py --demo
 ```
 
 ## CLI Reference
 
 ```bash
 # List ICA projects
-python skills/illumina-bridge/illumina_bridge.py \
+python3 skills/illumina-bridge/illumina_bridge.py \
   --list-projects
 
 # List pipeline runs in a project
-python skills/illumina-bridge/illumina_bridge.py \
+python3 skills/illumina-bridge/illumina_bridge.py \
   --project <project_id> --list-runs
 
 # Pull output from a pipeline run
-python skills/illumina-bridge/illumina_bridge.py \
+python3 skills/illumina-bridge/illumina_bridge.py \
   --project <project_id> --run <run_id> --output /tmp/demo
 ```
 

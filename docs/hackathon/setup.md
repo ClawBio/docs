@@ -32,7 +32,7 @@ source .venv/bin/activate  # Linux/macOS
 ## 3. Install Dependencies
 
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 Core dependencies: `pandas`, `numpy`, `matplotlib`, `seaborn`.
@@ -40,10 +40,10 @@ Core dependencies: `pandas`, `numpy`, `matplotlib`, `seaborn`.
 Optional (for specific skills):
 
 ```bash
-pip install scanpy          # scRNA-seq skills
-pip install reportlab       # PDF report generation
-pip install pydeseq2        # RNA-seq differential expression
-pip install bioblend        # Galaxy Bridge
+pip3 install scanpy          # scRNA-seq skills
+pip3 install reportlab       # PDF report generation
+pip3 install pydeseq2        # RNA-seq differential expression
+pip3 install bioblend        # Galaxy Bridge
 ```
 
 ## 4. Run a Demo
@@ -52,7 +52,7 @@ Verify everything works by running a built-in demo:
 
 ```bash
 # Pharmacogenomics demo
-python skills/pharmgx-reporter/pharmgx_reporter.py \
+python3 skills/pharmgx-reporter/pharmgx_reporter.py \
   --input skills/pharmgx-reporter/demo_patient.txt \
   --output /tmp/pharmgx_demo
 
