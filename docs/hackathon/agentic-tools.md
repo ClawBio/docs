@@ -20,7 +20,7 @@ This tutorial introduces AI coding agents: tools that can read files, write code
 
 A coding agent is not a single thing — it is a stack of three layers:
 
-![Agent → Provider → Model](../assets/images/stack-of-agents.svg)
+![Agent → Provider → Model](../assets/images/stack-of-agents.svg){ .svg-light-bg }
 
 | Layer | What it does | Examples |
 |-------|-------------|----------|

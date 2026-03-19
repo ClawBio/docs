@@ -284,8 +284,9 @@
    SVG images: light background on dark theme for readability
    ============================================================ */
 
-[data-md-color-scheme="clawbio"] .md-typeset img[src$=".svg"] {
-  background: #f6f8fa;
+[data-md-color-scheme="clawbio"] .md-typeset img[src*=".svg"],
+[data-md-color-scheme="clawbio"] .md-typeset .svg-light-bg {
+  background: #f6f8fa !important;
   border-radius: 8px;
   padding: 1rem;
 }
