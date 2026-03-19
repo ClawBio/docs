@@ -281,6 +281,16 @@
 }
 
 /* ============================================================
+   SVG images: light background on dark theme for readability
+   ============================================================ */
+
+[data-md-color-scheme="clawbio"] .md-typeset img[src$=".svg"] {
+  background: #f6f8fa;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+/* ============================================================
    Layout: Breathing Room
    More whitespace, larger line-height, spacious sections
    ============================================================ */
