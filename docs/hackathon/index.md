@@ -144,10 +144,6 @@ That is it. You do not need tests, figures, or a complete pipeline. A focused, w
 **Recommended before arrival** (saves time on the day):
 
 ```bash
-# Install GitHub CLI and authenticate
-brew install gh          # macOS
-gh auth login            # follow the prompts
-
 # Clone the repo and run a demo
 git clone https://github.com/ClawBio/ClawBio.git
 cd ClawBio
@@ -155,7 +151,17 @@ pip3 install -r requirements.txt
 python3 skills/pharmgx-reporter/pharmgx_reporter.py --demo
 ```
 
-If you do not have `gh` installed, you can submit your PR through the GitHub web interface instead. Both routes are covered in the [Submit](submit.md) guide.
+To submit your work you will need the **GitHub CLI** (`gh`). Install it if you don't have it:
+
+```bash
+brew install gh          # macOS
+sudo apt install gh      # Debian / Ubuntu
+winget install GitHub.cli # Windows
+```
+
+Then authenticate: `gh auth login`
+
+If you prefer not to install `gh`, you can submit your PR through the GitHub web interface instead. Both routes are covered in the [Submit](submit.md) guide.
 
 Food and drinks will be provided (pizza at 13:30).
 
