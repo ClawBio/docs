@@ -49,12 +49,49 @@ SKILL.md is not just documentation. It is the contract that tells humans and AI 
 
 ## Quick Path
 
-| Step | Time | What |
-|------|------|------|
-| 1. [Setup](setup.md) | 10 min | Clone repo, install dependencies, run a demo |
-| 2. [Your First Skill](first-skill.md) | 20 min | Scaffold a skill, write SKILL.md, add demo data |
-| 3. [Add Python](add-python.md) | 20 min | Implement the skill logic with a CLI endpoint |
-| 4. [Test and Submit](submit.md) | 10 min | Validate, test, open a PR |
+<div class="tutorial-cards">
+
+<a class="tutorial-card" href="setup/">
+  <div class="tutorial-card__header">
+    <span class="tutorial-card__number">01</span>
+    <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
+    <span class="time-estimate">10 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Setup</h3>
+  <p class="tutorial-card__desc">Clone repo, install dependencies, run a demo.</p>
+</a>
+
+<a class="tutorial-card" href="first-skill/">
+  <div class="tutorial-card__header">
+    <span class="tutorial-card__number">02</span>
+    <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
+    <span class="time-estimate">20 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Your First Skill</h3>
+  <p class="tutorial-card__desc">Scaffold a skill, write SKILL.md, add demo data.</p>
+</a>
+
+<a class="tutorial-card" href="add-python/">
+  <div class="tutorial-card__header">
+    <span class="tutorial-card__number">03</span>
+    <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
+    <span class="time-estimate">20 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Add Python</h3>
+  <p class="tutorial-card__desc">Implement the skill logic with a CLI endpoint.</p>
+</a>
+
+<a class="tutorial-card" href="submit/">
+  <div class="tutorial-card__header">
+    <span class="tutorial-card__number">04</span>
+    <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
+    <span class="time-estimate">10 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Test and Submit</h3>
+  <p class="tutorial-card__desc">Validate, test, open a PR.</p>
+</a>
+
+</div>
 
 Most participants will submit their first skill in **90 to 120 minutes**. The times above assume your environment is already set up. First-time Git or GitHub users should allow extra time; helpers will be available throughout.
 
@@ -148,12 +185,29 @@ Food and drinks will be provided (pizza at 13:30).
 
 ## Resources
 
-Two guided tutorials are available to get you started:
+Two guided tutorials are available to get you started. Both paths converge at the same goal: a working skill you can submit as a PR.
 
-1. **[Agentic Tools Tutorial](agentic-tools.md)** -- How AI coding agents work, setup options (GitHub Copilot, Claude Code, OpenCode), your first AI-assisted analysis, and context management tips. Adapted from Jay Moore's Skills Cookbook.
-2. **[ClawBio Setup](setup.md)** -- Clone ClawBio, run a demo skill, then build your own following the step-by-step guide.
+<div class="tutorial-cards">
 
-Both paths converge at the same goal: a working skill you can submit as a PR.
+<a class="tutorial-card" href="agentic-tools/">
+  <div class="tutorial-card__header">
+    <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
+    <span class="time-estimate">15 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Agentic Tools Tutorial</h3>
+  <p class="tutorial-card__desc">How AI coding agents work, setup options (GitHub Copilot, Claude Code, OpenCode), your first AI-assisted analysis, and context management tips.</p>
+</a>
+
+<a class="tutorial-card" href="setup/">
+  <div class="tutorial-card__header">
+    <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
+    <span class="time-estimate">10 min</span>
+  </div>
+  <h3 class="tutorial-card__title">ClawBio Setup</h3>
+  <p class="tutorial-card__desc">Clone ClawBio, run a demo skill, then build your own following the step-by-step guide.</p>
+</a>
+
+</div>
 
 ---
 

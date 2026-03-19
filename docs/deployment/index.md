@@ -7,7 +7,7 @@ description: Deploy ClawBio to Docker, Railway, or your own private cloud.
 
 Run ClawBio beyond your laptop. Choose the deployment option that fits your needs.
 
-<div class="section-cards" markdown>
+<div class="section-cards">
 
 <a class="section-card" href="../deployment/docker/">
   <div class="section-card__icon">🐳</div>

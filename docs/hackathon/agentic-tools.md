@@ -5,15 +5,22 @@ description: Get started with AI coding agents for bioinformatics
 
 # Agentic Tools Tutorial
 
-*Adapted from Jay Moore's [Skills Cookbook](https://neurogenomics.github.io/agentic-life-sciences-tutorial/) at Imperial College London.*
+<div class="tutorial-card__header">
+  <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
+  <span class="time-estimate">~15 min</span>
+</div>
 
 This tutorial introduces AI coding agents: tools that can read files, write code, and run commands on your computer. They are different from chatbots because they act on your local environment directly.
+
+*Adapted from Jay Moore's [Skills Cookbook](https://neurogenomics.github.io/agentic-life-sciences-tutorial/) at Imperial College London.*
 
 ---
 
 ## How AI Coding Agents Work
 
-Three layers:
+A coding agent is not a single thing — it is a stack of three layers:
+
+![Agent → Provider → Model](../assets/images/stack-of-agents.svg)
 
 | Layer | What it does | Examples |
 |-------|-------------|----------|
@@ -22,6 +29,9 @@ Three layers:
 | **Model** | The LLM generating code | Claude Sonnet 4, GPT-4.1, Kimi K2.5 |
 
 The agent runs on your machine. It sends your prompt (plus file context) to the provider, gets a response, and executes it locally. Your genomic data stays on your laptop.
+
+!!! note
+    Free models on OpenRouter may train on your interactions. If data privacy is important, use a paid model or check the model's training policy on OpenRouter before use.
 
 ---
 

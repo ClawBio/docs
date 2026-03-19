@@ -1,4 +1,18 @@
-# Test and Submit (~10 minutes)
+---
+title: "Test and Submit"
+description: Validate your skill, run demo mode, and submit a pull request.
+---
+
+# Test and Submit
+
+<div class="tutorial-card__header">
+  <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
+  <span class="time-estimate">~10 min</span>
+</div>
+
+Validate your skill, run demo mode, and submit a pull request to ClawBio.
+
+---
 
 ## 1. Run the Validation Check
 

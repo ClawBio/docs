@@ -1,6 +1,18 @@
-# Your First Skill (~20 minutes)
+---
+title: "Your First Skill"
+description: Create a SKILL.md file that defines your skill's contract.
+---
 
-Every ClawBio skill starts with a `SKILL.md` file. This is the contract that tells agents what your skill does, what inputs it needs, what domain decisions it encodes, and how to run it.
+# Your First Skill
+
+<div class="tutorial-card__header">
+  <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
+  <span class="time-estimate">~20 min</span>
+</div>
+
+Every ClawBio skill starts with a SKILL.md file — the contract that tells agents what your skill does, what inputs it needs, and what domain decisions it encodes.
+
+---
 
 ## 1. Create Your Skill Directory
 

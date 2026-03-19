@@ -1,4 +1,18 @@
-# Setup (~10 minutes)
+---
+title: "Hackathon Setup"
+description: Clone ClawBio, set up your Python environment, and verify everything works.
+---
+
+# Hackathon Setup
+
+<div class="tutorial-card__header">
+  <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
+  <span class="time-estimate">~10 min</span>
+</div>
+
+Clone ClawBio, set up your Python environment, and verify everything works by running a demo skill.
+
+---
 
 ## 1. Clone the Repository
 

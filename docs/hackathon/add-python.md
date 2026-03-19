@@ -1,6 +1,18 @@
-# Add Python Implementation (~20 minutes)
+---
+title: "Add Python Implementation"
+description: Write the Python script that executes your SKILL.md contract.
+---
+
+# Add Python Implementation
+
+<div class="tutorial-card__header">
+  <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
+  <span class="time-estimate">~20 min</span>
+</div>
 
 Your SKILL.md defines *what* the skill does. Now write the Python that *executes* it.
+
+---
 
 ## 1. Script Structure
 
