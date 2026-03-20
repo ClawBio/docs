@@ -1,0 +1,732 @@
+/* ============================================================
+   ClawBio Dark Theme — matches clawbio.ai landing page
+   Colors: bg #0d1117, accent green #3fb950, links #58a6ff
+   ============================================================ */
+
+/* --- Custom color scheme: [data-md-color-scheme="clawbio"] --- */
+
+[data-md-color-scheme="clawbio"] {
+  --md-default-bg-color: #0d1117;
+  --md-default-fg-color: #e6edf3;
+  --md-default-fg-color--light: #8b949e;
+  --md-default-fg-color--lighter: #6e7681;
+  --md-default-fg-color--lightest: #484f58;
+
+  --md-primary-fg-color: #0d1117;
+  --md-primary-bg-color: #e6edf3;
+  --md-accent-fg-color: #3fb950;
+  --md-accent-fg-color--transparent: rgba(63, 185, 80, 0.12);
+
+  /* Typography */
+  --md-typeset-color: #e6edf3;
+  --md-typeset-a-color: #58a6ff;
+
+  /* Code blocks */
+  --md-code-bg-color: #161b22;
+  --md-code-fg-color: #e6edf3;
+  --md-code-hl-color: rgba(63, 185, 80, 0.15);
+
+  /* Navigation / sidebar */
+  --md-footer-bg-color: #0d1117;
+  --md-footer-bg-color--dark: #010409;
+  --md-footer-fg-color: #8b949e;
+  --md-footer-fg-color--light: #6e7681;
+  --md-footer-fg-color--lighter: #484f58;
+
+  /* Admonitions */
+  --md-admonition-bg-color: #161b22;
+
+  /* Shadows off for flat dark look */
+  --md-shadow-z1: none;
+  --md-shadow-z2: none;
+  --md-shadow-z3: none;
+}
+
+/* Hide broken stars/forks count (GitHub API client-side fetch unreliable) */
+.md-source__fact {
+  display: none;
+}
+
+/* --- Header --- */
+
+[data-md-color-scheme="clawbio"] .md-header {
+  background: rgba(13, 17, 23, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #30363d;
+  box-shadow: none;
+}
+
+/* --- Navigation tabs --- */
+
+[data-md-color-scheme="clawbio"] .md-tabs {
+  background: #0d1117;
+  border-bottom: 1px solid #21262d;
+}
+
+[data-md-color-scheme="clawbio"] .md-tabs__link {
+  color: #8b949e;
+  opacity: 1;
+}
+
+[data-md-color-scheme="clawbio"] .md-tabs__link--active,
+[data-md-color-scheme="clawbio"] .md-tabs__link:hover {
+  color: #3fb950;
+}
+
+/* --- Sidebar --- */
+
+[data-md-color-scheme="clawbio"] .md-sidebar {
+  background: #0d1117;
+}
+
+[data-md-color-scheme="clawbio"] .md-nav__link {
+  color: #8b949e;
+}
+
+[data-md-color-scheme="clawbio"] .md-nav__link:hover {
+  color: #e6edf3;
+}
+
+[data-md-color-scheme="clawbio"] .md-nav__link--active,
+[data-md-color-scheme="clawbio"] .md-nav__item--active > .md-nav__link {
+  color: #3fb950;
+  font-weight: 600;
+}
+
+/* --- Content area --- */
+
+[data-md-color-scheme="clawbio"] .md-content {
+  background: #0d1117;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset h1,
+[data-md-color-scheme="clawbio"] .md-typeset h2,
+[data-md-color-scheme="clawbio"] .md-typeset h3,
+[data-md-color-scheme="clawbio"] .md-typeset h4 {
+  color: #e6edf3;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset h1 {
+  color: #3fb950;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset a {
+  color: #58a6ff;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset a:hover {
+  color: #79c0ff;
+}
+
+/* --- Code blocks --- */
+
+[data-md-color-scheme="clawbio"] .md-typeset code {
+  background: #161b22;
+  color: #e6edf3;
+  border: 1px solid #30363d;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset pre {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset pre code {
+  border: none;
+}
+
+[data-md-color-scheme="clawbio"] .md-clipboard {
+  color: #8b949e;
+}
+
+/* --- Tables --- */
+
+[data-md-color-scheme="clawbio"] .md-typeset table:not([class]) {
+  background: #0d1117;
+  border: 1px solid #30363d;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset table:not([class]) th {
+  background: #161b22;
+  color: #e6edf3;
+  border-bottom: 2px solid #30363d;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset table:not([class]) td {
+  border-bottom: 1px solid #21262d;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset table:not([class]) tr:hover td {
+  background: rgba(63, 185, 80, 0.04);
+}
+
+/* --- Admonitions --- */
+
+[data-md-color-scheme="clawbio"] .md-typeset .admonition,
+[data-md-color-scheme="clawbio"] .md-typeset details {
+  background: #161b22;
+  border-color: #30363d;
+  border-left-width: 4px;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset .admonition-title,
+[data-md-color-scheme="clawbio"] .md-typeset summary {
+  background: rgba(33, 38, 45, 0.8);
+}
+
+/* Warning admonitions in green accent */
+[data-md-color-scheme="clawbio"] .md-typeset .admonition.warning,
+[data-md-color-scheme="clawbio"] .md-typeset details.warning {
+  border-left-color: #3fb950;
+}
+
+/* --- Search --- */
+
+[data-md-color-scheme="clawbio"] .md-search__form {
+  background: #161b22;
+  border: 1px solid #30363d;
+}
+
+[data-md-color-scheme="clawbio"] .md-search__input {
+  color: #e6edf3;
+}
+
+[data-md-color-scheme="clawbio"] .md-search-result {
+  background: #161b22;
+}
+
+[data-md-color-scheme="clawbio"] .md-search-result__item {
+  border-bottom-color: #21262d;
+}
+
+[data-md-color-scheme="clawbio"] .md-search-result mark {
+  background: rgba(63, 185, 80, 0.3);
+  color: #e6edf3;
+}
+
+/* --- Footer --- */
+
+[data-md-color-scheme="clawbio"] .md-footer {
+  background: #0d1117;
+  border-top: 1px solid #30363d;
+}
+
+[data-md-color-scheme="clawbio"] .md-footer-meta {
+  background: #010409;
+}
+
+/* --- Scrollbar --- */
+
+[data-md-color-scheme="clawbio"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-md-color-scheme="clawbio"] ::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+
+[data-md-color-scheme="clawbio"] ::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 4px;
+}
+
+[data-md-color-scheme="clawbio"] ::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+/* --- Misc --- */
+
+[data-md-color-scheme="clawbio"] .md-typeset hr {
+  border-color: #21262d;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset blockquote {
+  border-left-color: #3fb950;
+  color: #8b949e;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset kbd {
+  background: #21262d;
+  border-color: #30363d;
+  color: #e6edf3;
+}
+
+/* Task list checkboxes */
+[data-md-color-scheme="clawbio"] .md-typeset [type="checkbox"]:checked + .task-list-indicator::before {
+  background-color: #3fb950;
+}
+
+/* Content tabs */
+[data-md-color-scheme="clawbio"] .md-typeset .tabbed-labels > label {
+  color: #8b949e;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset .tabbed-labels > label--active,
+[data-md-color-scheme="clawbio"] .md-typeset .tabbed-labels > .tabbed-labels__active {
+  color: #3fb950;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset .tabbed-set > input:checked + label {
+  color: #3fb950;
+  border-color: #3fb950;
+}
+
+/* Badge-style pills for inline labels */
+[data-md-color-scheme="clawbio"] .md-typeset .md-tag {
+  background: rgba(63, 185, 80, 0.15);
+  color: #3fb950;
+  border: 1px solid rgba(63, 185, 80, 0.4);
+}
+
+/* ============================================================
+   SVG images: light background on dark theme for readability
+   ============================================================ */
+
+[data-md-color-scheme="clawbio"] .md-typeset img[src*=".svg"],
+[data-md-color-scheme="clawbio"] .md-typeset .svg-light-bg {
+  background: #f6f8fa !important;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+/* ============================================================
+   Layout: Breathing Room
+   More whitespace, larger line-height, spacious sections
+   ============================================================ */
+
+/* System fonts — no external font loading */
+:root {
+  --md-text-font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --md-code-font: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+}
+
+/* Wider line-height for body text */
+.md-typeset {
+  font-size: 0.85rem;
+  line-height: 1.8;
+}
+
+/* More space above headings */
+.md-typeset h1 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+}
+
+.md-typeset h2 {
+  margin-top: 3rem;
+  margin-bottom: 1.2rem;
+  padding-top: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.md-typeset h3 {
+  margin-top: 2.2rem;
+  margin-bottom: 1rem;
+  font-size: 1.15rem;
+}
+
+/* Paragraphs breathe */
+.md-typeset p {
+  margin-bottom: 1.2rem;
+}
+
+/* Horizontal rules as spacious section dividers */
+.md-typeset hr {
+  margin: 3rem 0;
+  border: none;
+  border-top: 1px solid #21262d;
+}
+
+/* Lists: more space between items */
+.md-typeset ul li,
+.md-typeset ol li {
+  margin-bottom: 0.5rem;
+}
+
+/* Nested list items slightly less */
+.md-typeset ul ul li,
+.md-typeset ol ol li {
+  margin-bottom: 0.3rem;
+}
+
+/* Tables: more padding in cells */
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+  padding: 0.9rem 1.1rem;
+}
+
+/* Code blocks: more breathing room */
+.md-typeset pre {
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+}
+
+/* Admonitions: more internal space */
+.md-typeset .admonition,
+.md-typeset details {
+  margin: 1.8rem 0;
+  padding: 0 1.2rem 1rem;
+}
+
+/* Content max-width for readability */
+.md-content__inner {
+  max-width: 52rem;
+}
+
+/* Bold items in lists stand out as mini-headings */
+.md-typeset li > strong:first-child {
+  color: #e6edf3;
+  display: inline;
+}
+
+/* Space after the banner image */
+.md-typeset img {
+  margin-bottom: 1rem;
+}
+
+/* ============================================================
+   Hero Section
+   ============================================================ */
+
+.hero {
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid #21262d;
+  margin-bottom: 2rem;
+}
+
+.hero__title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+}
+
+.hero__subtitle {
+  font-size: 1.1rem;
+  color: #8b949e;
+  margin: 0;
+  max-width: 560px;
+}
+
+[data-md-color-scheme="clawbio"] .hero {
+  border-bottom-color: #21262d;
+}
+
+[data-md-color-scheme="clawbio"] .hero__title {
+  color: #3fb950;
+}
+
+[data-md-color-scheme="default"] .hero__title {
+  color: #1b5e20;
+}
+
+[data-md-color-scheme="default"] .hero__subtitle {
+  color: #475569;
+}
+
+[data-md-color-scheme="default"] .hero {
+  border-bottom-color: #e0e0e0;
+}
+
+/* ============================================================
+   Section Heading for Card Grids
+   ============================================================ */
+
+.section-heading {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 2.5rem 0 1rem;
+}
+
+/* ============================================================
+   Tutorial Card Grid
+   ============================================================ */
+
+.md-typeset .tutorial-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1rem 0 2.5rem;
+}
+
+/* Individual card — high specificity to beat .md-typeset a */
+.md-typeset a.tutorial-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.md-typeset a.tutorial-card:hover,
+.md-typeset a.tutorial-card:focus-visible {
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Dark theme cards */
+[data-md-color-scheme="clawbio"] .md-typeset a.tutorial-card {
+  background: #161b22;
+  border: 1px solid #30363d;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset a.tutorial-card:hover {
+  border-color: #3fb950;
+  box-shadow: 0 4px 20px rgba(63, 185, 80, 0.12);
+}
+
+/* Light theme cards */
+[data-md-color-scheme="default"] .md-typeset a.tutorial-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+[data-md-color-scheme="default"] .md-typeset a.tutorial-card:hover {
+  border-color: #2e7d32;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Card header row */
+.md-typeset .tutorial-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+  flex-wrap: wrap;
+}
+
+/* Step number */
+.md-typeset .tutorial-card__step {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  margin-left: auto;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset .tutorial-card__step {
+  color: #484f58;
+}
+
+[data-md-color-scheme="default"] .md-typeset .tutorial-card__step {
+  color: #94a3b8;
+}
+
+/* Card title — must beat .md-typeset h3 */
+.md-typeset .tutorial-card .tutorial-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+  padding: 0;
+  line-height: 1.3;
+  border: none;
+}
+
+/* Hide permalink anchors inside cards */
+.md-typeset .tutorial-card .headerlink,
+.md-typeset .section-card .headerlink {
+  display: none;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset .tutorial-card .tutorial-card__title {
+  color: #e6edf3;
+}
+
+[data-md-color-scheme="default"] .md-typeset .tutorial-card .tutorial-card__title {
+  color: #1a1a1a;
+}
+
+/* Card description — must beat .md-typeset p */
+.md-typeset .tutorial-card .tutorial-card__desc {
+  font-size: 0.88rem;
+  color: #8b949e;
+  line-height: 1.55;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+
+[data-md-color-scheme="default"] .md-typeset .tutorial-card .tutorial-card__desc {
+  color: #475569;
+}
+
+/* ============================================================
+   Section Cards (non-tutorial: deployment, reference links)
+   ============================================================ */
+
+.md-typeset .section-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1rem 0 2.5rem;
+}
+
+.md-typeset a.section-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.md-typeset a.section-card:hover,
+.md-typeset a.section-card:focus-visible {
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: inherit;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset a.section-card {
+  background: #161b22;
+  border: 1px solid #30363d;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset a.section-card:hover {
+  border-color: #3fb950;
+  box-shadow: 0 4px 20px rgba(63, 185, 80, 0.12);
+}
+
+[data-md-color-scheme="default"] .md-typeset a.section-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+[data-md-color-scheme="default"] .md-typeset a.section-card:hover {
+  border-color: #2e7d32;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.md-typeset .section-card__icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.md-typeset .section-card .section-card__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  padding: 0;
+  line-height: 1.3;
+}
+
+[data-md-color-scheme="clawbio"] .md-typeset .section-card .section-card__title {
+  color: #e6edf3;
+}
+
+[data-md-color-scheme="default"] .md-typeset .section-card .section-card__title {
+  color: #1a1a1a;
+}
+
+.md-typeset .section-card .section-card__desc {
+  font-size: 0.88rem;
+  color: #8b949e;
+  line-height: 1.55;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+
+[data-md-color-scheme="default"] .md-typeset .section-card .section-card__desc {
+  color: #475569;
+}
+
+/* ============================================================
+   Difficulty Badges
+   ============================================================ */
+
+.difficulty-badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+}
+
+.difficulty-badge--beginner {
+  color: #3fb950;
+  background: rgba(63, 185, 80, 0.15);
+}
+
+.difficulty-badge--intermediate {
+  color: #d29922;
+  background: rgba(210, 153, 34, 0.15);
+}
+
+.difficulty-badge--advanced {
+  color: #f85149;
+  background: rgba(248, 81, 73, 0.15);
+}
+
+.difficulty-badge--event {
+  color: #a5d6ff;
+  background: rgba(165, 214, 255, 0.15);
+}
+
+.difficulty-badge--tutorial {
+  color: #d2a8ff;
+  background: rgba(210, 168, 255, 0.15);
+}
+
+/* Light theme badge overrides */
+[data-md-color-scheme="default"] .difficulty-badge--beginner {
+  color: #16a34a;
+  background: #dcfce7;
+}
+
+[data-md-color-scheme="default"] .difficulty-badge--intermediate {
+  color: #d97706;
+  background: #fef3c7;
+}
+
+[data-md-color-scheme="default"] .difficulty-badge--advanced {
+  color: #dc2626;
+  background: #fee2e2;
+}
+
+[data-md-color-scheme="default"] .difficulty-badge--event {
+  color: #2563eb;
+  background: #dbeafe;
+}
+
+[data-md-color-scheme="default"] .difficulty-badge--tutorial {
+  color: #7c3aed;
+  background: #ede9fe;
+}
+
+/* ============================================================
+   Time Estimate
+   ============================================================ */
+
+.time-estimate {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: #6e7681;
+  margin-left: 0.5rem;
+}
+
+/* ============================================================
+   Responsive: single column below 480px
+   ============================================================ */
+
+@media (max-width: 640px) {
+  .tutorial-cards,
+  .section-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__title {
+    font-size: 1.75rem;
+  }
+}
