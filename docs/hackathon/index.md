@@ -80,7 +80,7 @@ Imperial College London, King's College London, The Crick Institute, UCL, QMUL, 
 ### Watch the recording
 
 <div style="text-align: center; margin: 1.5rem 0;">
-<em>Full recording coming soon on <a href="https://www.youtube.com/@ClawBio">YouTube</a>.</em>
+<iframe width="100%" height="450" src="https://www.youtube.com/embed/HofzUH7pmQM" title="ClawBio Hackathon #1: Agentic Genomics | Imperial College London" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 12px; max-width: 800px;"></iframe>
 </div>
 
 Organised by **Jay Moore** (Imperial), **Manuel Corpas** (Westminster), **Nathan Skene** (Imperial), and **Josh Beale**.
