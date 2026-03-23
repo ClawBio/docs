@@ -1,6 +1,6 @@
 site_name: ClawBio Documentation
 site_url: https://docs.clawbio.ai
-site_description: The reference repository for biological AI agent skills. Curated. Reproducible. Open.
+site_description: Technical documentation, tutorials, and research for ClawBio, the bioinformatics-native AI agent skill library.
 site_author: Manuel Corpas
 repo_url: https://github.com/ClawBio/ClawBio
 repo_name: ClawBio/ClawBio
@@ -35,13 +35,17 @@ theme:
 
 nav:
   - Home: index.md
-  - Hackathon:
-    - Guide: hackathon/index.md
-    - Setup: hackathon/setup.md
-    - Build a Skill: hackathon/first-skill.md
-    - Add Python: hackathon/add-python.md
-    - Submit: hackathon/submit.md
-    - Agentic Tools: hackathon/agentic-tools.md
+  - Skills:
+    - Skill Library: skills/index.md
+    - PharmGx Reporter: skills/pharmgx-reporter.md
+    - scRNA Orchestrator: skills/scrna-orchestrator.md
+    - Equity Scorer (HEIM): skills/equity-scorer.md
+    - NutriGx Advisor: skills/nutrigx-advisor.md
+    - Genome Compare: skills/genome-compare.md
+    - GWAS PRS: skills/gwas-prs.md
+    - GWAS Lookup: skills/gwas-lookup.md
+    - Galaxy Bridge: skills/galaxy-bridge.md
+    - RNA-seq DE: skills/rnaseq-de.md
   - Tutorials:
     - Overview: tutorials/index.md
     - Basics:
@@ -60,27 +64,26 @@ nav:
       - Run Your First Skill: tutorials/run-your-first-skill.md
       - Build a Skill: tutorials/build-a-skill.md
       - Telegram Bot: tutorials/telegram-bot.md
+  - Research:
+    - Overview: research/index.md
+    - Genomebook: research/genomebook.md
   - Deployment:
     - Overview: deployment/index.md
     - Docker: deployment/docker.md
     - Railway: deployment/railway.md
     - Private Cloud: deployment/private-cloud.md
-  - Skills:
-    - Skill Library: skills/index.md
-    - PharmGx Reporter: skills/pharmgx-reporter.md
-    - scRNA Orchestrator: skills/scrna-orchestrator.md
-    - Equity Scorer (HEIM): skills/equity-scorer.md
-    - NutriGx Advisor: skills/nutrigx-advisor.md
-    - Genome Compare: skills/genome-compare.md
-    - GWAS PRS: skills/gwas-prs.md
-    - GWAS Lookup: skills/gwas-lookup.md
-    - Galaxy Bridge: skills/galaxy-bridge.md
-    - RNA-seq DE: skills/rnaseq-de.md
   - Reference:
     - SKILL.md Spec: reference/skillmd-spec.md
     - CLI: reference/cli.md
     - Security: reference/security.md
     - Contributing: contributing/index.md
+  - Hackathon:
+    - Guide: hackathon/index.md
+    - Setup: hackathon/setup.md
+    - Build a Skill: hackathon/first-skill.md
+    - Add Python: hackathon/add-python.md
+    - Submit: hackathon/submit.md
+    - Agentic Tools: hackathon/agentic-tools.md
 
 plugins:
   - search
