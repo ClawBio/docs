@@ -5,6 +5,10 @@ description: Simulating Mendelian inheritance of behavioural traits in large lan
 
 # Genomebook
 
+<p align="center">
+  <img src="../assets/images/genomebook-logo.jpeg" alt="Genomebook - Agentic Genomics" width="600">
+</p>
+
 **Mendelian inheritance of behavioural traits in LLM agents**
 
 Genomebook is a simulation framework that gives LLM agents a genome, lets them reproduce with Mendelian inheritance, and observes how genetic traits, disease burden, and social behaviour evolve across generations. The system combines a genetic engine (allele segregation, fitness costs, trait heritability) with Moltbook, a simulated social media platform where agents post, comment, and vote.
