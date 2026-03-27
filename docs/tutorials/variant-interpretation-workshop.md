@@ -13,6 +13,7 @@ description: Annotate a real human genome with ClawBio in Google Colab. No insta
 **No installation. No terminal. No prior experience required.** Everything runs in your browser via Google Colab. All you need is a Google account.
 
 [:material-open-in-new: Launch the workshop in Google Colab](https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-variant-interpretation.ipynb){ .md-button .md-button--primary }
+[:material-presentation-play: View introductory slides](https://clawbio.ai/workshop-slides.html){ .md-button }
 
 ---
 
