@@ -173,6 +173,17 @@
 [data-md-color-scheme="clawbio"] .md-typeset .admonition-title,
 [data-md-color-scheme="clawbio"] .md-typeset summary {
   background: rgba(33, 38, 45, 0.8);
+  color: #e6edf3;
+}
+
+/* Admonition body text: bright enough to read on dark background */
+[data-md-color-scheme="clawbio"] .md-typeset .admonition > p,
+[data-md-color-scheme="clawbio"] .md-typeset .admonition > ul,
+[data-md-color-scheme="clawbio"] .md-typeset .admonition > ol,
+[data-md-color-scheme="clawbio"] .md-typeset details > p,
+[data-md-color-scheme="clawbio"] .md-typeset details > ul,
+[data-md-color-scheme="clawbio"] .md-typeset details > ol {
+  color: #c9d1d9;
 }
 
 /* Warning admonitions in green accent */
