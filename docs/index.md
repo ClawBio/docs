@@ -74,7 +74,7 @@ description: Technical documentation, tutorials, skill reference, and research p
     <span class="time-estimate">60 min</span>
   </div>
   <h3 class="tutorial-card__title">Variant Interpretation Workshop</h3>
-  <p class="tutorial-card__desc">Annotate a real human genome in Google Colab. Covers variant annotation, pharmacogenomics, ACMG, and clinical interpretation.</p>
+  <p class="tutorial-card__desc">Annotate a real human genome in Google Colab. No installation, no terminal, no prior experience required.</p>
 </a>
 
 </div>

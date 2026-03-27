@@ -1,6 +1,6 @@
 ---
 title: "Variant Interpretation Workshop"
-description: Annotate a real human genome with ClawBio in Google Colab. Covers variant annotation, pharmacogenomics, ACMG classification, and equity in genomics.
+description: Annotate a real human genome with ClawBio in Google Colab. No installation, no terminal, no prior experience required.
 ---
 
 # Variant Interpretation Workshop
@@ -10,305 +10,359 @@ description: Annotate a real human genome with ClawBio in Google Colab. Covers v
   <span class="time-estimate">~60 min</span>
 </div>
 
-Hands-on workshop: annotate a real human genome, interpret pharmacogenomic findings, and understand what AI changes (and does not change) about genomic analysis. Everything runs in Google Colab. No installation required.
+**No installation. No terminal. No prior experience required.** Everything runs in your browser via Google Colab. All you need is a Google account.
 
-[:material-open-in-new: Open in Google Colab](https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-variant-interpretation.ipynb){ .md-button .md-button--primary }
-[:material-file-presentation-box: Full workshop page](https://clawbio.ai/workshop-variant-interpretation.html){ .md-button }
-
----
-
-## What is ClawBio?
-
-ClawBio is the first bioinformatics-native AI agent skill library. It provides curated, reproducible, open-source skills that any AI agent can call. Each skill handles a specific task: annotating variants, scoring pharmacogenomic risk, running differential expression, searching clinical trials, and more.
-
-**Three principles:**
-
-- **Local-first**: your genomic data never leaves your machine. Skills process everything in-place.
-- **Reproducible**: every skill exports `commands.sh`, `environment.yml`, and SHA-256 checksums.
-- **Grounded, not hallucinated**: all gene-drug mappings trace to published CPIC guidelines and ClinVar assertions. The AI agent routes to the right skill; the skill does the grounded analysis.
-
-### The problem ClawBio addresses
-
-| Problem | Impact |
-|---------|--------|
-| Reproducing published bioinformatics is broken | Dependency hell, dead links, hardcoded paths |
-| AI hallucinates biology | Invented star alleles, fabricated gene-drug associations |
-| Manual pipelines take weeks | VEP, ClinVar, gnomAD, CPIC each require separate tools |
-| Equity gaps persist | 86% of GWAS participants are European; PRS loses up to 80% accuracy in other populations |
-
-ClawBio solves this by packaging each analysis as a self-contained skill with pinned dependencies, demo data, and reproducibility metadata.
-
-### Community and growth
-
-| Metric | Value |
-|--------|-------|
-| GitHub stars | 488 |
-| Forks | 85 |
-| Skills | 39 |
-| Contributors | 13 |
-
-**Milestones:**
-
-- **v0.4** (Mar 2026): Galaxy integration, 8,000+ tools via BioBlend SDK
-- **v0.3.1** (Mar 2026): Agent-friendly (`llms.txt`, `AGENTS.md`, `catalog.json`)
-- **v0.3** (Mar 2026): Imperial College AI Agent Hackathon, security audit (32 fixes)
-- **v0.2** (Feb 2026): 57 automated tests, GitHub Actions CI, ClawHub registry
-- **v0.1** (Jan 2026): First public release with core skills
+[:material-open-in-new: Launch the workshop in Google Colab](https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-variant-interpretation.ipynb){ .md-button .md-button--primary }
 
 ---
 
-## Background: variant interpretation
+## Part 1: What is ClawBio?
 
-### Genomic variation
+### The short version
 
-Every human genome carries 4 to 5 million single nucleotide polymorphisms (SNPs) compared to the reference. Most are benign. A small fraction affect protein function, drug metabolism, or disease risk. Beyond SNPs, variation includes insertions/deletions (indels), copy number variants (CNVs), and structural rearrangements. This workshop focuses on SNPs and small indels because they are what consumer genotyping platforms measure.
+ClawBio is an open-source toolkit that uses AI to automate genomic analysis. You give it genetic data, it runs the analysis, and you get a structured report. No bioinformatics experience needed to get started.
 
-### The ACMG five-tier classification
+### The problem it solves
 
-The American College of Medical Genetics and Genomics (ACMG) defines five categories:
+Interpreting a person's genome today involves a chain of manual steps: downloading specialist software, configuring databases, submitting queries to web APIs, parsing raw output files, and cross-referencing results across multiple sources. Each step requires a different tool, different expertise, and different file formats. A single analysis can take hours or days.
 
-| Category | Meaning | Action |
-|----------|---------|--------|
-| **Pathogenic** | Directly contributes to disease | Report. Genetic counselling. |
-| **Likely pathogenic** | Strong evidence, not conclusive | Report with caveat. |
-| **VUS** | Uncertain significance | Do not act on. May be reclassified. |
-| **Likely benign** | Probably no clinical effect | Generally not reported. |
-| **Benign** | No disease association | Not reported. |
+Meanwhile, AI language models (like ChatGPT or Claude) can answer genomics questions, but they frequently make things up. They invent gene-drug associations that do not exist, cite retracted papers, and produce star-allele calls with no basis in evidence. In clinical genomics, hallucinated results are dangerous.
 
-!!! warning "VUS is the honest answer"
-    Over half of all variants in ClinVar are VUS. The backlog grows faster than reclassification efforts. Learning to communicate uncertainty is a core clinical skill.
+ClawBio bridges that gap:
 
-### The annotation pipeline
+| Problem | How ClawBio solves it |
+|---------|----------------------|
+| Manual pipelines are slow and error-prone | Each analysis is packaged as a one-click "skill" with built-in demo data |
+| AI hallucinates biology | Every skill is grounded in published databases (ClinVar, CPIC, gnomAD), not language model guesses |
+| Reproducibility is broken | Every run produces a reproducibility bundle (exact commands, checksums, versions) |
+| Genetic data is sensitive | All processing happens on your machine (or your Colab session). Nothing is uploaded to ClawBio servers. |
 
-A standard variant interpretation workflow:
+### Who uses it
+
+ClawBio is used by students, researchers, and bioinformaticians. It is open-source (MIT licence), free, and has a growing community:
+
+| | |
+|---|---|
+| **GitHub stars** | 488 |
+| **Forks** | 85 |
+| **Available skills** | 39 (variant annotation, pharmacogenomics, GWAS, single-cell RNA-seq, equity scoring, and more) |
+| **Contributors** | 13 |
+
+The project launched in January 2026 and has been used at hackathons (Imperial College, DoraHacks), university courses (Westminster, UCL), and research labs.
+
+---
+
+## Part 2: Background you need for this workshop
+
+You do not need to memorise any of this before starting the practical. Read through it once so the terms are familiar, then refer back as you work through the notebook.
+
+### What is genomic variation?
+
+Every person's DNA differs from the "reference genome" at about 4 to 5 million positions. These differences are called variants. The most common type is a single nucleotide polymorphism (SNP): one DNA letter changed to another (e.g., A to G at a specific position).
+
+Most variants have no effect on health. A small number affect how proteins work, how drugs are metabolised, or whether someone is at risk for a disease. The challenge is finding the important ones.
+
+### How are variants classified?
+
+The American College of Medical Genetics and Genomics (ACMG) uses five categories:
+
+| Category | What it means | What happens clinically |
+|----------|---------------|------------------------|
+| **Pathogenic** | This variant causes or strongly contributes to disease | Reported to patient. Genetic counselling offered. |
+| **Likely pathogenic** | Strong evidence, but not conclusive | Reported with a caveat that evidence is still accumulating. |
+| **VUS** (Variant of Uncertain Significance) | Not enough evidence to say whether it matters | **Not acted upon.** May be reclassified as more data becomes available. |
+| **Likely benign** | Probably does not affect health | Usually not reported. |
+| **Benign** | Definitively does not cause disease | Not reported. |
+
+!!! warning "More than half of all known variants are VUS"
+    The classification backlog is enormous and growing. "We don't know yet" is often the most honest answer in genomics. This is true for humans and AI alike.
+
+### What is the annotation pipeline?
+
+When you have a list of variants (in a file called a VCF), you need to find out what each one does. The standard pipeline is:
 
 ```
-VCF --> VEP --> ClinVar --> gnomAD --> ACMG --> Report
+Your variants (VCF file)
+    |
+    v
+VEP (Ensembl Variant Effect Predictor)
+    --> What gene is affected? What type of change? (missense, synonymous, frameshift...)
+    |
+    v
+ClinVar (NCBI clinical database)
+    --> Has this variant been seen in patients? Is it pathogenic?
+    |
+    v
+gnomAD (population frequency database)
+    --> How common is this variant across 76,000+ genomes?
+    |
+    v
+ACMG classification
+    --> Combining all evidence: Pathogenic / Likely pathogenic / VUS / Likely benign / Benign
+    |
+    v
+Report
 ```
 
-- **VCF**: Variant Call Format, the standard file for genomic variants
-- **VEP**: Ensembl Variant Effect Predictor, determines functional consequence
-- **ClinVar**: NCBI database of variant-disease associations
-- **gnomAD**: Genome Aggregation Database, population allele frequencies (76,000+ genomes)
-- **ACMG**: Classification framework combining all evidence into a verdict
+In this workshop, ClawBio runs this entire pipeline for you in one step.
 
-### Pharmacogenomics
+### What is pharmacogenomics?
 
-Pharmacogenomics (PGx) studies how genetic variation affects drug response:
+Some genetic variants change how your body processes medications. This field is called pharmacogenomics (PGx). Knowing your PGx profile before starting a medication can prevent serious side effects.
 
-| Gene | Drugs affected | Clinical consequence |
-|------|---------------|---------------------|
-| **CYP2D6** | Codeine, tamoxifen, SSRIs (51 drugs) | Poor metabolisers get no pain relief from codeine |
-| **CYP2C19** | Clopidogrel, PPIs | Poor metabolisers: clopidogrel does not work |
-| **CYP2C9 + VKORC1** | Warfarin | Wrong dose causes dangerous bleeding or clotting |
-| **TPMT** | Azathioprine, 6-MP | Poor metabolisers: severe bone marrow toxicity |
-| **DPYD** | 5-fluorouracil, capecitabine | Deficiency can be fatal at standard chemo doses |
+Key examples:
 
-[CPIC](https://cpicpgx.org/) publishes evidence-based guidelines mapping genotype to drug recommendation. ClawBio's `pharmgx-reporter` skill implements these directly.
+| Gene | What it affects | Why it matters |
+|------|----------------|----------------|
+| **CYP2D6** | Codeine, tamoxifen, antidepressants (51 drugs total) | "Poor metabolisers" get zero pain relief from codeine because they cannot convert it to morphine |
+| **CYP2C19** | Clopidogrel (blood thinner), stomach acid drugs | "Poor metabolisers" on clopidogrel remain at full stroke/heart attack risk because the drug is not activated |
+| **CYP2C9 + VKORC1** | Warfarin (blood thinner) | Wrong dose causes dangerous bleeding (too much) or blood clots (too little). Dosing depends on both genes together. |
+| **TPMT** | Azathioprine (immunosuppressant) | "Poor metabolisers" suffer life-threatening bone marrow suppression at standard doses |
+| **DPYD** | 5-fluorouracil (chemotherapy) | Deficiency can be fatal at standard chemo doses |
 
-### The equity problem
+[CPIC](https://cpicpgx.org/) (Clinical Pharmacogenetics Implementation Consortium) publishes evidence-based guidelines that map genetic results to drug recommendations. ClawBio's skills implement these guidelines directly.
 
-Genomic databases are heavily biased toward European populations:
+### The equity problem in genomics
 
-- **86%** of GWAS participants are of European ancestry
-- BRCA variant databases have **30x more** entries for European populations
-- Polygenic risk scores lose up to **80% accuracy** in non-European populations
-- AI trained on biased data amplifies existing disparities
+Most genomic research has been conducted on people of European descent:
 
-A variant classified as "benign" in European databases may be pathogenic in another population but simply unstudied.
+- **86%** of genome-wide association study (GWAS) participants are European
+- Databases have **30 times more** BRCA variant data for Europeans than for other populations
+- Polygenic risk scores (genetic risk predictions) lose up to **80% accuracy** in non-European populations
 
-### The Corpasome
+This means a variant that looks "benign" in current databases may simply be unstudied in the relevant population. AI systems trained on this biased data amplify the problem rather than fixing it.
 
-In 2013, Manuel Corpas published his 23andMe genotype data under CC0 (public domain), making it one of the first fully open personal genomes. This workshop uses the Corpasome as its primary dataset.
+### The genome we are analysing
 
-Real findings from this genome include Factor V Leiden (thrombophilia carrier), HFE C282Y (haemochromatosis carrier), CFTR deltaF508 (cystic fibrosis carrier), VKORC1 + CYP2C9 (warfarin AVOID), MTHFR C677T (folate metabolism), and APOE e3/e4 (Alzheimer's risk factor).
+In this workshop, you will analyse the genome of Dr Manuel Corpas, published in 2013 under a CC0 (public domain) licence. It is one of the first fully open personal genomes.
+
+Real clinically relevant findings from this genome include:
+
+- **Factor V Leiden**: carrier for increased blood clotting risk
+- **HFE C282Y**: carrier for hereditary haemochromatosis (iron overload)
+- **CFTR deltaF508**: carrier for cystic fibrosis
+- **VKORC1 + CYP2C9**: warfarin sensitivity (standard dose is dangerous)
+- **APOE e3/e4**: elevated Alzheimer's disease risk factor
 
 > Corpas, M. (2013). Crowdsourcing the Corpasome. *Source Code for Biology and Medicine*, **8**, 13. [doi:10.1186/1751-0473-8-13](https://doi.org/10.1186/1751-0473-8-13)
 
 ---
 
-## Workshop materials
+## Part 3: How to run the workshop
 
-### Essential links
+### What you need
 
-| Resource | Link | Notes |
-|----------|------|-------|
-| **Google Colab notebook** | [Open in Colab](https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-variant-interpretation.ipynb) | Main practical. Free tier. |
-| **Full workshop page** | [clawbio.ai/workshop](https://clawbio.ai/workshop-variant-interpretation.html) | Slides, background, results guide |
-| **ClawBio GitHub** | [github.com/ClawBio/ClawBio](https://github.com/ClawBio/ClawBio) | Source code, skills, documentation |
-| **Corpasome paper** | [doi:10.1186/1751-0473-8-13](https://doi.org/10.1186/1751-0473-8-13) | Corpas (2013), Source Code Biol Med |
-| **Ensembl VEP** | [ensembl.org/vep](https://www.ensembl.org/info/docs/tools/vep/index.html) | Variant Effect Predictor (free REST API) |
-| **ClinVar** | [ncbi.nlm.nih.gov/clinvar](https://www.ncbi.nlm.nih.gov/clinvar/) | Variant-disease associations |
-| **gnomAD** | [gnomad.broadinstitute.org](https://gnomad.broadinstitute.org/) | Population allele frequencies |
-| **CPIC** | [cpicpgx.org](https://cpicpgx.org/) | Pharmacogenomics guidelines |
-| **ACMG Standards** | [Richards et al. (2015)](https://doi.org/10.1038/gim.2015.30) | Genetics in Medicine 17(5):405-24 |
+- A **Google account** (any free Gmail account works)
+- A **web browser** (Chrome, Firefox, or Safari)
+- That is it. No software to install, no terminal commands, no API keys, no payment.
 
-### Skills used
+### Opening the notebook
 
-- **variant-annotation**: Annotates VCF variants via Ensembl VEP REST. ClinVar significance, gnomAD frequencies, Tier 1-4 priority.
-- **pharmgx-reporter**: PGx report from 23andMe/AncestryDNA. 12 genes, 31 SNPs, 51 drugs. CPIC-grounded, zero external dependencies.
-- **clinpgx**: Deep gene-drug lookup via ClinPGx API. CPIC guideline context, PharmGKB, FDA labels.
+Click the button below to open the workshop notebook in Google Colab:
 
-### Requirements
+[:material-open-in-new: Launch in Google Colab](https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-variant-interpretation.ipynb){ .md-button .md-button--primary }
 
-- A Google account (for Colab)
-- A web browser
-- No installation, no API keys, no payment
-- Approximately 60 minutes
+When it opens, you will see a document with text blocks and code blocks. Code blocks have a **play button** on the left. Click the play button to run each block in order, from top to bottom.
 
----
+!!! tip "First time using Google Colab?"
+    Google Colab is a free service that lets you run Python code in your browser. You do not need to know Python. Just click the play button on each code cell and read the output. If Colab asks you to "connect to a runtime", click **Connect** in the top right corner.
 
-## Step-by-step walkthrough
+### Step-by-step guide
 
-### Step 0: Setup (2 min)
+#### Step 0: Setup (2 minutes)
 
-Run the first two code cells to clone ClawBio and install dependencies (`pysam`, `requests`, `pandas`, `matplotlib`).
+Run the first two code cells. They will:
+
+1. Download the ClawBio toolkit (takes ~15 seconds)
+2. Install the required analysis libraries
+
+You should see:
 
 ```
 ClawBio loaded successfully
 Skills available: 39
 ```
 
-!!! tip "If Colab is slow"
-    The git clone takes 10-20 seconds. If it times out, click **Runtime > Restart and run all**.
+!!! tip "If something goes wrong"
+    If you see an error, click **Runtime > Restart and run all** in the Colab menu bar. This resets everything and runs all cells from the beginning.
 
-### Step 1: Explore the Corpasome (5 min)
+#### Step 1: Explore the genome (5 minutes)
 
-The notebook loads Manuel Corpas's 23andMe file (~600,000 SNPs). You will see:
+The notebook loads the Corpasome (Manuel Corpas's 23andMe genotype file). You will see:
 
-- The 23andMe format: rsID, chromosome, position, genotype
-- Total SNP count
-- Per-chromosome breakdown (Chr 1 largest, Chr 22 smallest)
+- The file contains approximately **600,000 SNPs**
+- Each line has four columns: rsID (variant name), chromosome, position, genotype
+- A table showing how many variants are on each chromosome (chromosome 1 has the most because it is the largest)
 
-**Discussion**: Why does chromosome 1 have the most SNPs? (It is the largest chromosome, ~249 Mb.)
+#### Step 2: Select clinically relevant variants (3 minutes)
 
-### Step 2: Convert to VCF (3 min)
+Out of 600,000 variants, the notebook extracts **21 that are known to be clinically important**. These include variants in genes for:
 
-The notebook extracts 21 clinically relevant variants and converts them to VCF:
+- Drug metabolism (CYP2C19, CYP2D6, CYP2C9, VKORC1, TPMT, MTHFR)
+- Cancer risk (BRCA1, TP53)
+- Blood clotting (Factor V, Prothrombin)
+- Iron metabolism (HFE)
+- Cystic fibrosis (CFTR)
+- Alzheimer's risk (APOE)
 
-- **Pharmacogenomics**: CYP2C19, CYP2C9, CYP2D6, VKORC1, TPMT, MTHFR
-- **Cancer risk**: BRCA1, TP53
-- **Cardiovascular**: Factor V (F5), Prothrombin (F2), HFE
-- **Mendelian**: CFTR, APOE, SERPINA1
+The notebook converts these into VCF format, which is the standard input for genomic analysis tools.
 
-### Step 3: Run variant annotation (5 min)
+#### Step 3: Run the variant annotation (5 minutes)
 
-The `variant-annotation` skill sends 21 variants to Ensembl VEP and enriches them with ClinVar and gnomAD. Output:
+This is the main analysis. The notebook sends the 21 variants to the Ensembl VEP API (a free, public service run by the European Bioinformatics Institute) and retrieves:
 
-- `report.md` with a prioritised summary
-- `annotated_variants.tsv` with per-variant details
-- `result.json` for programmatic access
+- What gene each variant is in
+- What effect it has on the protein (missense, synonymous, etc.)
+- Whether ClinVar has classified it (pathogenic, benign, VUS, drug response)
+- How common it is across world populations (gnomAD frequency)
+- A priority tier (Tier 1 = most clinically relevant, Tier 4 = benign)
 
-!!! info "VEP API"
-    The 21 variants are submitted in a single batch (under the 200-variant limit). If the API is slow, the skill retries automatically.
+!!! info "No API key needed"
+    The Ensembl VEP REST API is free and public. ClawBio handles all the formatting and submission automatically. You just click the play button.
 
-### Step 4: Pharmacogenomic interpretation (5 min)
+#### Step 4: Pharmacogenomic interpretation (5 minutes)
 
-The `clinpgx` skill maps variants to CPIC drug recommendations. The warfarin finding is the highlight: VKORC1 TT (high sensitivity) + CYP2C9 *1/*2 (intermediate metaboliser) = **AVOID standard dose**.
+The notebook runs a second analysis focused on drug-gene interactions. It maps the variants to CPIC guideline recommendations: which drugs to avoid, which need dose adjustments, and which are safe at standard doses.
 
-### Step 5: Exercises (15 min)
+The warfarin finding is the standout result (see "Understanding your results" below).
 
-| Exercise | Task | Status |
-|----------|------|--------|
-| **5a** | Run variant-annotation on the bundled 20-variant synthetic panel (`--demo`). Compare with Corpasome results. | Required |
-| **5b** | Upload your own 23andMe/AncestryDNA file and re-run Steps 2-4. Privacy: data stays in Colab, deleted on session end. | Optional |
-| **5c** | Pick one gene. Research function, ACMG classification, gnomAD frequency. Would you report this to a patient? | Required |
+#### Step 5: Exercises (15 minutes, independent work)
+
+| Exercise | What to do | Required? |
+|----------|-----------|-----------|
+| **5a** | Run the analysis again on a different set of 20 synthetic variants (one click, using the `--demo` flag). Compare the findings with the Corpasome results. | Yes |
+| **5b** | If you have your own 23andMe or AncestryDNA file, upload it and analyse your own genome. Your data stays in the Colab session and is deleted when you close the tab. | Optional |
+| **5c** | Pick one gene from the results. Look up its function, its ACMG classification, and its population frequency. Write a short paragraph: would you report this to a patient? Why or why not? | Yes |
 
 ---
 
-## Understanding your results
+## Part 4: Understanding your results
 
 ### Priority tiers
 
-| Tier | Criteria | Corpasome example |
-|------|----------|-------------------|
-| **Tier 1** | Pathogenic/likely pathogenic in ClinVar. Rare (AF < 0.001). | CFTR deltaF508, cystic fibrosis carrier |
-| **Tier 2** | Drug response or established risk factor. CPIC-actionable. | VKORC1 rs9923231 TT, warfarin sensitivity |
-| **Tier 3** | Variant of uncertain significance. | Rare missense, no ClinVar entry |
-| **Tier 4** | Benign/likely benign. Common (> 1%). | MTHFR A1298C, common polymorphism |
+ClawBio assigns every variant a priority tier:
 
-### Key findings from the Corpasome
+| Tier | What it means | Example from this workshop |
+|------|---------------|---------------------------|
+| **Tier 1** | Pathogenic or likely pathogenic. Rare (less than 0.1% of the population). Highest clinical relevance. | CFTR deltaF508: carrier for cystic fibrosis |
+| **Tier 2** | Drug response variant or established risk factor. Actionable under CPIC guidelines. | VKORC1 rs9923231 TT: warfarin high sensitivity |
+| **Tier 3** | Variant of uncertain significance (VUS). Not enough evidence to classify. | Rare missense variants with no ClinVar entry |
+| **Tier 4** | Benign or likely benign. Common in the population (over 1%). | MTHFR A1298C: common polymorphism |
 
-#### Factor V Leiden (rs6025) -- Tier 1
+### Key findings explained
 
-**Gene:** F5 (coagulation factor V). **Genotype:** heterozygous carrier.
+#### Factor V Leiden (rs6025): Tier 1
 
-3-8x increased risk of venous thromboembolism. The most common inherited thrombophilia in Europeans (~5% carrier frequency). Relevant for oral contraceptive prescribing, surgery planning, and long-haul travel. Reportable finding; cascade testing recommended.
+**What the result says:** Heterozygous carrier (one copy of the variant).
 
-#### HFE C282Y (rs1800562) -- Tier 1
+**What it means:** Factor V is a protein involved in blood clotting. The Leiden variant makes the clotting system overactive, increasing the risk of deep vein thrombosis (blood clots) by 3 to 8 times.
 
-**Gene:** HFE (homeostatic iron regulator). **Genotype:** heterozygous carrier.
+**Why it matters:** About 5% of Europeans carry this variant. It is relevant for decisions about oral contraceptives (which also increase clotting risk), surgery planning, and advice about long-haul flights. Family members should be offered testing.
 
-Carrier for hereditary haemochromatosis. Homozygotes accumulate excess iron causing liver damage, diabetes, and heart failure. Heterozygous carriers have mildly elevated iron but rarely develop clinical disease. Monitor serum ferritin periodically.
+#### HFE C282Y (rs1800562): Tier 1
 
-#### CFTR deltaF508 (rs113993960) -- Tier 1
+**What the result says:** Heterozygous carrier.
 
-**Gene:** CFTR (cystic fibrosis transmembrane conductance regulator). **Genotype:** heterozygous carrier.
+**What it means:** The HFE gene controls iron absorption. People with two copies of C282Y absorb too much iron, which accumulates in the liver, heart, and pancreas, causing serious organ damage (hereditary haemochromatosis). Carriers with one copy have mildly elevated iron but almost never develop the disease.
 
-Carrier for cystic fibrosis, the most common lethal autosomal recessive condition in Europeans (~1 in 25 carrier frequency). Two copies needed for disease. Partner testing recommended before family planning.
+**Why it matters:** Simple blood tests (serum ferritin, transferrin saturation) can monitor iron levels. Early detection in homozygotes is life-saving because treatment (regular blood donation) is cheap and effective.
 
-#### Warfarin: CYP2C9 + VKORC1 -- Tier 2
+#### CFTR deltaF508 (rs113993960): Tier 1
 
-**Genes:** CYP2C9 (*1/*2, intermediate metaboliser) + VKORC1 (rs9923231 TT, high sensitivity).
+**What the result says:** Heterozygous carrier.
 
-This combination means warfarin is metabolised more slowly AND the drug target is more sensitive. Standard dosing would cause dangerously high drug levels and serious bleeding risk.
+**What it means:** CFTR mutations cause cystic fibrosis, a serious condition affecting the lungs and digestive system. You need two copies (one from each parent) to have the disease. Carriers with one copy are healthy. About 1 in 25 Europeans is a carrier.
 
-!!! danger "CPIC recommendation"
-    **AVOID standard dose.** Use pharmacogenomic-guided dosing or consider alternative anticoagulants (DOACs). Warfarin has a narrow therapeutic window: too little means clotting, too much means haemorrhage.
+**Why it matters:** Carrier status is relevant for family planning. If both partners carry a CFTR mutation, each child has a 25% chance of having cystic fibrosis. Partner testing is recommended.
 
-#### APOE e3/e4 (rs429358 + rs7412) -- Risk factor
+#### Warfarin sensitivity (CYP2C9 + VKORC1): Tier 2
 
-**Gene:** APOE (apolipoprotein E). **Genotype:** e3/e4.
+**What the result says:** CYP2C9 *1/*2 (intermediate metaboliser) + VKORC1 rs9923231 TT (high sensitivity).
 
-The e4 allele is the strongest common genetic risk factor for late-onset Alzheimer's (~3x risk with one copy). Many e4 carriers never develop Alzheimer's. APOE status is an ACMG secondary finding (SF v3.2). Disclosure recommended but must be accompanied by counselling. Probabilistic, not deterministic.
+**What it means:** Warfarin is a blood-thinning medication with a very narrow "safe zone". Too little and blood clots form; too much and dangerous bleeding occurs. Two genes determine how much warfarin a person needs:
 
-#### MTHFR C677T (rs1801133) -- Tier 2
+- **CYP2C9** breaks down warfarin. The *2 variant slows this down, so the drug stays active longer.
+- **VKORC1** is the drug's target. The TT genotype makes the target more sensitive, so less drug is needed.
 
-**Gene:** MTHFR (methylenetetrahydrofolate reductase). **Genotype:** heterozygous.
+This combination means the Corpasome individual needs a **significantly lower dose than standard**, or should use an alternative anticoagulant entirely.
 
-Reduced enzyme activity for folate metabolism. Heterozygotes retain ~65% activity (not clinically significant for most). Homozygotes (~35% activity) may benefit from methylfolate supplementation during pregnancy. Extremely common (~30-40% carrier frequency in Europeans). Frequently over-interpreted in direct-to-consumer reports.
+!!! danger "This is the textbook example of pharmacogenomics saving lives"
+    Without genetic testing, a doctor might prescribe the standard warfarin dose. In this individual, that dose could cause a haemorrhage. Pre-emptive pharmacogenomic testing catches this before the first prescription.
 
-### Reading the annotated variants table
+#### APOE e3/e4 (rs429358 + rs7412): Risk factor
 
-| Column | Meaning |
-|--------|---------|
-| `gene` | Gene symbol (e.g., CYP2D6, CFTR) |
-| `consequence` | Functional effect: missense_variant, synonymous, frameshift, etc. |
-| `impact` | VEP tier: HIGH, MODERATE, LOW, MODIFIER |
-| `clinvar_significance` | ClinVar classification: Pathogenic, Likely pathogenic, VUS, Benign, Drug response |
-| `gnomad_af` | Global allele frequency. Below 0.001 (0.1%) = rare. |
-| `priority_tier` | ClawBio tier (1-4) combining all evidence |
-| `priority_score` | Numeric rank within a tier. Higher = more clinically relevant. |
+**What the result says:** APOE genotype e3/e4.
 
-!!! warning "Limitations"
-    Consumer genotyping arrays test ~600,000 of ~3 billion positions. They miss structural variants, most rare variants, and copy number changes. A "clear" result does not mean the genome is free of pathogenic variants. Clinical-grade whole genome sequencing covers far more.
+**What it means:** The APOE gene comes in three common forms: e2, e3, and e4. The e4 variant is the strongest common genetic risk factor for late-onset Alzheimer's disease. One copy (e3/e4) increases risk about 3-fold compared to the most common genotype (e3/e3). Two copies (e4/e4) increase risk about 12-fold.
+
+**Important context:** APOE e4 is a risk factor, not a diagnosis. Many carriers never develop Alzheimer's, and many Alzheimer's patients do not carry e4. This is a probabilistic finding, not a deterministic one. Disclosure should always be accompanied by genetic counselling.
+
+#### MTHFR C677T (rs1801133): Tier 2
+
+**What the result says:** Heterozygous (one copy).
+
+**What it means:** MTHFR helps process folate (vitamin B9). The C677T variant reduces enzyme activity to about 65% in heterozygotes and about 35% in homozygotes. This is extremely common: 30 to 40% of Europeans carry at least one copy.
+
+**Important context:** MTHFR is one of the most over-interpreted variants in consumer genomics. For the vast majority of carriers, it has no clinical significance. Homozygotes may benefit from methylfolate supplementation during pregnancy, but heterozygotes generally do not need any action.
+
+### Reading the output table
+
+The annotated variants table has one row per variant. Here is what each column means:
+
+| Column | Plain English |
+|--------|--------------|
+| `gene` | Which gene the variant is in (e.g., CYP2D6, CFTR) |
+| `consequence` | What the variant does to the protein: `missense_variant` (changes an amino acid), `synonymous_variant` (no change), `frameshift_variant` (disrupts the protein), etc. |
+| `impact` | Severity: HIGH (likely disrupts protein), MODERATE (changes protein but may be tolerated), LOW (unlikely to matter), MODIFIER (non-coding region) |
+| `clinvar_significance` | What ClinVar says: Pathogenic, Likely pathogenic, VUS, Benign, Drug response |
+| `gnomad_af` | How common the variant is globally. Values below 0.001 (0.1%) are considered rare. |
+| `priority_tier` | ClawBio's overall assessment: Tier 1 (most important) to Tier 4 (benign) |
+
+!!! warning "What this analysis cannot tell you"
+    Consumer genotyping arrays (23andMe, AncestryDNA) test about 600,000 positions out of 3 billion in the genome. They miss structural variants, most rare variants, and copy number changes. A "clear" result from a genotyping array does **not** mean the genome is free of pathogenic variants. Clinical-grade whole genome sequencing is far more comprehensive.
 
 ---
 
-## Take-home messages
+## Part 5: Take-home messages
 
-1. **The fundamentals have not changed.** Variant interpretation still requires molecular biology, population genetics, clinical context, and the ACMG framework. AI accelerates the mechanical steps, not the judgement.
+1. **The biology has not changed.** AI makes the mechanical steps faster (database lookups, file conversions, prioritisation), but the fundamentals of variant interpretation, molecular biology, population genetics, and clinical context, remain essential. You still need to understand what VUS means before you can explain it to a patient.
 
-2. **Speed has changed dramatically.** What took days (tools, environments, VEP, parsing, cross-referencing) now takes minutes. The bottleneck shifts from data processing to interpretation.
+2. **Speed has changed dramatically.** An analysis that used to take a bioinformatician days (setting up tools, running VEP, parsing output, cross-referencing ClinVar and gnomAD) now takes minutes. The bottleneck shifts from data processing to clinical interpretation and decision-making.
 
-3. **Pharmacogenomics is actionable today.** Drug-gene interactions like warfarin/CYP2C9/VKORC1 are well-established, guideline-supported, and directly affect prescribing. This is not hypothetical.
+3. **Pharmacogenomics is already saving lives.** Drug-gene interactions like warfarin/CYP2C9/VKORC1 are not hypothetical future medicine. They are implemented today in hospitals that offer pre-emptive PGx testing. The evidence base and clinical guidelines already exist.
 
-4. **VUS is the honest answer.** Over half of ClinVar variants are VUS. The backlog grows faster than reclassification. Communicating uncertainty is a core skill.
+4. **"We don't know yet" is a valid answer.** Over half of all variants in ClinVar are classified as VUS. Communicating uncertainty honestly, rather than overpromising what genomics can deliver, is one of the most important skills in this field.
 
-5. **Equity gaps are real and growing.** AI trained on biased data amplifies disparities. Every analysis should consider the ancestry context of the individual and the reference databases.
+5. **Equity gaps are real.** When 86% of research has been done on European populations, genomic tools are inherently less reliable for everyone else. AI systems trained on biased data amplify this problem. Every analysis should acknowledge which populations the reference data represents.
 
-6. **Open data enables open science.** This entire workshop runs on a CC0-licensed genome, open-source skills, free APIs, and a free notebook. Anyone can reproduce the same results. That is the standard.
+6. **Open data makes open science possible.** This entire workshop, a real genome, open-source tools, free APIs, a free notebook, is reproducible by anyone in the world. That transparency is the standard to aim for.
 
 !!! danger "Medical disclaimer"
-    ClawBio is a research and educational tool. It is not a medical device and does not provide clinical diagnoses. Consult a healthcare professional before making any medical decisions based on genetic data.
+    ClawBio is a research and educational tool. It is not a medical device and does not provide clinical diagnoses. The findings discussed in this workshop are for educational purposes only. Consult a healthcare professional before making any medical decisions based on genetic data.
 
 ---
 
-## Further reading
+## Links and references
 
-- [ACMG Standards: Richards et al. (2015)](https://doi.org/10.1038/gim.2015.30)
-- [CPIC Guidelines](https://cpicpgx.org/)
-- [Ensembl VEP documentation](https://www.ensembl.org/info/docs/tools/vep/index.html)
-- [gnomAD browser](https://gnomad.broadinstitute.org/)
-- [ClinVar database](https://www.ncbi.nlm.nih.gov/clinvar/)
-- [Corpas (2013) Crowdsourcing the Corpasome](https://doi.org/10.1186/1751-0473-8-13)
+### Workshop resources
+
+| Resource | Link |
+|----------|------|
+| Google Colab notebook | [:material-open-in-new: Open in Colab](https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-variant-interpretation.ipynb) |
+| ClawBio GitHub repository | [github.com/ClawBio/ClawBio](https://github.com/ClawBio/ClawBio) |
+| ClawBio documentation | [docs.clawbio.ai](https://docs.clawbio.ai) |
+| ClawBio Discord community | [discord.gg/EEp4Neaz](https://discord.gg/EEp4Neaz) |
+
+### Databases used in this workshop
+
+| Database | What it does | Link |
+|----------|-------------|------|
+| Ensembl VEP | Predicts the functional effect of variants | [ensembl.org/vep](https://www.ensembl.org/info/docs/tools/vep/index.html) |
+| ClinVar | Curated variant-disease associations | [ncbi.nlm.nih.gov/clinvar](https://www.ncbi.nlm.nih.gov/clinvar/) |
+| gnomAD | Population allele frequencies (76,000+ genomes) | [gnomad.broadinstitute.org](https://gnomad.broadinstitute.org/) |
+| CPIC | Pharmacogenomics clinical guidelines | [cpicpgx.org](https://cpicpgx.org/) |
+
+### Key papers
+
+- Richards et al. (2015). Standards and guidelines for the interpretation of sequence variants. *Genetics in Medicine*, 17(5), 405-424. [doi:10.1038/gim.2015.30](https://doi.org/10.1038/gim.2015.30)
+- Corpas, M. (2013). Crowdsourcing the Corpasome. *Source Code for Biology and Medicine*, 8, 13. [doi:10.1186/1751-0473-8-13](https://doi.org/10.1186/1751-0473-8-13)

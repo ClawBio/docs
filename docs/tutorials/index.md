@@ -156,7 +156,7 @@ Hands-on guides to get productive with AI coding tools and ClawBio. Each tutoria
     <span class="time-estimate">60 min</span>
   </div>
   <h3 class="tutorial-card__title">Variant Interpretation Workshop</h3>
-  <p class="tutorial-card__desc">Annotate a real human genome in Google Colab — variant annotation, pharmacogenomics, ACMG classification, and clinical interpretation.</p>
+  <p class="tutorial-card__desc">Annotate a real human genome in Google Colab. No installation, no terminal, no prior experience required. Covers variant annotation, pharmacogenomics, and clinical interpretation.</p>
 </a>
 
 </div>
