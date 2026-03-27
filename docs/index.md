@@ -68,6 +68,15 @@ description: Technical documentation, tutorials, skill reference, and research p
   <p class="tutorial-card__desc">Deploy ClawBio via Docker, Railway, or private cloud.</p>
 </a>
 
+<a class="tutorial-card" href="tutorials/variant-interpretation-workshop/">
+  <div class="tutorial-card__header">
+    <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
+    <span class="time-estimate">60 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Variant Interpretation Workshop</h3>
+  <p class="tutorial-card__desc">Annotate a real human genome in Google Colab. Covers variant annotation, pharmacogenomics, ACMG, and clinical interpretation.</p>
+</a>
+
 </div>
 
 ---

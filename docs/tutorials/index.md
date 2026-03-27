@@ -149,6 +149,16 @@ Hands-on guides to get productive with AI coding tools and ClawBio. Each tutoria
   <p class="tutorial-card__desc">Deploy RoboTerri — a Telegram bot that runs ClawBio skills via any LLM provider.</p>
 </a>
 
+<a class="tutorial-card" href="variant-interpretation-workshop/">
+  <div class="tutorial-card__header">
+    <span class="tutorial-card__step">WORKSHOP</span>
+    <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
+    <span class="time-estimate">60 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Variant Interpretation Workshop</h3>
+  <p class="tutorial-card__desc">Annotate a real human genome in Google Colab — variant annotation, pharmacogenomics, ACMG classification, and clinical interpretation.</p>
+</a>
+
 </div>
 
 ## Prerequisites

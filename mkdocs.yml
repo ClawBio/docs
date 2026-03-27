@@ -64,6 +64,7 @@ nav:
       - Run Your First Skill: tutorials/run-your-first-skill.md
       - Build a Skill: tutorials/build-a-skill.md
       - Telegram Bot: tutorials/telegram-bot.md
+      - Variant Interpretation Workshop: tutorials/variant-interpretation-workshop.md
   - Research:
     - Overview: research/index.md
     - Genomebook: research/genomebook.md
