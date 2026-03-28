@@ -65,6 +65,7 @@ nav:
       - Build a Skill: tutorials/build-a-skill.md
       - Telegram Bot: tutorials/telegram-bot.md
       - Variant Interpretation Workshop: tutorials/variant-interpretation-workshop.md
+      - 30x WGS Workshop: tutorials/30x-wgs-workshop.md
   - Research:
     - Overview: research/index.md
     - Genomebook: research/genomebook.md

@@ -159,6 +159,16 @@ Hands-on guides to get productive with AI coding tools and ClawBio. Each tutoria
   <p class="tutorial-card__desc">Annotate a real human genome in Google Colab. No installation, no terminal, no prior experience required. Covers variant annotation, pharmacogenomics, and clinical interpretation.</p>
 </a>
 
+<a class="tutorial-card" href="30x-wgs-workshop/">
+  <div class="tutorial-card__header">
+    <span class="tutorial-card__step">WORKSHOP</span>
+    <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
+    <span class="time-estimate">40 min</span>
+  </div>
+  <h3 class="tutorial-card__title">30x WGS Workshop</h3>
+  <p class="tutorial-card__desc">Explore a real 30x whole-genome sequence in Google Colab. Structural variants, QC metrics, pharmacogenomics comparison. Goes beyond what SNP arrays can see.</p>
+</a>
+
 </div>
 
 ## Prerequisites
