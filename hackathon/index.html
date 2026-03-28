@@ -1,0 +1,3320 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Build bioinformatics AI agent skills with ClawBio. Recap from our first hackathon at Imperial College London and guide for future events.">
+      
+      
+        <meta name="author" content="Manuel Corpas">
+      
+      
+        <link rel="canonical" href="https://docs.clawbio.ai/hackathon/">
+      
+      
+        <link rel="prev" href="../contributing/">
+      
+      
+        <link rel="next" href="setup/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>ClawBio Hackathons: Agentic Genomics - ClawBio Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/clawbio.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ClawBio Documentation">
+  <meta property="og:title" content="Guide - ClawBio">
+  <meta property="og:description" content="Technical documentation, tutorials, and research for ClawBio, the bioinformatics-native AI agent skill library.">
+  <meta property="og:image" content="https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=1200,height=630/event-covers/ue/48e9b48f-4f12-493c-8740-d1b7fe78b6ff.png">
+  <meta property="og:url" content="https://docs.clawbio.ai/hackathon/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Guide - ClawBio">
+  <meta name="twitter:description" content="Technical documentation, tutorials, and research for ClawBio, the bioinformatics-native AI agent skill library.">
+  <meta name="twitter:image" content="https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=1200,height=630/event-covers/ue/48e9b48f-4f12-493c-8740-d1b7fe78b6ff.png">
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="clawbio" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#clawbio-hackathons-agentic-genomics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ClawBio Documentation" class="md-header__button md-logo" aria-label="ClawBio Documentation" data-md-component="logo">
+      
+  <img src="../assets/clawbio-logo.jpeg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ClawBio Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ClawBio Hackathons: Agentic Genomics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="clawbio" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="green"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ClawBio/ClawBio" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ClawBio/ClawBio
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../skills/" class="md-tabs__link">
+          
+  
+  
+  Skills
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../tutorials/" class="md-tabs__link">
+          
+  
+  
+  Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../research/" class="md-tabs__link">
+          
+  
+  
+  Research
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../deployment/" class="md-tabs__link">
+          
+  
+  
+  Deployment
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../reference/skillmd-spec/" class="md-tabs__link">
+          
+  
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Hackathon
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ClawBio Documentation" class="md-nav__button md-logo" aria-label="ClawBio Documentation" data-md-component="logo">
+      
+  <img src="../assets/clawbio-logo.jpeg" alt="logo">
+
+    </a>
+    ClawBio Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ClawBio/ClawBio" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ClawBio/ClawBio
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skills
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Skills
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skills/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skill Library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skills/pharmgx-reporter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PharmGx Reporter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skills/scrna-orchestrator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    scRNA Orchestrator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skills/equity-scorer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Equity Scorer (HEIM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skills/nutrigx-advisor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NutriGx Advisor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skills/genome-compare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Genome Compare
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skills/gwas-prs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GWAS PRS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skills/gwas-lookup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GWAS Lookup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skills/galaxy-bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galaxy Bridge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skills/rnaseq-de/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RNA-seq DE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/penguins-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Penguins Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/journal-club-slides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Journal Club Slides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/single-cell-portal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Single Cell Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/context-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/apm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extras
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Extras
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rules and Memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/github-education/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Education
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/making-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building Custom Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/tmux-sessions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    tmux Sessions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ClawBio
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ClawBio
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/run-your-first-skill/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Run Your First Skill
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/build-a-skill/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build a Skill
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/telegram-bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Telegram Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/variant-interpretation-workshop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variant Interpretation Workshop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/30x-wgs-workshop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30x WGS Workshop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../research/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../research/genomebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Genomebook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deployment
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deployment/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deployment/railway/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Railway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deployment/private-cloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Private Cloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/skillmd-spec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SKILL.md Spec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hackathon
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hackathon
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hackathon-1-imperial-college-london" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hackathon #1: Imperial College London
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hackathon #1: Imperial College London">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#by-the-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        By the numbers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skills-submitted-on-the-day" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Skills submitted on the day
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#institutions-represented" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Institutions represented
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#watch-the-recording" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Watch the recording
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#join-the-next-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join the next one
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hackathon-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hackathon Guide
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hackathon Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-clawbio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is ClawBio?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-is-this-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who is this for?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-counts-as-a-successful-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What counts as a successful submission?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#three-themes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three Themes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-event-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pre-event setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choose-your-track" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choose Your Track
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Choose Your Track">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#track-a-ai-engineers-new-to-genomics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track A: AI Engineers New to Genomics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#track-b-genomics-researchers-new-to-agentic-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track B: Genomics Researchers New to Agentic AI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#track-c-proteomics-and-multi-omics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track C: Proteomics and Multi-Omics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#track-d-clinical-and-diagnostic-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track D: Clinical and Diagnostic Applications
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#track-e-epidemiology-and-public-health" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track E: Epidemiology and Public Health
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#judging-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Judging Criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Communication
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="first-skill/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build a Skill
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="add-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="submit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Submit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="agentic-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agentic Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hackathon-1-imperial-college-london" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hackathon #1: Imperial College London
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hackathon #1: Imperial College London">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#by-the-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        By the numbers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skills-submitted-on-the-day" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Skills submitted on the day
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#institutions-represented" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Institutions represented
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#watch-the-recording" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Watch the recording
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#join-the-next-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join the next one
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hackathon-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hackathon Guide
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hackathon Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-clawbio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is ClawBio?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-is-this-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who is this for?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-counts-as-a-successful-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What counts as a successful submission?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#three-themes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three Themes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-event-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pre-event setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choose-your-track" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choose Your Track
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Choose Your Track">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#track-a-ai-engineers-new-to-genomics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track A: AI Engineers New to Genomics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#track-b-genomics-researchers-new-to-agentic-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track B: Genomics Researchers New to Agentic AI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#track-c-proteomics-and-multi-omics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track C: Proteomics and Multi-Omics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#track-d-clinical-and-diagnostic-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track D: Clinical and Diagnostic Applications
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#track-e-epidemiology-and-public-health" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track E: Epidemiology and Public Health
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#judging-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Judging Criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Communication
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="clawbio-hackathons-agentic-genomics">ClawBio Hackathons: Agentic Genomics<a class="headerlink" href="#clawbio-hackathons-agentic-genomics" title="Permanent link">&para;</a></h1>
+<p><img alt="ClawBio Hackathon Banner" src="img/hackathon-cover.jpg" style="border-radius: 12px; margin-bottom: 1.5rem;" width="100%" /></p>
+<hr />
+<h2 id="hackathon-1-imperial-college-london">Hackathon #1: Imperial College London<a class="headerlink" href="#hackathon-1-imperial-college-london" title="Permanent link">&para;</a></h2>
+<p><strong>19 March 2026 | Sir Michael Uren Hub, White City Campus</strong></p>
+<p>Our first hackathon brought together 70+ participants from across genomics, AI engineering, proteomics, clinical diagnostics, and epidemiology. In a single afternoon, attendees built and submitted 8 new bioinformatics skills as pull requests to ClawBio.</p>
+<div class="grid cards">
+<ul>
+<li>
+<p><img alt="Presentation" src="img/img1.jpg" /></p>
+<p><strong>Opening session.</strong> Full room for the welcome talks at the Sir Michael Uren Hub.</p>
+</li>
+<li>
+<p><img alt="Organisers presenting" src="img/img2.jpg" /></p>
+<p><strong>Manuel Corpas and Jay Moore</strong> introduce ClawBio and the docs.clawbio.ai hackathon guide.</p>
+</li>
+<li>
+<p><img alt="Speaker presenting" src="img/img4.jpg" /></p>
+<p><strong>Guided tutorial.</strong> Walking through agentic tools and skill building, step by step.</p>
+</li>
+<li>
+<p><img alt="Hacking session" src="img/img7.jpg" /></p>
+<p><strong>Build time.</strong> Laptops open, skills taking shape across all five tracks.</p>
+</li>
+<li>
+<p><img alt="Breakout area" src="img/img5.jpg" /></p>
+<p><strong>Breakout hacking</strong> with sunset views over White City. Discussions on reproducibility, sensitive biodata, and the future of agentic genomics.</p>
+</li>
+<li>
+<p><img alt="Jay Moore" src="img/img6.jpg" /></p>
+<p><strong>Jay Moore</strong> (Imperial) between mentoring rounds.</p>
+</li>
+</ul>
+</div>
+<p><img alt="Group photo" src="img/img3.jpg" style="border-radius: 12px; margin: 1rem 0;" width="100%" /></p>
+<p><strong>Group photo</strong> at the end of the day.</p>
+<h3 id="by-the-numbers">By the numbers<a class="headerlink" href="#by-the-numbers" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Registrants</td>
+<td>99+</td>
+</tr>
+<tr>
+<td>Attended</td>
+<td>70+</td>
+</tr>
+<tr>
+<td>Skill PRs submitted</td>
+<td>8</td>
+</tr>
+<tr>
+<td>GitHub stars (day of event)</td>
+<td>468</td>
+</tr>
+<tr>
+<td>Forks</td>
+<td>83</td>
+</tr>
+<tr>
+<td>Repo views (14 days)</td>
+<td>10,972</td>
+</tr>
+<tr>
+<td>Unique cloners</td>
+<td>645</td>
+</tr>
+<tr>
+<td>Tracks</td>
+<td>5 (AI engineers, genomics, proteomics, clinical, epi)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="skills-submitted-on-the-day">Skills submitted on the day<a class="headerlink" href="#skills-submitted-on-the-day" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>Author</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PubMed Summariser</td>
+<td>@emanueleriontino</td>
+<td>PubMed research briefing from gene or disease query</td>
+</tr>
+<tr>
+<td>Protocols.io Bridge</td>
+<td>@camlloyd</td>
+<td>Search and retrieve lab protocols</td>
+</tr>
+<tr>
+<td>Skill Builder</td>
+<td>@thepigdestroyer</td>
+<td>Scaffold new ClawBio skills from spec</td>
+</tr>
+<tr>
+<td>Variant Annotation</td>
+<td>@toby-clark4</td>
+<td>Annotate variants with ClinVar and gnomAD</td>
+</tr>
+<tr>
+<td>Variant Annotation</td>
+<td>@HadiKhan-dev</td>
+<td>Alternative variant annotation approach</td>
+</tr>
+<tr>
+<td>Bioconductor Bridge</td>
+<td>@HDash</td>
+<td>Doc-enriched Bioconductor package discovery</td>
+</tr>
+<tr>
+<td>FHIR PGx</td>
+<td>@MarceloGal</td>
+<td>Fetch electronic clinical pharmacogenomics data</td>
+</tr>
+<tr>
+<td>Clinical Trial Finder</td>
+<td>@Duvet05</td>
+<td>Find clinical trials with multiple output formats</td>
+</tr>
+</tbody>
+</table>
+<h3 id="institutions-represented">Institutions represented<a class="headerlink" href="#institutions-represented" title="Permanent link">&para;</a></h3>
+<p>Imperial College London, King's College London, The Crick Institute, UCL, QMUL, University of Westminster, Brunel University, PUCP Peru, FinalDose.ai, Canos.ai, Vivid-Dx, Flow.bio, FLock.io, Valink Tx, Inforcer</p>
+<h3 id="watch-the-recording">Watch the recording<a class="headerlink" href="#watch-the-recording" title="Permanent link">&para;</a></h3>
+<div style="text-align: center; margin: 1.5rem 0;">
+<iframe width="100%" height="450" src="https://www.youtube.com/embed/HofzUH7pmQM" title="ClawBio Hackathon #1: Agentic Genomics | Imperial College London" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 12px; max-width: 800px;"></iframe>
+</div>
+
+<p>Organised by <strong>Jay Moore</strong> (Imperial), <strong>Manuel Corpas</strong> (Westminster), <strong>Nathan Skene</strong> (Imperial), and <strong>Josh Beale</strong>.</p>
+<hr />
+<h2 id="join-the-next-one">Join the next one<a class="headerlink" href="#join-the-next-one" title="Permanent link">&para;</a></h2>
+<p>We are planning more hackathons in 2026. To get notified:</p>
+<ul>
+<li>Join <a href="https://discord.gg/EEp4Neaz">Discord</a></li>
+<li>Follow <a href="https://github.com/ClawBio/ClawBio">ClawBio on GitHub</a> (star and watch)</li>
+<li>Check <a href="https://luma.com/clawbio">Luma</a> for event announcements</li>
+</ul>
+<p>Want to host a ClawBio hackathon at your institution? <a href="https://github.com/ClawBio/ClawBio/issues">Open an issue</a> or reach out on Discord.</p>
+<hr />
+<h2 id="hackathon-guide">Hackathon Guide<a class="headerlink" href="#hackathon-guide" title="Permanent link">&para;</a></h2>
+<p>Everything below is the reusable guide for participating in any ClawBio hackathon. It covers setup, skill building, and submission.</p>
+<hr />
+<h3 id="the-problem">The Problem<a class="headerlink" href="#the-problem" title="Permanent link">&para;</a></h3>
+<p>Modern bioinformatics knowledge is fragmented across papers, scripts, and private pipelines. Reproducing even simple analyses often requires reconstructing hidden decisions from incomplete documentation. Only about 1 in 4 computational biology papers can be reproduced without contacting the authors (Garijo et al., PLOS ONE 2013; Collberg and Proebsting, 2016). Meanwhile, general-purpose LLMs hallucinate gene-drug associations, use outdated clinical guidelines, and produce results with no audit trail.</p>
+<h3 id="what-is-clawbio">What is ClawBio?<a class="headerlink" href="#what-is-clawbio" title="Permanent link">&para;</a></h3>
+<p>ClawBio proposes a different unit of knowledge: a <strong>skill</strong> that packages the code, the scientific assumptions, the test data, and the execution contract in one inspectable artefact.</p>
+<p>Each skill includes:</p>
+<ul>
+<li>A <strong>SKILL.md</strong> contract that explains the scientific decisions the tool makes (thresholds, databases, safety rules)</li>
+<li><strong>Demo data</strong> that anyone can run without their own files</li>
+<li>A <strong>Python script</strong> with <code>--input</code>, <code>--output</code>, and <code>--demo</code> flags</li>
+<li>A <strong>reproducibility bundle</strong>: <code>commands.sh</code>, <code>environment.yml</code>, and <code>checksums.sha256</code></li>
+</ul>
+<p>SKILL.md is not just documentation. It is the contract that tells humans and AI agents how the skill should be used, what assumptions it makes, and when it should refuse to run.</p>
+<hr />
+<h3 id="who-is-this-for">Who is this for?<a class="headerlink" href="#who-is-this-for" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>You are...</th>
+<th>You already know</th>
+<th>You do not need to know</th>
+<th>Good first project</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AI / software engineer</strong></td>
+<td>APIs, Python, automation</td>
+<td>Any biology or genomics</td>
+<td><a href="projects/pubmed-summariser/">PubMed Summariser</a>, <a href="projects/clinical-trial-finder/">Clinical Trial Finder</a></td>
+</tr>
+<tr>
+<td><strong>Genomics researcher</strong></td>
+<td>VCFs, pipelines, domain expertise</td>
+<td>Agentic AI or SKILL.md</td>
+<td><a href="projects/variant-annotation/">Variant Annotation</a>, <a href="projects/qc-report/">QC Report</a></td>
+</tr>
+<tr>
+<td><strong>Proteomics / multi-omics</strong></td>
+<td>Mass spec, protein databases</td>
+<td>ClawBio (no skills exist yet)</td>
+<td><a href="projects/protein-interaction/">Protein Interaction Mapper</a>, <a href="projects/protein-domain/">Protein Domain Annotator</a></td>
+</tr>
+<tr>
+<td><strong>Clinical / diagnostics</strong></td>
+<td>Variant classification, PGx</td>
+<td>Agent frameworks</td>
+<td><a href="projects/pgx-interaction-checker/">PGx Interaction Checker</a></td>
+</tr>
+<tr>
+<td><strong>Epidemiology / public health</strong></td>
+<td>Population data, outbreak analysis</td>
+<td>Python scripting (helpers available)</td>
+<td><a href="projects/vaccine-equity/">Vaccine Equity Scorer</a>, <a href="projects/gbd-visualiser/">GBD Visualiser</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="quick-path">Quick Path<a class="headerlink" href="#quick-path" title="Permanent link">&para;</a></h3>
+<div class="tutorial-cards">
+
+<a class="tutorial-card" href="setup/">
+  <div class="tutorial-card__header">
+    <span class="tutorial-card__number">01</span>
+    <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
+    <span class="time-estimate">10 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Setup</h3>
+  <p class="tutorial-card__desc">Clone repo, install dependencies, run a demo.</p>
+</a>
+
+<a class="tutorial-card" href="first-skill/">
+  <div class="tutorial-card__header">
+    <span class="tutorial-card__number">02</span>
+    <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
+    <span class="time-estimate">20 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Your First Skill</h3>
+  <p class="tutorial-card__desc">Scaffold a skill, write SKILL.md, add demo data.</p>
+</a>
+
+<a class="tutorial-card" href="add-python/">
+  <div class="tutorial-card__header">
+    <span class="tutorial-card__number">03</span>
+    <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
+    <span class="time-estimate">20 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Add Python</h3>
+  <p class="tutorial-card__desc">Implement the skill logic with a CLI endpoint.</p>
+</a>
+
+<a class="tutorial-card" href="submit/">
+  <div class="tutorial-card__header">
+    <span class="tutorial-card__number">04</span>
+    <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
+    <span class="time-estimate">10 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Test and Submit</h3>
+  <p class="tutorial-card__desc">Validate, test, open a PR.</p>
+</a>
+
+</div>
+
+<p>Most participants submit their first skill in <strong>90 to 120 minutes</strong>. First-time Git or GitHub users should allow extra time; helpers will be available throughout.</p>
+<p><strong>Starter template</strong>: copy <code>templates/SKILL-TEMPLATE.md</code> into your skill directory to get the correct structure immediately. See <a href="first-skill/">Your First Skill</a> for the full walkthrough.</p>
+<p><strong>Example completed skill</strong>: see the <a href="https://github.com/ClawBio/ClawBio/pull/1">NutriGx Advisor PR</a> by @drdaviddelorenzo, the first community contribution.</p>
+<hr />
+<h3 id="what-counts-as-a-successful-submission">What counts as a successful submission?<a class="headerlink" href="#what-counts-as-a-successful-submission" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] One new skill directory under <code>skills/</code></li>
+<li>[ ] A <code>SKILL.md</code> with frontmatter (name, version, inputs, outputs) and three body sections (Domain Decisions, Safety Rules, Agent Boundary)</li>
+<li>[ ] Synthetic demo data (never real patient data)</li>
+<li>[ ] A runnable <code>--demo</code> command that produces output</li>
+<li>[ ] A pull request to <a href="https://github.com/ClawBio/ClawBio">github.com/ClawBio/ClawBio</a></li>
+</ul>
+<p>That is it. A focused, well-documented skill with clear domain decisions is better than an ambitious but incomplete one.</p>
+<hr />
+<h3 id="three-themes">Three Themes<a class="headerlink" href="#three-themes" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Gaps in genomics tools</strong>: What analyses are still manual, brittle, or unreproducible? Build a skill that fills one of those gaps.</li>
+<li><strong>Trustworthy agentic approaches</strong>: How do we make AI agents safe for biology? Encode domain decisions and safety rules into SKILL.md so agents execute with proven logic, not hallucinations.</li>
+<li><strong>Accessible complexity</strong>: Genomics data is vast and complex. Build skills that present results so clearly that a non-specialist can act on them.</li>
+</ol>
+<hr />
+<h3 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h3>
+<p>Two guided tutorials are available to get you started. Both paths converge at the same goal: a working skill you can submit as a PR.</p>
+<div class="tutorial-cards">
+
+<a class="tutorial-card" href="agentic-tools/">
+  <div class="tutorial-card__header">
+    <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
+    <span class="time-estimate">15 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Agentic Tools Tutorial</h3>
+  <p class="tutorial-card__desc">How AI coding agents work, setup options (GitHub Copilot, Claude Code, OpenCode), your first AI-assisted analysis, and context management tips.</p>
+</a>
+
+<a class="tutorial-card" href="setup/">
+  <div class="tutorial-card__header">
+    <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
+    <span class="time-estimate">10 min</span>
+  </div>
+  <h3 class="tutorial-card__title">ClawBio Setup</h3>
+  <p class="tutorial-card__desc">Clone ClawBio, run a demo skill, then build your own following the step-by-step guide.</p>
+</a>
+
+</div>
+
+<hr />
+<h3 id="pre-event-setup">Pre-event setup<a class="headerlink" href="#pre-event-setup" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Clone the repo and run a demo</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ClawBio/ClawBio.git
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">cd</span><span class="w"> </span>ClawBio
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>pip3<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>python3<span class="w"> </span>skills/pharmgx-reporter/pharmgx_reporter.py<span class="w"> </span>--demo
+</code></pre></div>
+<p>To submit your work you will need the <strong>GitHub CLI</strong> (<code>gh</code>). Install it if you don't have it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>brew<span class="w"> </span>install<span class="w"> </span>gh<span class="w">          </span><span class="c1"># macOS</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gh<span class="w">      </span><span class="c1"># Debian / Ubuntu</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>winget<span class="w"> </span>install<span class="w"> </span>GitHub.cli<span class="w"> </span><span class="c1"># Windows</span>
+</code></pre></div>
+<p>Then authenticate: <code>gh auth login</code></p>
+<p>If you prefer not to install <code>gh</code>, you can submit your PR through the GitHub web interface instead. Both routes are covered in the <a href="submit/">Submit</a> guide.</p>
+<hr />
+<h3 id="choose-your-track">Choose Your Track<a class="headerlink" href="#choose-your-track" title="Permanent link">&para;</a></h3>
+<p>We have attendees ranging from AI agent engineers with no genomics background to researchers with 40+ years in computational biology. Pick the track that fits you. Each project is labelled as a <strong>90-minute build</strong> (achievable in the afternoon) or a <strong>stretch build</strong> (ambitious, likely a prototype).</p>
+<h4 id="track-a-ai-engineers-new-to-genomics">Track A: AI Engineers New to Genomics<a class="headerlink" href="#track-a-ai-engineers-new-to-genomics" title="Permanent link">&para;</a></h4>
+<p>You build agents, automation, and APIs professionally. You just haven't touched genomic data before. These skills let you apply your engineering strengths to biology using public APIs, no wet-lab knowledge required.</p>
+<p><strong>90-minute builds:</strong></p>
+<ul>
+<li><a href="projects/pubmed-summariser/">PubMed Research Summariser</a></li>
+<li><a href="projects/clinical-trial-finder/">Clinical Trial Finder</a></li>
+<li><a href="projects/variant-frequency/">Variant Frequency Dashboard</a></li>
+<li><a href="projects/protein-domain/">Protein Domain Annotator</a></li>
+</ul>
+<p><strong>Stretch builds:</strong></p>
+<ul>
+<li><a href="projects/drug-label-parser/">Drug Label Parser</a></li>
+<li><a href="projects/multi-db-aggregator/">Multi-Database Aggregator</a></li>
+</ul>
+<h4 id="track-b-genomics-researchers-new-to-agentic-ai">Track B: Genomics Researchers New to Agentic AI<a class="headerlink" href="#track-b-genomics-researchers-new-to-agentic-ai" title="Permanent link">&para;</a></h4>
+<p>You work with genomic data daily. Wrap your existing expertise into a skill.</p>
+<p><strong>90-minute builds:</strong></p>
+<ul>
+<li><a href="projects/qc-report/">QC Report Generator</a></li>
+<li><a href="projects/gene-set-enrichment/">Gene Set Enrichment</a></li>
+<li><a href="projects/de-wrapper/">Differential Expression Wrapper</a></li>
+</ul>
+<p><strong>Stretch builds:</strong></p>
+<ul>
+<li><a href="projects/variant-annotation/">Variant Annotation Pipeline</a></li>
+<li><a href="projects/cell-type-annotator/">Single-Cell Cluster Annotator</a></li>
+</ul>
+<h4 id="track-c-proteomics-and-multi-omics">Track C: Proteomics and Multi-Omics<a class="headerlink" href="#track-c-proteomics-and-multi-omics" title="Permanent link">&para;</a></h4>
+<p>ClawBio currently has zero proteomics skills. Build the first one.</p>
+<p><strong>90-minute builds:</strong></p>
+<ul>
+<li><a href="projects/protein-interaction/">Protein Interaction Mapper</a></li>
+<li><a href="projects/protein-domain/">Protein Domain Annotator</a></li>
+</ul>
+<p><strong>Stretch builds:</strong></p>
+<ul>
+<li><a href="projects/mass-spec-qc/">Mass Spec QC Skill</a></li>
+<li><a href="projects/phospho-enricher/">Phosphoproteomics Enricher</a></li>
+</ul>
+<h4 id="track-d-clinical-and-diagnostic-applications">Track D: Clinical and Diagnostic Applications<a class="headerlink" href="#track-d-clinical-and-diagnostic-applications" title="Permanent link">&para;</a></h4>
+<p><strong>All clinical track outputs are educational prototypes only. They must not be used for clinical decision-making or patient management.</strong></p>
+<p><strong>90-minute builds:</strong></p>
+<ul>
+<li><a href="projects/pgx-interaction-checker/">Pharmacogenomics Interaction Checker</a></li>
+</ul>
+<p><strong>Stretch builds:</strong></p>
+<ul>
+<li><a href="projects/acmg-classifier/">ACMG Variant Classifier</a></li>
+<li><a href="projects/diagnostic-yield/">Diagnostic Yield Calculator</a></li>
+<li><a href="projects/tmb-calculator/">Tumour Mutational Burden</a></li>
+</ul>
+<h4 id="track-e-epidemiology-and-public-health">Track E: Epidemiology and Public Health<a class="headerlink" href="#track-e-epidemiology-and-public-health" title="Permanent link">&para;</a></h4>
+<p><strong>90-minute builds:</strong></p>
+<ul>
+<li><a href="projects/vaccine-equity/">Vaccine Equity Scorer</a></li>
+<li><a href="projects/gbd-visualiser/">GBD Disease Burden Visualiser</a></li>
+</ul>
+<p><strong>Stretch builds:</strong></p>
+<ul>
+<li><a href="projects/outbreak-clusterer/">Outbreak Phylogenetic Clusterer</a></li>
+<li><a href="projects/amr-profiler/">Antimicrobial Resistance Profiler</a></li>
+</ul>
+<hr />
+<h3 id="judging-criteria">Judging Criteria<a class="headerlink" href="#judging-criteria" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Domain correctness</td>
+<td>40%</td>
+</tr>
+<tr>
+<td>Reproducibility</td>
+<td>25%</td>
+</tr>
+<tr>
+<td>Usefulness</td>
+<td>20%</td>
+</tr>
+<tr>
+<td>Code quality</td>
+<td>15%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="communication">Communication<a class="headerlink" href="#communication" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Primary channel</strong>: <a href="https://discord.gg/EEp4Neaz">Discord</a> for technical help, PR reviews, and community</li>
+<li><strong>GitHub</strong>: <a href="https://github.com/ClawBio/ClawBio/discussions">ClawBio/ClawBio Discussions</a> for skill proposals and longer-form questions</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../contributing/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Contributing">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Contributing
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="setup/" class="md-footer__link md-footer__link--next" aria-label="Next: Setup">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Setup
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026 ClawBio — Research and educational tool. Not a medical device.
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/ClawBio/ClawBio" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/clawbio" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M492.5 69.8c-.2-.3-.4-.6-.8-.7-38.1-17.5-78.4-30-119.7-37.1-.4-.1-.8 0-1.1.1s-.6.4-.8.8c-5.5 9.9-10.5 20.2-14.9 30.6-44.6-6.8-89.9-6.8-134.4 0-4.5-10.5-9.5-20.7-15.1-30.6-.2-.3-.5-.6-.8-.8s-.7-.2-1.1-.2C162.5 39 122.2 51.5 84.1 69c-.3.1-.6.4-.8.7C7.1 183.5-13.8 294.6-3.6 404.2c0 .3.1.5.2.8s.3.4.5.6c44.4 32.9 94 58 146.8 74.2.4.1.8.1 1.1 0s.7-.4.9-.7c11.3-15.4 21.4-31.8 30-48.8.1-.2.2-.5.2-.8s0-.5-.1-.8-.2-.5-.4-.6-.4-.3-.7-.4c-15.8-6.1-31.2-13.4-45.9-21.9-.3-.2-.5-.4-.7-.6s-.3-.6-.3-.9 0-.6.2-.9.3-.5.6-.7c3.1-2.3 6.2-4.7 9.1-7.1.3-.2.6-.4.9-.4s.7 0 1 .1c96.2 43.9 200.4 43.9 295.5 0 .3-.1.7-.2 1-.2s.7.2.9.4c2.9 2.4 6 4.9 9.1 7.2.2.2.4.4.6.7s.2.6.2.9-.1.6-.3.9-.4.5-.6.6c-14.7 8.6-30 15.9-45.9 21.8-.2.1-.5.2-.7.4s-.3.4-.4.7-.1.5-.1.8.1.5.2.8c8.8 17 18.8 33.3 30 48.8.2.3.6.6.9.7s.8.1 1.1 0c52.9-16.2 102.6-41.3 147.1-74.2.2-.2.4-.4.5-.6s.2-.5.2-.8c12.3-126.8-20.5-236.9-86.9-334.5zm-302 267.7c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.4 59.2-52.8 59.2m195.4 0c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.2 59.2-52.8 59.2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.footer", "search.suggest", "content.code.copy", "header.autohide"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

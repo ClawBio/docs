@@ -1,0 +1,3740 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Annotate a real human genome with ClawBio in Google Colab. No installation, no terminal, no prior experience required.">
+      
+      
+        <meta name="author" content="Manuel Corpas">
+      
+      
+        <link rel="canonical" href="https://docs.clawbio.ai/tutorials/variant-interpretation-workshop/">
+      
+      
+        <link rel="prev" href="../telegram-bot/">
+      
+      
+        <link rel="next" href="../30x-wgs-workshop/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Variant Interpretation Workshop - ClawBio Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/clawbio.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ClawBio Documentation">
+  <meta property="og:title" content="Variant Interpretation Workshop - ClawBio">
+  <meta property="og:description" content="Technical documentation, tutorials, and research for ClawBio, the bioinformatics-native AI agent skill library.">
+  <meta property="og:image" content="https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=1200,height=630/event-covers/ue/48e9b48f-4f12-493c-8740-d1b7fe78b6ff.png">
+  <meta property="og:url" content="https://docs.clawbio.ai/tutorials/variant-interpretation-workshop/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Variant Interpretation Workshop - ClawBio">
+  <meta name="twitter:description" content="Technical documentation, tutorials, and research for ClawBio, the bioinformatics-native AI agent skill library.">
+  <meta name="twitter:image" content="https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=1200,height=630/event-covers/ue/48e9b48f-4f12-493c-8740-d1b7fe78b6ff.png">
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="clawbio" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#variant-interpretation-workshop" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ClawBio Documentation" class="md-header__button md-logo" aria-label="ClawBio Documentation" data-md-component="logo">
+      
+  <img src="../../assets/clawbio-logo.jpeg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ClawBio Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Variant Interpretation Workshop
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="clawbio" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="green"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ClawBio/ClawBio" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ClawBio/ClawBio
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../skills/" class="md-tabs__link">
+          
+  
+  
+  Skills
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../research/" class="md-tabs__link">
+          
+  
+  
+  Research
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../deployment/" class="md-tabs__link">
+          
+  
+  
+  Deployment
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/skillmd-spec/" class="md-tabs__link">
+          
+  
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../hackathon/" class="md-tabs__link">
+          
+  
+  
+  Hackathon
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ClawBio Documentation" class="md-nav__button md-logo" aria-label="ClawBio Documentation" data-md-component="logo">
+      
+  <img src="../../assets/clawbio-logo.jpeg" alt="logo">
+
+    </a>
+    ClawBio Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ClawBio/ClawBio" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ClawBio/ClawBio
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skills
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Skills
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../skills/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skill Library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../skills/pharmgx-reporter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PharmGx Reporter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../skills/scrna-orchestrator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    scRNA Orchestrator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../skills/equity-scorer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Equity Scorer (HEIM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../skills/nutrigx-advisor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NutriGx Advisor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../skills/genome-compare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Genome Compare
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../skills/gwas-prs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GWAS PRS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../skills/gwas-lookup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GWAS Lookup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../skills/galaxy-bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galaxy Bridge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../skills/rnaseq-de/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RNA-seq DE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../penguins-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Penguins Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../journal-club-slides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Journal Club Slides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../single-cell-portal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Single Cell Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../context-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extras
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Extras
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rules and Memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github-education/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Education
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../making-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building Custom Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tmux-sessions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    tmux Sessions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ClawBio
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ClawBio
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../run-your-first-skill/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Run Your First Skill
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../build-a-skill/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build a Skill
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../telegram-bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Telegram Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variant Interpretation Workshop
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variant Interpretation Workshop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#part-1-what-is-clawbio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 1: What is ClawBio?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 1: What is ClawBio?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-short-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The short version
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-problem-it-solves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The problem it solves
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-uses-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who uses it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-2-background-you-need-for-this-workshop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 2: Background you need for this workshop
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2: Background you need for this workshop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-genomic-variation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is genomic variation?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-are-variants-classified" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How are variants classified?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-the-annotation-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is the annotation pipeline?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-pharmacogenomics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is pharmacogenomics?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-equity-problem-in-genomics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The equity problem in genomics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-genome-we-are-analysing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The genome we are analysing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-3-how-to-run-the-workshop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 3: How to run the workshop
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 3: How to run the workshop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-you-need" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you need
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opening-the-notebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opening the notebook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step guide
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step-by-step guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-0-setup-2-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 0: Setup (2 minutes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-explore-the-genome-5-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Explore the genome (5 minutes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-select-clinically-relevant-variants-3-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Select clinically relevant variants (3 minutes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-run-the-variant-annotation-5-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Run the variant annotation (5 minutes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-pharmacogenomic-interpretation-5-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Pharmacogenomic interpretation (5 minutes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-exercises-15-minutes-independent-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Exercises (15 minutes, independent work)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-4-understanding-your-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 4: Understanding your results
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 4: Understanding your results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#priority-tiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Priority tiers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-findings-explained" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key findings explained
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key findings explained">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#factor-v-leiden-rs6025-tier-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factor V Leiden (rs6025): Tier 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hfe-c282y-rs1800562-tier-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HFE C282Y (rs1800562): Tier 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cftr-deltaf508-rs113993960-tier-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CFTR deltaF508 (rs113993960): Tier 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#warfarin-sensitivity-cyp2c9-vkorc1-tier-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Warfarin sensitivity (CYP2C9 + VKORC1): Tier 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apoe-e3e4-rs429358-rs7412-risk-factor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APOE e3/e4 (rs429358 + rs7412): Risk factor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mthfr-c677t-rs1801133-tier-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MTHFR C677T (rs1801133): Tier 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reading-the-output-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading the output table
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-5-take-home-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 5: Take-home messages
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links-and-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Links and references
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Links and references">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workshop-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workshop resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#databases-used-in-this-workshop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Databases used in this workshop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-papers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key papers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../30x-wgs-workshop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30x WGS Workshop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../research/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../research/genomebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Genomebook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deployment
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deployment/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deployment/railway/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Railway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deployment/private-cloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Private Cloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/skillmd-spec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SKILL.md Spec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hackathon
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hackathon
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hackathon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hackathon/setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hackathon/first-skill/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build a Skill
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hackathon/add-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hackathon/submit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Submit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hackathon/agentic-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agentic Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#part-1-what-is-clawbio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 1: What is ClawBio?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 1: What is ClawBio?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-short-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The short version
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-problem-it-solves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The problem it solves
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-uses-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who uses it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-2-background-you-need-for-this-workshop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 2: Background you need for this workshop
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2: Background you need for this workshop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-genomic-variation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is genomic variation?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-are-variants-classified" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How are variants classified?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-the-annotation-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is the annotation pipeline?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-pharmacogenomics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is pharmacogenomics?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-equity-problem-in-genomics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The equity problem in genomics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-genome-we-are-analysing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The genome we are analysing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-3-how-to-run-the-workshop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 3: How to run the workshop
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 3: How to run the workshop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-you-need" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you need
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opening-the-notebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opening the notebook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step guide
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step-by-step guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-0-setup-2-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 0: Setup (2 minutes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-explore-the-genome-5-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Explore the genome (5 minutes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-select-clinically-relevant-variants-3-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Select clinically relevant variants (3 minutes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-run-the-variant-annotation-5-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Run the variant annotation (5 minutes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-pharmacogenomic-interpretation-5-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Pharmacogenomic interpretation (5 minutes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-exercises-15-minutes-independent-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Exercises (15 minutes, independent work)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-4-understanding-your-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 4: Understanding your results
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 4: Understanding your results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#priority-tiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Priority tiers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-findings-explained" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key findings explained
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key findings explained">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#factor-v-leiden-rs6025-tier-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factor V Leiden (rs6025): Tier 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hfe-c282y-rs1800562-tier-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HFE C282Y (rs1800562): Tier 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cftr-deltaf508-rs113993960-tier-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CFTR deltaF508 (rs113993960): Tier 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#warfarin-sensitivity-cyp2c9-vkorc1-tier-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Warfarin sensitivity (CYP2C9 + VKORC1): Tier 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apoe-e3e4-rs429358-rs7412-risk-factor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APOE e3/e4 (rs429358 + rs7412): Risk factor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mthfr-c677t-rs1801133-tier-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MTHFR C677T (rs1801133): Tier 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reading-the-output-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading the output table
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-5-take-home-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 5: Take-home messages
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links-and-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Links and references
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Links and references">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workshop-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workshop resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#databases-used-in-this-workshop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Databases used in this workshop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-papers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key papers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="variant-interpretation-workshop">Variant Interpretation Workshop<a class="headerlink" href="#variant-interpretation-workshop" title="Permanent link">&para;</a></h1>
+<div class="tutorial-card__header">
+  <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
+  <span class="time-estimate">~60 min</span>
+</div>
+
+<p><strong>No installation. No terminal. No prior experience required.</strong> Everything runs in your browser via Google Colab. All you need is a Google account.</p>
+<p><a class="md-button md-button--primary" href="https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-variant-interpretation.ipynb">:material-open-in-new: Launch the workshop in Google Colab</a>
+<a class="md-button" href="https://clawbio.ai/workshop-slides.html">:material-presentation-play: View introductory slides</a></p>
+<hr />
+<h2 id="part-1-what-is-clawbio">Part 1: What is ClawBio?<a class="headerlink" href="#part-1-what-is-clawbio" title="Permanent link">&para;</a></h2>
+<h3 id="the-short-version">The short version<a class="headerlink" href="#the-short-version" title="Permanent link">&para;</a></h3>
+<p>ClawBio is an open-source toolkit that uses AI to automate genomic analysis. You give it genetic data, it runs the analysis, and you get a structured report. No bioinformatics experience needed to get started.</p>
+<h3 id="the-problem-it-solves">The problem it solves<a class="headerlink" href="#the-problem-it-solves" title="Permanent link">&para;</a></h3>
+<p>Interpreting a person's genome today involves a chain of manual steps: downloading specialist software, configuring databases, submitting queries to web APIs, parsing raw output files, and cross-referencing results across multiple sources. Each step requires a different tool, different expertise, and different file formats. A single analysis can take hours or days.</p>
+<p>Meanwhile, AI language models (like ChatGPT or Claude) can answer genomics questions, but they frequently make things up. They invent gene-drug associations that do not exist, cite retracted papers, and produce star-allele calls with no basis in evidence. In clinical genomics, hallucinated results are dangerous.</p>
+<p>ClawBio bridges that gap:</p>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>How ClawBio solves it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Manual pipelines are slow and error-prone</td>
+<td>Each analysis is packaged as a one-click "skill" with built-in demo data</td>
+</tr>
+<tr>
+<td>AI hallucinates biology</td>
+<td>Every skill is grounded in published databases (ClinVar, CPIC, gnomAD), not language model guesses</td>
+</tr>
+<tr>
+<td>Reproducibility is broken</td>
+<td>Every run produces a reproducibility bundle (exact commands, checksums, versions)</td>
+</tr>
+<tr>
+<td>Genetic data is sensitive</td>
+<td>All processing happens on your machine (or your Colab session). Nothing is uploaded to ClawBio servers.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-uses-it">Who uses it<a class="headerlink" href="#who-uses-it" title="Permanent link">&para;</a></h3>
+<p>ClawBio is used by students, researchers, and bioinformaticians. It is open-source (MIT licence), free, and has a growing community:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GitHub stars</strong></td>
+<td>488</td>
+</tr>
+<tr>
+<td><strong>Forks</strong></td>
+<td>85</td>
+</tr>
+<tr>
+<td><strong>Available skills</strong></td>
+<td>39 (variant annotation, pharmacogenomics, GWAS, single-cell RNA-seq, equity scoring, and more)</td>
+</tr>
+<tr>
+<td><strong>Contributors</strong></td>
+<td>13</td>
+</tr>
+</tbody>
+</table>
+<p>The project launched in January 2026 and has been used at hackathons (Imperial College, DoraHacks), university courses (Westminster, UCL), and research labs.</p>
+<hr />
+<h2 id="part-2-background-you-need-for-this-workshop">Part 2: Background you need for this workshop<a class="headerlink" href="#part-2-background-you-need-for-this-workshop" title="Permanent link">&para;</a></h2>
+<p>You do not need to memorise any of this before starting the practical. Read through it once so the terms are familiar, then refer back as you work through the notebook.</p>
+<h3 id="what-is-genomic-variation">What is genomic variation?<a class="headerlink" href="#what-is-genomic-variation" title="Permanent link">&para;</a></h3>
+<p>Every person's DNA differs from the "reference genome" at about 4 to 5 million positions. These differences are called variants. The most common type is a single nucleotide polymorphism (SNP): one DNA letter changed to another (e.g., A to G at a specific position).</p>
+<p>Most variants have no effect on health. A small number affect how proteins work, how drugs are metabolised, or whether someone is at risk for a disease. The challenge is finding the important ones.</p>
+<h3 id="how-are-variants-classified">How are variants classified?<a class="headerlink" href="#how-are-variants-classified" title="Permanent link">&para;</a></h3>
+<p>The American College of Medical Genetics and Genomics (ACMG) uses five categories:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>What it means</th>
+<th>What happens clinically</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pathogenic</strong></td>
+<td>This variant causes or strongly contributes to disease</td>
+<td>Reported to patient. Genetic counselling offered.</td>
+</tr>
+<tr>
+<td><strong>Likely pathogenic</strong></td>
+<td>Strong evidence, but not conclusive</td>
+<td>Reported with a caveat that evidence is still accumulating.</td>
+</tr>
+<tr>
+<td><strong>VUS</strong> (Variant of Uncertain Significance)</td>
+<td>Not enough evidence to say whether it matters</td>
+<td><strong>Not acted upon.</strong> May be reclassified as more data becomes available.</td>
+</tr>
+<tr>
+<td><strong>Likely benign</strong></td>
+<td>Probably does not affect health</td>
+<td>Usually not reported.</td>
+</tr>
+<tr>
+<td><strong>Benign</strong></td>
+<td>Definitively does not cause disease</td>
+<td>Not reported.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">More than half of all known variants are VUS</p>
+<p>The classification backlog is enormous and growing. "We don't know yet" is often the most honest answer in genomics. This is true for humans and AI alike.</p>
+</div>
+<h3 id="what-is-the-annotation-pipeline">What is the annotation pipeline?<a class="headerlink" href="#what-is-the-annotation-pipeline" title="Permanent link">&para;</a></h3>
+<p>When you have a list of variants (in a file called a VCF), you need to find out what each one does. The standard pipeline is:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Your variants (VCF file)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    |
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    v
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>VEP (Ensembl Variant Effect Predictor)
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    --&gt; What gene is affected? What type of change? (missense, synonymous, frameshift...)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    |
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    v
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>ClinVar (NCBI clinical database)
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    --&gt; Has this variant been seen in patients? Is it pathogenic?
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    |
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    v
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>gnomAD (population frequency database)
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    --&gt; How common is this variant across 76,000+ genomes?
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    |
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    v
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>ACMG classification
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    --&gt; Combining all evidence: Pathogenic / Likely pathogenic / VUS / Likely benign / Benign
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    |
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    v
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>Report
+</code></pre></div>
+<p>In this workshop, ClawBio runs this entire pipeline for you in one step.</p>
+<h3 id="what-is-pharmacogenomics">What is pharmacogenomics?<a class="headerlink" href="#what-is-pharmacogenomics" title="Permanent link">&para;</a></h3>
+<p>Some genetic variants change how your body processes medications. This field is called pharmacogenomics (PGx). Knowing your PGx profile before starting a medication can prevent serious side effects.</p>
+<p>Key examples:</p>
+<table>
+<thead>
+<tr>
+<th>Gene</th>
+<th>What it affects</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CYP2D6</strong></td>
+<td>Codeine, tamoxifen, antidepressants (51 drugs total)</td>
+<td>"Poor metabolisers" get zero pain relief from codeine because they cannot convert it to morphine</td>
+</tr>
+<tr>
+<td><strong>CYP2C19</strong></td>
+<td>Clopidogrel (blood thinner), stomach acid drugs</td>
+<td>"Poor metabolisers" on clopidogrel remain at full stroke/heart attack risk because the drug is not activated</td>
+</tr>
+<tr>
+<td><strong>CYP2C9 + VKORC1</strong></td>
+<td>Warfarin (blood thinner)</td>
+<td>Wrong dose causes dangerous bleeding (too much) or blood clots (too little). Dosing depends on both genes together.</td>
+</tr>
+<tr>
+<td><strong>TPMT</strong></td>
+<td>Azathioprine (immunosuppressant)</td>
+<td>"Poor metabolisers" suffer life-threatening bone marrow suppression at standard doses</td>
+</tr>
+<tr>
+<td><strong>DPYD</strong></td>
+<td>5-fluorouracil (chemotherapy)</td>
+<td>Deficiency can be fatal at standard chemo doses</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://cpicpgx.org/">CPIC</a> (Clinical Pharmacogenetics Implementation Consortium) publishes evidence-based guidelines that map genetic results to drug recommendations. ClawBio's skills implement these guidelines directly.</p>
+<h3 id="the-equity-problem-in-genomics">The equity problem in genomics<a class="headerlink" href="#the-equity-problem-in-genomics" title="Permanent link">&para;</a></h3>
+<p>Most genomic research has been conducted on people of European descent:</p>
+<ul>
+<li><strong>86%</strong> of genome-wide association study (GWAS) participants are European</li>
+<li>Databases have <strong>30 times more</strong> BRCA variant data for Europeans than for other populations</li>
+<li>Polygenic risk scores (genetic risk predictions) lose up to <strong>80% accuracy</strong> in non-European populations</li>
+</ul>
+<p>This means a variant that looks "benign" in current databases may simply be unstudied in the relevant population. AI systems trained on this biased data amplify the problem rather than fixing it.</p>
+<h3 id="the-genome-we-are-analysing">The genome we are analysing<a class="headerlink" href="#the-genome-we-are-analysing" title="Permanent link">&para;</a></h3>
+<p>In this workshop, you will analyse the genome of Dr Manuel Corpas, published in 2013 under a CC0 (public domain) licence. It is one of the first fully open personal genomes.</p>
+<p>Real clinically relevant findings from this genome include:</p>
+<ul>
+<li><strong>Factor V Leiden</strong>: carrier for increased blood clotting risk</li>
+<li><strong>HFE C282Y</strong>: carrier for hereditary haemochromatosis (iron overload)</li>
+<li><strong>CFTR deltaF508</strong>: carrier for cystic fibrosis</li>
+<li><strong>VKORC1 + CYP2C9</strong>: warfarin sensitivity (standard dose is dangerous)</li>
+<li><strong>APOE e3/e4</strong>: elevated Alzheimer's disease risk factor</li>
+</ul>
+<blockquote>
+<p>Corpas, M. (2013). Crowdsourcing the Corpasome. <em>Source Code for Biology and Medicine</em>, <strong>8</strong>, 13. <a href="https://doi.org/10.1186/1751-0473-8-13">doi:10.1186/1751-0473-8-13</a></p>
+</blockquote>
+<hr />
+<h2 id="part-3-how-to-run-the-workshop">Part 3: How to run the workshop<a class="headerlink" href="#part-3-how-to-run-the-workshop" title="Permanent link">&para;</a></h2>
+<h3 id="what-you-need">What you need<a class="headerlink" href="#what-you-need" title="Permanent link">&para;</a></h3>
+<ul>
+<li>A <strong>Google account</strong> (any free Gmail account works)</li>
+<li>A <strong>web browser</strong> (Chrome, Firefox, or Safari)</li>
+<li>That is it. No software to install, no terminal commands, no API keys, no payment.</li>
+</ul>
+<h3 id="opening-the-notebook">Opening the notebook<a class="headerlink" href="#opening-the-notebook" title="Permanent link">&para;</a></h3>
+<p>Click the button below to open the workshop notebook in Google Colab:</p>
+<p><a class="md-button md-button--primary" href="https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-variant-interpretation.ipynb">:material-open-in-new: Launch in Google Colab</a></p>
+<p>When it opens, you will see a document with text blocks and code blocks. Code blocks have a <strong>play button</strong> on the left. Click the play button to run each block in order, from top to bottom.</p>
+<div class="admonition tip">
+<p class="admonition-title">First time using Google Colab?</p>
+<p>Google Colab is a free service that lets you run Python code in your browser. You do not need to know Python. Just click the play button on each code cell and read the output. If Colab asks you to "connect to a runtime", click <strong>Connect</strong> in the top right corner.</p>
+</div>
+<h3 id="step-by-step-guide">Step-by-step guide<a class="headerlink" href="#step-by-step-guide" title="Permanent link">&para;</a></h3>
+<h4 id="step-0-setup-2-minutes">Step 0: Setup (2 minutes)<a class="headerlink" href="#step-0-setup-2-minutes" title="Permanent link">&para;</a></h4>
+<p>Run the first two code cells. They will:</p>
+<ol>
+<li>Download the ClawBio toolkit (takes ~15 seconds)</li>
+<li>Install the required analysis libraries</li>
+</ol>
+<p>You should see:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ClawBio loaded successfully
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Skills available: 39
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">If something goes wrong</p>
+<p>If you see an error, click <strong>Runtime &gt; Restart and run all</strong> in the Colab menu bar. This resets everything and runs all cells from the beginning.</p>
+</div>
+<h4 id="step-1-explore-the-genome-5-minutes">Step 1: Explore the genome (5 minutes)<a class="headerlink" href="#step-1-explore-the-genome-5-minutes" title="Permanent link">&para;</a></h4>
+<p>The notebook loads the Corpasome (Manuel Corpas's 23andMe genotype file). You will see:</p>
+<ul>
+<li>The file contains approximately <strong>600,000 SNPs</strong></li>
+<li>Each line has four columns: rsID (variant name), chromosome, position, genotype</li>
+<li>A table showing how many variants are on each chromosome (chromosome 1 has the most because it is the largest)</li>
+</ul>
+<h4 id="step-2-select-clinically-relevant-variants-3-minutes">Step 2: Select clinically relevant variants (3 minutes)<a class="headerlink" href="#step-2-select-clinically-relevant-variants-3-minutes" title="Permanent link">&para;</a></h4>
+<p>Out of 600,000 variants, the notebook extracts <strong>21 that are known to be clinically important</strong>. These include variants in genes for:</p>
+<ul>
+<li>Drug metabolism (CYP2C19, CYP2D6, CYP2C9, VKORC1, TPMT, MTHFR)</li>
+<li>Cancer risk (BRCA1, TP53)</li>
+<li>Blood clotting (Factor V, Prothrombin)</li>
+<li>Iron metabolism (HFE)</li>
+<li>Cystic fibrosis (CFTR)</li>
+<li>Alzheimer's risk (APOE)</li>
+</ul>
+<p>The notebook converts these into VCF format, which is the standard input for genomic analysis tools.</p>
+<h4 id="step-3-run-the-variant-annotation-5-minutes">Step 3: Run the variant annotation (5 minutes)<a class="headerlink" href="#step-3-run-the-variant-annotation-5-minutes" title="Permanent link">&para;</a></h4>
+<p>This is the main analysis. The notebook sends the 21 variants to the Ensembl VEP API (a free, public service run by the European Bioinformatics Institute) and retrieves:</p>
+<ul>
+<li>What gene each variant is in</li>
+<li>What effect it has on the protein (missense, synonymous, etc.)</li>
+<li>Whether ClinVar has classified it (pathogenic, benign, VUS, drug response)</li>
+<li>How common it is across world populations (gnomAD frequency)</li>
+<li>A priority tier (Tier 1 = most clinically relevant, Tier 4 = benign)</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">No API key needed</p>
+<p>The Ensembl VEP REST API is free and public. ClawBio handles all the formatting and submission automatically. You just click the play button.</p>
+</div>
+<h4 id="step-4-pharmacogenomic-interpretation-5-minutes">Step 4: Pharmacogenomic interpretation (5 minutes)<a class="headerlink" href="#step-4-pharmacogenomic-interpretation-5-minutes" title="Permanent link">&para;</a></h4>
+<p>The notebook runs a second analysis focused on drug-gene interactions. It maps the variants to CPIC guideline recommendations: which drugs to avoid, which need dose adjustments, and which are safe at standard doses.</p>
+<p>The warfarin finding is the standout result (see "Understanding your results" below).</p>
+<h4 id="step-5-exercises-15-minutes-independent-work">Step 5: Exercises (15 minutes, independent work)<a class="headerlink" href="#step-5-exercises-15-minutes-independent-work" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Exercise</th>
+<th>What to do</th>
+<th>Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>5a</strong></td>
+<td>Run the analysis again on a different set of 20 synthetic variants (one click, using the <code>--demo</code> flag). Compare the findings with the Corpasome results.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>5b</strong></td>
+<td>If you have your own 23andMe or AncestryDNA file, upload it and analyse your own genome. Your data stays in the Colab session and is deleted when you close the tab.</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td><strong>5c</strong></td>
+<td>Pick one gene from the results. Look up its function, its ACMG classification, and its population frequency. Write a short paragraph: would you report this to a patient? Why or why not?</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="part-4-understanding-your-results">Part 4: Understanding your results<a class="headerlink" href="#part-4-understanding-your-results" title="Permanent link">&para;</a></h2>
+<h3 id="priority-tiers">Priority tiers<a class="headerlink" href="#priority-tiers" title="Permanent link">&para;</a></h3>
+<p>ClawBio assigns every variant a priority tier:</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>What it means</th>
+<th>Example from this workshop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tier 1</strong></td>
+<td>Pathogenic or likely pathogenic. Rare (less than 0.1% of the population). Highest clinical relevance.</td>
+<td>CFTR deltaF508: carrier for cystic fibrosis</td>
+</tr>
+<tr>
+<td><strong>Tier 2</strong></td>
+<td>Drug response variant or established risk factor. Actionable under CPIC guidelines.</td>
+<td>VKORC1 rs9923231 TT: warfarin high sensitivity</td>
+</tr>
+<tr>
+<td><strong>Tier 3</strong></td>
+<td>Variant of uncertain significance (VUS). Not enough evidence to classify.</td>
+<td>Rare missense variants with no ClinVar entry</td>
+</tr>
+<tr>
+<td><strong>Tier 4</strong></td>
+<td>Benign or likely benign. Common in the population (over 1%).</td>
+<td>MTHFR A1298C: common polymorphism</td>
+</tr>
+</tbody>
+</table>
+<h3 id="key-findings-explained">Key findings explained<a class="headerlink" href="#key-findings-explained" title="Permanent link">&para;</a></h3>
+<h4 id="factor-v-leiden-rs6025-tier-1">Factor V Leiden (rs6025): Tier 1<a class="headerlink" href="#factor-v-leiden-rs6025-tier-1" title="Permanent link">&para;</a></h4>
+<p><strong>What the result says:</strong> Heterozygous carrier (one copy of the variant).</p>
+<p><strong>What it means:</strong> Factor V is a protein involved in blood clotting. The Leiden variant makes the clotting system overactive, increasing the risk of deep vein thrombosis (blood clots) by 3 to 8 times.</p>
+<p><strong>Why it matters:</strong> About 5% of Europeans carry this variant. It is relevant for decisions about oral contraceptives (which also increase clotting risk), surgery planning, and advice about long-haul flights. Family members should be offered testing.</p>
+<h4 id="hfe-c282y-rs1800562-tier-1">HFE C282Y (rs1800562): Tier 1<a class="headerlink" href="#hfe-c282y-rs1800562-tier-1" title="Permanent link">&para;</a></h4>
+<p><strong>What the result says:</strong> Heterozygous carrier.</p>
+<p><strong>What it means:</strong> The HFE gene controls iron absorption. People with two copies of C282Y absorb too much iron, which accumulates in the liver, heart, and pancreas, causing serious organ damage (hereditary haemochromatosis). Carriers with one copy have mildly elevated iron but almost never develop the disease.</p>
+<p><strong>Why it matters:</strong> Simple blood tests (serum ferritin, transferrin saturation) can monitor iron levels. Early detection in homozygotes is life-saving because treatment (regular blood donation) is cheap and effective.</p>
+<h4 id="cftr-deltaf508-rs113993960-tier-1">CFTR deltaF508 (rs113993960): Tier 1<a class="headerlink" href="#cftr-deltaf508-rs113993960-tier-1" title="Permanent link">&para;</a></h4>
+<p><strong>What the result says:</strong> Heterozygous carrier.</p>
+<p><strong>What it means:</strong> CFTR mutations cause cystic fibrosis, a serious condition affecting the lungs and digestive system. You need two copies (one from each parent) to have the disease. Carriers with one copy are healthy. About 1 in 25 Europeans is a carrier.</p>
+<p><strong>Why it matters:</strong> Carrier status is relevant for family planning. If both partners carry a CFTR mutation, each child has a 25% chance of having cystic fibrosis. Partner testing is recommended.</p>
+<h4 id="warfarin-sensitivity-cyp2c9-vkorc1-tier-2">Warfarin sensitivity (CYP2C9 + VKORC1): Tier 2<a class="headerlink" href="#warfarin-sensitivity-cyp2c9-vkorc1-tier-2" title="Permanent link">&para;</a></h4>
+<p><strong>What the result says:</strong> CYP2C9 <em>1/</em>2 (intermediate metaboliser) + VKORC1 rs9923231 TT (high sensitivity).</p>
+<p><strong>What it means:</strong> Warfarin is a blood-thinning medication with a very narrow "safe zone". Too little and blood clots form; too much and dangerous bleeding occurs. Two genes determine how much warfarin a person needs:</p>
+<ul>
+<li><strong>CYP2C9</strong> breaks down warfarin. The *2 variant slows this down, so the drug stays active longer.</li>
+<li><strong>VKORC1</strong> is the drug's target. The TT genotype makes the target more sensitive, so less drug is needed.</li>
+</ul>
+<p>This combination means the Corpasome individual needs a <strong>significantly lower dose than standard</strong>, or should use an alternative anticoagulant entirely.</p>
+<div class="admonition danger">
+<p class="admonition-title">This is the textbook example of pharmacogenomics saving lives</p>
+<p>Without genetic testing, a doctor might prescribe the standard warfarin dose. In this individual, that dose could cause a haemorrhage. Pre-emptive pharmacogenomic testing catches this before the first prescription.</p>
+</div>
+<h4 id="apoe-e3e4-rs429358-rs7412-risk-factor">APOE e3/e4 (rs429358 + rs7412): Risk factor<a class="headerlink" href="#apoe-e3e4-rs429358-rs7412-risk-factor" title="Permanent link">&para;</a></h4>
+<p><strong>What the result says:</strong> APOE genotype e3/e4.</p>
+<p><strong>What it means:</strong> The APOE gene comes in three common forms: e2, e3, and e4. The e4 variant is the strongest common genetic risk factor for late-onset Alzheimer's disease. One copy (e3/e4) increases risk about 3-fold compared to the most common genotype (e3/e3). Two copies (e4/e4) increase risk about 12-fold.</p>
+<p><strong>Important context:</strong> APOE e4 is a risk factor, not a diagnosis. Many carriers never develop Alzheimer's, and many Alzheimer's patients do not carry e4. This is a probabilistic finding, not a deterministic one. Disclosure should always be accompanied by genetic counselling.</p>
+<h4 id="mthfr-c677t-rs1801133-tier-2">MTHFR C677T (rs1801133): Tier 2<a class="headerlink" href="#mthfr-c677t-rs1801133-tier-2" title="Permanent link">&para;</a></h4>
+<p><strong>What the result says:</strong> Heterozygous (one copy).</p>
+<p><strong>What it means:</strong> MTHFR helps process folate (vitamin B9). The C677T variant reduces enzyme activity to about 65% in heterozygotes and about 35% in homozygotes. This is extremely common: 30 to 40% of Europeans carry at least one copy.</p>
+<p><strong>Important context:</strong> MTHFR is one of the most over-interpreted variants in consumer genomics. For the vast majority of carriers, it has no clinical significance. Homozygotes may benefit from methylfolate supplementation during pregnancy, but heterozygotes generally do not need any action.</p>
+<h3 id="reading-the-output-table">Reading the output table<a class="headerlink" href="#reading-the-output-table" title="Permanent link">&para;</a></h3>
+<p>The annotated variants table has one row per variant. Here is what each column means:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Plain English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gene</code></td>
+<td>Which gene the variant is in (e.g., CYP2D6, CFTR)</td>
+</tr>
+<tr>
+<td><code>consequence</code></td>
+<td>What the variant does to the protein: <code>missense_variant</code> (changes an amino acid), <code>synonymous_variant</code> (no change), <code>frameshift_variant</code> (disrupts the protein), etc.</td>
+</tr>
+<tr>
+<td><code>impact</code></td>
+<td>Severity: HIGH (likely disrupts protein), MODERATE (changes protein but may be tolerated), LOW (unlikely to matter), MODIFIER (non-coding region)</td>
+</tr>
+<tr>
+<td><code>clinvar_significance</code></td>
+<td>What ClinVar says: Pathogenic, Likely pathogenic, VUS, Benign, Drug response</td>
+</tr>
+<tr>
+<td><code>gnomad_af</code></td>
+<td>How common the variant is globally. Values below 0.001 (0.1%) are considered rare.</td>
+</tr>
+<tr>
+<td><code>priority_tier</code></td>
+<td>ClawBio's overall assessment: Tier 1 (most important) to Tier 4 (benign)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">What this analysis cannot tell you</p>
+<p>Consumer genotyping arrays (23andMe, AncestryDNA) test about 600,000 positions out of 3 billion in the genome. They miss structural variants, most rare variants, and copy number changes. A "clear" result from a genotyping array does <strong>not</strong> mean the genome is free of pathogenic variants. Clinical-grade whole genome sequencing is far more comprehensive.</p>
+</div>
+<hr />
+<h2 id="part-5-take-home-messages">Part 5: Take-home messages<a class="headerlink" href="#part-5-take-home-messages" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>The biology has not changed.</strong> AI makes the mechanical steps faster (database lookups, file conversions, prioritisation), but the fundamentals of variant interpretation, molecular biology, population genetics, and clinical context, remain essential. You still need to understand what VUS means before you can explain it to a patient.</p>
+</li>
+<li>
+<p><strong>Speed has changed dramatically.</strong> An analysis that used to take a bioinformatician days (setting up tools, running VEP, parsing output, cross-referencing ClinVar and gnomAD) now takes minutes. The bottleneck shifts from data processing to clinical interpretation and decision-making.</p>
+</li>
+<li>
+<p><strong>Pharmacogenomics is already saving lives.</strong> Drug-gene interactions like warfarin/CYP2C9/VKORC1 are not hypothetical future medicine. They are implemented today in hospitals that offer pre-emptive PGx testing. The evidence base and clinical guidelines already exist.</p>
+</li>
+<li>
+<p><strong>"We don't know yet" is a valid answer.</strong> Over half of all variants in ClinVar are classified as VUS. Communicating uncertainty honestly, rather than overpromising what genomics can deliver, is one of the most important skills in this field.</p>
+</li>
+<li>
+<p><strong>Equity gaps are real.</strong> When 86% of research has been done on European populations, genomic tools are inherently less reliable for everyone else. AI systems trained on biased data amplify this problem. Every analysis should acknowledge which populations the reference data represents.</p>
+</li>
+<li>
+<p><strong>Open data makes open science possible.</strong> This entire workshop, a real genome, open-source tools, free APIs, a free notebook, is reproducible by anyone in the world. That transparency is the standard to aim for.</p>
+</li>
+</ol>
+<div class="admonition danger">
+<p class="admonition-title">Medical disclaimer</p>
+<p>ClawBio is a research and educational tool. It is not a medical device and does not provide clinical diagnoses. The findings discussed in this workshop are for educational purposes only. Consult a healthcare professional before making any medical decisions based on genetic data.</p>
+</div>
+<hr />
+<h2 id="links-and-references">Links and references<a class="headerlink" href="#links-and-references" title="Permanent link">&para;</a></h2>
+<h3 id="workshop-resources">Workshop resources<a class="headerlink" href="#workshop-resources" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Google Colab notebook</td>
+<td><a href="https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-variant-interpretation.ipynb">:material-open-in-new: Open in Colab</a></td>
+</tr>
+<tr>
+<td>ClawBio GitHub repository</td>
+<td><a href="https://github.com/ClawBio/ClawBio">github.com/ClawBio/ClawBio</a></td>
+</tr>
+<tr>
+<td>ClawBio documentation</td>
+<td><a href="https://docs.clawbio.ai">docs.clawbio.ai</a></td>
+</tr>
+<tr>
+<td>ClawBio Discord community</td>
+<td><a href="https://discord.gg/EEp4Neaz">discord.gg/EEp4Neaz</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="databases-used-in-this-workshop">Databases used in this workshop<a class="headerlink" href="#databases-used-in-this-workshop" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Database</th>
+<th>What it does</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ensembl VEP</td>
+<td>Predicts the functional effect of variants</td>
+<td><a href="https://www.ensembl.org/info/docs/tools/vep/index.html">ensembl.org/vep</a></td>
+</tr>
+<tr>
+<td>ClinVar</td>
+<td>Curated variant-disease associations</td>
+<td><a href="https://www.ncbi.nlm.nih.gov/clinvar/">ncbi.nlm.nih.gov/clinvar</a></td>
+</tr>
+<tr>
+<td>gnomAD</td>
+<td>Population allele frequencies (76,000+ genomes)</td>
+<td><a href="https://gnomad.broadinstitute.org/">gnomad.broadinstitute.org</a></td>
+</tr>
+<tr>
+<td>CPIC</td>
+<td>Pharmacogenomics clinical guidelines</td>
+<td><a href="https://cpicpgx.org/">cpicpgx.org</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="key-papers">Key papers<a class="headerlink" href="#key-papers" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Richards et al. (2015). Standards and guidelines for the interpretation of sequence variants. <em>Genetics in Medicine</em>, 17(5), 405-424. <a href="https://doi.org/10.1038/gim.2015.30">doi:10.1038/gim.2015.30</a></li>
+<li>Corpas, M. (2013). Crowdsourcing the Corpasome. <em>Source Code for Biology and Medicine</em>, 8, 13. <a href="https://doi.org/10.1186/1751-0473-8-13">doi:10.1186/1751-0473-8-13</a></li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../telegram-bot/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Telegram Bot">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Telegram Bot
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../30x-wgs-workshop/" class="md-footer__link md-footer__link--next" aria-label="Next: 30x WGS Workshop">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                30x WGS Workshop
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026 ClawBio — Research and educational tool. Not a medical device.
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/ClawBio/ClawBio" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/clawbio" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M492.5 69.8c-.2-.3-.4-.6-.8-.7-38.1-17.5-78.4-30-119.7-37.1-.4-.1-.8 0-1.1.1s-.6.4-.8.8c-5.5 9.9-10.5 20.2-14.9 30.6-44.6-6.8-89.9-6.8-134.4 0-4.5-10.5-9.5-20.7-15.1-30.6-.2-.3-.5-.6-.8-.8s-.7-.2-1.1-.2C162.5 39 122.2 51.5 84.1 69c-.3.1-.6.4-.8.7C7.1 183.5-13.8 294.6-3.6 404.2c0 .3.1.5.2.8s.3.4.5.6c44.4 32.9 94 58 146.8 74.2.4.1.8.1 1.1 0s.7-.4.9-.7c11.3-15.4 21.4-31.8 30-48.8.1-.2.2-.5.2-.8s0-.5-.1-.8-.2-.5-.4-.6-.4-.3-.7-.4c-15.8-6.1-31.2-13.4-45.9-21.9-.3-.2-.5-.4-.7-.6s-.3-.6-.3-.9 0-.6.2-.9.3-.5.6-.7c3.1-2.3 6.2-4.7 9.1-7.1.3-.2.6-.4.9-.4s.7 0 1 .1c96.2 43.9 200.4 43.9 295.5 0 .3-.1.7-.2 1-.2s.7.2.9.4c2.9 2.4 6 4.9 9.1 7.2.2.2.4.4.6.7s.2.6.2.9-.1.6-.3.9-.4.5-.6.6c-14.7 8.6-30 15.9-45.9 21.8-.2.1-.5.2-.7.4s-.3.4-.4.7-.1.5-.1.8.1.5.2.8c8.8 17 18.8 33.3 30 48.8.2.3.6.6.9.7s.8.1 1.1 0c52.9-16.2 102.6-41.3 147.1-74.2.2-.2.4-.4.5-.6s.2-.5.2-.8c12.3-126.8-20.5-236.9-86.9-334.5zm-302 267.7c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.4 59.2-52.8 59.2m195.4 0c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.2 59.2-52.8 59.2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.footer", "search.suggest", "content.code.copy", "header.autohide"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
