@@ -77,6 +77,15 @@ description: Technical documentation, tutorials, skill reference, and research p
   <p class="tutorial-card__desc">Annotate a real human genome in Google Colab. No installation, no terminal, no prior experience required.</p>
 </a>
 
+<a class="tutorial-card" href="tutorials/30x-wgs-workshop/">
+  <div class="tutorial-card__header">
+    <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
+    <span class="time-estimate">40 min</span>
+  </div>
+  <h3 class="tutorial-card__title">30x WGS Workshop</h3>
+  <p class="tutorial-card__desc">Explore a real 30x whole-genome sequence: structural variants, QC metrics, and pharmacogenomics beyond SNP arrays.</p>
+</a>
+
 </div>
 
 ---
