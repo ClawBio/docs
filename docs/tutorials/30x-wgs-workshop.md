@@ -33,6 +33,9 @@ This workshop uses that 30x WGS dataset. It is hosted on Zenodo and citable:
 !!! danger "Research and education only"
     This dataset is provided for research and educational purposes only. It must not be used for clinical decision-making. ClawBio is not a medical device.
 
+!!! info "Ethics approval"
+    Use of this personal genome data for research was approved by the UNIR Research Ethics Committee (Comite de Etica de la Investigacion) on 28 January 2021, under protocol **PI:029/2020** ("Healthy Genome Project"), with Manuel Corpas as principal investigator.
+
 ### What WGS captures that SNP arrays miss
 
 Consumer genotyping platforms (23andMe, AncestryDNA) test around 600,000 pre-selected positions using a SNP array. Whole-genome sequencing reads every base. The difference is significant:
