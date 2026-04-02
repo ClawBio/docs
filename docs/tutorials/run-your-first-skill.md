@@ -1,6 +1,6 @@
 ---
 title: "Run Your First Skill"
-description: Clone ClawBio, run the PharmGx demo, and understand the input-output flow.
+description: Run a ClawBio skill demo in Google Colab — no installation, no terminal, no cost.
 ---
 
 # Run Your First Skill
@@ -10,33 +10,33 @@ description: Clone ClawBio, run the PharmGx demo, and understand the input-outpu
   <span class="time-estimate">~15 min</span>
 </div>
 
-In this tutorial you'll clone the ClawBio repository, install dependencies, run a demo skill, and inspect the output files.
+**No installation. No terminal. No cost.** Everything runs in your browser via Google Colab. All you need is a Google account.
+
+[:material-open-in-new: Launch in Google Colab](https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-variant-interpretation.ipynb){ .md-button .md-button--primary }
+
+!!! tip "Also works locally"
+    Prefer to run on your own machine? Every code cell below works in a terminal too. Just remove the `!` prefix.
 
 ---
 
-## 1. Clone the Repository
+## 1. Install ClawBio
 
-```bash
-git clone https://github.com/ClawBio/ClawBio.git
-cd ClawBio
+Open a new Google Colab notebook and run:
+
+```python
+!git clone https://github.com/ClawBio/ClawBio.git
+%cd ClawBio
+!pip install -q -r requirements.txt
 ```
 
-## 2. Install Dependencies
+That is it. ClawBio is ready to use.
 
-Create a virtual environment and install the required packages:
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip3 install -r requirements.txt
-```
-
-## 3. Run the PharmGx Demo
+## 2. Run the PharmGx Demo
 
 Every ClawBio skill ships with synthetic demo data. Run the **PharmGx Reporter** — it generates a pharmacogenomics report from a sample 23andMe-format file:
 
-```bash
-python3 skills/pharmgx-reporter/pharmgx_reporter.py \
+```python
+!python3 skills/pharmgx-reporter/pharmgx_reporter.py \
   --input skills/pharmgx-reporter/demo_patient.txt \
   --output /tmp/pharmgx-demo
 ```
@@ -50,12 +50,10 @@ You should see output like:
 ✓ Summary written to /tmp/pharmgx-demo/summary.json
 ```
 
-## 4. Inspect the Output
+## 3. Inspect the Output
 
-Open the generated report:
-
-```bash
-cat /tmp/pharmgx-demo/report.md
+```python
+!cat /tmp/pharmgx-demo/report.md
 ```
 
 The report includes:
@@ -65,24 +63,34 @@ The report includes:
 - **Safety warnings** — flagged high-risk variants (e.g. DPYD*2A for fluorouracil toxicity)
 - **Research-use disclaimer** — ClawBio is not a medical device
 
-The `summary.json` file contains the same data in a structured format for programmatic use.
+View the structured JSON:
 
-## 5. Try Another Skill
+```python
+import json
+with open("/tmp/pharmgx-demo/summary.json") as f:
+    data = json.load(f)
+print(json.dumps(data, indent=2))
+```
+
+## 4. Try Another Skill
 
 Run any other skill with `--demo`:
 
-```bash
+```python
 # Polygenic risk scores
-python3 skills/gwas-prs/gwas_prs.py --demo --output /tmp/demo
+!python3 skills/gwas-prs/gwas_prs.py --demo --output /tmp/prs-demo
 
 # Single-cell RNA-seq pipeline
-python3 skills/scrna-orchestrator/scrna_orchestrator.py --demo --output /tmp/demo
+!python3 skills/scrna-orchestrator/scrna_orchestrator.py --demo --output /tmp/scrna-demo
 
 # Health equity scoring
-python3 skills/equity-scorer/equity_scorer.py --demo --output /tmp/demo
+!python3 skills/equity-scorer/equity_scorer.py --demo --output /tmp/equity-demo
+
+# GWAS variant lookup across 9 databases
+!python3 skills/gwas-lookup/gwas_lookup.py --demo --output /tmp/gwas-demo
 ```
 
-## 6. Understand the Flow
+## 5. Understand the Flow
 
 Every ClawBio skill follows the same pattern:
 

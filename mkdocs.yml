@@ -60,10 +60,10 @@ nav:
       - GitHub Education: tutorials/github-education.md
       - Building Custom Agents: tutorials/making-agents.md
       - tmux Sessions: tutorials/tmux-sessions.md
+      - Telegram Bot: tutorials/telegram-bot.md
     - ClawBio:
       - Run Your First Skill: tutorials/run-your-first-skill.md
       - Build a Skill: tutorials/build-a-skill.md
-      - Telegram Bot: tutorials/telegram-bot.md
       - Variant Interpretation Workshop: tutorials/variant-interpretation-workshop.md
       - 30x WGS Workshop: tutorials/30x-wgs-workshop.md
       - GWAS Workshop: tutorials/gwas-workshop.md
