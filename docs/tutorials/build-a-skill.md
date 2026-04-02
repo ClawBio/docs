@@ -12,10 +12,7 @@ description: Create a complete ClawBio skill from scratch in Google Colab — SK
 
 **No installation required.** This tutorial runs entirely in Google Colab. You will create a complete ClawBio skill: write the SKILL.md contract, add a Python implementation, create demo data, and validate everything works.
 
-[:material-open-in-new: Open a new Google Colab notebook](https://colab.research.google.com/#create=true){ .md-button .md-button--primary }
-
-!!! tip "How to follow along"
-    Open a blank Google Colab notebook using the button above, then copy and paste each code block into a new cell. Click the play button to run each cell in order. The `%%writefile` magic creates files directly in Colab. Every command also works in a local terminal if you remove the `!` prefix and use a text editor instead of `%%writefile`.
+[:material-open-in-new: Launch in Google Colab](https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-build-a-skill.ipynb){ .md-button .md-button--primary }
 
 ---
 
