@@ -18,6 +18,19 @@ description: Explore a real 30x whole-genome sequence with ClawBio in Google Col
 !!! warning "Early release: testers welcome"
     This workshop has not been fully tested end-to-end. If you hit errors, please [file an issue on GitHub](https://github.com/ClawBio/ClawBio/issues) or message Manuel directly. Your feedback makes this better for everyone.
 
+!!! tip "Builds on Workshops 1 and 2"
+    This is the third and final workshop in the series. In the [Variant Interpretation Workshop](variant-interpretation-workshop.md) you analysed a SNP array (~600K positions). In the [GWAS Workshop](gwas-workshop.md) you scaled up to population-level analysis. Now you return to the same individual genome at **full 30x whole-genome sequencing resolution**, revealing variant types that are invisible to both arrays and summary statistics.
+
+## What's new compared to previous workshops
+
+| | Workshop 1 (Variant Interpretation) | Workshop 2 (GWAS) | This workshop (30x WGS) |
+|--|-------------------------------------|-------------------|------------------------|
+| **Data** | 23andMe SNP array (~600K) | Population summary statistics | 30x WGS (4.6M variants) |
+| **Variant types** | SNPs only | SNP associations | SNPs + indels + structural variants + CNVs |
+| **New concepts** | ACMG, VEP, ClinVar, CPIC | PRS, fine-mapping, cross-ancestry | QC metrics, Ti/Tv, structural variants, WGS vs chip |
+| **Key insight** | "What do my variants mean?" | "Which variants matter at the population level?" | "What does my genome look like at full resolution?" |
+| **Skills used** | vcf-annotator, pharmgx-reporter | gwas-lookup, gwas-prs, fine-mapping | variant-annotation (WGS), QC baselines |
+
 ---
 
 ## Part 1: What is this dataset?
@@ -127,7 +140,7 @@ WGS does not just find "more of the same." It finds qualitatively different type
 
 ### Prerequisite
 
-This workshop assumes basic familiarity with genomic concepts (what a variant is, what a VCF file contains). If you are new to genomics, start with the [Variant Interpretation Workshop](variant-interpretation-workshop.md) first.
+This workshop assumes you have completed the [Variant Interpretation Workshop](variant-interpretation-workshop.md) and ideally the [GWAS Workshop](gwas-workshop.md). You should be comfortable with VCF files, variant annotation, and basic genomic terminology.
 
 ### Opening the notebook
 

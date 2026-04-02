@@ -18,8 +18,21 @@ description: Run a complete GWAS analysis with ClawBio in Google Colab. Variant 
 !!! tip "Runs in Google Colab"
     All code in this workshop runs in Google Colab. Open a new notebook, clone ClawBio (`!git clone https://github.com/ClawBio/ClawBio.git` then `%cd ClawBio` and `!pip install -q -r requirements.txt`), and follow along.
 
-!!! tip "Follows on from the Variant Interpretation Workshop"
-    This workshop picks up where the [Variant Interpretation Workshop](variant-interpretation-workshop.md) left off. In that session you annotated a single genome and found clinically relevant variants. Now we scale up to population-level analysis using GWAS summary statistics.
+!!! tip "Builds on the Variant Interpretation Workshop"
+    This is the second workshop in the series. In the [Variant Interpretation Workshop](variant-interpretation-workshop.md) you annotated a **single genome** and found clinically relevant variants. Now we scale up: from one person to **population-level** analysis using GWAS summary statistics. You will query the same variant (rs429358/APOE) you found before, but this time across thousands of genomes and nine databases.
+
+---
+
+## What's new compared to the Variant Interpretation Workshop
+
+| | Variant Interpretation | This workshop (GWAS) |
+|--|----------------------|---------------------|
+| **Scope** | One genome | Thousands of genomes |
+| **Data type** | Individual genotypes (23andMe) | Population summary statistics |
+| **Analysis** | VEP, ClinVar, gnomAD, CPIC | GWAS Catalog, PGS Catalog, SuSiE |
+| **Question** | "What do my variants mean?" | "Which variants cause disease in the population?" |
+| **New skills** | vcf-annotator, pharmgx-reporter | gwas-lookup, gwas-prs, fine-mapping |
+| **Equity angle** | Database representation bias | Cross-ancestry transferability of GWAS findings |
 
 ---
 
@@ -184,3 +197,13 @@ Run SuSiE on a demo locus containing 200 variants with 2 independent causal sign
 | Ensembl VEP | [ensembl.org/vep](https://ensembl.org/vep) |
 | gnomAD | [gnomad.broadinstitute.org](https://gnomad.broadinstitute.org) |
 | CPIC Guidelines | [cpicpgx.org](https://cpicpgx.org) |
+
+---
+
+## What's next
+
+You have now analysed variants at the individual level (Workshop 1) and the population level (this workshop). The final workshop goes deeper into the same individual genome:
+
+| Workshop | What it adds |
+|----------|-------------|
+| [30x WGS Workshop](30x-wgs-workshop.md) | Analyse Manuel Corpas's genome at **full 30x whole-genome sequencing resolution**. Discover 8,925 structural variants, 912K indels, and copy number changes that are invisible to both SNP arrays and summary statistics. Compare WGS findings with the SNP chip results from Workshop 1. |

@@ -367,3 +367,14 @@ The annotated variants table has one row per variant. Here is what each column m
 
 - Richards et al. (2015). Standards and guidelines for the interpretation of sequence variants. *Genetics in Medicine*, 17(5), 405-424. [doi:10.1038/gim.2015.30](https://doi.org/10.1038/gim.2015.30)
 - Corpas, M. (2013). Crowdsourcing the Corpasome. *Source Code for Biology and Medicine*, 8, 13. [doi:10.1186/1751-0473-8-13](https://doi.org/10.1186/1751-0473-8-13)
+
+---
+
+## What's next
+
+This workshop analysed a **single genome** using a **SNP array** (~600K positions). The next two workshops build on this:
+
+| Workshop | What it adds | Level |
+|----------|-------------|-------|
+| [GWAS Workshop](gwas-workshop.md) | Scale from one genome to **population-level** analysis. Query nine GWAS databases, compute polygenic risk scores, and fine-map causal variants using public summary statistics. | Intermediate |
+| [30x WGS Workshop](30x-wgs-workshop.md) | Analyse the **same genome at full resolution** (30x whole-genome sequencing). Discover structural variants, indels, and copy number changes invisible to SNP arrays. | Intermediate |
