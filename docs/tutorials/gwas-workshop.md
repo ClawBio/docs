@@ -12,8 +12,9 @@ description: Run a complete GWAS analysis with ClawBio in Google Colab. Variant 
 
 **No installation. No terminal. No API keys. No cost.** Everything runs in your browser via Google Colab. All you need is a Google account.
 
-[:material-presentation-play: View slides](https://clawbio.ai/workshop-gwas-slides.html){ .md-button .md-button--primary }
-[:material-open-in-new: Previous workshop: Variant Interpretation](variant-interpretation-workshop.md){ .md-button }
+[:material-open-in-new: Open a new Google Colab notebook](https://colab.research.google.com/#create=true){ .md-button .md-button--primary }
+[:material-presentation-play: View slides](https://clawbio.ai/workshop-gwas-slides.html){ .md-button }
+[:material-arrow-left: Previous workshop: Variant Interpretation](variant-interpretation-workshop.md){ .md-button }
 
 !!! tip "Runs in Google Colab"
     All code in this workshop runs in Google Colab. Open a new notebook, clone ClawBio (`!git clone https://github.com/ClawBio/ClawBio.git` then `%cd ClawBio` and `!pip install -q -r requirements.txt`), and follow along.

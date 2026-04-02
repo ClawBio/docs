@@ -12,10 +12,10 @@ description: Run a ClawBio skill demo in Google Colab — no installation, no te
 
 **No installation. No terminal. No cost.** Everything runs in your browser via Google Colab. All you need is a Google account.
 
-[:material-open-in-new: Launch in Google Colab](https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-variant-interpretation.ipynb){ .md-button .md-button--primary }
+[:material-open-in-new: Open a new Google Colab notebook](https://colab.research.google.com/#create=true){ .md-button .md-button--primary }
 
-!!! tip "Also works locally"
-    Prefer to run on your own machine? Every code cell below works in a terminal too. Just remove the `!` prefix.
+!!! tip "How to follow along"
+    Open a blank Google Colab notebook using the button above, then copy and paste each code block from this page into a new cell. Click the play button to run each cell in order. Every command below also works in a local terminal if you remove the `!` prefix.
 
 ---
 
