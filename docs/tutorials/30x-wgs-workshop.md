@@ -18,8 +18,8 @@ description: Explore a real 30x whole-genome sequence with ClawBio in Google Col
 !!! warning "Early release: testers welcome"
     This workshop has not been fully tested end-to-end. If you hit errors, please [file an issue on GitHub](https://github.com/ClawBio/ClawBio/issues) or message Manuel directly. Your feedback makes this better for everyone.
 
-!!! tip "Builds on Workshops 1 and 2"
-    This is the third and final workshop in the series. In the [Variant Interpretation Workshop](variant-interpretation-workshop.md) you analysed a SNP array (~600K positions). In the [GWAS Workshop](gwas-workshop.md) you scaled up to population-level analysis. Now you return to the same individual genome at **full 30x whole-genome sequencing resolution**, revealing variant types that are invisible to both arrays and summary statistics.
+!!! tip "Step 5 of 5: Builds on Steps 3 and 4"
+    This is the final step in the ClawBio tutorial sequence. In **Step 3** ([Variant Interpretation Workshop](variant-interpretation-workshop.md)) you analysed a SNP array (~600K positions). In **Step 4** ([GWAS Workshop](gwas-workshop.md)) you scaled up to population-level analysis. Now you return to the same individual genome at **full 30x whole-genome sequencing resolution**, revealing variant types that are invisible to both arrays and summary statistics.
 
 ## What's new compared to previous workshops
 
@@ -275,3 +275,7 @@ The notebook extracts 20 PASS variants from chromosome 20 and runs ClawBio's var
 | gnomAD | [gnomad.broadinstitute.org](https://gnomad.broadinstitute.org/) |
 | UCSC Genome Browser | [genome.ucsc.edu](https://genome.ucsc.edu) |
 | CPIC Guidelines | [cpicpgx.org](https://cpicpgx.org/) |
+
+**Previous:** [GWAS Workshop](gwas-workshop.md) | **Back to:** [All Tutorials](index.md)
+
+**Full workshop sequence:** [Run Your First Skill](run-your-first-skill.md) :material-arrow-right: [Build a Skill](build-a-skill.md) :material-arrow-right: [Variant Interpretation](variant-interpretation-workshop.md) :material-arrow-right: [GWAS](gwas-workshop.md) :material-arrow-right: 30x WGS

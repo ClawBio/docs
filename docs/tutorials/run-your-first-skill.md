@@ -100,4 +100,6 @@ The agent reads the SKILL.md to understand what the skill does and how to call i
 
 ---
 
-**Next:** [Build a Skill](build-a-skill.md) — create your own skill from scratch.
+**Next step:** [Build a Skill](build-a-skill.md) — create your own skill from scratch.
+
+**Full workshop sequence:** Run Your First Skill :material-arrow-right: [Build a Skill](build-a-skill.md) :material-arrow-right: [Variant Interpretation](variant-interpretation-workshop.md) :material-arrow-right: [GWAS](gwas-workshop.md) :material-arrow-right: [30x WGS](30x-wgs-workshop.md)

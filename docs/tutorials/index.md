@@ -136,37 +136,46 @@ Hands-on guides to get productive with AI coding tools and ClawBio. Each tutoria
     <span class="time-estimate">30 min</span>
   </div>
   <h3 class="tutorial-card__title">Build a Skill</h3>
-  <p class="tutorial-card__desc">Write a complete ClawBio skill from scratch — SKILL.md, Python, demo data, validation.</p>
-</a>
-
-<a class="tutorial-card" href="telegram-bot/">
-  <div class="tutorial-card__header">
-    <span class="tutorial-card__step">STEP 3</span>
-    <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
-    <span class="time-estimate">20 min</span>
-  </div>
-  <h3 class="tutorial-card__title">Telegram Bot</h3>
-  <p class="tutorial-card__desc">Deploy RoboTerri — a Telegram bot that runs ClawBio skills via any LLM provider.</p>
+  <p class="tutorial-card__desc">Write a complete ClawBio skill from scratch: SKILL.md contract, Python implementation, demo data, and validation.</p>
 </a>
 
 <a class="tutorial-card" href="variant-interpretation-workshop/">
   <div class="tutorial-card__header">
-    <span class="tutorial-card__step">WORKSHOP</span>
+    <span class="tutorial-card__step">STEP 3</span>
     <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
     <span class="time-estimate">60 min</span>
   </div>
   <h3 class="tutorial-card__title">Variant Interpretation Workshop</h3>
-  <p class="tutorial-card__desc">Annotate a real human genome in Google Colab. No installation, no terminal, no prior experience required. Covers variant annotation, pharmacogenomics, and clinical interpretation.</p>
+  <p class="tutorial-card__desc">Annotate a real human genome in Google Colab. Variant annotation, pharmacogenomics, and clinical interpretation. No prior experience required.</p>
+</a>
+
+<a class="tutorial-card" href="gwas-workshop/">
+  <div class="tutorial-card__header">
+    <span class="tutorial-card__step">STEP 4</span>
+    <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
+    <span class="time-estimate">30 min</span>
+  </div>
+  <h3 class="tutorial-card__title">GWAS Workshop</h3>
+  <p class="tutorial-card__desc">Scale from one genome to population-level analysis. GWAS variant lookup across 9 databases, polygenic risk scores, and SuSiE fine-mapping.</p>
 </a>
 
 <a class="tutorial-card" href="30x-wgs-workshop/">
   <div class="tutorial-card__header">
-    <span class="tutorial-card__step">WORKSHOP</span>
+    <span class="tutorial-card__step">STEP 5</span>
     <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
     <span class="time-estimate">40 min</span>
   </div>
   <h3 class="tutorial-card__title">30x WGS Workshop</h3>
-  <p class="tutorial-card__desc">Explore a real 30x whole-genome sequence in Google Colab. Structural variants, QC metrics, pharmacogenomics comparison. Goes beyond what SNP arrays can see.</p>
+  <p class="tutorial-card__desc">Explore a real 30x whole-genome sequence. Structural variants, QC metrics, and pharmacogenomics comparison. Goes beyond what SNP arrays can see.</p>
+</a>
+
+<a class="tutorial-card" href="telegram-bot/">
+  <div class="tutorial-card__header">
+    <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
+    <span class="time-estimate">20 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Telegram Bot (Bonus)</h3>
+  <p class="tutorial-card__desc">Deploy RoboTerri, a Telegram bot that runs ClawBio skills via any LLM provider.</p>
 </a>
 
 </div>

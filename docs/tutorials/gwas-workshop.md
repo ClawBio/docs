@@ -18,8 +18,8 @@ description: Run a complete GWAS analysis with ClawBio in Google Colab. Variant 
 !!! tip "Runs in Google Colab"
     All code in this workshop runs in Google Colab. Open a new notebook, clone ClawBio (`!git clone https://github.com/ClawBio/ClawBio.git` then `%cd ClawBio` and `!pip install -q -r requirements.txt`), and follow along.
 
-!!! tip "Builds on the Variant Interpretation Workshop"
-    This is the second workshop in the series. In the [Variant Interpretation Workshop](variant-interpretation-workshop.md) you annotated a **single genome** and found clinically relevant variants. Now we scale up: from one person to **population-level** analysis using GWAS summary statistics. You will query the same variant (rs429358/APOE) you found before, but this time across thousands of genomes and nine databases.
+!!! tip "Step 4 of 5: Builds on the Variant Interpretation Workshop"
+    This is **Step 4** in the ClawBio tutorial sequence. In **Step 3** ([Variant Interpretation Workshop](variant-interpretation-workshop.md)) you annotated a **single genome** and found clinically relevant variants. Now we scale up: from one person to **population-level** analysis using GWAS summary statistics. You will query the same variant (rs429358/APOE) you found before, but this time across thousands of genomes and nine databases.
 
 ---
 
@@ -207,3 +207,7 @@ You have now analysed variants at the individual level (Workshop 1) and the popu
 | Workshop | What it adds |
 |----------|-------------|
 | [30x WGS Workshop](30x-wgs-workshop.md) | Analyse Manuel Corpas's genome at **full 30x whole-genome sequencing resolution**. Discover 8,925 structural variants, 912K indels, and copy number changes that are invisible to both SNP arrays and summary statistics. Compare WGS findings with the SNP chip results from Workshop 1. |
+
+**Previous:** [Variant Interpretation Workshop](variant-interpretation-workshop.md) | **Next step:** [30x WGS Workshop](30x-wgs-workshop.md)
+
+**Full workshop sequence:** [Run Your First Skill](run-your-first-skill.md) :material-arrow-right: [Build a Skill](build-a-skill.md) :material-arrow-right: [Variant Interpretation](variant-interpretation-workshop.md) :material-arrow-right: GWAS :material-arrow-right: [30x WGS](30x-wgs-workshop.md)

@@ -15,6 +15,9 @@ description: Annotate a real human genome with ClawBio in Google Colab. No insta
 [:material-open-in-new: Launch the workshop in Google Colab](https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-variant-interpretation.ipynb){ .md-button .md-button--primary }
 [:material-presentation-play: View introductory slides](https://clawbio.ai/workshop-slides.html){ .md-button }
 
+!!! tip "Step 3 of 5: Your first hands-on genomics workshop"
+    This is **Step 3** in the ClawBio tutorial sequence. In [Step 1](run-your-first-skill.md) you ran a skill demo. In [Step 2](build-a-skill.md) you built a skill from scratch. Now you apply ClawBio to a real human genome: variant annotation, pharmacogenomics, and clinical interpretation.
+
 ---
 
 ## Part 1: What is ClawBio?
@@ -378,3 +381,7 @@ This workshop analysed a **single genome** using a **SNP array** (~600K position
 |----------|-------------|-------|
 | [GWAS Workshop](gwas-workshop.md) | Scale from one genome to **population-level** analysis. Query nine GWAS databases, compute polygenic risk scores, and fine-map causal variants using public summary statistics. | Intermediate |
 | [30x WGS Workshop](30x-wgs-workshop.md) | Analyse the **same genome at full resolution** (30x whole-genome sequencing). Discover structural variants, indels, and copy number changes invisible to SNP arrays. | Intermediate |
+
+**Previous:** [Build a Skill](build-a-skill.md) | **Next step:** [GWAS Workshop](gwas-workshop.md)
+
+**Full workshop sequence:** [Run Your First Skill](run-your-first-skill.md) :material-arrow-right: [Build a Skill](build-a-skill.md) :material-arrow-right: Variant Interpretation :material-arrow-right: [GWAS](gwas-workshop.md) :material-arrow-right: [30x WGS](30x-wgs-workshop.md)

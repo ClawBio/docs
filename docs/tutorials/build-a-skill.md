@@ -214,4 +214,6 @@ See [Contributing](../contributing/index.md) for PR guidelines.
 
 ---
 
-**Next:** [Variant Interpretation Workshop](variant-interpretation-workshop.md) — analyse a real genome hands-on.
+**Previous:** [Run Your First Skill](run-your-first-skill.md) | **Next step:** [Variant Interpretation Workshop](variant-interpretation-workshop.md) — analyse a real genome hands-on.
+
+**Full workshop sequence:** [Run Your First Skill](run-your-first-skill.md) :material-arrow-right: Build a Skill :material-arrow-right: [Variant Interpretation](variant-interpretation-workshop.md) :material-arrow-right: [GWAS](gwas-workshop.md) :material-arrow-right: [30x WGS](30x-wgs-workshop.md)

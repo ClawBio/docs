@@ -62,11 +62,11 @@ nav:
       - tmux Sessions: tutorials/tmux-sessions.md
       - Telegram Bot: tutorials/telegram-bot.md
     - ClawBio:
-      - Run Your First Skill: tutorials/run-your-first-skill.md
-      - Build a Skill: tutorials/build-a-skill.md
-      - Variant Interpretation Workshop: tutorials/variant-interpretation-workshop.md
-      - GWAS Workshop: tutorials/gwas-workshop.md
-      - 30x WGS Workshop: tutorials/30x-wgs-workshop.md
+      - "Step 1 — Run Your First Skill": tutorials/run-your-first-skill.md
+      - "Step 2 — Build a Skill": tutorials/build-a-skill.md
+      - "Step 3 — Variant Interpretation": tutorials/variant-interpretation-workshop.md
+      - "Step 4 — GWAS Workshop": tutorials/gwas-workshop.md
+      - "Step 5 — 30x WGS Workshop": tutorials/30x-wgs-workshop.md
   - Research:
     - Overview: research/index.md
     - Genomebook: research/genomebook.md
