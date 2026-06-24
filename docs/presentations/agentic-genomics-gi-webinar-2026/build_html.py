@@ -1,79 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agentic Genomics in Practice | Manuel Corpas (ClawBio × Genomic Intelligence)</title>
-<meta property="og:title" content="Agentic Genomics in Practice">
-<meta property="og:description" content="AI agents are starting to do real genomics work. The hard part is trusting them. ClawBio × Genomic Intelligence webinar, 24 June 2026.">
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; overflow: hidden; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0d1117; color: #e6edf3; }
-.deck { position: relative; width: 100vw; height: 100vh; }
-.slide {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    padding: 4vh 6vw; opacity: 0; visibility: hidden; transition: opacity 0.4s ease;
-}
-.slide.active { opacity: 1; visibility: visible; }
-h1 { font-size: clamp(1.8rem, 3.8vw, 3.2rem); font-weight: 700; text-align: center; line-height: 1.2; margin-bottom: 1.5rem; }
-h2 { font-size: clamp(1.5rem, 2.8vw, 2.4rem); font-weight: 600; text-align: center; line-height: 1.3; margin-bottom: 1.2rem; }
-h3 { font-size: clamp(1.1rem, 1.8vw, 1.6rem); font-weight: 500; color: #adbac7; text-align: center; margin-bottom: 1rem; }
-p, li { font-size: clamp(0.95rem, 1.6vw, 1.3rem); line-height: 1.6; }
-ul { list-style: none; text-align: left; max-width: 85%; }
-ul li { padding: 0.4em 0; padding-left: 1.5em; position: relative; }
-ul li::before { content: "\2192"; position: absolute; left: 0; color: #58a6ff; }
-.small { font-size: clamp(0.8rem, 1.3vw, 1rem); color: #adbac7; }
-.accent { color: #58a6ff; }
-.green { color: #56d364; }
-.orange { color: #e3b341; }
-.red { color: #ffa198; }
-.purple { color: #d2a8ff; }
-.muted { color: #6e7681; }
-.highlight { background: rgba(88,166,255,0.15); padding: 0.15em 0.4em; border-radius: 4px; }
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3vw; width: 92%; align-items: start; }
-.two-col > * { text-align: left; }
-.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2vw; width: 92%; }
-.center { text-align: center; }
-.content { width: 92%; max-width: 1200px; }
-.gap { margin-top: 1.5rem; }
-.card { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 1.2em; text-align: center; }
-.card h3 { font-size: clamp(0.95rem, 1.5vw, 1.2rem); color: #e6edf3; margin-bottom: 0.5rem; }
-.card p { font-size: clamp(0.78rem, 1.15vw, 1.0rem); color: #adbac7; line-height: 1.55; text-align: left; }
-.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5vw; width: 92%; margin-top: 1rem; }
-.stat { text-align: center; }
-.stat .num { font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 800; color: #56d364; }
-.stat .label { font-size: clamp(0.7rem, 1.1vw, 0.95rem); color: #adbac7; margin-top: 0.3rem; }
-code { font-family: 'SF Mono', 'Fira Code', monospace; color: #56d364; background: #161b22; padding: 0.05em 0.4em; border-radius: 4px; font-size: 0.9em; }
-.section-label { display: inline-block; background: #58a6ff; color: #0d1117; font-size: clamp(0.7rem, 1.2vw, 1rem); font-weight: 700; padding: 0.25em 0.75em; border-radius: 20px; margin-bottom: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase; }
-.progress { position: fixed; bottom: 0; left: 0; height: 3px; background: #58a6ff; transition: width 0.3s; z-index: 100; }
-.counter { position: fixed; bottom: 12px; right: 20px; font-size: 0.85rem; color: #768390; z-index: 100; }
-.notes { display: none; }
-.title-slide h1 { font-size: clamp(1.8rem, 3.8vw, 3.4rem); }
-.title-slide .subtitle { font-size: clamp(0.95rem, 1.6vw, 1.35rem); color: #adbac7; margin-top: 0.5rem; max-width: 85%; line-height: 1.5; }
-.title-slide .author { margin-top: 2rem; font-size: clamp(1rem, 1.5vw, 1.2rem); color: #58a6ff; }
-.title-slide .meta { margin-top: 0.5rem; font-size: clamp(0.8rem, 1.2vw, 0.95rem); color: #768390; text-align: center; line-height: 1.6; }
-.section-label.alt { background: #d2a8ff; }
-.agenda { display: grid; grid-template-columns: 1fr; gap: 0.8vw; width: 88%; max-width: 1000px; margin-top: 0.6rem; }
-.agenda .row { display: flex; align-items: center; gap: 1.2em; background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 0.9em 1.3em; }
-.agenda .who { flex: 0 0 auto; font-weight: 700; font-size: clamp(0.85rem, 1.3vw, 1.1rem); color: #58a6ff; min-width: 8.5em; }
-.agenda .who.gi { color: #d2a8ff; }
-.agenda .what { color: #adbac7; font-size: clamp(0.85rem, 1.3vw, 1.1rem); text-align: left; }
-.principle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2vw; width: 92%; margin-top: 1rem; }
-.principle { background: #161b22; border-left: 3px solid #58a6ff; padding: 0.9em 1.1em; border-radius: 4px; }
-.principle h4 { font-size: clamp(0.9rem, 1.4vw, 1.1rem); color: #58a6ff; font-weight: 700; margin-bottom: 0.3em; }
-.principle p { font-size: clamp(0.78rem, 1.15vw, 1rem); color: #adbac7; line-height: 1.5; }
-.talk-handle { position: fixed; bottom: 12px; left: 20px; font-size: 0.85rem; color: #8b949e; z-index: 99; font-family: 'SF Mono', 'Fira Code', monospace; letter-spacing: 0.02em; }
-.link-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4vw; width: 92%; max-width: 1100px; margin-top: 1rem; }
-.link-card { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 1.1em 1.1em; text-align: center; }
-.link-card .lk-title { color: #56d364; font-weight: 700; font-size: clamp(0.95rem, 1.4vw, 1.2rem); margin-bottom: 0.3em; }
-.link-card .lk-sub { color: #adbac7; font-size: clamp(0.78rem, 1.1vw, 0.98rem); line-height: 1.5; }
-.link-card .lk-url { color: #58a6ff; font-family: 'SF Mono', 'Fira Code', monospace; font-size: clamp(0.72rem, 1vw, 0.9rem); margin-top: 0.5em; display: block; word-break: break-all; }
-</style>
-</head>
-<body>
-<div class="deck">
+#!/usr/bin/env python3
+"""Rebuild index.html as the expanded 15-slide v1 deck.
 
+Reuses the existing <head>/CSS, the JS footer, and the three inline SVG
+diagrams (two-waves, counterintuitive branch, ancestry bar chart) from the
+current index.html, and rewrites the slide body to match the v1 PPTX.
+Run from this directory:  /opt/homebrew/bin/python3 build_html.py
+"""
+import os
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+SRC = os.path.join(HERE, "index.html")
+text = open(SRC).read()
+
+head = text[:text.index("</head>") + len("</head>")]
+footer = text[text.index('<div class="progress"'):]
+
+
+def extract_svg(marker):
+    i = text.index(marker)
+    s = text.rindex("<svg", 0, i)
+    e = text.index("</svg>", i) + len("</svg>")
+    return text[s:e]
+
+WAVES = extract_svg('viewBox="0 0 1000 130"')
+COUNTER = extract_svg("max-width: 1080px")
+ANCESTRY = extract_svg("max-width: 1040px")
+
+BODY = r"""
 <!-- 1. TITLE -->
 <section class="slide title-slide active">
     <img src="figures/clawbio-logo-white.png" alt="ClawBio logo" style="width:clamp(80px,9vw,128px); height:auto; margin-bottom:1.1rem;">
@@ -107,22 +60,7 @@ code { font-family: 'SF Mono', 'Fira Code', monospace; color: #56d364; backgroun
 <section class="slide">
     <div class="section-label">The shift</div>
     <h2>From retrieval to <span class="green">autonomous execution</span></h2>
-    <svg viewBox="0 0 1000 130" style="width: 88%; max-width: 1000px; height: auto; display: block; margin: 0.4rem auto 0.6rem;" xmlns="http://www.w3.org/2000/svg">
-        <rect x="20" y="20" width="380" height="60" rx="8" fill="#161b22" stroke="#adbac7" stroke-width="1.5"/>
-        <text x="210" y="44" text-anchor="middle" fill="#adbac7" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" letter-spacing="0.05em">FIRST WAVE</text>
-        <text x="210" y="64" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI, sans-serif" font-size="13">Information retrieval &middot; chat &middot; summarisation</text>
-        <line x1="410" y1="50" x2="590" y2="50" stroke="#58a6ff" stroke-width="2"/>
-        <polygon points="590,50 580,44 580,56" fill="#58a6ff"/>
-        <text x="500" y="38" text-anchor="middle" fill="#58a6ff" font-family="Segoe UI, sans-serif" font-size="11" font-style="italic">tool use, code execution</text>
-        <rect x="600" y="20" width="380" height="60" rx="8" fill="#161b22" stroke="#56d364" stroke-width="2"/>
-        <text x="790" y="44" text-anchor="middle" fill="#56d364" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" letter-spacing="0.05em">SECOND WAVE</text>
-        <text x="790" y="64" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI, sans-serif" font-size="13">Autonomous execution &middot; multi-step planning</text>
-        <text x="20" y="110" fill="#6e7681" font-family="Segoe UI, sans-serif" font-size="12" font-weight="600">Bottleneck:</text>
-        <text x="105" y="110" fill="#adbac7" font-family="Segoe UI, sans-serif" font-size="13">code production</text>
-        <text x="220" y="110" fill="#6e7681" font-family="Segoe UI, sans-serif" font-size="14">&#x2192;</text>
-        <text x="245" y="110" fill="#56d364" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700">validation &amp; judgement</text>
-        <text x="980" y="110" text-anchor="end" fill="#6e7681" font-family="Segoe UI, sans-serif" font-size="11" font-style="italic">researcher: producer &#x2192; evaluator</text>
-    </svg>
+    __WAVES__
     <div class="two-col content">
         <div>
             <h3 style="text-align:left; color:#adbac7;">First wave: information retrieval</h3>
@@ -237,39 +175,7 @@ code { font-family: 'SF Mono', 'Fira Code', monospace; color: #56d364; backgroun
 <section class="slide">
     <div class="section-label">The counterintuitive result</div>
     <h2>The right guideline made the model <span class="red">more dangerous</span></h2>
-    <svg viewBox="0 0 1000 300" style="width: 94%; max-width: 1080px; height: auto; max-height: 56vh; display: block; margin: 0.6rem auto 0;" xmlns="http://www.w3.org/2000/svg">
-        <style>.lbl { font-family: 'Segoe UI', sans-serif; }</style>
-
-        <!-- input box -->
-        <text x="135" y="118" text-anchor="middle" class="lbl" fill="#58a6ff" font-size="13" font-weight="700" letter-spacing="0.05em">YOU ADD</text>
-        <rect x="30" y="124" width="210" height="78" rx="10" fill="rgba(88,166,255,0.10)" stroke="#58a6ff" stroke-width="2"/>
-        <text x="135" y="156" text-anchor="middle" class="lbl" fill="#e6edf3" font-size="15" font-weight="600">The correct CPIC</text>
-        <text x="135" y="177" text-anchor="middle" class="lbl" fill="#e6edf3" font-size="15" font-weight="600">guideline</text>
-        <text x="135" y="194" text-anchor="middle" class="lbl" fill="#adbac7" font-size="12">as free-text context</text>
-
-        <!-- branch lines -->
-        <path d="M 240 163 C 370 163, 400 78, 538 78" fill="none" stroke="#56d364" stroke-width="2.5"/>
-        <polygon points="542,78 531,72 531,84" fill="#56d364"/>
-        <path d="M 240 163 C 370 163, 400 228, 538 228" fill="none" stroke="#ffa198" stroke-width="2.5"/>
-        <polygon points="542,228 531,222 531,234" fill="#ffa198"/>
-        <text x="392" y="104" text-anchor="middle" class="lbl" fill="#6e7681" font-size="12" font-style="italic">most cases</text>
-        <text x="392" y="206" text-anchor="middle" class="lbl" fill="#6e7681" font-size="12" font-style="italic">a minority</text>
-
-        <!-- green outcome -->
-        <rect x="540" y="42" width="430" height="72" rx="10" fill="rgba(86,211,100,0.08)" stroke="#56d364" stroke-width="1.8"/>
-        <text x="566" y="86" class="lbl" fill="#56d364" font-size="26" font-weight="800">&#x2713;</text>
-        <text x="600" y="74" class="lbl" fill="#e6edf3" font-size="15" font-weight="600">Average accuracy went up</text>
-        <text x="600" y="96" class="lbl" fill="#adbac7" font-size="13">the headline number looks better</text>
-
-        <!-- red outcome (the surprise) -->
-        <rect x="540" y="180" width="430" height="92" rx="10" fill="rgba(255,161,152,0.10)" stroke="#ffa198" stroke-width="2.8"/>
-        <text x="566" y="232" class="lbl" fill="#ffa198" font-size="26" font-weight="800">&#x2717;</text>
-        <text x="600" y="212" class="lbl" fill="#e6edf3" font-size="15" font-weight="600">Previously SAFE answers flipped to</text>
-        <text x="600" y="234" class="lbl" fill="#ffa198" font-size="15" font-weight="700">confident, and WRONG</text>
-        <text x="600" y="256" class="lbl" fill="#adbac7" font-size="13">a brand-new failure mode the average hides</text>
-        <rect x="838" y="186" width="124" height="22" rx="11" fill="#ffa198"/>
-        <text x="900" y="201" text-anchor="middle" class="lbl" fill="#0d1117" font-size="11" font-weight="800" letter-spacing="0.04em">THE SURPRISE</text>
-    </svg>
+    __COUNTER__
     <p class="gap center" style="max-width:90%; margin-top:0.8rem; font-size:clamp(1rem,1.6vw,1.3rem);">Trust is <span class="green">architectural</span>: it comes from deterministic, auditable, model-invariant execution, not from a better prompt.</p>
     <div class="notes">[1:20] The result that should give everyone pause, found only because we scored at scale. Give the model the correct guideline as context and average accuracy goes up; the headline improves, most cases get better. But underneath the average, a minority of previously safe answers flipped to confident and wrong. Adding the right information created a new failure mode the average concealed. This is why I do not trust prompt-level fixes for consequential work: a better prompt can raise the mean and quietly introduce new, fluent, hard-to-catch errors. Trust has to be architectural: deterministic, auditable, the same regardless of model. That is the bridge to the most important slide, because this gets worse the moment you leave curated European data.</div>
 </section>
@@ -278,48 +184,7 @@ code { font-family: 'SF Mono', 'Fira Code', monospace; color: #56d364; backgroun
 <section class="slide">
     <div class="section-label">The headline</div>
     <h2>On real genomes, accuracy <span class="red">falls by ancestry</span></h2>
-    <svg viewBox="0 0 1000 360" style="width: 92%; max-width: 1040px; height: auto; max-height: 58vh; display: block; margin: 0.4rem auto 0;" xmlns="http://www.w3.org/2000/svg">
-        <style>.lbl { font-family: 'Segoe UI', sans-serif; }</style>
-
-        <!-- y reference: baseline y=300 (0%), 100% at y=40, so 1% = 2.6px -->
-        <line x1="110" y1="300" x2="950" y2="300" stroke="#30363d" stroke-width="1.5"/>
-        <text x="100" y="305" text-anchor="end" class="lbl" fill="#6e7681" font-size="12">0%</text>
-        <text x="100" y="175" text-anchor="end" class="lbl" fill="#6e7681" font-size="12">50%</text>
-        <text x="100" y="45" text-anchor="end" class="lbl" fill="#6e7681" font-size="12">100%</text>
-
-        <!-- 100% / clinical-grade target line -->
-        <line x1="110" y1="40" x2="950" y2="40" stroke="#56d364" stroke-width="1.6" stroke-dasharray="7 5"/>
-        <text x="948" y="33" text-anchor="end" class="lbl" fill="#56d364" font-size="12.5" font-weight="600">&#x2248;100% for every ancestry when the skill is executed</text>
-
-        <!-- Bar 1: curated benchmark ~96% (the misleading headline) -->
-        <rect x="160" y="50" width="110" height="250" rx="4" fill="#6e7681" opacity="0.55"/>
-        <text x="215" y="40" text-anchor="middle" class="lbl" fill="#adbac7" font-size="18" font-weight="800">~96%</text>
-        <text x="215" y="322" text-anchor="middle" class="lbl" fill="#adbac7" font-size="13" font-weight="600">Curated cases</text>
-        <text x="215" y="340" text-anchor="middle" class="lbl" fill="#6e7681" font-size="11.5">(what the paper reports)</text>
-
-        <!-- Bar 2: European 72% -->
-        <rect x="365" y="113" width="110" height="187" rx="4" fill="#56d364"/>
-        <text x="420" y="103" text-anchor="middle" class="lbl" fill="#56d364" font-size="20" font-weight="800">72%</text>
-        <text x="420" y="322" text-anchor="middle" class="lbl" fill="#e6edf3" font-size="13" font-weight="600">European</text>
-        <text x="420" y="340" text-anchor="middle" class="lbl" fill="#6e7681" font-size="11.5">Corpas family</text>
-
-        <!-- Bar 3: Latin American 51% -->
-        <rect x="570" y="167" width="110" height="133" rx="4" fill="#e3b341"/>
-        <text x="625" y="157" text-anchor="middle" class="lbl" fill="#e3b341" font-size="20" font-weight="800">51%</text>
-        <text x="625" y="322" text-anchor="middle" class="lbl" fill="#e6edf3" font-size="13" font-weight="600">Latin American</text>
-        <text x="625" y="340" text-anchor="middle" class="lbl" fill="#6e7681" font-size="11.5">Peruvian Genome Project</text>
-
-        <!-- Bar 4: East African 40% -->
-        <rect x="775" y="196" width="110" height="104" rx="4" fill="#ffa198"/>
-        <text x="830" y="186" text-anchor="middle" class="lbl" fill="#ffa198" font-size="20" font-weight="800">40%</text>
-        <text x="830" y="322" text-anchor="middle" class="lbl" fill="#e6edf3" font-size="13" font-weight="600">East African</text>
-        <text x="830" y="340" text-anchor="middle" class="lbl" fill="#6e7681" font-size="11.5">Uganda Genome Resource</text>
-
-        <!-- the gradient arrow across the three real-genome bars -->
-        <path d="M 420 108 L 830 191" fill="none" stroke="#ffa198" stroke-width="2" stroke-dasharray="2 4" opacity="0.9"/>
-        <polygon points="833,193 821,186 826,180" fill="#ffa198"/>
-        <text x="625" y="128" text-anchor="middle" class="lbl" fill="#ffa198" font-size="13" font-weight="700" font-style="italic">the gradient: accuracy falls with distance from the European reference</text>
-    </svg>
+    __ANCESTRY__
     <p class="gap center" style="max-width:90%; margin-top:0.6rem; font-size:clamp(0.92rem,1.45vw,1.18rem);">Curated ~96% <span class="red">does not transfer</span> to real diplotypes from 7,000+ individuals; error grows with distance from the European reference. <span class="green">Executing the skill removes the gradient.</span> Validation is an equity problem.</p>
     <div class="notes">[2:00] The slide I would build the whole talk around. That curated 96% is measured on clean, curated cases. Run the same skill on real diplotypes from over seven thousand actual people and it collapses, and it collapses by ancestry. European, 72%. Latin American, from the Peruvian Genome Project, 51%. East African, from the Uganda Genome Resource, 40%. Accuracy falls with distance from the European reference the tools were built on. This is not an ethics footnote; it is a correctness result. An agent left to its defaults reaches for the most abundant European resources and silently inherits this gradient, at scale. The green line: when the skill executes deterministically, every ancestry returns to roughly 100%. The fix for the equity gap and the fix for the trust gap are the same fix. Equity has to be engineered, not declared.</div>
 </section>
@@ -402,34 +267,13 @@ code { font-family: 'SF Mono', 'Fira Code', monospace; color: #56d364; backgroun
     <p class="center small" style="margin-top:0.5rem;">Try it live: <code style="background:none; padding:0; color:#56d364;">conversational.clawbio.ai</code> &middot; Build with us: <code style="background:none; padding:0; color:#58a6ff;">github.com/ClawBio/ClawBio</code></p>
     <div class="notes">[0:40] Two ways to take this further while the demos run. The book, Build an Agentic Genomics System From Scratch, is hands-on; you build it in your browser on a real published genome, your first runnable skill in minutes and then the validation and guardrails that keep agents honest. Scan the left QR. Join the community on the right: WhatsApp for the conversation, Luma for hackathons and workshops. The open call stands: ship a use case on the platform in the next fortnight, and the best submissions win. Now, let's watch it run.</div>
 </section>
+"""
 
-</div>
-<div class="progress" id="progress"></div>
-<div class="counter" id="counter"></div>
-<div class="talk-handle">clawbio.ai</div>
-<script>
-const slides = document.querySelectorAll('.slide');
-let current = 0;
-const total = slides.length;
-function show(n) {
-    if (n < 0 || n >= total) return;
-    slides[current].classList.remove('active');
-    current = n;
-    slides[current].classList.add('active');
-    document.getElementById('progress').style.width = ((current + 1) / total * 100) + '%';
-    document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
-}
-document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); show(current + 1); }
-    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); show(current - 1); }
-    if (e.key === 'Home') { e.preventDefault(); show(0); }
-    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
-});
-let tsx = 0;
-document.addEventListener('touchstart', e => { tsx = e.changedTouches[0].screenX; });
-document.addEventListener('touchend', e => { const dx = e.changedTouches[0].screenX - tsx; if (dx < -50) show(current + 1); if (dx > 50) show(current - 1); });
-document.addEventListener('click', e => { if (e.target.closest('a, pre, code')) return; if (e.clientX > window.innerWidth / 2) show(current + 1); else show(current - 1); });
-show(0);
-</script>
-</body>
-</html>
+BODY = BODY.replace("__WAVES__", WAVES).replace("__COUNTER__", COUNTER).replace("__ANCESTRY__", ANCESTRY)
+
+out = head + "\n<body>\n<div class=\"deck\">\n" + BODY + "\n</div>\n" + footer
+open(SRC, "w").write(out)
+
+# guard: no em/en dashes in the generated file
+bad = sum(out.count(c) for c in ("—", "–"))
+print("wrote index.html, slides:", out.count('class="slide'), "| em/en dashes:", bad)
