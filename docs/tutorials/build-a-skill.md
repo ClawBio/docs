@@ -23,7 +23,7 @@ Open a new Google Colab notebook and install ClawBio:
 ```python
 !git clone https://github.com/ClawBio/ClawBio.git
 %cd ClawBio
-!pip install -q -r requirements.txt
+!pip install -q -e .
 ```
 
 ## 2. Create Your Skill Directory

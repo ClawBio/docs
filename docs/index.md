@@ -23,7 +23,7 @@ description: Technical documentation, tutorials, and skill reference for ClawBio
     <span class="time-estimate">10 min</span>
   </div>
   <h3 class="tutorial-card__title">Setup</h3>
-  <p class="tutorial-card__desc">Clone ClawBio, install dependencies, and run your first demo skill.</p>
+  <p class="tutorial-card__desc">Install an AI coding agent, connect it to a model provider, and run your first prompt.</p>
 </a>
 
 <a class="tutorial-card" href="tutorials/run-your-first-skill/">
@@ -93,9 +93,26 @@ description: Technical documentation, tutorials, and skill reference for ClawBio
 ## Quick Install
 
 ```bash
+pip install clawbio                 # Python 3.11+
+clawbio run pharmgx --demo
+```
+
+Prefer [conda](https://docs.conda.io/)? `conda install -c bioconda clawbio`.
+
+Using [Claude Code](https://claude.com/claude-code)? Install the skills as a plugin:
+
+```
+/plugin marketplace add ClawBio/ClawBio
+/plugin install clawbio
+```
+
+**Developing ClawBio, or want every skill with its full demo data?** Work from a source
+checkout instead ([uv](https://docs.astral.sh/uv/) recommended):
+
+```bash
 git clone https://github.com/ClawBio/ClawBio.git && cd ClawBio
-pip install -r requirements.txt
-python clawbio.py run pharmgx --demo
+uv sync
+uv run python clawbio.py run pharmgx --demo
 ```
 
 ---

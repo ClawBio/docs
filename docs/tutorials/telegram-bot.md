@@ -25,7 +25,7 @@ Deploy **RoboTerri** — a Telegram bot that runs ClawBio bioinformatics skills 
 
 ```bash
 cd ClawBio
-pip3 install -r bot/requirements.txt
+pip3 install -e .
 ```
 
 ## 2. Create a Telegram Bot

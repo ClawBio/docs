@@ -16,7 +16,7 @@ description: Run a complete GWAS analysis with ClawBio in Google Colab. Variant 
 [:material-presentation-play: View slides](https://clawbio.ai/workshop-gwas-slides.html){ .md-button }
 
 !!! tip "Runs in Google Colab"
-    All code in this workshop runs in Google Colab. Open a new notebook, clone ClawBio (`!git clone https://github.com/ClawBio/ClawBio.git` then `%cd ClawBio` and `!pip install -q -r requirements.txt`), and follow along.
+    All code in this workshop runs in Google Colab. Open a new notebook, clone ClawBio (`!git clone https://github.com/ClawBio/ClawBio.git` then `%cd ClawBio` and `!pip install -q -e .`), and follow along.
 
 !!! tip "Step 4 of 5: Builds on the Variant Interpretation Workshop"
     This is **Step 4** in the ClawBio tutorial sequence. In **Step 3** ([Variant Interpretation Workshop](variant-interpretation-workshop.md)) you annotated a **single genome** and found clinically relevant variants. Now we scale up: from one person to **population-level** analysis using GWAS summary statistics. You will query the same variant (rs429358/APOE) you found before, but this time across thousands of genomes and nine databases.

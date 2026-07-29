@@ -244,7 +244,7 @@ Two guided tutorials are available to get you started. Both paths converge at th
 # Clone the repo and run a demo
 git clone https://github.com/ClawBio/ClawBio.git
 cd ClawBio
-pip3 install -r requirements.txt
+pip3 install -e .
 python3 skills/pharmgx-reporter/pharmgx_reporter.py --demo
 ```
 

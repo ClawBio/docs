@@ -32,7 +32,7 @@ source .venv/bin/activate  # Linux/macOS
 ## 3. Install Dependencies
 
 ```bash
-pip3 install -r requirements.txt
+pip3 install -e .
 ```
 
 Core dependencies: `pandas`, `numpy`, `matplotlib`, `seaborn`.
@@ -65,7 +65,7 @@ You should see a pharmacogenomics report with drug recommendations. If this work
 ## Troubleshooting
 
 ### `ModuleNotFoundError: No module named 'pandas'`
-You forgot to activate the virtual environment or install dependencies. Run `pip install -r requirements.txt`.
+You forgot to activate the virtual environment or install dependencies. Run `pip install -e .`.
 
 ### `Permission denied` on output directory
 Create the output directory first: `mkdir -p /tmp/my_output`.

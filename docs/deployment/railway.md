@@ -15,7 +15,7 @@ description: Deploy ClawBio to Railway for managed cloud hosting.
 2. Click **New Project → Deploy from GitHub Repo**
 3. Select your ClawBio fork or the `ClawBio/ClawBio` repository
 
-Railway auto-detects Python projects and installs `requirements.txt` dependencies.
+Railway auto-detects Python projects and installs dependencies from `pyproject.toml`.
 
 ## 2. Set Environment Variables
 

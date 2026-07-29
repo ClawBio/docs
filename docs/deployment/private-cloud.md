@@ -33,7 +33,7 @@ aws ec2 run-instances \
 ssh -i your-key.pem ubuntu@<instance-ip>
 git clone https://github.com/ClawBio/ClawBio.git
 cd ClawBio
-pip3 install -r requirements.txt
+pip3 install -e .
 ```
 
 For GPU skills, use a `g5.xlarge` (NVIDIA A10G) or `p3.2xlarge` (V100) instance.
@@ -141,14 +141,14 @@ For environments with no internet access:
 
 1. **Pre-download** all Python dependencies:
    ```bash
-   pip download -r requirements.txt -d ./packages
+   pip download . -d ./packages
    ```
 
 2. **Transfer** the ClawBio repo and packages to the air-gapped network (USB, secure transfer)
 
 3. **Install** from local packages:
    ```bash
-   pip install --no-index --find-links ./packages -r requirements.txt
+   pip install --no-index --find-links ./packages clawbio
    ```
 
 4. **Use a local LLM** — Ollama or LM Studio with a downloaded model:
@@ -164,7 +164,7 @@ For environments with no internet access:
 ## Monitoring and Maintenance
 
 - **Logs**: Use systemd journal, CloudWatch, or your existing log aggregation
-- **Updates**: `git pull` and `pip install -r requirements.txt` — no container rebuild needed for direct deployments
+- **Updates**: `git pull` and `pip install -e .` — no container rebuild needed for direct deployments
 - **Backups**: Regular snapshots of the data and results volumes
 - **Health checks**: Cron job or monitoring agent to verify the bot process is running
 

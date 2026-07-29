@@ -23,8 +23,11 @@ Open a new Google Colab notebook and run:
 ```python
 !git clone https://github.com/ClawBio/ClawBio.git
 %cd ClawBio
-!pip install -q -r requirements.txt
+!pip install -q -e .
 ```
+
+We clone the repository here rather than `pip install clawbio`, because this tutorial runs
+the skill scripts directly from `skills/` and uses their bundled demo data.
 
 That is it. ClawBio is ready to use.
 
