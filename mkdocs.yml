@@ -81,6 +81,10 @@ nav:
   - Presentations: presentations/index.md
   - Hackathon:
     - Guide: hackathon/index.md
+    - Berlin 2026:
+      - Overview: hackathon/berlin/index.md
+      - Setup: hackathon/berlin/setup.md
+      - Tracks: hackathon/berlin/tracks.md
     - Setup: hackathon/setup.md
     - Build a Skill: hackathon/first-skill.md
     - Add Python: hackathon/add-python.md
