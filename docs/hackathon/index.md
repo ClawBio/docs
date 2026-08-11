@@ -7,6 +7,21 @@ description: Build bioinformatics AI agent skills with ClawBio. Recap from our f
 
 ![ClawBio Hackathon Banner](img/hackathon-cover.jpg){ width="100%" style="border-radius: 12px; margin-bottom: 1.5rem;" }
 
+!!! tip "Next hackathon: Berlin, Tuesday 18 August 2026"
+
+    **ClawBio + Nebius Hackathon Berlin: Agentic AI for Genomics.** Impact Hub Berlin,
+    12:00 to 18:00. Free, lunch provided, and Nebius credits for the best builds.
+
+    Everything for that event lives under **Berlin 2026** in the top navigation:
+
+    [The Event](berlin/index.md) &nbsp;&middot;&nbsp;
+    [Setup](berlin/setup.md) &nbsp;&middot;&nbsp;
+    [Tracks](berlin/tracks.md) &nbsp;&middot;&nbsp;
+    [Register](https://luma.com/clawbio-q8pw)
+
+    The tracks, setup and judging on **this** page are the general hackathon guide.
+    For Berlin, use the Berlin pages: they supersede what is below.
+
 ---
 
 ## Hackathon #1: Imperial College London

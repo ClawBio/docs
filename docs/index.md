@@ -17,6 +17,15 @@ description: Technical documentation, tutorials, and skill reference for ClawBio
 
 <div class="tutorial-cards">
 
+<a class="tutorial-card" href="hackathon/berlin/">
+  <div class="tutorial-card__header">
+    <span class="difficulty-badge difficulty-badge--event">Next event</span>
+    <span class="time-estimate">Tue 18 Aug 2026</span>
+  </div>
+  <h3 class="tutorial-card__title">ClawBio + Nebius Hackathon Berlin</h3>
+  <p class="tutorial-card__desc">One day building agents that do real genomics, at Impact Hub Berlin. Free, lunch provided, Nebius credits for the best builds. Setup, tracks and running order.</p>
+</a>
+
 <a class="tutorial-card" href="tutorials/setup/">
   <div class="tutorial-card__header">
     <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
