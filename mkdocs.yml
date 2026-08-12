@@ -38,7 +38,8 @@ nav:
   - Berlin 2026:
     - The Event: hackathon/berlin/index.md
     - Setup: hackathon/berlin/setup.md
-    - Tracks: hackathon/berlin/tracks.md
+    - Nebius Quickstart: hackathon/berlin/nebius-quickstart.md
+    - Challenges: hackathon/berlin/tracks.md
   - Skills:
     - Skill Library: skills/index.md
     - PharmGx Reporter: skills/pharmgx-reporter.md

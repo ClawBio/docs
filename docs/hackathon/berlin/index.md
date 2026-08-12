@@ -39,7 +39,12 @@ reproducibility, provenance, traceable evidence, and knowing when to abstain.
 
 ClawBio is the open infrastructure for that: agents perform scientific work through
 explicit, versioned, auditable skills, so what an agent did can be inspected, reproduced
-and challenged.
+and challenged. The library ships 94 skills and bridges to more than 8,000 Galaxy tools,
+so you start from a working pattern rather than a blank page.
+
+You will spend the afternoon on a real genomics problem, not on plumbing. The environment
+is pre-configured and the compute is provided, which is the whole reason the day is worth
+attending: three and a half hours of build time actually spent building.
 
 The premise for the day is one sentence. **A model that confidently invents a citation is
 worse than one that says it does not know.** Everything is built around grounding and
@@ -53,38 +58,46 @@ provenance rather than making a model sound convincing.
 | 12:00 | Welcome, then genomics in an agentic world, an overview (20 min) |
 | 12:20 | Introduction to Nebius products (15 min) |
 | 12:35 | Using and developing ClawBio skills on Nebius, a primer (30 min) |
-| 13:05 | Tracks announced, team formation, lunch |
+| 13:05 | Challenges announced, team formation, lunch |
 | 13:20 | Build |
 | 17:00 | Demos. Everyone votes for their three favourites |
 | 18:00 | Close |
 
-Build time is **3 hours 40 minutes**. That is the constraint every track is designed
+Build time is **3 hours 40 minutes**. That is the constraint every challenge is designed
 around, and it is worth internalising before you scope your idea.
 
-## Tracks
+## Challenges
 
-Pick one. The same prize pool applies across all three.
+Three real problems in genomics. Pick one. The same prize pool applies across all three.
 
 <div class="grid cards" markdown>
 
-- **1. Build a new ClawBio skill**
+- **1. End the diagnostic odyssey**
 
-    Write one skill that does a single useful thing, with a test, and open a pull request.
-    Clearest finish line, and the best artefact to take home.
+    A family, five public genomes, and hundreds of candidate variants. Produce a ranked
+    shortlist with the evidence visible, and be honest about the variants you were not
+    entitled to rank.
 
-- **2. Build an agentic workflow**
+- **2. A cancer target you would defend**
 
-    Chain existing skills so an agent answers a real omics question with the provenance
-    visible at every step.
+    Pick a tumour type in TCGA and shortlist targets. For each one, make the case against
+    it as visible as the case for it. Show us a target you killed.
 
-- **3. Open models on Nebius Serverless**
+- **3. Whose genome does this fail?**
 
-    Put an open biology model behind an endpoint and make a ClawBio skill call it as a
-    tool.
+    Take a published polygenic score, apply it across ancestries, and find where it stops
+    meaning anything. Then build the agent that declines to report it.
 
 </div>
 
-[Full track descriptions and starter problems](tracks.md){ .md-button }
+Not your field? There is an **open challenge** too: bring your own question and we will
+scope it with you at 13:05.
+
+**How** you build is a separate choice you make inside your challenge: write a new skill,
+chain existing ones, or host an open model on Nebius Serverless and call it as a tool.
+Any of the three counts, on any challenge.
+
+[Full briefs, data and judging](tracks.md){ .md-button }
 
 ## Prizes
 

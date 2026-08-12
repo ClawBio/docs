@@ -16,11 +16,12 @@ description: Build bioinformatics AI agent skills with ClawBio. Recap from our f
 
     [The Event](berlin/index.md) &nbsp;&middot;&nbsp;
     [Setup](berlin/setup.md) &nbsp;&middot;&nbsp;
-    [Tracks](berlin/tracks.md) &nbsp;&middot;&nbsp;
+    [Challenges](berlin/tracks.md) &nbsp;&middot;&nbsp;
     [Register](https://luma.com/clawbio-q8pw)
 
-    The tracks, setup and judging on **this** page are the general hackathon guide.
-    For Berlin, use the Berlin pages: they supersede what is below.
+    The tracks, setup and judging on **this** page are the general hackathon guide, kept
+    from the Imperial event. For Berlin, use the Berlin pages: they supersede what is
+    below.
 
 ---
 

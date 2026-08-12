@@ -77,8 +77,9 @@ the ClawBio skill library available as tools. You can point it at your own provi
 instead if you prefer, but the sponsored path is the fastest and it is the one the
 mentors can help with.
 
-The shared read-only volume carries reference data (GIAB, ClinVar, reference genomes) so
-no team spends build time downloading files.
+You do not need to download reference data in advance. Every ClawBio skill ships with its
+own demo data inside the repository, and the public datasets in the briefs (ClinVar,
+gnomAD, TCGA, the PGS Catalog) are reached over their APIs rather than downloaded.
 
 ## Getting help
 
@@ -93,6 +94,13 @@ mentors are there precisely so that nobody loses an hour to a fixable problem.
 
 ## Next
 
-[Read the tracks](tracks.md) before you arrive and turn up with a rough idea of which
+Once you have your Token Factory key, work through the
+[Nebius Quickstart](nebius-quickstart.md). Fifteen minutes, and it is the piece that
+makes any challenge agentic rather than a set of scripts run by hand.
+
+[Read the challenges](tracks.md) before you arrive and turn up with a rough idea of which
 one you want. Team formation at 13:05 goes much faster when people already know what
 they fancy building.
+
+Each brief names the skills that give you an hour-one win, so you can look at one or two
+in advance if you like. You do not have to.

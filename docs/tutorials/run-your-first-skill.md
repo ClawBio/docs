@@ -80,15 +80,22 @@ Run any other skill with `--demo`:
 # Polygenic risk scores
 !python3 skills/gwas-prs/gwas_prs.py --demo --output /tmp/prs-demo
 
-# Single-cell RNA-seq pipeline
-!python3 skills/scrna-orchestrator/scrna_orchestrator.py --demo --output /tmp/scrna-demo
-
-# Health equity scoring
-!python3 skills/equity-scorer/equity_scorer.py --demo --output /tmp/equity-demo
+# Per-variant population equity audit
+!python3 skills/population-equity-auditor/population_equity_auditor.py --demo --output /tmp/equity-demo
 
 # GWAS variant lookup across 9 databases
 !python3 skills/gwas-lookup/gwas_lookup.py --demo --output /tmp/gwas-demo
+
+# Single-cell RNA-seq pipeline (needs one extra install first)
+!pip install -q scanpy
+!python3 skills/scrna-orchestrator/scrna_orchestrator.py --demo --output /tmp/scrna-demo
 ```
+
+!!! note "Not every skill has a `--demo`"
+
+    Most do. Some need real input by design: `equity-scorer`, for instance, computes
+    cohort-level HEIM metrics and takes `--input` with a multi-sample VCF, so there is
+    nothing sensible for it to invent. `--help` on any skill tells you which it is.
 
 ## 5. Understand the Flow
 
