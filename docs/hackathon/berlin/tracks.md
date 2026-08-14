@@ -21,7 +21,7 @@ yourself. See [How you build it](#how-you-build-it) below.
 
     Worth understanding before you arrive, because it is not obvious.
 
-    ClawBio skills are **plain Python**. 93 of the 94 need no language model at all:
+    ClawBio skills are **plain Python**. 94 of the 95 need no language model at all:
     `rare-high-impact-variants` reads a VCF and does arithmetic. Running skills by hand
     in a terminal consumes no Nebius credit and, on its own, is not an agentic workflow.
 
@@ -285,7 +285,7 @@ Bring your own problem. Same rules, same judging, same prize pool.
 
 If you work on a biology that is not covered above, plants, microbes, ageing, proteomics,
 neuro, bring the question and we will help you scope it to the clock at 13:05. The
-library has 94 skills and a bridge to more than 8,000 Galaxy tools, so the odds that
+library has 95 skills and a bridge to more than 8,000 Galaxy tools, so the odds that
 nothing touches your field are low.
 
 Two conditions. Public data only, and the question has to be one where being wrong

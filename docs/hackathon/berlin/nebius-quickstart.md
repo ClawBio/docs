@@ -13,9 +13,24 @@ description: Put a Nebius Token Factory model in charge of ClawBio skills in abo
 Do this before you pick a challenge. It is the smallest complete thing that is
 genuinely agentic, and everything in the three briefs builds on it.
 
+!!! info "This page is Route B, the local one"
+
+    [Setup](setup.md) describes two routes. **Route A** is the hosted agent: one button in
+    the Nebius console, keys provided, four skills runnable on bundled demo data. **Route
+    B** is this page: a local ClawBio checkout driven by a Token Factory model, which
+    reaches all 95 skills and your own files.
+
+    Challenges 1 and 2 need Route B, because `vcf-annotator`,
+    `rare-high-impact-variants`, `clinical-variant-reporter` and
+    `target-validation-scorer` are not among the four the hosted image runs. Challenge 3
+    can start on either, since `gwas-prs` runs in both.
+
+    Fifteen minutes here buys you the whole library. Start on Route A if you would rather
+    see an agent work before installing anything.
+
 ## Why this page exists
 
-ClawBio skills are plain Python. 93 of the 94 need no language model at all:
+ClawBio skills are plain Python. 94 of the 95 need no language model at all:
 `rare-high-impact-variants` reads a VCF and does arithmetic. You can run every skill
 in the library from a terminal, all afternoon, and consume no Nebius credit and build
 nothing agentic.

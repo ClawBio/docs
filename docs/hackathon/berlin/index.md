@@ -39,7 +39,7 @@ reproducibility, provenance, traceable evidence, and knowing when to abstain.
 
 ClawBio is the open infrastructure for that: agents perform scientific work through
 explicit, versioned, auditable skills, so what an agent did can be inspected, reproduced
-and challenged. The library ships 94 skills and bridges to more than 8,000 Galaxy tools,
+and challenged. The library ships 95 skills and bridges to more than 8,000 Galaxy tools,
 so you start from a working pattern rather than a blank page.
 
 You will spend the afternoon on a real genomics problem, not on plumbing. The environment
@@ -120,7 +120,10 @@ You do **not** need prior ClawBio experience, and you do not need to have used A
 agents before. Roughly a third of the room never has.
 
 You get a pre-configured environment on Nebius, so there is nothing to install in
-advance. See [Setup](setup.md) for what to do before you arrive and on the day.
+advance. There are two ways to run: a **hosted agent** that starts from one button in the
+Nebius console, and a **local ClawBio** checkout driven by a Token Factory model. Both
+spend Nebius credits and both are legitimate; the hosted one is faster to start, the local
+one reaches all 95 skills. [Setup](setup.md) explains which to pick and why.
 
 ## Teams
 
@@ -131,7 +134,11 @@ You do not need to arrive with a team. Most people do not.
 
 ## Getting help
 
-Support runs in Slack for the whole day. The invite link is in your joining email.
+Support runs in Slack for the whole day, and starts now rather than on Tuesday. Team
+formation happens in `#berlin-teams` before the event, so the earlier you join the better
+your first hour goes.
+
+[Join the ClawBio Slack](https://join.slack.com/t/clawbioworkspace/shared_invite/zt-46i2vb0gl-k6XHMJdUWE48odbfmONGFg){ .md-button .md-button--primary }
 
 | Channel | For |
 |---------|-----|
