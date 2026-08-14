@@ -121,7 +121,7 @@ All 95 skills are available on this route, including the ones the briefs lean on
     stops a connected server handing an agent a genome on its own. For your own data, use
     the local route.
 
-### 4. Check it works
+### 3. Check it works
 
 Run the dry run in the quickstart. What you want to see is a result with a visible
 provenance trail: which skill ran, and what it returned. If the dry run prints a report,
@@ -149,7 +149,7 @@ gnomAD, TCGA, the PGS Catalog) are reached over their APIs rather than downloade
 | Channel | For |
 |---------|-----|
 | `#berlin-help` | Anything technical. Nebius engineers are in here all day |
-| `#berlin-general` | Announcements, joining details, the walkthrough when it lands |
+| `#berlin-general` | Announcements and joining details |
 | `#berlin-teams` | Finding people to build with |
 
 [Join the ClawBio Slack](https://join.slack.com/t/clawbioworkspace/shared_invite/zt-46i2vb0gl-k6XHMJdUWE48odbfmONGFg){ .md-button }
