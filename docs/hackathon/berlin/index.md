@@ -127,7 +127,7 @@ one command.
 machine is ready before you arrive:
 
 ```bash
-git clone https://github.com/ClawBio/ClawBio.git
+git clone --depth 1 https://github.com/ClawBio/ClawBio.git
 cd ClawBio
 python3 examples/nebius_agent.py --dry-run
 ```

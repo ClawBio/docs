@@ -73,7 +73,7 @@ Python standard library.
 ## 1. Get ClawBio
 
 ```bash
-git clone https://github.com/ClawBio/ClawBio.git
+git clone --depth 1 https://github.com/ClawBio/ClawBio.git
 cd ClawBio
 ```
 

@@ -43,7 +43,7 @@ python3 --version
 Then clone and run the check:
 
 ```bash
-git clone https://github.com/ClawBio/ClawBio.git
+git clone --depth 1 https://github.com/ClawBio/ClawBio.git
 cd ClawBio
 python3 examples/nebius_agent.py --dry-run
 ```
@@ -51,6 +51,10 @@ python3 examples/nebius_agent.py --dry-run
 You should see a report about rare high-impact variants. That means your machine is
 ready: the skill library works, the agent wiring works, and the only thing still missing
 on the day is your Token Factory key.
+
+`--depth 1` skips the history and takes the download from about 145 MB to well under
+half that. Please do this at home rather than in the room: seventy of us cloning the same
+repository over one venue connection at 12:30 is a slow start for everybody.
 
 **If it does not print a report, ask in `#berlin-help` now rather than on Tuesday
 morning.** Solving it in advance costs you a message; solving it in the room costs you
