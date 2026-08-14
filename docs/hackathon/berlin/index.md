@@ -43,7 +43,7 @@ and challenged. The library ships 95 skills and bridges to more than 8,000 Galax
 so you start from a working pattern rather than a blank page.
 
 You will spend the afternoon on a real genomics problem, not on plumbing. The environment
-is pre-configured and the compute is provided, which is the whole reason the day is worth
+is small, the compute is provided, and the credits are free, which is the whole reason the day is worth
 attending: three and a half hours of build time actually spent building.
 
 The premise for the day is one sentence. **A model that confidently invents a citation is
@@ -119,11 +119,21 @@ A laptop, and enough Python to be dangerous.
 You do **not** need prior ClawBio experience, and you do not need to have used AI coding
 agents before. Roughly a third of the room never has.
 
-You get a pre-configured environment on Nebius, so there is nothing to install in
-advance beyond a clone of ClawBio, and you can do that in the room. On the day you put a
-Nebius Token Factory model in charge of the skill library, which takes about fifteen
-minutes from a promo code to a grounded answer. [Setup](setup.md) covers what to do
-before you arrive and on the day.
+Nebius provide the compute and the Token Factory credits, so there is nothing to buy and
+nothing heavy to install. The one thing to set up is ClawBio itself, which is a clone and
+one command.
+
+**Do that part at home.** It needs no key, no account and no credits, and it proves your
+machine is ready before you arrive:
+
+```bash
+git clone https://github.com/ClawBio/ClawBio.git
+cd ClawBio
+python3 examples/nebius_agent.py --dry-run
+```
+
+On the day you add a Token Factory key and put a Nebius model in charge of the skill
+library. [Setup](setup.md) covers the rest.
 
 ## Teams
 

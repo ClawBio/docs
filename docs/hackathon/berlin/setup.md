@@ -10,7 +10,8 @@ description: What to do before you arrive at the ClawBio + Nebius hackathon in B
   <span class="time-estimate">~15 min before the day</span>
 </div>
 
-You get a pre-configured environment on Nebius, so there is very little to install. The
+Nebius provide the compute and the credits, and ClawBio installs with a clone, so there
+is very little to do. The
 few minutes below are worth spending in advance, because the difference between arriving
 ready and arriving cold is most of an hour of build time.
 
@@ -26,25 +27,45 @@ eats the first half hour of a hackathon.
 
 Any operating system. You need a browser and a terminal.
 
-### 3. Optional: get familiar with ClawBio
+### 3. Install ClawBio and prove it runs
 
-Not required, and about a third of the room will not have. If you want a head start,
-the [Run Your First Skill](../../tutorials/run-your-first-skill.md) tutorial takes
-about twenty minutes and will make the 12:35 primer land better.
+**Do this at home. It is the difference between building from 13:20 and building from
+14:00.** It takes about five minutes, needs no key, no account, and no Nebius credits,
+and it downloads nothing beyond the repository itself.
 
-!!! tip "Worth cloning ClawBio before you arrive"
+First check you have git and Python 3.11 or newer:
 
-    The main route on the day runs ClawBio locally with a Nebius Token Factory model in
-    charge of it, so a clone saves you a few minutes and a share of the venue wifi. It is
-    a normal Python repo with no heavy dependencies, and every skill ships its own demo
-    data, so nothing else needs downloading.
+```bash
+git --version
+python3 --version
+```
 
-    ```bash
-    git clone https://github.com/ClawBio/ClawBio.git
-    ```
+Then clone and run the check:
 
-    Not essential. You can do it in the room. See also the standard
-    [hackathon setup](../setup.md).
+```bash
+git clone https://github.com/ClawBio/ClawBio.git
+cd ClawBio
+python3 examples/nebius_agent.py --dry-run
+```
+
+You should see a report about rare high-impact variants. That means your machine is
+ready: the skill library works, the agent wiring works, and the only thing still missing
+on the day is your Token Factory key.
+
+**If it does not print a report, ask in `#berlin-help` now rather than on Tuesday
+morning.** Solving it in advance costs you a message; solving it in the room costs you
+build time.
+
+If you do not have git or Python, the
+[Nebius Quickstart](nebius-quickstart.md) has per-OS install commands and the full
+walkthrough.
+
+### 4. Optional: get familiar with ClawBio
+
+Genuinely optional, and about a third of the room will arrive without having used an AI
+coding agent at all. If you want a head start, the
+[Run Your First Skill](../../tutorials/run-your-first-skill.md) tutorial takes about
+twenty minutes and will make the 12:35 primer land better.
 
 ## On the day
 
