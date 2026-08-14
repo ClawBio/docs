@@ -36,36 +36,103 @@ Factory, and that is where your credits go.
 
 This page wires those two halves together.
 
-## 1. Get a key
+## 0. What you need first
+
+Two things, and you very likely have both.
+
+```bash
+git --version          # any recent version
+python3 --version      # must be 3.11 or newer
+```
+
+If either is missing:
+
+=== "macOS"
+
+    ```bash
+    xcode-select --install                 # git, if you do not have it
+    brew install python@3.12               # python, if yours is older than 3.11
+    ```
+
+=== "Linux"
+
+    ```bash
+    sudo apt update && sudo apt install -y git python3 python3-venv python3-pip
+    ```
+
+=== "Windows"
+
+    Use [Git for Windows](https://git-scm.com/download/win) and
+    [python.org/downloads](https://www.python.org/downloads/). Tick **Add python.exe to
+    PATH** in the installer. Then run the commands below in Git Bash or PowerShell,
+    replacing `python3` with `python`.
+
+**You do not need `uv`, Conda, Docker, or a GPU.** Steps 1 and 2 use nothing but the
+Python standard library.
+
+## 1. Get ClawBio
+
+```bash
+git clone https://github.com/ClawBio/ClawBio.git
+cd ClawBio
+```
+
+That is the whole install. ClawBio skills are plain Python, and every skill ships its own
+demo data inside the repository, so there is nothing else to download.
+
+## 2. Prove it works, before you have a key
+
+```bash
+python3 examples/nebius_agent.py --dry-run
+```
+
+**No key, no dependencies, no API call, no spend.** It prints the base URL, the model,
+the tools the model will be offered, and then runs one skill locally to prove dispatch
+works. You should see a report about rare high-impact variants.
+
+If that prints, your setup is sound, and any later failure is the key or the network
+rather than ClawBio. Do this before you arrive: it is the one step that can be done at
+home and it is the one that most often eats the first half hour of a hackathon.
+
+## 3. Get a key
 
 Token Factory promo codes are handed out at the venue by QR code, so collect yours at the
 door. Redeem it, then create a key at
 [tokenfactory.nebius.com/project/api-keys](https://tokenfactory.nebius.com/project/api-keys).
 
 ```bash
-export NEBIUS_API_KEY=...
+export NEBIUS_API_KEY=paste-your-key-here
 ```
+
+On Windows PowerShell that is `$env:NEBIUS_API_KEY = "paste-your-key-here"`.
+
+The key lives in that terminal window only. Open a new tab and you will need to export it
+again, which is the usual cause of a sudden `NEBIUS_API_KEY is not set`.
 
 The API is OpenAI-compatible. Base URL `https://api.tokenfactory.nebius.com/v1/`,
 authenticated with `Authorization: Bearer <key>`, and it supports native function
 calling, which is the feature the whole day depends on.
 
-## 2. Check the wiring before you spend anything
+## 4. Install the one dependency
 
 ```bash
-cd ClawBio
-uv run python examples/nebius_agent.py --dry-run
+python3 -m pip install openai
 ```
 
-This exercises the whole tool path with no API call and no spend: it prints the base
-URL, the model, the tools the model will be offered, and then runs one skill locally to
-prove dispatch works. If the dry run prints a report, your checkout is sound and any
-later failure is the key or the network, not ClawBio.
-
-## 3. Go live
+That is the only package needed, and only from here on: the dry run above deliberately
+avoids it. If `pip` complains about an externally managed environment, make a virtual
+environment first:
 
 ```bash
-uv run python examples/nebius_agent.py \
+python3 -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+python3 -m pip install openai
+```
+
+## 5. Go live
+
+```bash
+python3 examples/nebius_agent.py \
   --ask "Which variants are genuinely rare and high-impact, and which can you not tell?"
 ```
 
@@ -96,7 +163,7 @@ The tool-call line is the point. It is the provenance trail: not "the model said
 question-to-grounded-answer cycle was **1,268 tokens**, so your credits are not the
 constraint on what you attempt today.
 
-## 4. Read what it refused to say
+## 6. Read what it refused to say
 
 The demo genome has six carried annotated variants. Five are high impact. Of those, three
 have a documented frequency below the threshold, one is common, and **one has no
@@ -109,7 +176,7 @@ into the rare pile. Weak models sweep.
 
 If it swept, that is not a bug to hide. It is the most interesting slide in your demo.
 
-## 5. Now make it yours
+## 7. Now make it yours
 
 The script is about 200 lines and deliberately small. Three obvious extensions, one per
 challenge:
@@ -130,7 +197,7 @@ picks from a fixed menu rather than composing a shell command. Keep it that way.
 List the live catalogue instead, which is 29 models today:
 
 ```bash
-uv run python examples/nebius_agent.py --list-models
+python3 examples/nebius_agent.py --list-models
 ```
 
 The default is `Qwen/Qwen3-235B-A22B-Instruct-2507`, verified working with tool calls.
