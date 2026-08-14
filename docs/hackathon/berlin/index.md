@@ -120,10 +120,10 @@ You do **not** need prior ClawBio experience, and you do not need to have used A
 agents before. Roughly a third of the room never has.
 
 You get a pre-configured environment on Nebius, so there is nothing to install in
-advance. There are two ways to run: a **hosted agent** that starts from one button in the
-Nebius console, and a **local ClawBio** checkout driven by a Token Factory model. Both
-spend Nebius credits and both are legitimate; the hosted one is faster to start, the local
-one reaches all 95 skills. [Setup](setup.md) explains which to pick and why.
+advance beyond a clone of ClawBio, and you can do that in the room. On the day you put a
+Nebius Token Factory model in charge of the skill library, which takes about fifteen
+minutes from a promo code to a grounded answer. [Setup](setup.md) covers what to do
+before you arrive and on the day.
 
 ## Teams
 

@@ -32,11 +32,19 @@ Not required, and about a third of the room will not have. If you want a head st
 the [Run Your First Skill](../../tutorials/run-your-first-skill.md) tutorial takes
 about twenty minutes and will make the 12:35 primer land better.
 
-!!! tip "You do not need to install ClawBio locally"
+!!! tip "Worth cloning ClawBio before you arrive"
 
-    The environment on the day comes with ClawBio and the models already wired up. A
-    local install is a useful fallback, not a prerequisite. If you would rather have one
-    anyway, follow the standard [hackathon setup](../setup.md).
+    The main route on the day runs ClawBio locally with a Nebius Token Factory model in
+    charge of it, so a clone saves you a few minutes and a share of the venue wifi. It is
+    a normal Python repo with no heavy dependencies, and every skill ships its own demo
+    data, so nothing else needs downloading.
+
+    ```bash
+    git clone https://github.com/ClawBio/ClawBio.git
+    ```
+
+    Not essential. You can do it in the room. See also the standard
+    [hackathon setup](../setup.md).
 
 ## On the day
 
@@ -48,69 +56,56 @@ code arrives by email, usually within five minutes.
 Codes are given out in the room rather than in advance, so arriving is the only way to
 get one.
 
-### 2. Choose your route
+### 2. Run ClawBio on Token Factory
 
-There are two ways to run on the day. **Both spend Token Factory credits, both are
-legitimate, and you can switch.** They differ in setup cost and in what they can reach.
+This is the path to follow, and it is verified working end to end. A Token Factory model
+takes charge of the ClawBio skill library: it reads each skill's contract, picks the one
+that answers your question, runs it, reads the output, and reports both what it found and
+what it could not conclude.
 
-| | **A. Hosted agent** | **B. Local ClawBio** |
-|---|---|---|
-| Setup | One button, keys provided | Clone the repo, paste a key |
-| Time to first answer | ~2 minutes | ~15 minutes |
-| Skills you can run | 4, on bundled demo data | All 95, on demo or your own files |
-| Your own data files | Not by default (see below) | Yes |
-| Best for | A first look at agents, and anyone who would rather not install anything | Challenges 1 and 2, which need skills the hosted image does not run |
+The [Nebius Quickstart](nebius-quickstart.md) walks it through in about fifteen minutes.
+You need two things: your Token Factory key from the promo code above, and a clone of
+ClawBio. There is a dry-run mode that exercises the entire tool path with no API call and
+no spend, so you can prove your setup works before using a single credit.
 
-If you have never used an AI coding agent, start with A, then move to B when you know
-what you want to build. If you already know your challenge, go straight to B.
+All 95 skills are available on this route, including the ones the briefs lean on:
+`vcf-annotator`, `rare-high-impact-variants`, `clinical-variant-reporter`,
+`target-validation-scorer` and `gwas-prs`. You can also point skills at your own files.
 
-### 3a. Route A: the hosted agent
+!!! info "A hosted one-click agent may also be available"
 
-In the Nebius console at [console.nebius.com/ai](https://console.nebius.com/ai), find
-**Deploy BioNeMo Agent** and start it. Nebius provide the API keys, so there is nothing
-to procure.
+    Nebius have been preparing a hosted agent that packages OpenClaw, Token Factory,
+    Tavily web search, the ClawBio skills and hosted biology models such as Boltz-2 and
+    DiffDock behind a single deploy button, with API keys provided.
 
-What you get is an OpenClaw chat interface with several things already wired together:
-Token Factory for reasoning, with a model picker; Tavily for agentic web search;
-the ClawBio skill library exposed as tools; and hosted biology models you can call,
-including Boltz-2 and DiffDock for structure prediction and docking.
+    As of Friday 15 August it is not yet published to participant accounts: searching the
+    Nebius console under **Applications → Marketplace** returns only *JupyterHub with
+    BioNeMo Framework*, which is a notebook environment rather than the agent. If it
+    lands before the day, we will announce it in `#berlin-general` with instructions, and
+    it will be the fastest way to see an agent work without installing anything.
 
-The ClawBio tools are `clawbio__list_skills`, `clawbio__describe_skill` and
-`clawbio__run_skill`. Start with:
+    Do not wait for it. The route above needs nothing from anyone and works today.
 
-```
-List every ClawBio skill available in this image. Call clawbio__list_skills exactly once.
-For each skill report its name and whether demo_runnable_in_image is true.
-Do not run any skill.
-```
+??? note "If you do get access to the hosted agent"
 
-Four skills report `demo_runnable_in_image: true`, meaning their demo runs entirely
-inside the image with no external data: `gwas-lookup`, `gwas-prs`, `pharmgx-reporter`
-and `profile-report`. Run one with `clawbio__run_skill`, `demo=true`.
+    The ClawBio tools there are `clawbio__list_skills`, `clawbio__describe_skill` and
+    `clawbio__run_skill`. Start by asking it to list the skills and report which have
+    `demo_runnable_in_image: true`. Four do: `gwas-lookup`, `gwas-prs`,
+    `pharmgx-reporter` and `profile-report`. Run one with `clawbio__run_skill` and
+    `demo=true`.
 
-!!! note "Pointing the hosted agent at your own file"
-
-    `clawbio__run_skill` accepts an `input_path`, but ClawBio's MCP server refuses it
-    unless it was started with `CLAWBIO_MCP_ALLOW_LOCAL_FILES=1`. That is our safety
-    default, not a Nebius restriction: it stops a connected server handing an agent a
-    genome on its own. If you need your own data on the day, use Route B, or ask in
-    `#berlin-help`.
-
-### 3b. Route B: local ClawBio on Token Factory
-
-This is the route the [Nebius Quickstart](nebius-quickstart.md) documents end to end, and
-it is the one to use for Challenges 1 and 2, because skills like `vcf-annotator`,
-`rare-high-impact-variants`, `clinical-variant-reporter` and `target-validation-scorer`
-run here and are not among the four in the hosted image.
-
-You need a Token Factory key from your promo code, and a clone of ClawBio. There is a
-dry-run mode that proves the whole tool path works before you spend a single credit.
+    That image runs those four on bundled demo data only. `clawbio__run_skill` accepts an
+    `input_path`, but ClawBio's MCP server refuses it unless started with
+    `CLAWBIO_MCP_ALLOW_LOCAL_FILES=1`. That guard is ours, not a Nebius restriction: it
+    stops a connected server handing an agent a genome on its own. For your own data, use
+    the local route.
 
 ### 4. Check it works
 
-On Route A, run one of the four demo-qualified skills and read the output. On Route B,
-run the dry run in the quickstart. Either way, what you want to see is a result with a
-visible provenance trail: which skill ran, and what it returned.
+Run the dry run in the quickstart. What you want to see is a result with a visible
+provenance trail: which skill ran, and what it returned. If the dry run prints a report,
+your checkout is sound, and any later failure is the key or the network rather than
+ClawBio.
 
 If you get an authentication error, it is almost always the Token Factory key rather
 than anything else: usually the promo code was redeemed but no key was created
