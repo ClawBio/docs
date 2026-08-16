@@ -315,18 +315,20 @@ code{font-family:'SF Mono','JetBrains Mono',monospace;color:var(--green-hi);
 </section>
 <section class="slide">
   <div class="eyebrow">Today</div>
-  <h2 class="wide">What this means for what you build by five</h2>
+  <h2 class="wide">The shape of what you build</h2>
   <div class="cols three">
-    <div class="card"><span class="k">Challenge 1</span><p><strong>End the diagnostic odyssey.</strong>
-      A ranked shortlist with the evidence visible, and an explicit list of the variants you were not entitled to rank.</p></div>
-    <div class="card"><span class="k">Challenge 2</span><p><strong>A cancer target you would defend.</strong>
-      The case against as visible as the case for. An unresolvable PMID puts you out of contention.</p></div>
-    <div class="card"><span class="k">Challenge 3</span><p><strong>Whose genome does this fail?</strong>
-      Find where a score stops meaning anything, then build the agent that declines to report it.</p></div>
+    <div class="card is-green"><span class="k">Start deterministic</span><p>Run a <strong>ClawBio skill</strong>.
+      It computes an answer you can check, and tells you what it could not call. That is your ground truth for the day.</p></div>
+    <div class="card"><span class="k">Add the agent</span><p>Put a <strong>Token Factory</strong> model in charge of it,
+      with <strong>Tavily</strong> for grounding. Now it chooses, runs, reads the output and reports.</p></div>
+    <div class="card"><span class="k">Then go further</span><p>Call a <strong>hosted model</strong> as a tool,
+      Boltz-2 or DiffDock. Chain skills. Or write a new skill and open a PR.</p></div>
   </div>
-  <p class="kicker">Judged on four things: does it run, would you trust it, is it reusable, did it need agents.
+  <p class="kicker">Any question you like: pick one of the three challenges, or bring your own and we scope it at 13:05.
+    Public data, and being wrong has to matter.</p>
+  <p class="small muted">Judged on four things: does it run, would you trust it, is it reusable, did it need agents.
     <span class="mark">A confident answer with an invented source scores below an honest abstention.</span></p>
-  <div class="notes-src" hidden>Bring your own question is fine too, we scope it at 13:05. Public data, and being wrong has to matter.</div>
+  <div class="notes-src" hidden>The pattern matters more than the topic. Deterministic skill first, so you have something true to compare against; then the agent on top, which is where the Nebius credits go; then Rene's hosted models if your problem needs structure or docking. Challenge briefs are on the docs page, and bring-your-own is genuinely welcome.</div>
 </section>
 <section class="slide">
   <div class="eyebrow">Get building</div>
