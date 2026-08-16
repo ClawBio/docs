@@ -21,7 +21,7 @@ yourself. See [How you build it](#how-you-build-it) below.
 
     Worth understanding before you arrive, because it is not obvious.
 
-    ClawBio skills are **plain Python**. 94 of the 95 need no language model at all:
+    ClawBio skills are **plain Python**. Most need no language model at all:
     `rare-high-impact-variants` reads a VCF and does arithmetic. Running skills by hand
     in a terminal consumes no Nebius credit and, on its own, is not an agentic workflow.
 
@@ -72,11 +72,13 @@ Two things that catch people out:
 - **The runner's short names are not the directory names.** `clawbio.py run` registers 49
   aliases: `prs` is `gwas-prs`, `acmg` is `clinical-variant-reporter`, `rdoutlier` is
   `rare-disease-rnaseq`. `uv run python clawbio.py list` shows them. The direct
-  `skills/<name>/<script>.py` form used below works for every skill, so the briefs use
-  that.
+  `skills/<name>/<script>.py` form works for the skills shown below, so the briefs use
+  that form.
 
-On the day you will be on the prepared Nebius environment rather than a local clone, so
-paths may differ. The illustrated walkthrough lands in `#berlin-general` before the event.
+The local clone is the canonical environment for the day, so the paths below are the
+paths you will use. If Nebius confirms a hosted alternative, it will be announced in the
+final Luma update and `#berlin-general` only after the same commands have been tested
+there.
 
 ---
 
@@ -87,19 +89,20 @@ answer. The sequencing is not the bottleneck. Interpretation is: hundreds of can
 variants, most of them uncertain, and a pipeline that has to decide which ones a human
 should ever see.
 
-**Headline brief.** Take the Corpas family of five, openly consented and public, and
-produce a ranked shortlist of candidate variants for one member. Show the inheritance
-logic. Show the evidence behind each rank. Then show the list you refused to rank, and
-say why.
+**Headline brief.** Use the publicly consented four-person Corpas exome pedigree: son,
+father, mother and sister. Treat the son as a teaching proband, show the inheritance
+logic and make the evidence behind every filter visible. Then state what the data does
+not support. There is no phenotype or HPO file and this is not an undiagnosed clinical
+case, so a defensible agent must refuse to turn segregation evidence into a diagnosis.
 
 That last part is the point. Any tool can output a ranking. Very few say which variants
 they were not entitled to have an opinion about.
 
 | | |
 |---|---|
-| **Hour one** | Annotate one genome and get a ranked table out. `vcf-annotator` and `rare-high-impact-variants` will do this without you writing code. |
-| **Hour two** | Add the rest of the family. Segregation, de novo versus inherited, compound heterozygotes. The logic is conditional and messy, which is exactly where an agent earns its place. |
-| **Stretch** | ACMG evidence codes with `clinical-variant-reporter`, and an explicit abstention list with a reason attached to every entry. |
+| **Hour one** | Start from the supplied strict 68-record b37 quartet subset. Reproduce the 30 paternal and 38 maternal unphased teaching labels, then make every filter visible. |
+| **Hour two** | Add one missing evidence layer, such as build-matched population frequency or updated consequence annotation. Keep it separate from the inherited teaching labels. |
+| **Stretch** | Add an explicit abstention list with a reason attached to every entry. Refuse diagnosis without phenotype or HPO data, and do not claim molecular phase or compound heterozygosity. |
 
 **The commands.** Every one below was run on a source checkout on 12 August and produced
 output. Run them from the ClawBio directory.
@@ -127,6 +130,13 @@ Read `/tmp/rhiv/report.md` first. It already separates variants that are *docume
 from variants with *no frequency data at all*, and says why that distinction matters. That
 is your starting point, not your finish line.
 
+The commands above are verified demonstrations on bundled synthetic data. Do not run
+`vcf-annotator` over either complete Corpas source VCF: it makes serial per-variant
+network calls, uses current GRCh38 services by default and does not retain the family
+genotypes. Do not feed the historical quartet directly to
+`rare-high-impact-variants`: it does not parse the legacy `EFF` field or provide the
+missing population-frequency layer.
+
 **The gap worth attacking.** Variants with no gnomAD frequency at all. Absence of a
 frequency is not evidence of rarity, but automated pipelines routinely treat it as
 though it were. On a recent audit of one such pipeline, 16 of 27 flagged
@@ -142,7 +152,24 @@ is worth more than one that guesses past it.
   `cnv-acmg-classifier` over structural and copy-number variants and report what a
   SNV-only pipeline silently drops.
 
-**Data.** Corpas family of five, GIAB, ClinVar, gnomAD.
+**Data.** The supplied event pack contains an indexed 68-record quartet subset as the
+canonical starter. It was derived from the
+[joint four-person Corpas exome VCF](https://figshare.com/articles/dataset/Corpasome/693052)
+using autosomal, biallelic, PASS, historical HIGH-effect, family-wide DP and GQ, and
+single-parent transmission filters. The complete quartet and the
+[son-only exome VCF](https://f1000.figshare.com/articles/dataset/Son_exome_files/92584)
+remain provenance and extension sources, not the hour-one input. These are GRCh37
+teaching data. Retain the DOI and CC BY 4.0 attribution, and remember that public human
+genomes remain potentially identifiable. GIAB, ClinVar and gnomAD can provide comparison
+or annotation data only when the genome build and evidence semantics are made explicit.
+
+!!! danger "Release gate"
+
+    Before this page is published, insert the approved retrieval URL for
+    `challenge1-b37-segregation.vcf.gz` and its `.tbi` index. The VCF SHA256 is
+    `c6c1185618c232d6b751dabb78a9678936f1fedf2633fbb7f35ccfa992e3dc90`.
+    Do not send participants to this page until the files resolve without organiser
+    credentials.
 
 ---
 
@@ -232,9 +259,6 @@ grep -i "reference population" /tmp/prs/prs_report.md   # EUR, on every single s
 # Ancestry decomposition against the Simons Genome Diversity Project
 uv run python skills/claw-ancestry-pca/ancestry_pca.py --demo --output /tmp/pca
 
-# Per-variant equity audit
-uv run python skills/population-equity-auditor/population_equity_auditor.py \
-  --demo --output /tmp/pea && cat /tmp/pea/report.md
 ```
 
 `equity-scorer` has no `--demo` because it works across a cohort, but the repo ships one:
@@ -247,8 +271,7 @@ uv run python skills/equity-scorer/equity_scorer.py \
   --output /tmp/equity && cat /tmp/equity/report.md
 ```
 
-Verified on 12 August: HEIM score 76.2/100, with pairwise FST and a PCA. That is your
-cohort-level view; `population-equity-auditor` above is the per-variant one.
+Verified on 12 August: HEIM score 76.2/100, with pairwise FST and a PCA.
 
 **Headline brief.** Take a published score from the PGS Catalog. Apply it across
 ancestries. Find the point at which it stops meaning anything, and quantify it rather
@@ -285,7 +308,7 @@ Bring your own problem. Same rules, same judging, same prize pool.
 
 If you work on a biology that is not covered above, plants, microbes, ageing, proteomics,
 neuro, bring the question and we will help you scope it to the clock at 13:05. The
-library has 95 skills and a bridge to more than 8,000 Galaxy tools, so the odds that
+library has more than 90 skills and a bridge to more than 8,000 Galaxy tools, so the odds that
 nothing touches your field are low.
 
 Two conditions. Public data only, and the question has to be one where being wrong
@@ -316,9 +339,10 @@ whichever challenge you picked.
 
 - **Route C: host your own model**
 
-    Put an open biology model behind a Nebius Serverless endpoint and have a ClawBio
-    skill call it as a tool. Deepest route, and the most plumbing risk. Nebius engineers
-    are in `#berlin-help` for exactly this.
+    If participant Serverless access, billing and credits are confirmed, put an open
+    biology model behind a Nebius endpoint and have a ClawBio skill call it as a tool.
+    Deepest route, and the most plumbing risk. If access is not confirmed, this route is
+    out for the day.
 
 </div>
 
@@ -352,12 +376,14 @@ and demo it on purpose.
 
 ## Data
 
-Use public data only. Nothing participant-supplied, nothing patient-identifiable.
+Use public data only. Nothing participant-supplied. Public human genomes can remain
+identifiable, so keep the approved teaching pack separate from attendee data and do not
+upload it to an unapproved service.
 
 | Dataset | What it is | Challenge |
 |---------|-----------|-----------|
-| Corpas family of five | Openly consented family genomes | 1 |
-| GIAB | Genome in a Bottle reference materials | 1, ground truth for anything |
+| Corpas exome quartet | Public GRCh37 joint VCF for son, father, mother and sister; teaching data, not an undiagnosed case | 1 |
+| GIAB | Genome in a Bottle benchmark materials | 1, truth sets within their defined benchmark regions and variant classes |
 | ClinVar | Clinical variant assertions | 1, 2 |
 | gnomAD | Population allele frequencies, and their absence | 1, 3 |
 | TCGA via UCSC Xena | Tumour expression, survival, clinical | 2 |
@@ -366,13 +392,10 @@ Use public data only. Nothing participant-supplied, nothing patient-identifiable
 | 1000 Genomes, SGDP | Ancestry reference panels | 3 |
 | GEO, Expression Atlas | Public expression data | Any |
 
-Nothing in the table needs downloading in advance. Every skill ships with demo data inside
-the repository, so you can start with a working example in seconds, and each public
-dataset above is reached over its API when you move on to real inputs.
-
-If any bulk reference data is staged locally on the day, it will be announced in
-`#berlin-general` on the morning. Do not plan around it: nothing in these briefs requires
-it.
+The repository contains demo inputs for the exact skill commands shown in these briefs.
+That does not mean every ClawBio skill bundles data or every public source has an API.
+Challenge 1 also needs the separate 68-record event pack named above. Its approved link
+will be included in the final Luma reminder and `#berlin-general` before the event.
 
 ---
 

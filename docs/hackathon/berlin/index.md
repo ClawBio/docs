@@ -22,11 +22,11 @@ skills on Nebius infrastructure and demo what you made at five.
 | | |
 |---|---|
 | **Date** | Tuesday 18 August 2026 |
-| **Doors** | 11:30 |
+| **Doors** | 11:30, subject to final venue confirmation |
 | **Programme** | 12:00 to 18:00 |
-| **Venue** | Impact Hub Berlin, room "The Loop" |
+| **Venue** | Impact Hub Berlin, room "The Loop", confirmed 28 July and awaiting final reconfirmation |
 | **Address** | Rollbergstraße 28a, 12053 Berlin |
-| **Cost** | Free. Lunch provided. |
+| **Cost** | Free. Lunch planned, with final service details pending. |
 
 Come at 11:30 if you can. We start at 12:00 sharp, and the earlier you are set up on
 Nebius the more you build.
@@ -39,12 +39,14 @@ reproducibility, provenance, traceable evidence, and knowing when to abstain.
 
 ClawBio is the open infrastructure for that: agents perform scientific work through
 explicit, versioned, auditable skills, so what an agent did can be inspected, reproduced
-and challenged. The library ships 95 skills and bridges to more than 8,000 Galaxy tools,
+and challenged. The library ships more than 90 skills and bridges to more than 8,000 Galaxy tools,
 so you start from a working pattern rather than a blank page.
 
-You will spend the afternoon on a real genomics problem, not on plumbing. The environment
-is small, the compute is provided, and the credits are free, which is the whole reason the day is worth
-attending: three and a half hours of build time actually spent building.
+You will spend the afternoon on a real genomics problem, not on plumbing. The local
+ClawBio route is small and verified. Nebius plans to provide compute and promotional
+credits; the organisers are testing the external redemption path and room-scale capacity
+before the final participant instructions are released. The programme provides 3 hours
+40 minutes of build time.
 
 The premise for the day is one sentence. **A model that confidently invents a citation is
 worse than one that says it does not know.** Everything is built around grounding and
@@ -74,9 +76,9 @@ Three real problems in genomics. Pick one. The same prize pool applies across al
 
 - **1. End the diagnostic odyssey**
 
-    A family, five public genomes, and hundreds of candidate variants. Produce a ranked
-    shortlist with the evidence visible, and be honest about the variants you were not
-    entitled to rank.
+    A public four-person exome pedigree and hundreds of candidate variants. Show the
+    segregation evidence, then be explicit about what cannot be concluded without a
+    clinical phenotype.
 
 - **2. A cancer target you would defend**
 
@@ -94,8 +96,8 @@ Not your field? There is an **open challenge** too: bring your own question and 
 scope it with you at 13:05.
 
 **How** you build is a separate choice you make inside your challenge: write a new skill,
-chain existing ones, or host an open model on Nebius Serverless and call it as a tool.
-Any of the three counts, on any challenge.
+chain existing ones, or, if participant Serverless access is confirmed, host an open
+model on Nebius and call it as a tool. Any available route counts on any challenge.
 
 [Full briefs, data and judging](tracks.md){ .md-button }
 
@@ -117,11 +119,11 @@ Winners are chosen by the room. Everyone votes for their three favourite demos.
 A laptop, and enough Python to be dangerous.
 
 You do **not** need prior ClawBio experience, and you do not need to have used AI coding
-agents before. Roughly a third of the room never has.
+agents before.
 
-Nebius provide the compute and the Token Factory credits, so there is nothing to buy and
-nothing heavy to install. The one thing to set up is ClawBio itself, which is a clone and
-one command.
+The planned sponsored route uses Nebius Token Factory promotional credits. The exact
+participant redemption flow is under final test. The only local setup is ClawBio itself,
+which is a clone and one command.
 
 **Do that part at home.** It needs no key, no account and no credits, and it proves your
 machine is ready before you arrive:

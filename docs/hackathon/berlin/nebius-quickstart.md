@@ -15,8 +15,10 @@ genuinely agentic, and everything in the three briefs builds on it.
 
 !!! info "This is the main route for the day"
 
-    A local ClawBio checkout with a Nebius Token Factory model in charge of it. It reaches
-    all 95 skills and your own files, and it is verified working end to end.
+    A local ClawBio checkout with a Nebius Token Factory model in charge of a four-skill
+    allowlist. The local code and one organiser-key call are verified, and you can extend
+    the allowlist for your challenge. External credit redemption and room-scale capacity
+    remain under final test.
 
     Nebius have a hosted one-click agent in preparation which would package this behind a
     deploy button. It is not published to participant accounts yet, so do not wait for it;
@@ -24,7 +26,7 @@ genuinely agentic, and everything in the three briefs builds on it.
 
 ## Why this page exists
 
-ClawBio skills are plain Python. 94 of the 95 need no language model at all:
+ClawBio skills are plain Python. Most need no language model at all:
 `rare-high-impact-variants` reads a VCF and does arithmetic. You can run every skill
 in the library from a terminal, all afternoon, and consume no Nebius credit and build
 nothing agentic.
@@ -77,8 +79,9 @@ git clone --depth 1 https://github.com/ClawBio/ClawBio.git
 cd ClawBio
 ```
 
-That is the whole install. ClawBio skills are plain Python, and every skill ships its own
-demo data inside the repository, so there is nothing else to download.
+That is the whole install for the reference agent. Its dry run uses bundled demo data.
+Some other skills and the real challenge inputs need separate data or network access;
+each challenge brief states what it requires.
 
 ## 2. Prove it works, before you have a key
 
@@ -90,14 +93,15 @@ python3 examples/nebius_agent.py --dry-run
 the tools the model will be offered, and then runs one skill locally to prove dispatch
 works. You should see a report about rare high-impact variants.
 
-If that prints, your setup is sound, and any later failure is the key or the network
-rather than ClawBio. Do this before you arrive: it is the one step that can be done at
-home and it is the one that most often eats the first half hour of a hackathon.
+If that prints, the reference checkout and one local dispatch path are sound. It does
+not test every skill, your key, the venue network or Token Factory capacity. Do this
+before you arrive so checkout problems do not consume build time.
 
 ## 3. Get a key
 
-Token Factory promo codes are handed out at the venue by QR code, so collect yours at the
-door. Redeem it, then create a key at
+Nebius plan to provide Token Factory promotional credit at the venue. Follow the
+confirmed QR or code instructions at check-in. Once the credit appears in your project,
+create a key at
 [tokenfactory.nebius.com/project/api-keys](https://tokenfactory.nebius.com/project/api-keys).
 
 ```bash
@@ -159,9 +163,8 @@ Tokens: 962 in, 306 out, over 1 skill call(s).
 ```
 
 The tool-call line is the point. It is the provenance trail: not "the model said so" but
-"the model ran this skill and here is what came back". And note the cost. A complete
-question-to-grounded-answer cycle was **1,268 tokens**, so your credits are not the
-constraint on what you attempt today.
+"the model ran this skill and here is what came back". This one measured run used 1,268
+tokens. It verifies the call shape, not the room's credit or capacity limits.
 
 ## 6. Read what it refused to say
 
@@ -192,15 +195,16 @@ picks from a fixed menu rather than composing a shell command. Keep it that way.
 
 ## Choosing a model
 
-**Do not trust the model ID in Nebius's own function-calling documentation.** It is
-`meta-llama/Meta-Llama-3.1-8B-Instruct-fast` and it returns a 404: the docs are stale.
-List the live catalogue instead, which is 29 models today:
+A model ID copied from Nebius function-calling documentation returned a 404 in the
+12 August test. List the live catalogue instead:
 
 ```bash
 python3 examples/nebius_agent.py --list-models
 ```
 
-The default is `Qwen/Qwen3-235B-A22B-Instruct-2507`, verified working with tool calls.
+The current script default is `Qwen/Qwen3-235B-A22B-Instruct-2507`, verified working
+with tool calls. The organisers will name the final room model after the endpoint and
+capacity test. Until then, do not hard-code a different model into your project.
 
 ### Reasoning models will surprise you
 
