@@ -335,14 +335,20 @@ code{font-family:'SF Mono','JetBrains Mono',monospace;color:var(--green-hi);
   <h2 class="wide">The whole setup</h2>
   <pre><code>git clone --depth 1 https://github.com/ClawBio/ClawBio.git
 cd ClawBio
-python3 examples/nebius_agent.py --dry-run
 
-export NEBIUS_API_KEY=...          # your promo code, at the door
+claude                     # or codex, in that folder
+&gt; read CLAUDE.md, then take me through challenge 1
+
+export NEBIUS_API_KEY=...  # promo code at the door
 python3 examples/nebius_agent.py --ask "your question"</code></pre>
-  <p class="lead">A grounded answer costs about <strong>1,300 tokens</strong> and seven seconds.
-    Your credits are not the constraint on what you attempt.</p>
+  <p class="lead">You drive an agent. It reads the skills, runs them and chains them.
+    A grounded answer costs about <strong>1,300 tokens</strong> and seven seconds, so your
+    credits are not the constraint on what you attempt.</p>
+  <p class="small muted">Every challenge has a prompt you paste straight in, and all the data is ready at
+    <code>docs.clawbio.ai/hackathon/berlin/data</code>. Skills run through <code>uv</code> (<code>astral.sh/uv</code>).
+    None of this is required to turn up.</p>
   <p class="small muted">docs.clawbio.ai/hackathon/berlin &middot; <code>#berlin-help</code> in Slack, all day &middot; demos at 17:00</p>
-  <div class="notes-src" hidden>Ninety-five of the ninety-six skills need no model at all. The agent is the layer above, and that is where the Nebius credits go. Demos at five, everyone votes for their three favourites.</div>
+  <div class="notes-src" hidden>You are not meant to type skill commands. Open Claude Code or Codex in the clone, tell it to read CLAUDE.md, and paste the challenge prompt from the docs page. The repo ships CLAUDE.md and AGENTS.md so both agents know what they are holding. Ninety-five of the ninety-six skills need no model at all; the agent is the layer above, and that is where the Nebius credits go. Data is published and needs no account. Demos at five, everyone votes for their three favourites.</div>
 </section>
 </div>
 

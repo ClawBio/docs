@@ -13,12 +13,16 @@ description: Five minutes of setup for the ClawBio + Nebius hackathon in Berlin.
 Three commands, then you hand over to an agent. You will not be typing skill commands all
 day: your coding agent reads the skill library and runs it for you.
 
+**None of this is required to turn up.** You can do all of it at the venue, and there
+will be people on hand to help. It is simply faster on your own connection than on shared
+WiFi at 13:20.
+
 ## The five-minute setup
 
 ### 1. Install `uv`
 
-Every ClawBio skill runs through `uv`. A system Python will fail on missing packages, and
-`pip install -e .` does not work on this repository, so this step is not optional.
+Every ClawBio skill runs through `uv`, and a system Python will fail on missing packages.
+Worth having before you start building.
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh

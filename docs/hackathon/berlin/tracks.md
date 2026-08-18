@@ -20,9 +20,10 @@ you a prompt to paste. Start there and go wherever the science takes you.
 [Get the data](data/index.md){ .md-button }
 [Setup, if you have not done it](setup.md){ .md-button }
 
-## Before anything else: five minutes of setup
+## Five minutes of setup
 
-You need three things. Your agent handles everything after that.
+Three things, and your agent handles everything after that. None of it is required in
+advance: do it at the venue if you prefer, and ask in `#berlin-help` if anything sticks.
 
 **1. Install `uv`.** Every ClawBio skill runs through it, and a system Python will fail on
 missing packages. One line:
