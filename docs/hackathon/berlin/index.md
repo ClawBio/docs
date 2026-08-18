@@ -42,11 +42,11 @@ explicit, versioned, auditable skills, so what an agent did can be inspected, re
 and challenged. The library ships more than 90 skills and bridges to more than 8,000 Galaxy tools,
 so you start from a working pattern rather than a blank page.
 
-You will spend the afternoon on a real genomics problem, not on plumbing. The local
-ClawBio route is small and verified. Nebius plans to provide compute and promotional
-credits; the organisers are testing the external redemption path and room-scale capacity
-before the final participant instructions are released. The programme provides 3 hours
-40 minutes of build time.
+You will spend the afternoon on a real genomics problem, not on plumbing. You drive a
+coding agent, Claude Code or Codex, and it reads the skill library, runs the analyses and
+chains them together. You will not be typing commands all day. Nebius provide compute and
+promotional credits, issued at the venue. The programme provides 3 hours 20 minutes of
+build time.
 
 The premise for the day is one sentence. **A model that confidently invents a citation is
 worse than one that says it does not know.** Everything is built around grounding and
@@ -60,13 +60,16 @@ provenance rather than making a model sound convincing.
 | 12:00 | Welcome, then genomics in an agentic world, an overview (20 min) |
 | 12:20 | Introduction to Nebius products (15 min) |
 | 12:35 | Using and developing ClawBio skills on Nebius, a primer (30 min) |
-| 13:05 | Challenges announced, team formation, lunch |
+| 12:55 | The three challenges, and how demos are judged |
+| 13:05 | Team formation and lunch |
 | 13:20 | Build |
+| 16:40 | Submissions freeze in `#berlin-demos` |
 | 17:00 | Demos. Everyone votes for their three favourites |
 | 18:00 | Close |
 
-Build time is **3 hours 40 minutes**. That is the constraint every challenge is designed
-around, and it is worth internalising before you scope your idea.
+Build time is **3 hours 20 minutes**, 13:20 to the 16:40 freeze. That is the constraint
+every challenge is designed around, and it is worth internalising before you scope your
+idea.
 
 ## Challenges
 
@@ -99,7 +102,11 @@ scope it with you at 13:05.
 chain existing ones, or, if participant Serverless access is confirmed, host an open
 model on Nebius and call it as a tool. Any available route counts on any challenge.
 
-[Full briefs, data and judging](tracks.md){ .md-button }
+Each brief comes with a prompt you paste straight into Claude Code or Codex, so your
+first hour starts with the science rather than with setup.
+
+[Full briefs and judging](tracks.md){ .md-button }
+[Challenge data](data/index.md){ .md-button }
 
 ## Prizes
 
@@ -121,21 +128,22 @@ A laptop, and enough Python to be dangerous.
 You do **not** need prior ClawBio experience, and you do not need to have used AI coding
 agents before.
 
-The planned sponsored route uses Nebius Token Factory promotional credits. The exact
-participant redemption flow is under final test. The only local setup is ClawBio itself,
-which is a clone and one command.
+Bring Claude Code or Codex if you have them. You will drive the day through one of them,
+and everything works without them too.
 
-**Do that part at home.** It needs no key, no account and no credits, and it proves your
-machine is ready before you arrive:
+**Setup is three commands and takes five minutes.** No key, no account, no credits:
 
 ```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
 git clone --depth 1 https://github.com/ClawBio/ClawBio.git
 cd ClawBio
-python3 examples/nebius_agent.py --dry-run
 ```
 
-On the day you add a Token Factory key and put a Nebius model in charge of the skill
-library. [Setup](setup.md) covers the rest.
+Then open `claude` or `codex` in that folder and ask it to read `CLAUDE.md`. The repo
+ships instructions for both, so your agent knows what it is holding.
+
+Do it before you arrive if you can. [Setup](setup.md) has the detail, and
+[the data](data/index.md) is ready for all three challenges.
 
 ## Teams
 

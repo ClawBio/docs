@@ -1,111 +1,144 @@
 ---
 title: "Berlin Setup"
-description: What to do before you arrive at the ClawBio + Nebius hackathon in Berlin, and how to get running on the day.
+description: Five minutes of setup for the ClawBio + Nebius hackathon in Berlin. Install uv, clone ClawBio, open Claude Code or Codex, and let the agent do the rest.
 ---
 
 # Setup
 
 <div class="tutorial-card__header">
   <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
-  <span class="time-estimate">~15 min before the day</span>
+  <span class="time-estimate">~5 min</span>
 </div>
 
-Nebius provide the compute and the credits, and ClawBio installs with a clone, so there
-is very little to do. The
-few minutes below are worth spending in advance, because the difference between arriving
-ready and arriving cold is most of an hour of build time.
+Three commands, then you hand over to an agent. You will not be typing skill commands all
+day: your coding agent reads the skill library and runs it for you.
 
-## Before you arrive
+## The five-minute setup
 
-### 1. Create a Nebius account
+### 1. Install `uv`
 
-Sign up at [nebius.com](https://nebius.com) with the email you registered with. Do this
-at home. Account creation and email verification is the single most common thing that
-eats the first half hour of a hackathon.
-
-### 2. Bring a laptop
-
-Any operating system. You need a browser and a terminal.
-
-### 3. Install ClawBio and prove it runs
-
-**Do this at home. It is the difference between building from 13:20 and building from
-14:00.** It takes about five minutes, needs no key, no account, and no Nebius credits,
-and it downloads nothing beyond the repository itself.
-
-First check you have git and Python 3.11 or newer:
+Every ClawBio skill runs through `uv`. A system Python will fail on missing packages, and
+`pip install -e .` does not work on this repository, so this step is not optional.
 
 ```bash
-git --version
-python3 --version
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Then clone and run the check:
+Windows PowerShell:
+
+```powershell
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+Then restart your terminal and check it:
+
+```bash
+uv --version
+```
+
+### 2. Clone ClawBio
 
 ```bash
 git clone --depth 1 https://github.com/ClawBio/ClawBio.git
 cd ClawBio
-python3 examples/nebius_agent.py --dry-run
 ```
 
-You should see a report about rare high-impact variants. That proves this checkout can
-run the reference script and dispatch one bundled skill locally. It does not test every
-skill, your Token Factory key, the venue network or room-scale capacity.
+`--depth 1` skips the history. Please do this on your own connection rather than the
+venue WiFi if you can.
 
-`--depth 1` skips the history and takes the download from about 145 MB to well under
-half that. Please do this at home rather than in the room: seventy of us cloning the same
-repository over one venue connection at 12:30 is a slow start for everybody.
+### 3. Open your agent in that folder
 
-**If it does not print a report, ask in `#berlin-help` now rather than on Tuesday
-morning.** Solving it in advance costs you a message; solving it in the room costs you
-build time.
+```bash
+claude          # Claude Code
+codex           # Codex
+```
 
-If you do not have git or Python, the
-[Nebius Quickstart](nebius-quickstart.md) has per-OS install commands and the full
-walkthrough.
+The repository ships `CLAUDE.md` and `AGENTS.md` at its root, so both agents pick up the
+skill library, the routing rules and the safety boundaries automatically. Tell your agent
+to read `CLAUDE.md` first.
 
-### 4. Optional: get familiar with ClawBio
+### 4. Prove it works
 
-Genuinely optional. If you want a head start, the
-[Run Your First Skill](../../tutorials/run-your-first-skill.md) tutorial takes about
-twenty minutes and will make the 12:35 primer land better.
+Ask your agent:
+
+```text
+Read CLAUDE.md, then run the reference agent's dry check:
+uv run python examples/nebius_agent.py --dry-run
+Tell me what it printed and what it proves.
+```
+
+You should see a rare high-impact variants report. That proves your checkout can run a
+skill locally. It needs no key, no account and no credits.
+
+If it does not print a report, ask in `#berlin-help` straight away rather than losing
+build time to it.
+
+!!! warning "The first thing that will confuse your agent"
+
+    `clawbio.py run <name>` only registers 49 short aliases, and most of the challenge
+    skills are not among them. `clawbio.py run gwas-prs` fails with "Unknown skill".
+
+    The reliable form is the direct script path:
+    `uv run python skills/gwas-prs/gwas_prs.py --demo --output /tmp/prs`
+
+    Tell your agent this once and it will stop fighting the runner.
+
+!!! tip "If you do not have Claude Code or Codex"
+
+    Everything still works. Every challenge brief has a collapsed
+    **"The underlying commands"** block with the exact verified commands, so you can run
+    the skills directly and build your workflow around them.
+
+    You can also put a Nebius Token Factory model in charge of the skills instead. The
+    [Nebius Quickstart](nebius-quickstart.md) does that in about fifteen minutes.
+
+## Your data
+
+All three challenges have their data sorted, and none of it needs an account.
+
+- **Challenge 1** downloads a 15 KB teaching pack from
+  [the data page](data/index.md). Your agent can fetch it itself.
+- **Challenge 2** queries the UCSC Xena API live. Nothing to download.
+- **Challenge 3** uses demo data bundled in the repository.
+
+[Get the data](data/index.md){ .md-button .md-button--primary }
 
 ## On the day
 
-### 1. Collect your Token Factory credits
+### Collect your Token Factory credits
 
-Nebius plan to issue promotional credits at the venue. Follow the confirmed QR or code
-instructions at check-in, wait for the credit to appear in your Token Factory project,
-then create an API key. The organisers are testing this exact external-user path before
-the event.
+Nebius issue promotional credits at the venue. Follow the QR or code instructions at
+check-in, wait for the credit to appear in your Token Factory project, then create an API
+key.
 
-### 2. Run ClawBio on Token Factory
+### Point an agent at the skills
 
-This is the path to follow. The local agent and one organiser-key Token Factory call are
-verified. The external promotional-credit route and room-scale capacity remain under
-final test. A Token Factory model takes charge of the reference agent's allowlisted
-ClawBio skills: it reads their contracts, picks one, runs it, reads the output, and
-reports both what it found and what it could not conclude.
+You have two ways to make this agentic, and both count for judging.
 
-The [Nebius Quickstart](nebius-quickstart.md) walks it through in about fifteen minutes.
-You need two things: your Token Factory key from the promo code above, and a clone of
-ClawBio. There is a dry-run mode that exercises one local dispatch path with no API call
-and no spend, so you can prove the reference checkout works before using a credit.
+**Claude Code or Codex**, driving the ClawBio skills locally. This is the fastest route
+and it works right now.
 
-The reference agent starts with four verified skills:
-`vcf-annotator`, `rare-high-impact-variants`, `clinical-variant-reporter` and
-`gwas-prs`. Its `SKILLS` dictionary is deliberately a small allowlist. Add the skills
-your project needs there rather than exposing arbitrary shell commands to the model.
+**A Nebius Token Factory model**, taking charge of the reference agent's skills. The
+[Nebius Quickstart](nebius-quickstart.md) walks it through in about fifteen minutes. This
+is where your credits go.
+
+The reference agent starts with four verified skills: `vcf-annotator`,
+`rare-high-impact-variants`, `clinical-variant-reporter` and `gwas-prs`. Its `SKILLS`
+dictionary is deliberately a small allowlist. Add the skills your project needs there
+rather than exposing arbitrary shell commands to a model.
+
+If you get an authentication error, it is almost always the Token Factory key: usually
+the promo code was redeemed but no key was created afterwards, or the key belongs to a
+different project from the credits. Ask in `#berlin-help`.
 
 !!! info "A hosted one-click agent may also be available"
 
     Nebius have been preparing a hosted agent that packages OpenClaw, Token Factory,
     Tavily web search, the ClawBio skills and hosted biology models such as Boltz-2 and
-    DiffDock behind a single deploy button, with API keys provided.
+    DiffDock behind a single deploy button.
 
-    Participant access to that hosted route has not been confirmed. If it becomes
-    available before the day, we will announce it in the final Luma update and
-    `#berlin-general` with tested instructions.
+    Participant access to that route is not confirmed. If it becomes available we will
+    announce it in `#berlin-general` with tested instructions.
 
     Do not wait for it. The local route above is the canonical path and works today.
 
@@ -113,9 +146,8 @@ your project needs there rather than exposing arbitrary shell commands to the mo
 
     The ClawBio tools there are `clawbio__list_skills`, `clawbio__describe_skill` and
     `clawbio__run_skill`. Start by asking it to list the skills and report which have
-    `demo_runnable_in_image: true`. Four do: `gwas-lookup`, `gwas-prs`,
-    `pharmgx-reporter` and `profile-report`. Run one with `clawbio__run_skill` and
-    `demo=true`.
+    `demo_runnable_in_image: true`. Four do: `gwas-lookup`, `gwas-prs`, `pharmgx-reporter`
+    and `profile-report`. Run one with `clawbio__run_skill` and `demo=true`.
 
     That image runs those four on bundled demo data only. `clawbio__run_skill` accepts an
     `input_path`, but ClawBio's MCP server refuses it unless started with
@@ -123,52 +155,25 @@ your project needs there rather than exposing arbitrary shell commands to the mo
     stops a connected server handing an agent a genome on its own. For your own data, use
     the local route.
 
-### 3. Check it works
-
-Run the dry run in the quickstart. What you want to see is a result with a visible
-provenance trail: which skill ran, and what it returned. If the dry run prints a report,
-your checkout is sound, and any later failure is the key or the network rather than
-ClawBio.
-
-If you get an authentication error, it is almost always the Token Factory key rather
-than anything else: usually the promo code was redeemed but no key was created
-afterwards, or the key belongs to a different project from the credits. Ask in
-`#berlin-help`.
-
-## What is running underneath
-
-You are talking to an agent configured to use open-weight models hosted by Nebius, with
-the ClawBio skill library available as tools. You can point it at your own provider
-instead if you prefer, but the sponsored path is the fastest and it is the one the
-mentors can help with.
-
-You do not need to download bulk reference data in advance. The exact skill commands in
-the briefs use bundled demos or named APIs. Some other skills and real inputs need
-separate files. Challenge 1 uses a small organiser-provided teaching pack whose approved
-link will appear in the final Luma reminder and `#berlin-general`.
-
 ## Getting help
 
 | Channel | For |
 |---------|-----|
-| `#berlin-help` | Anything technical. Nebius engineers are in here all day |
+| `#berlin-help` | Anything technical. Organisers and Nebius engineers are in the workspace |
 | `#berlin-general` | Announcements and joining details |
 | `#berlin-teams` | Finding people to build with |
+| `#berlin-demos` | Your repo and one line, before 16:40 |
 
 [Join the ClawBio Slack](https://join.slack.com/t/clawbioworkspace/shared_invite/zt-46i2vb0gl-k6XHMJdUWE48odbfmONGFg){ .md-button }
 
-Ask early rather than at 16:00; the mentors are there precisely so that nobody loses an
+Ask early rather than at 16:00. The mentors are there precisely so that nobody loses an
 hour to a fixable problem.
 
 ## Next
 
-Once you have your Token Factory key, work through the
-[Nebius Quickstart](nebius-quickstart.md). Fifteen minutes, and it is the piece that
-makes any challenge agentic rather than a set of scripts run by hand.
+[Read the challenges](tracks.md) and turn up with a rough idea of which one you want.
+Team formation at 13:05 goes much faster when people already know what they fancy
+building.
 
-[Read the challenges](tracks.md) before you arrive and turn up with a rough idea of which
-one you want. Team formation at 13:05 goes much faster when people already know what
-they fancy building.
-
-Each brief names the skills that give you an hour-one win, so you can look at one or two
-in advance if you like. You do not have to.
+Each brief has a prompt you can paste straight into your agent, so your first hour starts
+with science rather than setup.

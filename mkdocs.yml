@@ -40,6 +40,7 @@ nav:
     - Setup: hackathon/berlin/setup.md
     - Nebius Quickstart: hackathon/berlin/nebius-quickstart.md
     - Challenges: hackathon/berlin/tracks.md
+    - Challenge Data: hackathon/berlin/data/index.md
   - Skills:
     - Skill Library: skills/index.md
     - PharmGx Reporter: skills/pharmgx-reporter.md
