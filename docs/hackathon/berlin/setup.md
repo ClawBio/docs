@@ -128,9 +128,9 @@ and your first hour should be science rather than setup.
 | `#berlin-general` | **Your Nebius link and token**, plus announcements |
 | `#berlin-help` | Anything technical, including connection problems |
 | `#berlin-teams` | Finding people to build with |
-| `#berlin-demos` | Your repo and one line, before 16:40 |
+| `#berlin-demos` | Your repo and one line, before 16:10 |
 
 [Join the ClawBio Slack](https://join.slack.com/t/clawbioworkspace/shared_invite/zt-46i2vb0gl-k6XHMJdUWE48odbfmONGFg){ .md-button }
 
-Ask early rather than at 16:00. The mentors are there precisely so that nobody loses an
+Ask early rather than at 15:30. The mentors are there precisely so that nobody loses an
 hour to a fixable problem.

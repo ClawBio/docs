@@ -13,7 +13,7 @@ description: One day building AI agents that do real genomics work. Tuesday 18 A
 ![ClawBio Berlin](img/berlin-cover.png){ width="420" style="border-radius: 12px; margin: 1.5rem 0;" }
 
 **Agentic AI for Genomics.** One day, real data, real compute. You build with ClawBio
-skills on Nebius infrastructure and demo what you made at five.
+skills on Nebius infrastructure and demo what you made at half four.
 
 [Register on Luma](https://luma.com/clawbio-q8pw){ .md-button .md-button--primary }
 
@@ -45,7 +45,7 @@ so you start from a working pattern rather than a blank page.
 You will spend the afternoon on a real genomics problem, not on plumbing. You drive an
 agent, and it reads the skill library, runs the analyses and chains them together. You
 will not be typing commands all day, and there is nothing to install: Nebius provide a
-hosted environment you reach with a URL and a token. The programme provides 3 hours 20
+hosted environment you reach with a URL and a token. The programme provides 2 hours 50
 minutes of build time.
 
 The premise for the day is one sentence. **A model that confidently invents a citation is
@@ -63,11 +63,11 @@ provenance rather than making a model sound convincing.
 | 12:55 | The three challenges, and how demos are judged |
 | 13:05 | Team formation and lunch |
 | 13:20 | Build |
-| 16:40 | Submissions freeze in `#berlin-demos` |
-| 17:00 | Demos, jury decision and the community vote |
+| 16:10 | Submissions freeze in `#berlin-demos` |
+| 16:30 | Demos, jury decision and the community vote |
 | 18:00 | Close |
 
-Build time is **3 hours 20 minutes**, 13:20 to the 16:40 freeze. That is the constraint
+Build time is **2 hours 50 minutes**, 13:20 to the 16:10 freeze. That is the constraint
 every challenge is designed around, and it is worth internalising before you scope your
 idea.
 
@@ -102,8 +102,8 @@ scope it with you at 13:05.
 chain existing ones, or, if participant Serverless access is confirmed, host an open
 model on Nebius and call it as a tool. Any available route counts on any challenge.
 
-Each brief comes with a prompt you paste straight into Claude Code or Codex, so your
-first hour starts with the science rather than with setup.
+Each brief comes with a prompt you paste straight into the agent, so your first hour
+starts with the science rather than with setup.
 
 [Full briefs and judging](tracks.md){ .md-button }
 [Challenge data](data/index.md){ .md-button }
@@ -163,7 +163,7 @@ your first hour goes.
 | `#berlin-general` | **Your Nebius link and token**, plus announcements |
 | `#berlin-help` | Stuck on anything. Nebius engineers are in here |
 | `#berlin-teams` | Say what you want to build, find people to build it with |
-| `#berlin-demos` | Post your repo and one line before 16:40 |
+| `#berlin-demos` | Post your repo and one line before 16:10 |
 
 ## Hosts
 

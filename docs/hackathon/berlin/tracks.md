@@ -7,7 +7,7 @@ description: Three genomics challenges for the ClawBio + Nebius hackathon in Ber
 
 <div class="tutorial-card__header">
   <span class="difficulty-badge difficulty-badge--event">Event</span>
-  <span class="time-estimate">3 h 20 min build time</span>
+  <span class="time-estimate">2 h 50 min build time</span>
 </div>
 
 Three challenges, each a real problem in genomics that is still open. Pick one. The same
@@ -75,8 +75,8 @@ Type into the message box. That is it. No clone, no install, no keys of your own
 
 !!! warning "Scope for the clock, not for the idea"
 
-    Build runs 13:20 to 16:40, then demo rehearsal, then demos at 17:00. That is
-    3 hours 20 minutes and it is the hardest constraint of the day.
+    Build runs 13:20 to the 16:10 freeze, then demo rehearsal, then demos at 16:30.
+    That is 2 hours 50 minutes and it is the hardest constraint of the day.
 
     Every brief has an hour-one win and a stretch. Get the hour-one win working first,
     even if it is boring. Decide at 15:00 what you are cutting. A team that demos one
@@ -417,15 +417,15 @@ whichever challenge you picked.
     counts directly towards the implementation criterion. You are not choosing between
     doing science and doing infrastructure.
 
-    If you go this way, start it at 13:20 rather than at 15:00, and ask in `#berlin-help`
-    early rather than at 16:00.
+    If you go this way, start it at 13:20 rather than at 14:30, and ask in `#berlin-help`
+    early rather than at 15:30.
 
 ## What "done" looks like
 
 Whichever challenge you picked, a finished demo is one where a sceptical person in the
 room can ask **"how do you know that?"** about any step on screen and get an answer.
 
-Concretely, by 16:40 you want:
+Concretely, by 16:10 you want:
 
 1. It runs live, on real data, in front of people.
 2. Every claim traces to a source, and the sources resolve.
@@ -457,8 +457,8 @@ correctly refuses to answer.
 
 ## Submitting
 
-Post in `#berlin-demos` **before 16:40** with your repo link and one line describing what
-you built. Demos start at 17:00 and the order is fixed at the freeze, so late submissions
+Post in `#berlin-demos` **before 16:10** with your repo link and one line describing what
+you built. Demos start at 16:30 and the order is fixed at the freeze, so late submissions
 do not get a slot.
 
 If you took Route A, also open your pull request against
