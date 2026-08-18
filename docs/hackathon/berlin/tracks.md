@@ -1,6 +1,6 @@
 ---
 title: "Berlin Challenges"
-description: Three genomics challenges for the ClawBio + Nebius hackathon in Berlin. Drive them with Claude Code or Codex, on real public data.
+description: Three genomics challenges for the ClawBio + Nebius hackathon in Berlin. Paste a prompt into the BioNeMo Research Agent and build on real public data.
 ---
 
 # Challenges
@@ -13,75 +13,64 @@ description: Three genomics challenges for the ClawBio + Nebius hackathon in Ber
 Three challenges, each a real problem in genomics that is still open. Pick one. The same
 prize pool applies across all three and the judging criteria are identical.
 
-**You are not here to type commands.** You drive a coding agent, and the agent reads the
-skills, runs them, chains them and interprets what comes back. Each challenge below gives
-you a prompt to paste. Start there and go wherever the science takes you.
+**You are not here to type commands, and there is nothing to install.** You get a URL and
+a token at the door, they open the **BioNeMo Research Agent** running on Nebius, and you
+work by talking to it. It reads the ClawBio skills, runs them, chains them and interprets
+what comes back.
+
+Each challenge below gives you a **prompt template to paste**. Start there, then go
+wherever the science takes you.
 
 [Get the data](data/index.md){ .md-button }
-[Setup, if you have not done it](setup.md){ .md-button }
+[How to connect](setup.md){ .md-button }
 
-## Five minutes of setup
+## Getting in: two minutes, nothing to install
 
-Three things, and your agent handles everything after that. None of it is required in
-advance: do it at the venue if you prefer, and ask in `#berlin-help` if anything sticks.
+You are given a **URL and a token** at the door. That is the whole setup.
 
-**1. Install `uv`.** Every ClawBio skill runs through it, and a system Python will fail on
-missing packages. One line:
+1. Open the URL. You land on the **OpenClaw Gateway Dashboard**.
+2. The **WebSocket URL** is already filled in. Paste your token into **Gateway Token**.
+   Leave **Password** empty.
+3. Click **Connect**.
+4. You arrive at the **BioNeMo Research Agent** chat, running **Nemotron 3 Super**.
 
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-```
+Type into the message box. That is it. No clone, no install, no keys of your own.
 
-**2. Clone ClawBio.**
+!!! tip "Start every session with this"
 
-```bash
-git clone --depth 1 https://github.com/ClawBio/ClawBio.git
-cd ClawBio
-```
-
-**3. Open your agent in that folder.**
-
-```bash
-claude          # Claude Code
-codex           # Codex
-```
-
-The repository ships `CLAUDE.md` and `AGENTS.md` at its root, so both agents pick up the
-skill library, the routing rules and the safety boundaries on their own. Tell your agent
-to read `CLAUDE.md` first and it will know what it is holding.
-
-!!! tip "The first thing to ask it"
+    Capabilities differ between environments, so find out what yours has before you
+    build on an assumption. Paste this first:
 
     ```text
-    Read CLAUDE.md, then list the skills in skills/ that are relevant to
-    [rare disease / cancer targets / polygenic scores] and tell me what each one
-    actually does. Do not run anything yet.
+    Before we start, tell me exactly what you can do:
+    1. List every tool you have available, with its name.
+    2. Use your ClawBio skill-listing tool to show me the skills you can actually run.
+    3. Can you fetch a file from a public URL? Can you read or write local files?
+    4. Can you run code you write yourself?
+
+    Answer only from what you can actually see. If you are not sure whether something
+    works, say so rather than assuming, and we will test it.
     ```
 
-    Ninety-eight skills is too many to browse. Let the agent triage them for you.
+    Whatever it answers is your real toolkit for the day. Build to that, not to what
+    you hoped it had.
 
-!!! warning "One thing that will trip your agent up"
+!!! info "Your ClawBio tools"
 
-    `clawbio.py run <name>` only knows 49 short aliases, and most challenge skills are
-    not among them. `clawbio.py run gwas-prs` fails with "Unknown skill".
+    The agent reaches the skill library through three tools. Names may be prefixed in
+    your environment, so let the agent find them rather than typing them yourself.
 
-    The reliable form is the direct script path, which is what the prompts below use:
-    `uv run python skills/gwas-prs/gwas_prs.py --demo --output /tmp/prs`
+    | Tool | What it does |
+    |---|---|
+    | `clawbio_list_skills(query)` | Search the library. Empty query lists everything. |
+    | `clawbio_describe_skill(name)` | Read a skill's contract: inputs, outputs, safety rules |
+    | `clawbio_run_skill(skill, demo, input_path, output_dir, extra_args)` | Run it |
 
-    If your agent gets stuck on the runner, tell it to call the script directly.
-
-!!! info "Where your Nebius credits come in"
-
-    ClawBio skills are plain Python and most need no model at all. Running them by hand
-    consumes no credit and, on its own, is not an agentic workflow.
-
-    Nebius enters at two points. First, **the agent**: a Token Factory model can take
-    charge of the skill library instead of Claude or Codex, which is what the
-    [Nebius Quickstart](nebius-quickstart.md) sets up in about fifteen minutes. Second,
-    **hosted models as tools**: a skill can call a model over HTTP, and the `gi-*` family
-    is the working reference to copy.
-
-    Criterion four at judging, *did it need agents*, is asking exactly this.
+    Two things worth knowing. Skills are called by their **short alias**, so it is
+    `prs`, not `gwas-prs`, and `acmg`, not `clinical-variant-reporter`. Ask the agent to
+    list them and it will show you the real names. And `demo=true` always works, while
+    `input_path` may be refused for local files depending on how your image is
+    configured. If it is refused, that is a boundary to report, not a bug to fight.
 
 !!! warning "Scope for the clock, not for the idea"
 
@@ -110,35 +99,48 @@ they were not entitled to have an opinion about.
 **Your data is [here](data/index.md#challenge-1-end-the-diagnostic-odyssey).** 15 KB,
 downloads instantly, and your agent can fetch it itself.
 
-### Paste this into your agent
+### Paste this into the BioNeMo Research Agent
 
 ```text
-I'm at a genomics hackathon, working in this ClawBio repo. Read CLAUDE.md first.
+I'm at a genomics hackathon. You are my analysis partner for the next three hours.
 
-Challenge: end the diagnostic odyssey.
+CHALLENGE: End the diagnostic odyssey.
 
-Get the data into data/challenge1/ (all three files):
+THE DATA
+A four-person exome pedigree, GRCh37/b37, publicly consented teaching data:
 https://docs.clawbio.ai/hackathon/berlin/data/challenge1-b37-segregation.vcf.gz
 https://docs.clawbio.ai/hackathon/berlin/data/challenge1-b37-segregation.vcf.gz.tbi
 https://docs.clawbio.ai/hackathon/berlin/data/challenge1-b37-segregation.tsv
 
-It's a four-person exome pedigree on GRCh37/b37. Samples ISDBM322015 to ISDBM322018 are
-son, father, mother, sister. 68 HIGH-effect records the son carries with exactly one
-parent: 30 labelled paternal, 38 maternal, unphased.
+Samples ISDBM322015 to ISDBM322018 are son, father, mother, sister. It holds 68
+HIGH-effect records the son carries with exactly one parent: 30 labelled paternal,
+38 maternal, unphased. The TSV is the readable version if the VCF is awkward.
 
-Do this in order:
-1. Load the pack and reproduce the 30/38 paternal/maternal split. Show me the filter
-   logic, not just the counts.
-2. Read skills/rare-high-impact-variants/SKILL.md, run its demo, and show me how it
-   separates documented-rare variants from variants with NO frequency data at all.
-   That distinction is the interesting part.
-3. Build me an abstention list: for each record, what can this data NOT support, and
+STEP 0, before anything else
+Tell me whether you can fetch those URLs, and use your ClawBio skill-listing tool to
+show me which relevant skills you can actually run. If you cannot fetch the files, say
+so plainly and we will work from skill demo data instead. Do not pretend either way.
+
+THEN, in order
+1. Reproduce the 30 paternal / 38 maternal split. Show me the logic you used, not just
+   the two numbers. If you cannot load the file, reason from the description instead
+   and label it clearly as reasoning rather than measurement.
+2. Use your ClawBio tools to describe and run a relevant variant-interpretation skill on
+   its demo data. Show me how it distinguishes variants that are DOCUMENTED rare from
+   variants with NO population-frequency data at all. That distinction is the whole
+   point: absence of a frequency is not evidence of rarity.
+3. Build me an abstention list. For the pedigree, what can this data NOT support, and
    why. There is no phenotype, no HPO terms, no valid population-frequency layer, and
-   the EFF annotation is historical.
+   the effect annotation is historical rather than current clinical evidence.
 
-Rules: use `uv run python`, never bare python3. Call skills by their direct script path,
-not through clawbio.py. Never call anything rare, pathogenic, diagnostic, de novo or
-compound heterozygous. If you can't verify something, say so plainly instead of hedging.
+RULES
+Never call anything rare, pathogenic, diagnostic, de novo or compound heterozygous.
+The parent-of-origin labels are unphased teaching labels, not molecular phase.
+Every claim must trace to something you actually ran or read. If you cannot verify
+something, say so plainly instead of hedging. An honest "I cannot determine this"
+scores higher today than a confident guess.
+
+Start with step 0.
 ```
 
 | | |
@@ -158,9 +160,11 @@ case where blood RNA promotes or demotes a variant of uncertain significance. Or
 `cnv-acmg-classifier` over structural and copy-number variants and report what an
 SNV-only pipeline silently drops.
 
-??? note "The underlying commands, if you want to see them"
+??? note "Running locally instead, if you prefer your own machine"
 
-    Your agent runs these for you. They are here so you can check its work, and all were
+    You do not need any of this: the hosted agent is the supported route. But if you
+    would rather work on your own machine, clone ClawBio, install `uv`
+    (`curl -LsSf https://astral.sh/uv/install.sh | sh`) and run these directly. All were
     verified from a clean clone.
 
     ```bash
@@ -200,30 +204,42 @@ at least one target your agent killed, and why.
 **Your data needs no download.** The Xena API is queried live and was verified working
 this morning. See [challenge 2 data](data/index.md#challenge-2-a-cancer-target-you-would-defend).
 
-### Paste this into your agent
+### Paste this into the BioNeMo Research Agent
 
 ```text
-I'm at a genomics hackathon, working in this ClawBio repo. Read CLAUDE.md first.
+I'm at a genomics hackathon. You are my analysis partner for the next three hours.
 
-Challenge: pick a cancer target you would defend.
+CHALLENGE: A cancer target you would defend.
 
-1. Read skills/xena-tcga-gene-query/SKILL.md. Query the UCSC Xena API live for tumour
-   vs normal expression and survival association, for a gene set in a TCGA cancer type.
-   Watch the argument order: global flags come BEFORE the subcommand, like this:
-   uv run python skills/xena-tcga-gene-query/scripts/query_tcga_api.py \
-     --demo --output /tmp/xena diff-expr --gene TP53 --cancer BRCA
+The premise: the literature will support almost any gene if you go looking for support.
+The hard part is the counter-argument. I want targets you have genuinely tried to kill.
+
+STEP 0, before anything else
+Use your ClawBio skill-listing tool to show me which oncology, target-evidence and
+literature skills you can actually run. Tell me whether you can query public APIs
+(UCSC Xena, Open Targets, PubMed, ClinicalTrials.gov) and whether you can fetch a URL
+to verify a citation. Answer from what you can see, not from what you assume.
+
+THEN, in order
+1. Pick a TCGA tumour type with me. Get tumour versus normal expression and survival
+   association for a candidate gene set, using whichever of your tools can reach that
+   data. Show me the numbers and where they came from.
 2. Shortlist three candidate targets. For each one, build the case FOR and the case
-   AGAINST with equal effort. Use skills/target-validation-scorer and
-   skills/omics-target-evidence-mapper.
-3. Kill one target explicitly. Tell me what killed it.
-4. Check prior art with skills/clinical-trial-finder and skills/pubmed-summariser.
+   AGAINST with equal effort. I want the against column to be as full as the for column.
+3. Kill one target explicitly. Tell me exactly what evidence killed it. This is the part
+   I will demo, so make it sharp.
+4. Check prior art: is somebody already running a trial on your surviving target?
 
-CRITICAL: every PMID you cite must resolve. Before showing me any citation, fetch it and
-confirm it exists. A fabricated PMID disqualifies this project from first place, so build
-that check into the workflow and show it running. If a claim has no resolvable source,
-drop the claim.
+THE HARD RULE
+Every PMID or citation you give me must resolve to a real paper. Before you show me any
+citation, verify it exists and tell me how you verified it. If you cannot verify a
+citation, do not cite it: say "I could not verify a source for this claim" and drop the
+claim. A fabricated citation puts this project out of contention for first place, and a
+persuasive fake is worse than no citation at all.
 
-Use `uv run python` and call scripts by their direct path, not through clawbio.py.
+Build that verification step into your workflow and show it running when we demo.
+
+Start with step 0.
 ```
 
 | | |
@@ -246,7 +262,7 @@ context-selective candidates rather than pan-lethal ones. Or rebuild a figure fr
 published TCGA analysis using the underlying public data and report where your numbers
 differ from the paper's. Disagreement, stated precisely, is a result.
 
-??? note "The underlying commands, if you want to see them"
+??? note "Running locally instead, if you prefer your own machine"
 
     ```bash
     # Tumour vs normal, correlation and survival, via the UCSC Xena API
@@ -282,28 +298,45 @@ Disclosure is not abstention. The distance between those two is this challenge.
 **Your data is bundled in the repo.** Nothing to download. See
 [challenge 3 data](data/index.md#challenge-3-whose-genome-does-this-fail).
 
-### Paste this into your agent
+### Paste this into the BioNeMo Research Agent
 
 ```text
-I'm at a genomics hackathon, working in this ClawBio repo. Read CLAUDE.md first.
+I'm at a genomics hackathon. You are my analysis partner for the next three hours.
 
-Challenge: whose genome does this polygenic score fail?
+CHALLENGE: Whose genome does this polygenic score fail?
 
-1. Read skills/gwas-prs/SKILL.md, then run:
-   uv run python skills/gwas-prs/gwas_prs.py --demo --output /tmp/prs
-   Now grep the report for "reference population". Every score says EUR, and every score
-   still returns a confident percentile no matter whose genome went in. Show me that.
-2. Quantify the gap. Run skills/claw-ancestry-pca on its demo, and run
-   skills/equity-scorer over examples/demo_populations.vcf with
-   examples/demo_population_map.csv for FST, heterozygosity and HEIM metrics.
-3. Build the thing that matters: a wrapper that REFUSES to report a percentile when the
-   individual's ancestry is too far from the score's reference population. Pick a
-   threshold, justify it from the data, and demo it firing on a real input.
+The premise: a polygenic score trained on one population does not simply become less
+accurate elsewhere, it becomes uninterpretable. I want to find where that happens and
+build the behaviour that responds to it.
 
+STEP 0, before anything else
+Use your ClawBio skill-listing tool to show me what you can run. I am looking for the
+polygenic score skill and the equity or ancestry skills. They may be under short
+aliases like "prs" and "equity" rather than their full names. Describe each one's
+contract before you run it, and tell me what inputs it will and will not accept.
+
+THEN, in order
+1. Run the polygenic score skill on its demo data. Then find, in its own output, the
+   reference population for each score. Every one of them is EUR. Show me that, and
+   show me that it still returns a confident percentile regardless of whose genome
+   went in. Disclosure is not abstention, and the gap between them is this challenge.
+2. Quantify the gap rather than asserting it. Use the ancestry and equity skills to get
+   real numbers: population representation, FST between populations, heterozygosity.
+   Give me a figure I can put on screen.
+3. Build the deliverable: a wrapper or decision rule that REFUSES to report a percentile
+   when the individual's ancestry is too far from the score's reference population.
+   Pick a threshold, justify it from the numbers in step 2, and demo it firing.
+
+THE POINT
 The plot is not the deliverable. The refusal is the deliverable. End by showing me it
-declining to answer, with a message a clinician could act on.
+declining to answer, with a message a clinician could actually act on.
 
-Use `uv run python` and direct script paths, not clawbio.py.
+RULES
+Every number must come from something you ran, not from your training data. If a skill
+will not accept an input, tell me the boundary rather than working around it silently.
+An honest "I cannot score this person" is the winning output today.
+
+Start with step 0.
 ```
 
 | | |
@@ -318,7 +351,7 @@ sequenced. Or audit a report generator by feeding it an input too thin to suppor
 ancestry call, a few dozen ancestry-informative markers, and see whether it abstains or
 produces a confident pie chart. Most produce the pie chart.
 
-??? note "The underlying commands, if you want to see them"
+??? note "Running locally instead, if you prefer your own machine"
 
     ```bash
     # Six polygenic scores from the PGS Catalog, then what it admits to

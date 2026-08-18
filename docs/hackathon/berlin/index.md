@@ -42,11 +42,11 @@ explicit, versioned, auditable skills, so what an agent did can be inspected, re
 and challenged. The library ships more than 90 skills and bridges to more than 8,000 Galaxy tools,
 so you start from a working pattern rather than a blank page.
 
-You will spend the afternoon on a real genomics problem, not on plumbing. You drive a
-coding agent, Claude Code or Codex, and it reads the skill library, runs the analyses and
-chains them together. You will not be typing commands all day. Nebius provide compute and
-promotional credits, issued at the venue. The programme provides 3 hours 20 minutes of
-build time.
+You will spend the afternoon on a real genomics problem, not on plumbing. You drive an
+agent, and it reads the skill library, runs the analyses and chains them together. You
+will not be typing commands all day, and there is nothing to install: Nebius provide a
+hosted environment you reach with a URL and a token. The programme provides 3 hours 20
+minutes of build time.
 
 The premise for the day is one sentence. **A model that confidently invents a citation is
 worse than one that says it does not know.** Everything is built around grounding and
@@ -128,22 +128,15 @@ A laptop, and enough Python to be dangerous.
 You do **not** need prior ClawBio experience, and you do not need to have used AI coding
 agents before.
 
-Bring Claude Code or Codex if you have them. You will drive the day through one of them,
-and everything works without them too.
+**There is nothing to install.** You get a URL and a token at the door. Open the URL,
+paste the token, click Connect, and you are in the **BioNeMo Research Agent** running on
+Nebius. Everything happens in your browser.
 
-**Setup is three commands and takes five minutes.** No key, no account, no credits:
-
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-git clone --depth 1 https://github.com/ClawBio/ClawBio.git
-cd ClawBio
-```
-
-Then open `claude` or `codex` in that folder and ask it to read `CLAUDE.md`. The repo
-ships instructions for both, so your agent knows what it is holding.
-
-Do it before you arrive if you can. [Setup](setup.md) has the detail, and
+Then paste a challenge prompt and start. [Setup](setup.md) has the connection detail, and
 [the data](data/index.md) is ready for all three challenges.
+
+If you would rather work on your own machine, everything is open source and the briefs
+carry the exact local commands.
 
 ## Teams
 

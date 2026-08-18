@@ -333,22 +333,19 @@ code{font-family:'SF Mono','JetBrains Mono',monospace;color:var(--green-hi);
 <section class="slide">
   <div class="eyebrow">Get building</div>
   <h2 class="wide">The whole setup</h2>
-  <pre><code>git clone --depth 1 https://github.com/ClawBio/ClawBio.git
-cd ClawBio
+  <pre><code>1.  Open the URL on your card
+2.  Paste the token  &rarr;  Connect
+3.  BioNeMo Research Agent, on Nemotron 3 Super
 
-claude                     # or codex, in that folder
-&gt; read CLAUDE.md, then take me through challenge 1
-
-export NEBIUS_API_KEY=...  # promo code at the door
-python3 examples/nebius_agent.py --ask "your question"</code></pre>
-  <p class="lead">You drive an agent. It reads the skills, runs them and chains them.
-    A grounded answer costs about <strong>1,300 tokens</strong> and seven seconds, so your
-    credits are not the constraint on what you attempt.</p>
-  <p class="small muted">Every challenge has a prompt you paste straight in, and all the data is ready at
-    <code>docs.clawbio.ai/hackathon/berlin/data</code>. Skills run through <code>uv</code> (<code>astral.sh/uv</code>).
-    None of this is required to turn up.</p>
+4.  Paste your challenge prompt:
+    docs.clawbio.ai/hackathon/berlin/tracks</code></pre>
+  <p class="lead">Nothing to install. You drive an agent, and it reads the skills, runs them
+    and chains them. A grounded answer costs about <strong>1,300 tokens</strong> and seven
+    seconds, so your credits are not the constraint on what you attempt.</p>
+  <p class="small muted">Ask it first what tools it actually has, then build to that. All the challenge
+    data is ready at <code>docs.clawbio.ai/hackathon/berlin/data</code> and needs no account.</p>
   <p class="small muted">docs.clawbio.ai/hackathon/berlin &middot; <code>#berlin-help</code> in Slack, all day &middot; demos at 17:00</p>
-  <div class="notes-src" hidden>You are not meant to type skill commands. Open Claude Code or Codex in the clone, tell it to read CLAUDE.md, and paste the challenge prompt from the docs page. The repo ships CLAUDE.md and AGENTS.md so both agents know what they are holding. Ninety-five of the ninety-six skills need no model at all; the agent is the layer above, and that is where the Nebius credits go. Data is published and needs no account. Demos at five, everyone votes for their three favourites.</div>
+  <div class="notes-src" hidden>You are not meant to type skill commands. URL and token on the card, Connect, and you are in the BioNeMo Research Agent on Nemotron 3 Super. Every challenge has a prompt template on the docs page: paste it and go. Tell them to start by asking the agent what tools it actually has, because that is both good practice and the honest thing given the environment is new. Ninety-five of the ninety-six skills need no model at all; the agent is the layer above, and that is where the Nebius credits go. Data is published and needs no account. Anyone who prefers their own machine can clone and run locally, commands are in each brief. Demos at five, everyone votes for their three favourites.</div>
 </section>
 </div>
 

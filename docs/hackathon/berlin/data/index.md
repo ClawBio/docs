@@ -5,9 +5,9 @@ description: Every dataset used by the Berlin hackathon challenges, with direct 
 
 # Challenge data
 
-Everything the three challenges need is either bundled in the ClawBio repository you
-cloned, downloadable from this page, or fetched live from a public API. Nothing requires
-an account, a login or an organiser.
+Everything the three challenges need is either downloadable from this page, bundled
+inside the ClawBio skills, or fetched live from a public API. Nothing requires an
+account, a login or an organiser.
 
 If you are stuck on data at any point, ask in `#berlin-help` rather than losing build
 time to it.
@@ -23,14 +23,19 @@ downloads instantly and works on any laptop.
 | Tabix index | 4 KB | [challenge1-b37-segregation.vcf.gz.tbi](challenge1-b37-segregation.vcf.gz.tbi) |
 | Readable genotype table | 18 KB | [challenge1-b37-segregation.tsv](challenge1-b37-segregation.tsv) |
 
-Your agent can fetch all three itself. Ask it to run:
+**In the BioNeMo Research Agent**, just paste the three URLs and ask it to fetch them.
+The Challenge 1 prompt template already does this, and it asks the agent to say plainly
+whether it can reach them rather than pretending either way. If it cannot fetch files,
+the `.tsv` is small enough to paste in directly.
 
-```bash
-mkdir -p data/challenge1 && cd data/challenge1
-curl -fsSLO https://docs.clawbio.ai/hackathon/berlin/data/challenge1-b37-segregation.vcf.gz
-curl -fsSLO https://docs.clawbio.ai/hackathon/berlin/data/challenge1-b37-segregation.vcf.gz.tbi
-curl -fsSLO https://docs.clawbio.ai/hackathon/berlin/data/challenge1-b37-segregation.tsv
-```
+??? note "Fetching them on your own machine"
+
+    ```bash
+    mkdir -p data/challenge1 && cd data/challenge1
+    curl -fsSLO https://docs.clawbio.ai/hackathon/berlin/data/challenge1-b37-segregation.vcf.gz
+    curl -fsSLO https://docs.clawbio.ai/hackathon/berlin/data/challenge1-b37-segregation.vcf.gz.tbi
+    curl -fsSLO https://docs.clawbio.ai/hackathon/berlin/data/challenge1-b37-segregation.tsv
+    ```
 
 **What is in it.** 68 autosomal, biallelic, PASS records from a four-person exome
 pedigree: son, father, mother and sister. Sample IDs are `ISDBM322015` through

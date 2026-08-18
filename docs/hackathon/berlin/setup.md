@@ -1,169 +1,122 @@
 ---
 title: "Berlin Setup"
-description: Five minutes of setup for the ClawBio + Nebius hackathon in Berlin. Install uv, clone ClawBio, open Claude Code or Codex, and let the agent do the rest.
+description: How to connect to the Nebius BioNeMo Research Agent at the ClawBio + Nebius hackathon in Berlin. A URL and a token, nothing to install.
 ---
 
 # Setup
 
 <div class="tutorial-card__header">
   <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
-  <span class="time-estimate">~5 min</span>
+  <span class="time-estimate">~2 min</span>
 </div>
 
-Three commands, then you hand over to an agent. You will not be typing skill commands all
-day: your coding agent reads the skill library and runs it for you.
+**There is nothing to install.** You get a URL and a token at the door, and everything
+runs in your browser on Nebius. Bring a laptop that can open a web page.
 
-**None of this is required to turn up.** You can do all of it at the venue, and there
-will be people on hand to help. It is simply faster on your own connection than on shared
-WiFi at 13:20.
+## Connecting
 
-## The five-minute setup
+1. **Open the URL** you were given. You land on the **OpenClaw Gateway Dashboard**.
+2. The **WebSocket URL** field is already filled in for you.
+3. Paste your token into **Gateway Token**. Leave **Password** empty.
+4. Click **Connect**.
+5. You arrive at the **BioNeMo Research Agent** chat, running **Nemotron 3 Super**.
 
-### 1. Install `uv`
+Type into the message box at the bottom and you are working.
 
-Every ClawBio skill runs through `uv`, and a system Python will fail on missing packages.
-Worth having before you start building.
+!!! warning "If it says Could not connect"
 
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-```
+    Check these in order, and ask in `#berlin-help` rather than losing build time:
 
-Windows PowerShell:
+    - The WebSocket URL must start with `wss://`, not `ws://`.
+    - Make sure the token went into **Gateway Token** and not into **Password**.
+    - Check for a trailing space when you pasted the token.
+    - Try a private or incognito window, in case a stale session is interfering.
 
-```powershell
-powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-```
+    Organisers have spare credentials. This is the one thing worth interrupting someone
+    for.
 
-Then restart your terminal and check it:
+## The first thing to type
 
-```bash
-uv --version
-```
-
-### 2. Clone ClawBio
-
-```bash
-git clone --depth 1 https://github.com/ClawBio/ClawBio.git
-cd ClawBio
-```
-
-`--depth 1` skips the history. Please do this on your own connection rather than the
-venue WiFi if you can.
-
-### 3. Open your agent in that folder
-
-```bash
-claude          # Claude Code
-codex           # Codex
-```
-
-The repository ships `CLAUDE.md` and `AGENTS.md` at its root, so both agents pick up the
-skill library, the routing rules and the safety boundaries automatically. Tell your agent
-to read `CLAUDE.md` first.
-
-### 4. Prove it works
-
-Ask your agent:
+Capabilities differ between environments. Find out what yours actually has before you
+build on an assumption:
 
 ```text
-Read CLAUDE.md, then run the reference agent's dry check:
-uv run python examples/nebius_agent.py --dry-run
-Tell me what it printed and what it proves.
+Before we start, tell me exactly what you can do:
+1. List every tool you have available, with its name.
+2. Use your ClawBio skill-listing tool to show me the skills you can actually run.
+3. Can you fetch a file from a public URL? Can you read or write local files?
+4. Can you run code you write yourself?
+
+Answer only from what you can actually see. If you are not sure whether something
+works, say so rather than assuming, and we will test it.
 ```
 
-You should see a rare high-impact variants report. That proves your checkout can run a
-skill locally. It needs no key, no account and no credits.
+Whatever it answers is your real toolkit for the day. Build to that.
 
-If it does not print a report, ask in `#berlin-help` straight away rather than losing
-build time to it.
+## Your ClawBio tools
 
-!!! warning "The first thing that will confuse your agent"
+The agent reaches the skill library through three tools. Tool names may be prefixed in
+your environment, so let the agent find them rather than typing them yourself.
 
-    `clawbio.py run <name>` only registers 49 short aliases, and most of the challenge
-    skills are not among them. `clawbio.py run gwas-prs` fails with "Unknown skill".
+| Tool | What it does |
+|---|---|
+| `clawbio_list_skills(query)` | Search the library. An empty query lists everything. |
+| `clawbio_describe_skill(name)` | Read a skill's contract: inputs, outputs, safety rules |
+| `clawbio_run_skill(skill, demo, input_path, output_dir, extra_args)` | Run a skill |
 
-    The reliable form is the direct script path:
-    `uv run python skills/gwas-prs/gwas_prs.py --demo --output /tmp/prs`
+Two things worth knowing:
 
-    Tell your agent this once and it will stop fighting the runner.
+**Skills use short aliases.** It is `prs`, not `gwas-prs`. It is `acmg`, not
+`clinical-variant-reporter`. Ask the agent to list them and work from what it shows you.
 
-!!! tip "If you do not have Claude Code or Codex"
-
-    Everything still works. Every challenge brief has a collapsed
-    **"The underlying commands"** block with the exact verified commands, so you can run
-    the skills directly and build your workflow around them.
-
-    You can also put a Nebius Token Factory model in charge of the skills instead. The
-    [Nebius Quickstart](nebius-quickstart.md) does that in about fifteen minutes.
+**`demo=true` always works.** Passing a local file through `input_path` may be refused
+depending on how your image is configured. If it is refused, that is a boundary worth
+reporting in your demo, not a bug to fight for an hour.
 
 ## Your data
 
 All three challenges have their data sorted, and none of it needs an account.
 
-- **Challenge 1** downloads a 15 KB teaching pack from
-  [the data page](data/index.md). Your agent can fetch it itself.
-- **Challenge 2** queries the UCSC Xena API live. Nothing to download.
-- **Challenge 3** uses demo data bundled in the repository.
+- **Challenge 1** uses a 15 KB teaching pack published at
+  [the data page](data/index.md). Ask your agent to fetch the URLs.
+- **Challenge 2** queries public APIs live. Nothing to download.
+- **Challenge 3** uses demo data already inside the skills.
 
 [Get the data](data/index.md){ .md-button .md-button--primary }
 
-## On the day
+## Then pick a challenge
 
-### Collect your Token Factory credits
+Each brief has a **prompt template you paste straight in**. That is your starting point,
+and your first hour should be science rather than setup.
 
-Nebius issue promotional credits at the venue. Follow the QR or code instructions at
-check-in, wait for the credit to appear in your Token Factory project, then create an API
-key.
+[Read the challenges](tracks.md){ .md-button }
 
-### Point an agent at the skills
+??? note "Prefer to work on your own machine?"
 
-You have two ways to make this agentic, and both count for judging.
+    The hosted agent is the supported route today, but everything is open source and
+    runs locally if you would rather.
 
-**Claude Code or Codex**, driving the ClawBio skills locally. This is the fastest route
-and it works right now.
+    ```bash
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    git clone --depth 1 https://github.com/ClawBio/ClawBio.git
+    cd ClawBio
+    python3 examples/nebius_agent.py --dry-run
+    ```
 
-**A Nebius Token Factory model**, taking charge of the reference agent's skills. The
-[Nebius Quickstart](nebius-quickstart.md) walks it through in about fifteen minutes. This
-is where your credits go.
+    Every skill runs through `uv`, so a bare `python3` will fail on missing packages.
+    Note also that `clawbio.py run` only knows 49 short aliases: if a skill is not found,
+    call its script directly, for example
+    `uv run python skills/gwas-prs/gwas_prs.py --demo --output /tmp/prs`.
 
-The reference agent starts with four verified skills: `vcf-annotator`,
-`rare-high-impact-variants`, `clinical-variant-reporter` and `gwas-prs`. Its `SKILLS`
-dictionary is deliberately a small allowlist. Add the skills your project needs there
-rather than exposing arbitrary shell commands to a model.
-
-If you get an authentication error, it is almost always the Token Factory key: usually
-the promo code was redeemed but no key was created afterwards, or the key belongs to a
-different project from the credits. Ask in `#berlin-help`.
-
-!!! info "A hosted one-click agent may also be available"
-
-    Nebius have been preparing a hosted agent that packages OpenClaw, Token Factory,
-    Tavily web search, the ClawBio skills and hosted biology models such as Boltz-2 and
-    DiffDock behind a single deploy button.
-
-    Participant access to that route is not confirmed. If it becomes available we will
-    announce it in `#berlin-general` with tested instructions.
-
-    Do not wait for it. The local route above is the canonical path and works today.
-
-??? note "If you do get access to the hosted agent"
-
-    The ClawBio tools there are `clawbio__list_skills`, `clawbio__describe_skill` and
-    `clawbio__run_skill`. Start by asking it to list the skills and report which have
-    `demo_runnable_in_image: true`. Four do: `gwas-lookup`, `gwas-prs`, `pharmgx-reporter`
-    and `profile-report`. Run one with `clawbio__run_skill` and `demo=true`.
-
-    That image runs those four on bundled demo data only. `clawbio__run_skill` accepts an
-    `input_path`, but ClawBio's MCP server refuses it unless started with
-    `CLAWBIO_MCP_ALLOW_LOCAL_FILES=1`. That guard is ours, not a Nebius restriction: it
-    stops a connected server handing an agent a genome on its own. For your own data, use
-    the local route.
+    Each challenge brief has a collapsed block with the exact verified commands. You can
+    also open Claude Code or Codex in the clone: the repo ships `CLAUDE.md` and
+    `AGENTS.md`, so both pick up the library on their own.
 
 ## Getting help
 
 | Channel | For |
 |---------|-----|
-| `#berlin-help` | Anything technical. Organisers and Nebius engineers are in the workspace |
+| `#berlin-help` | Anything technical, including connection problems |
 | `#berlin-general` | Announcements and joining details |
 | `#berlin-teams` | Finding people to build with |
 | `#berlin-demos` | Your repo and one line, before 16:40 |
@@ -172,12 +125,3 @@ different project from the credits. Ask in `#berlin-help`.
 
 Ask early rather than at 16:00. The mentors are there precisely so that nobody loses an
 hour to a fixable problem.
-
-## Next
-
-[Read the challenges](tracks.md) and turn up with a rough idea of which one you want.
-Team formation at 13:05 goes much faster when people already know what they fancy
-building.
-
-Each brief has a prompt you can paste straight into your agent, so your first hour starts
-with science rather than setup.
