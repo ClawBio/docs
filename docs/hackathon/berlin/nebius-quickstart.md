@@ -10,19 +10,20 @@ description: Put a Nebius Token Factory model in charge of ClawBio skills in abo
   <span class="time-estimate">~15 min</span>
 </div>
 
-Do this before you pick a challenge. It is the smallest complete thing that is
-genuinely agentic, and everything in the three briefs builds on it.
+!!! warning "You probably do not need this page today"
 
-!!! info "This is the main route for the day"
+    The route for the day is the **hosted BioNeMo Research Agent**. Your link and token
+    are in `#berlin-general` on Slack, there is nothing to install, and each challenge
+    has a prompt you paste straight in. Start at [Setup](setup.md) and
+    [the challenges](tracks.md).
 
-    A local ClawBio checkout with a Nebius Token Factory model in charge of a four-skill
-    allowlist. The local code and one organiser-key call are verified, and you can extend
-    the allowlist for your challenge. External credit redemption and room-scale capacity
-    remain under final test.
+    This page is the do-it-yourself version: a local ClawBio checkout with your own
+    Nebius Token Factory key and model in charge of a four-skill allowlist. Useful if you
+    want to see the wiring, extend the allowlist, or keep working after the event. Not
+    required for any challenge.
 
-    Nebius have a hosted one-click agent in preparation which would package this behind a
-    deploy button. It is not published to participant accounts yet, so do not wait for it;
-    see [Setup](setup.md) for the current state. Nothing on this page depends on it.
+It is the smallest complete thing that is genuinely agentic, so it is worth reading even
+if you build in the hosted agent.
 
 ## Why this page exists
 

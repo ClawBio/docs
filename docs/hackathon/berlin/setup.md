@@ -10,12 +10,21 @@ description: How to connect to the Nebius BioNeMo Research Agent at the ClawBio 
   <span class="time-estimate">~2 min</span>
 </div>
 
-**There is nothing to install.** You get a URL and a token at the door, and everything
-runs in your browser on Nebius. Bring a laptop that can open a web page.
+**There is nothing to install.** Everything runs in your browser on Nebius. Bring a
+laptop that can open a web page.
+
+## Where to get your link and token
+
+Both are posted in **`#berlin-general`** on the ClawBio Slack, along with every other
+joining detail. Join before you arrive so you are not hunting for credentials at 12:00.
+
+[Join the ClawBio Slack](https://join.slack.com/t/clawbioworkspace/shared_invite/zt-46i2vb0gl-k6XHMJdUWE48odbfmONGFg){ .md-button .md-button--primary }
+
+Organisers have spares at the desk if anything goes wrong.
 
 ## Connecting
 
-1. **Open the URL** you were given. You land on the **OpenClaw Gateway Dashboard**.
+1. **Open the link** from `#berlin-general`. You land on the **OpenClaw Gateway Dashboard**.
 2. The **WebSocket URL** field is already filled in for you.
 3. Paste your token into **Gateway Token**. Leave **Password** empty.
 4. Click **Connect**.
@@ -116,8 +125,8 @@ and your first hour should be science rather than setup.
 
 | Channel | For |
 |---------|-----|
+| `#berlin-general` | **Your Nebius link and token**, plus announcements |
 | `#berlin-help` | Anything technical, including connection problems |
-| `#berlin-general` | Announcements and joining details |
 | `#berlin-teams` | Finding people to build with |
 | `#berlin-demos` | Your repo and one line, before 16:40 |
 

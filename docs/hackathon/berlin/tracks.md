@@ -13,10 +13,10 @@ description: Three genomics challenges for the ClawBio + Nebius hackathon in Ber
 Three challenges, each a real problem in genomics that is still open. Pick one. The same
 prize pool applies across all three and the judging criteria are identical.
 
-**You are not here to type commands, and there is nothing to install.** You get a URL and
-a token at the door, they open the **BioNeMo Research Agent** running on Nebius, and you
-work by talking to it. It reads the ClawBio skills, runs them, chains them and interprets
-what comes back.
+**You are not here to type commands, and there is nothing to install.** Your Nebius link
+and token are in `#berlin-general` on Slack. They open the **BioNeMo Research Agent**,
+and you work by talking to it. It reads the ClawBio skills, runs them, chains them and
+interprets what comes back.
 
 Each challenge below gives you a **prompt template to paste**. Start there, then go
 wherever the science takes you.
@@ -26,9 +26,10 @@ wherever the science takes you.
 
 ## Getting in: two minutes, nothing to install
 
-You are given a **URL and a token** at the door. That is the whole setup.
+Your **link and token** are posted in **`#berlin-general`** on the ClawBio Slack. That is
+the whole setup.
 
-1. Open the URL. You land on the **OpenClaw Gateway Dashboard**.
+1. Open the link. You land on the **OpenClaw Gateway Dashboard**.
 2. The **WebSocket URL** is already filled in. Paste your token into **Gateway Token**.
    Leave **Password** empty.
 3. Click **Connect**.
@@ -412,9 +413,9 @@ whichever challenge you picked.
 
 !!! tip "Serverless bonus, on any challenge"
 
-    Any team on any challenge that stands up an open model on Nebius Serverless and has
-    an agent genuinely call it gets that noted to the room at judging. You are not
-    choosing between doing science and doing infrastructure.
+    Standing up an open model on Nebius Serverless and having an agent genuinely call it
+    counts directly towards the implementation criterion. You are not choosing between
+    doing science and doing infrastructure.
 
     If you go this way, start it at 13:20 rather than at 15:00, and ask in `#berlin-help`
     early rather than at 16:00.
@@ -429,25 +430,30 @@ Concretely, by 16:40 you want:
 1. It runs live, on real data, in front of people.
 2. Every claim traces to a source, and the sources resolve.
 3. There is at least one input where it correctly says it cannot answer.
-4. Somebody else could run it on Wednesday from your repo.
+4. It does something that was not obvious before you built it.
 
-Point three is the one teams skip and the one that wins. Build a deliberate failure case
-and demo it on purpose.
+Point three is the one teams skip and the one that impresses a jury. Build a deliberate
+failure case and demo it on purpose.
 
 ## Judging
 
-Everyone votes for their three favourite demos at 17:00. Four criteria, given to the room
-so the vote is about the work rather than about who presented most confidently.
+**A jury picks three winners.** The room picks a fourth, the community prize.
+
+Three criteria, weighted equally, and they apply the same way to all challenges.
 
 | Criterion | The question |
 |-----------|--------------|
-| **Does it run?** | Demonstrated live, on real data, not on slides |
-| **Would you trust it?** | Provenance visible, uncertainty stated, failure handled |
-| **Is it reusable?** | Could someone else pick it up on Wednesday |
-| **Did it need agents?** | A shell script in a trenchcoat is not an agentic workflow |
+| **Originality** | Is this a genuinely new angle, or a familiar demo with new branding? |
+| **Impact** | If it worked at scale, would it change what someone can actually do? |
+| **Nebius and ClawBio implementation** | How well does it use the agent, the skill library and the Nebius stack? A shell script in a trenchcoat is not an agentic workflow. |
 
 One hard rule across all challenges: **claims that cannot be checked do not count.** A
-confident answer with an invented source scores below an honest abstention.
+confident answer with an invented source scores below an honest abstention, and in
+Challenge 2 an unresolvable PMID puts a project out of contention for first place.
+
+What that means in practice, whichever criterion you are chasing: demo it live on real
+data rather than on slides, make the provenance visible, and show the case where it
+correctly refuses to answer.
 
 ## Submitting
 

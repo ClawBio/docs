@@ -64,7 +64,7 @@ provenance rather than making a model sound convincing.
 | 13:05 | Team formation and lunch |
 | 13:20 | Build |
 | 16:40 | Submissions freeze in `#berlin-demos` |
-| 17:00 | Demos. Everyone votes for their three favourites |
+| 17:00 | Demos, jury decision and the community vote |
 | 18:00 | Close |
 
 Build time is **3 hours 20 minutes**, 13:20 to the 16:40 freeze. That is the constraint
@@ -119,7 +119,10 @@ after the day.
 | 2nd | $1,000 | $250 |
 | 3rd | $500 | $100 |
 
-Winners are chosen by the room. Everyone votes for their three favourite demos.
+**A jury chooses those three**, on originality, impact, and how well the project uses
+Nebius and ClawBio.
+
+**There is also a community prize**, chosen by the room.
 
 ## What to bring
 
@@ -128,9 +131,11 @@ A laptop, and enough Python to be dangerous.
 You do **not** need prior ClawBio experience, and you do not need to have used AI coding
 agents before.
 
-**There is nothing to install.** You get a URL and a token at the door. Open the URL,
-paste the token, click Connect, and you are in the **BioNeMo Research Agent** running on
-Nebius. Everything happens in your browser.
+**There is nothing to install.** Your Nebius link and token are posted in
+`#berlin-general` on Slack. Open the link, paste the token, click Connect, and you are in
+the **BioNeMo Research Agent** running on Nebius. Everything happens in your browser.
+
+Join the Slack before you arrive, so you are not hunting for credentials at 12:00.
 
 Then paste a challenge prompt and start. [Setup](setup.md) has the connection detail, and
 [the data](data/index.md) is ready for all three challenges.
@@ -155,10 +160,10 @@ your first hour goes.
 
 | Channel | For |
 |---------|-----|
-| `#berlin-general` | Announcements and joining details |
+| `#berlin-general` | **Your Nebius link and token**, plus announcements |
 | `#berlin-help` | Stuck on anything. Nebius engineers are in here |
 | `#berlin-teams` | Say what you want to build, find people to build it with |
-| `#berlin-demos` | Post your repo and one line before 17:00 |
+| `#berlin-demos` | Post your repo and one line before 16:40 |
 
 ## Hosts
 
