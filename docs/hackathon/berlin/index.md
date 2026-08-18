@@ -57,8 +57,8 @@ provenance rather than making a model sound convincing.
 | Time | Session |
 |------|---------|
 | 11:30 | Doors open. Arrive, get set up on Nebius |
-| 12:00 | Welcome, then genomics in an agentic world, an overview (20 min) |
-| 12:20 | Introduction to Nebius products (15 min) |
+| 12:00 | Welcome, then genomics in an agentic world, an overview (15 min) |
+| 12:15 | Introduction to Nebius products (20 min) |
 | 12:35 | Using and developing ClawBio skills on Nebius, a primer (30 min) |
 | 12:55 | The three challenges, and how demos are judged |
 | 13:05 | Team formation and lunch |
