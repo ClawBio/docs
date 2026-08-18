@@ -22,11 +22,11 @@ skills on Nebius infrastructure and demo what you made at five.
 | | |
 |---|---|
 | **Date** | Tuesday 18 August 2026 |
-| **Doors** | 11:30, subject to final venue confirmation |
+| **Doors** | 11:30 |
 | **Programme** | 12:00 to 18:00 |
-| **Venue** | Impact Hub Berlin, room "The Loop", confirmed 28 July and awaiting final reconfirmation |
+| **Venue** | Impact Hub Berlin, room "The Loop" |
 | **Address** | Rollbergstraße 28a, 12053 Berlin |
-| **Cost** | Free. Lunch planned, with final service details pending. |
+| **Cost** | Free, and lunch is provided |
 
 Come at 11:30 if you can. We start at 12:00 sharp, and the earlier you are set up on
 Nebius the more you build.
