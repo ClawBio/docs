@@ -1,6 +1,6 @@
 ---
 title: Integrate a Framework
-description: Connect your agent framework to ClawBio's skill registry and MCP bridge
+description: Connect your agent framework to ClawBio's skill registry, as Agent Skills or through the CLI
 ---
 
 # Integrate a Framework
@@ -26,20 +26,23 @@ Each skill exposes a standard CLI interface. Your framework needs to:
 3. **Execute** the Python script with the correct arguments
 4. **Capture** the output directory contents
 
-## MCP Bridge
+## Agent Skills
 
-ClawBio provides an MCP (Model Context Protocol) server that exposes skills as tools. If your framework supports MCP, this is the simplest integration path:
+Every skill folder is a plain [Agent Skills](https://agentskills.io) package: `SKILL.md`,
+the script, demo data and tests. If your framework reads Agent Skills (`~/.agents/skills/` is the
+convention Cursor, VS Code, Codex and Zed share), copy the folders there and there is
+nothing to integrate.
 
-```bash
-# Start the MCP bridge
-clawbio mcp serve
+## MCP Bridge (deprecated)
 
-# Your MCP-compatible agent can now discover and call skills as tools
-```
+ClawBio 0.6.0 added an MCP server (`clawbio mcp`) exposing skills as tools. It is
+deprecated as of 0.7.0 and will be removed in 0.8.0; see the
+[MCP page](../reference/mcp.md) for why and how to migrate. Do not build a new
+integration on it.
 
 ## Direct Integration
 
-If your framework does not support MCP, integrate directly with the CLI:
+Integrate directly with the CLI:
 
 ```python
 import subprocess

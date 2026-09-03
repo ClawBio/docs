@@ -26,7 +26,7 @@ ClawBio is an open project. Anyone can contribute a skill -- from a simple SKILL
     <span class="time-estimate">20 min</span>
   </div>
   <h3 class="tutorial-card__title">Integrate a Framework</h3>
-  <p class="tutorial-card__desc">Connect your agent framework to ClawBio's registry and MCP bridge.</p>
+  <p class="tutorial-card__desc">Connect your agent framework to ClawBio's registry, as Agent Skills or through the CLI.</p>
 </a>
 
 </div>

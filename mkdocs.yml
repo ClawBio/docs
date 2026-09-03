@@ -81,7 +81,7 @@ nav:
   - Reference:
     - SKILL.md Spec: reference/skillmd-spec.md
     - CLI: reference/cli.md
-    - MCP Server: reference/mcp.md
+    - MCP Server (deprecated): reference/mcp.md
     - Security: reference/security.md
     - Contributing: contributing/index.md
   - Presentations: presentations/index.md
