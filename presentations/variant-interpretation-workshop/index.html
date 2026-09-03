@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workshop: Agentic Variant Interpretation | ClawBio</title>
+  <meta name="description" content="Hands-on workshop: annotate a real human genome using ClawBio's AI agent skills in Google Colab. University of Westminster Systems Biology, March 2026.">
+  <meta property="og:title" content="Workshop: Agentic Variant Interpretation with ClawBio">
+  <meta property="og:description" content="Annotate a real human genome with AI agent skills. Free, open, runs in Google Colab.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/ClawBio/ClawBio/main/img/clawbio-social-preview.png">
+  <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../assets/clawbio-logo.jpeg">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+      --border: #30363d; --text: #e6edf3; --text-muted: #8b949e;
+      --accent: #3fb950; --accent2: #58a6ff; --warn: #d29922; --danger: #f85149;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; line-height: 1.7; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(13,17,23,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; font-size: 1.15rem; text-decoration: none; color: var(--text); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero { text-align: center; padding: 5rem 2rem 4rem; background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(63,185,80,0.12) 0%, transparent 70%); }
+    .hero-badge { display: inline-block; background: rgba(63,185,80,0.15); border: 1px solid rgba(63,185,80,0.4); color: var(--accent); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.9rem; border-radius: 999px; margin-bottom: 1.2rem; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero p.lead { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--text-muted); max-width: 660px; margin: 0 auto 1.5rem; }
+    .hero-meta { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; }
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.4rem; border-radius: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; }
+    .btn-primary { background: var(--accent); color: #0d1117; }
+    .btn-primary:hover { background: #56d364; transform: translateY(-1px); }
+    .btn-secondary { background: var(--bg3); color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--text-muted); transform: translateY(-1px); }
+
+    /* SECTIONS */
+    section { padding: 4rem 2rem; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+    .section-title { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; margin-bottom: 0.8rem; }
+    .section-sub { color: var(--text-muted); max-width: 640px; margin-bottom: 2rem; font-size: 1.05rem; }
+    .alt-bg { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    /* CARDS */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+    .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; transition: border-color 0.2s; }
+    .card:hover { border-color: var(--accent); }
+    .card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .card p { color: var(--text-muted); font-size: 0.92rem; }
+    .card .emoji { font-size: 1.6rem; margin-bottom: 0.6rem; display: block; }
+
+    /* SLIDE DECK */
+    .slide-deck { display: grid; gap: 1.5rem; }
+    .slide { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; position: relative; }
+    .slide::before { content: attr(data-num); position: absolute; top: 1rem; right: 1.5rem; font-size: 0.75rem; font-weight: 700; color: var(--accent); background: rgba(63,185,80,0.12); padding: 0.15rem 0.6rem; border-radius: 999px; }
+    .slide h3 { font-size: 1.2rem; margin-bottom: 0.6rem; }
+    .slide p, .slide ul { color: var(--text-muted); font-size: 0.95rem; }
+    .slide ul { padding-left: 1.2rem; margin-top: 0.4rem; }
+    .slide ul li { margin-bottom: 0.3rem; }
+    .slide .highlight { color: var(--accent); font-weight: 600; }
+    .slide .stat { font-size: 2rem; font-weight: 800; color: var(--accent); display: block; margin: 0.5rem 0; }
+
+    /* STATS ROW */
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 2rem 0; }
+    .stat-box { text-align: center; padding: 1.2rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; }
+    .stat-box .num { font-size: 2rem; font-weight: 800; color: var(--accent); display: block; }
+    .stat-box .label { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+    /* TIMELINE */
+    .timeline { border-left: 2px solid var(--border); padding-left: 1.5rem; margin: 1.5rem 0; }
+    .timeline-item { position: relative; margin-bottom: 1.5rem; }
+    .timeline-item::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); position: absolute; left: -1.85rem; top: 0.5rem; }
+    .timeline-item h4 { font-size: 1rem; margin-bottom: 0.2rem; }
+    .timeline-item p { color: var(--text-muted); font-size: 0.9rem; }
+    .timeline-item .date { font-size: 0.78rem; color: var(--accent2); }
+
+    /* CODE */
+    .code-block { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.5rem; font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 0.85rem; line-height: 1.8; overflow-x: auto; margin: 1rem 0; }
+    .code-block .comment { color: #8b949e; }
+    .code-block .cmd { color: var(--accent2); }
+    .code-block .out { color: var(--accent); }
+
+    /* TABLE */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 1rem 0; }
+    .data-table th { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 2px solid var(--border); color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .data-table td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); }
+    .data-table tr:hover { background: rgba(63,185,80,0.04); }
+    .badge { font-size: 0.72rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .badge-path { background: rgba(248,81,73,0.15); color: var(--danger); border: 1px solid rgba(248,81,73,0.3); }
+    .badge-drug { background: rgba(210,153,34,0.15); color: var(--warn); border: 1px solid rgba(210,153,34,0.3); }
+    .badge-risk { background: rgba(88,166,255,0.15); color: var(--accent2); border: 1px solid rgba(88,166,255,0.3); }
+    .badge-benign { background: rgba(63,185,80,0.12); color: var(--accent); border: 1px solid rgba(63,185,80,0.3); }
+
+    /* CALLOUT */
+    .callout { border-left: 3px solid var(--accent); background: rgba(63,185,80,0.06); padding: 1rem 1.2rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+    .callout.warn { border-left-color: var(--warn); background: rgba(210,153,34,0.06); }
+    .callout.danger { border-left-color: var(--danger); background: rgba(248,81,73,0.06); }
+    .callout strong { display: block; margin-bottom: 0.3rem; }
+    .callout p { color: var(--text-muted); font-size: 0.92rem; }
+
+    /* CHECKLIST */
+    .checklist { list-style: none; margin: 1rem 0; }
+    .checklist li { padding: 0.5rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 0.6rem; align-items: flex-start; }
+    .checklist li::before { content: ''; width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; margin-top: 3px; }
+    .checklist li.done::before { background: var(--accent); border-color: var(--accent); }
+
+    /* FOOTER */
+    footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem; }
+    footer a { color: var(--accent2); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* TOC */
+    .toc { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem 2rem; margin: 2rem 0; }
+    .toc h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 0.8rem; }
+    .toc ol { padding-left: 1.2rem; }
+    .toc li { margin-bottom: 0.35rem; }
+    .toc a { color: var(--accent2); text-decoration: none; font-size: 0.92rem; }
+    .toc a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      section { padding: 2.5rem 1.2rem; }
+      .slide { padding: 1.2rem; }
+      .card-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../../" class="nav-logo">ClawBio</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#community">Community</a></li>
+    <li><a href="#background">Background</a></li>
+    <li><a href="#materials">Materials</a></li>
+    <li><a href="#walkthrough">Walkthrough</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#takeaways">Takeaways</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Systems Biology Workshop</div>
+  <h1>Agentic <em>Variant Interpretation</em></h1>
+  <p class="lead">Hands-on with a real human genome. Annotate clinically relevant variants, interpret pharmacogenomic findings, and understand what AI changes (and does not change) about genomic analysis.</p>
+  <p class="hero-meta">Dr Manuel Corpas &middot; University of Westminster &middot; 27 March 2026</p>
+  <div class="hero-ctas">
+    <a href="https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-variant-interpretation.ipynb" class="btn btn-primary" target="_blank">Open in Google Colab</a>
+    <a href="https://github.com/ClawBio/ClawBio" class="btn btn-secondary" target="_blank">GitHub Repository</a>
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<section>
+  <div class="section-inner">
+    <div class="toc">
+      <h3>Contents</h3>
+      <ol>
+        <li><a href="#about">What is ClawBio?</a></li>
+        <li><a href="#problem">The Problem it Addresses</a></li>
+        <li><a href="#community">Community and Growth</a></li>
+        <li><a href="#background">Background: Variant Interpretation</a></li>
+        <li><a href="#materials">Workshop Materials and Links</a></li>
+        <li><a href="#walkthrough">Step-by-Step Walkthrough</a></li>
+        <li><a href="#results">Understanding Your Results</a></li>
+        <li><a href="#takeaways">Take-Home Messages</a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 1: WHAT IS CLAWBIO -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label">Introduction</p>
+    <h2 class="section-title">What is ClawBio?</h2>
+    <p class="section-sub">The first bioinformatics-native AI agent skill library. Curated, reproducible, open-source.</p>
+
+    <div class="slide-deck">
+      <div class="slide" data-num="1">
+        <h3>Bioinformatics skills for AI agents</h3>
+        <p>ClawBio is a collection of self-contained, reproducible bioinformatics skills that any AI agent can call. Each skill handles a specific task: annotating variants, scoring pharmacogenomic risk, running differential expression, searching clinical trials, and more. The skills run locally, keep genetic data on your machine, and produce structured, auditable outputs.</p>
+        <p style="margin-top:0.8rem;">Think of it as a toolbox. The AI agent decides which tool to pick up. The tool does the analysis. You review the results.</p>
+      </div>
+
+      <div class="slide" data-num="2">
+        <h3>Local-first. Reproducible. Open.</h3>
+        <ul>
+          <li><span class="highlight">Local-first</span>: your genomic data never leaves your laptop. Skills process everything in-place.</li>
+          <li><span class="highlight">Reproducible</span>: every skill exports <code>commands.sh</code>, <code>environment.yml</code>, and SHA-256 checksums. Re-run any analysis and get the same output.</li>
+          <li><span class="highlight">Open-source</span>: MIT licensed. Fork it, extend it, contribute back.</li>
+          <li><span class="highlight">Equity-aware</span>: built-in HEIM diversity metrics flag when analyses depend on biased reference data.</li>
+        </ul>
+      </div>
+
+      <div class="slide" data-num="3">
+        <h3>From raw data to clinical-grade report in one command</h3>
+        <div class="code-block">
+          <span class="comment"># Traditional approach: 6 manual steps across 3 tools</span><br>
+          <span class="cmd">vep --input sample.vcf --output vep_out.txt --cache</span><br>
+          <span class="comment"># ...parse JSON, cross-reference ClinVar, check gnomAD, read CPIC tables...</span><br><br>
+          <span class="comment"># ClawBio: one command</span><br>
+          <span class="cmd">python clawbio.py run variant-annotation --input sample.vcf --output report/</span><br>
+          <span class="out">Annotated 21 variants. 3 Tier 1 (pathogenic). 6 Tier 2 (drug response). Report saved.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: THE PROBLEM -->
+<section id="problem" class="alt-bg">
+  <div class="section-inner">
+    <p class="section-label">The problem</p>
+    <h2 class="section-title">Why bioinformatics needs agent skills</h2>
+
+    <div class="card-grid" style="margin-bottom:2rem;">
+      <div class="card">
+        <span class="emoji">&#x1F6AB;</span>
+        <h3>Reproducibility is broken</h3>
+        <p>Dependency hell, dead links to reference data, hardcoded paths, missing configs. Most published bioinformatics analyses cannot be re-run a year later.</p>
+      </div>
+      <div class="card">
+        <span class="emoji">&#x1F916;</span>
+        <h3>AI hallucinates biology</h3>
+        <p>Large language models guess star alleles, invent gene-drug associations, and cite retracted papers. Without grounded skills, AI in genomics is unreliable.</p>
+      </div>
+      <div class="card">
+        <span class="emoji">&#x23F1;</span>
+        <h3>Manual pipelines take weeks</h3>
+        <p>A clinical-grade variant annotation requires VEP, ClinVar lookup, gnomAD frequency checks, CPIC cross-referencing, and manual prioritisation. Each step is a separate tool with its own interface.</p>
+      </div>
+      <div class="card">
+        <span class="emoji">&#x1F30D;</span>
+        <h3>Equity gaps persist</h3>
+        <p>86% of GWAS participants are of European descent. Polygenic risk scores lose up to 80% accuracy in non-European populations. AI trained on biased data amplifies existing disparities.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>ClawBio's solution</strong>
+      <p>Every skill is self-contained with pinned dependencies, demo data, and reproducibility metadata. The AI agent routes to the right skill, the skill does the grounded analysis, and the human reviews the structured output. No hallucination. No broken pipelines.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: COMMUNITY -->
+<section id="community">
+  <div class="section-inner">
+    <p class="section-label">Community</p>
+    <h2 class="section-title">Growth and contributors</h2>
+
+    <div class="stats-row">
+      <div class="stat-box"><span class="num">488</span><span class="label">GitHub Stars</span></div>
+      <div class="stat-box"><span class="num">85</span><span class="label">Forks</span></div>
+      <div class="stat-box"><span class="num">39</span><span class="label">Skills</span></div>
+      <div class="stat-box"><span class="num">13</span><span class="label">Contributors</span></div>
+    </div>
+
+    <h3 style="margin-top:2rem; margin-bottom:1rem;">Project milestones</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="date">March 2026</span>
+        <h4>v0.4 &mdash; Galaxy Integration</h4>
+        <p>Bridge to 8,000+ Galaxy tools. BioBlend SDK integration. Cross-platform skill chaining.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="date">March 2026</span>
+        <h4>v0.3.1 &mdash; Agent-Friendly</h4>
+        <p>Added <code>llms.txt</code>, <code>AGENTS.md</code>, and machine-readable <code>catalog.json</code> so any AI agent can discover and use ClawBio skills automatically.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="date">March 2026</span>
+        <h4>v0.3 &mdash; Imperial College AI Agent Hackathon</h4>
+        <p>Security audit (32 fixes). Full README overhaul. Production deployment of RoboTerri Telegram bot.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="date">February 2026</span>
+        <h4>v0.2 &mdash; Tests and CI</h4>
+        <p>57 automated tests. GitHub Actions CI pipeline. ClawHub skill registry.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="date">January 2026</span>
+        <h4>v0.1 &mdash; First public release</h4>
+        <p>Core skills: variant annotation, pharmacogenomics, equity scoring, nutrigenomics. The Corpasome as demo genome.</p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:2rem;">
+      <strong>Join the community</strong>
+      <p>ClawBio is open to contributions. Wanted skills include GWAS automation (PLINK/REGENIE), clinical ACMG classification, pathway enrichment (GO/KEGG), phylogenetics, and spatial transcriptomics. See the <a href="https://github.com/ClawBio/ClawBio/blob/main/CONTRIBUTING.md" style="color:var(--accent2);">contributing guide</a> to get started.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: BACKGROUND -->
+<section id="background" class="alt-bg">
+  <div class="section-inner">
+    <p class="section-label">Background</p>
+    <h2 class="section-title">Variant interpretation: the biology before the AI</h2>
+    <p class="section-sub">This section covers the key concepts you need before running the practical.</p>
+
+    <div class="slide-deck">
+      <div class="slide" data-num="4">
+        <h3>Genomic variation in a nutshell</h3>
+        <p>Every human genome carries 4 to 5 million single nucleotide polymorphisms (SNPs) compared to the reference genome. Most are benign. A small fraction affect protein function, drug metabolism, or disease risk. The challenge is finding the variants that matter in a sea of noise.</p>
+        <p style="margin-top:0.6rem;">Beyond SNPs, variation includes insertions/deletions (indels), copy number variants (CNVs), and structural rearrangements. This workshop focuses on SNPs and small indels because they are what consumer genotyping platforms (23andMe, AncestryDNA) measure.</p>
+      </div>
+
+      <div class="slide" data-num="5">
+        <h3>The ACMG five-tier classification</h3>
+        <p>The American College of Medical Genetics and Genomics (ACMG) defines five categories for variant classification:</p>
+        <table class="data-table" style="margin-top:0.8rem;">
+          <thead><tr><th>Category</th><th>Meaning</th><th>Clinical action</th></tr></thead>
+          <tbody>
+            <tr><td><span class="badge badge-path">Pathogenic</span></td><td>Directly contributes to disease</td><td>Report. Genetic counselling.</td></tr>
+            <tr><td><span class="badge badge-path">Likely pathogenic</span></td><td>Strong evidence, not conclusive</td><td>Report with caveat.</td></tr>
+            <tr><td><span class="badge badge-risk">VUS</span></td><td>Uncertain significance</td><td>Do not act on. May be reclassified.</td></tr>
+            <tr><td><span class="badge badge-benign">Likely benign</span></td><td>Probably no clinical effect</td><td>Generally not reported.</td></tr>
+            <tr><td><span class="badge badge-benign">Benign</span></td><td>No disease association</td><td>Not reported.</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:0.8rem;"><strong>Key point:</strong> VUS (Variant of Uncertain Significance) is the honest answer when there is not enough evidence. You will never catch up with the classification backlog. Neither will AI. Learning to communicate uncertainty is a core clinical skill.</p>
+      </div>
+
+      <div class="slide" data-num="6">
+        <h3>The annotation pipeline</h3>
+        <p>A standard variant interpretation workflow follows this chain:</p>
+        <div class="code-block" style="text-align:center; font-size:1rem; letter-spacing:0.02em;">
+          VCF &rarr; VEP &rarr; ClinVar &rarr; gnomAD &rarr; ACMG &rarr; Report
+        </div>
+        <ul style="margin-top:0.8rem;">
+          <li><strong>VCF</strong>: Variant Call Format, the standard file for storing genomic variants</li>
+          <li><strong>VEP</strong>: Ensembl Variant Effect Predictor, determines functional consequence (missense, synonymous, etc.)</li>
+          <li><strong>ClinVar</strong>: NCBI database of variant-disease associations</li>
+          <li><strong>gnomAD</strong>: Genome Aggregation Database, population allele frequencies across 76,000+ genomes</li>
+          <li><strong>ACMG</strong>: Classification framework that combines all evidence into a five-tier verdict</li>
+        </ul>
+      </div>
+
+      <div class="slide" data-num="7">
+        <h3>Pharmacogenomics: when your genome affects your medication</h3>
+        <p>Pharmacogenomics (PGx) studies how genetic variation affects drug response. The key genes and their clinical impact:</p>
+        <table class="data-table" style="margin-top:0.8rem;">
+          <thead><tr><th>Gene</th><th>Drugs affected</th><th>Clinical consequence</th></tr></thead>
+          <tbody>
+            <tr><td><strong>CYP2D6</strong></td><td>Codeine, tamoxifen, SSRIs (51 drugs total)</td><td>Poor metabolisers get no pain relief from codeine</td></tr>
+            <tr><td><strong>CYP2C19</strong></td><td>Clopidogrel (Plavix), PPIs</td><td>Poor metabolisers: clopidogrel does not work</td></tr>
+            <tr><td><strong>CYP2C9 + VKORC1</strong></td><td>Warfarin</td><td>Wrong dose causes dangerous bleeding or clotting</td></tr>
+            <tr><td><strong>TPMT</strong></td><td>Azathioprine, 6-MP</td><td>Poor metabolisers: severe bone marrow toxicity</td></tr>
+            <tr><td><strong>DPYD</strong></td><td>5-fluorouracil, capecitabine</td><td>Deficiency can be fatal at standard chemotherapy doses</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:0.8rem;">CPIC (Clinical Pharmacogenetics Implementation Consortium) publishes evidence-based guidelines that map genotype to drug recommendation. ClawBio's pharmgx-reporter skill implements these guidelines directly.</p>
+      </div>
+
+      <div class="slide" data-num="8">
+        <h3>The equity problem in genomics</h3>
+        <p>Genomic databases are heavily biased toward European populations:</p>
+        <ul>
+          <li><span class="highlight">86%</span> of GWAS participants are of European ancestry</li>
+          <li>BRCA variant databases have <span class="highlight">30x more</span> entries for European populations</li>
+          <li>Polygenic risk scores lose up to <span class="highlight">80% accuracy</span> in non-European populations</li>
+          <li>44% of neglected tropical diseases have <span class="highlight">zero</span> dedicated genomic research infrastructure</li>
+        </ul>
+        <p style="margin-top:0.8rem;">AI trained on biased data amplifies existing disparities. A variant classified as "benign" in European databases may be pathogenic in another population but simply unstudied. ClawBio's equity-scorer skill quantifies this gap using the HEIM (Health Equity Impact Metric) framework.</p>
+      </div>
+
+      <div class="slide" data-num="9">
+        <h3>The Corpasome: a real open genome</h3>
+        <p>In 2013, Manuel Corpas published his 23andMe genotype data under a CC0 (public domain) licence, making it one of the first fully open personal genomes. This workshop uses the Corpasome as its primary dataset.</p>
+        <p style="margin-top:0.6rem;">Real findings from this genome include:</p>
+        <ul>
+          <li><strong>Factor V Leiden</strong> (rs6025): carrier for thrombophilia risk</li>
+          <li><strong>HFE C282Y</strong> (rs1800562): carrier for hereditary haemochromatosis</li>
+          <li><strong>CFTR deltaF508</strong> (rs113993960): carrier for cystic fibrosis</li>
+          <li><strong>VKORC1 + CYP2C9</strong>: warfarin sensitivity (AVOID standard dose)</li>
+          <li><strong>MTHFR C677T</strong> (rs1801133): folate metabolism variant</li>
+          <li><strong>APOE e3/e4</strong>: elevated Alzheimer's risk factor</li>
+        </ul>
+        <p style="margin-top:0.6rem;">Citation: Corpas, M. (2013). Crowdsourcing the Corpasome. <em>Source Code for Biology and Medicine</em>, 8, 13. <a href="https://doi.org/10.1186/1751-0473-8-13" style="color:var(--accent2);">doi:10.1186/1751-0473-8-13</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: MATERIALS -->
+<section id="materials">
+  <div class="section-inner">
+    <p class="section-label">Materials</p>
+    <h2 class="section-title">Workshop materials and links</h2>
+    <p class="section-sub">Everything you need to run the practical. No local installation required.</p>
+
+    <h3 style="margin-bottom:1rem;">Essential links</h3>
+    <table class="data-table">
+      <thead><tr><th>Resource</th><th>Link</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Google Colab notebook</strong></td>
+          <td><a href="https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-variant-interpretation.ipynb" style="color:var(--accent2);" target="_blank">Open in Colab</a></td>
+          <td>Main practical. Runs in browser, free tier.</td>
+        </tr>
+        <tr>
+          <td><strong>Lecture slides (PPTX)</strong></td>
+          <td><a href="https://github.com/ClawBio/ClawBio/raw/main/slides/OpenClaw-Bio-10-Tips.pptx" style="color:var(--accent2);" target="_blank">Download</a></td>
+          <td>ClawBio overview deck</td>
+        </tr>
+        <tr>
+          <td><strong>ClawBio GitHub</strong></td>
+          <td><a href="https://github.com/ClawBio/ClawBio" style="color:var(--accent2);" target="_blank">github.com/ClawBio/ClawBio</a></td>
+          <td>Source code, skills, documentation</td>
+        </tr>
+        <tr>
+          <td><strong>Corpasome paper</strong></td>
+          <td><a href="https://doi.org/10.1186/1751-0473-8-13" style="color:var(--accent2);" target="_blank">doi:10.1186/1751-0473-8-13</a></td>
+          <td>Corpas (2013), Source Code Biol Med</td>
+        </tr>
+        <tr>
+          <td><strong>Ensembl VEP</strong></td>
+          <td><a href="https://www.ensembl.org/info/docs/tools/vep/index.html" style="color:var(--accent2);" target="_blank">ensembl.org/vep</a></td>
+          <td>Variant Effect Predictor (public REST API)</td>
+        </tr>
+        <tr>
+          <td><strong>ClinVar</strong></td>
+          <td><a href="https://www.ncbi.nlm.nih.gov/clinvar/" style="color:var(--accent2);" target="_blank">ncbi.nlm.nih.gov/clinvar</a></td>
+          <td>Variant-disease associations database</td>
+        </tr>
+        <tr>
+          <td><strong>gnomAD</strong></td>
+          <td><a href="https://gnomad.broadinstitute.org/" style="color:var(--accent2);" target="_blank">gnomad.broadinstitute.org</a></td>
+          <td>Population allele frequency data</td>
+        </tr>
+        <tr>
+          <td><strong>CPIC Guidelines</strong></td>
+          <td><a href="https://cpicpgx.org/" style="color:var(--accent2);" target="_blank">cpicpgx.org</a></td>
+          <td>Pharmacogenomics clinical guidelines</td>
+        </tr>
+        <tr>
+          <td><strong>ACMG Standards</strong></td>
+          <td><a href="https://doi.org/10.1038/gim.2015.30" style="color:var(--accent2);" target="_blank">Richards et al. (2015)</a></td>
+          <td>Genetics in Medicine 17(5):405-24</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:2.5rem; margin-bottom:1rem;">Skills used in this workshop</h3>
+    <div class="card-grid">
+      <div class="card">
+        <h3>variant-annotation</h3>
+        <p>Annotates VCF variants via Ensembl VEP REST API. Extracts ClinVar significance, gnomAD frequencies, and assigns Tier 1-4 priority. Outputs report, TSV, and JSON.</p>
+      </div>
+      <div class="card">
+        <h3>pharmgx-reporter</h3>
+        <p>Pharmacogenomic report from 23andMe/AncestryDNA data. 12 genes, 31 SNPs, 51 drugs. CPIC-grounded, zero external dependencies, runs offline.</p>
+      </div>
+      <div class="card">
+        <h3>clinpgx</h3>
+        <p>Deep gene-drug lookup via the ClinPGx API. Provides detailed CPIC guideline context, PharmGKB annotations, and FDA label information.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:2.5rem; margin-bottom:1rem;">Requirements</h3>
+    <ul class="checklist">
+      <li>A Google account (for Colab access)</li>
+      <li>A web browser (Chrome, Firefox, or Safari)</li>
+      <li>No installation, no API keys, no payment required</li>
+      <li>Approximately 30 minutes for the guided practical</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SECTION 6: WALKTHROUGH -->
+<section id="walkthrough" class="alt-bg">
+  <div class="section-inner">
+    <p class="section-label">Walkthrough</p>
+    <h2 class="section-title">Step-by-step workshop instructions</h2>
+    <p class="section-sub">Open the <a href="https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-variant-interpretation.ipynb" style="color:var(--accent2);" target="_blank">Colab notebook</a> and follow along.</p>
+
+    <div class="slide-deck">
+
+      <div class="slide" data-num="Step 0">
+        <h3>Setup (2 minutes)</h3>
+        <p>Run the first two code cells. They clone the ClawBio repository and install dependencies (<code>pysam</code>, <code>requests</code>, <code>pandas</code>, <code>matplotlib</code>). You should see:</p>
+        <div class="code-block">
+          <span class="out">ClawBio loaded successfully</span><br>
+          <span class="out">Skills available: 39</span>
+        </div>
+        <div class="callout warn">
+          <strong>If Colab is slow</strong>
+          <p>The git clone takes 10-20 seconds. If it times out, click "Runtime > Restart and run all". The Colab free tier occasionally throttles new sessions.</p>
+        </div>
+      </div>
+
+      <div class="slide" data-num="Step 1">
+        <h3>Explore the Corpasome (5 minutes)</h3>
+        <p>The notebook loads Manuel Corpas's 23andMe genotype file (gzipped, ~600,000 SNPs). You will see:</p>
+        <ul>
+          <li>The 23andMe file format: rsID, chromosome, position, genotype</li>
+          <li>Total SNP count across all chromosomes</li>
+          <li>A per-chromosome breakdown showing Chr 1 has the most variants and Chr 22 the fewest</li>
+        </ul>
+        <p style="margin-top:0.6rem;"><strong>Discussion point:</strong> Why does chromosome 1 have the most SNPs? (It is the largest chromosome, ~249 Mb.)</p>
+      </div>
+
+      <div class="slide" data-num="Step 2">
+        <h3>Convert to VCF (3 minutes)</h3>
+        <p>The notebook extracts 21 clinically relevant variants from the full genotype file and converts them to VCF format. These span:</p>
+        <ul>
+          <li><strong>Pharmacogenomics</strong>: CYP2C19, CYP2C9, CYP2D6, VKORC1, TPMT, MTHFR</li>
+          <li><strong>Cancer risk</strong>: BRCA1, TP53</li>
+          <li><strong>Cardiovascular</strong>: Factor V (F5), Prothrombin (F2), HFE</li>
+          <li><strong>Other Mendelian</strong>: CFTR, APOE, SERPINA1</li>
+        </ul>
+        <p style="margin-top:0.6rem;">The output VCF is small enough to annotate in seconds using the free Ensembl REST API.</p>
+      </div>
+
+      <div class="slide" data-num="Step 3">
+        <h3>Run variant annotation (5 minutes)</h3>
+        <p>This is the core analysis step. The <code>variant-annotation</code> skill sends the 21 variants to Ensembl VEP and enriches them with ClinVar and gnomAD data. The output includes:</p>
+        <ul>
+          <li>A <strong>report.md</strong> with a prioritised summary of findings</li>
+          <li>An <strong>annotated_variants.tsv</strong> table with per-variant details</li>
+          <li>A <strong>result.json</strong> for programmatic access</li>
+        </ul>
+        <div class="callout">
+          <strong>What to watch for</strong>
+          <p>The VEP API processes 21 variants in a single batch (under the 200-variant limit). You should see status messages as each batch is submitted and cached. If the API is slow, the skill will retry automatically.</p>
+        </div>
+      </div>
+
+      <div class="slide" data-num="Step 4">
+        <h3>Pharmacogenomic interpretation (5 minutes)</h3>
+        <p>The <code>clinpgx</code> skill maps the annotated variants to CPIC drug recommendations. The key output is a gene-by-gene metaboliser profile and a drug recommendation table.</p>
+        <p style="margin-top:0.6rem;">The warfarin finding is the highlight of this step: the combination of VKORC1 TT (high sensitivity) and CYP2C9 *1/*2 (intermediate metaboliser) triggers an <strong>AVOID or significantly reduce dose</strong> recommendation. Without genotyping, a standard dose could cause dangerous bleeding.</p>
+      </div>
+
+      <div class="slide" data-num="Step 5">
+        <h3>Exercises (15 minutes, independent work)</h3>
+        <p>Three exercises for students:</p>
+        <table class="data-table" style="margin-top:0.8rem;">
+          <thead><tr><th>Exercise</th><th>Task</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>5a</strong></td><td>Run variant-annotation on the bundled 20-variant synthetic ClinVar panel (<code>--demo</code> flag). Compare the findings with your Corpasome results.</td><td>Required</td></tr>
+            <tr><td><strong>5b</strong></td><td>Upload your own 23andMe or AncestryDNA file and re-run Steps 2-4 on your data. <em>Privacy note: data stays in Colab, deleted on session end.</em></td><td>Optional</td></tr>
+            <tr><td><strong>5c</strong></td><td>Pick one gene from the results. Research its function, ACMG classification, gnomAD frequency, and write a brief interpretation: would you report this to a patient?</td><td>Required</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: UNDERSTANDING RESULTS -->
+<section id="results">
+  <div class="section-inner">
+    <p class="section-label">Results guide</p>
+    <h2 class="section-title">Understanding your results</h2>
+    <p class="section-sub">What the output tables and reports mean, and how to interpret the key findings.</p>
+
+    <h3 style="margin-bottom:1rem;">Priority tiers</h3>
+    <p style="margin-bottom:1rem;">The variant-annotation skill assigns every variant a priority tier based on clinical significance, population frequency, and functional impact:</p>
+    <table class="data-table">
+      <thead><tr><th>Tier</th><th>Criteria</th><th>Example from Corpasome</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-path">Tier 1</span></td>
+          <td>Pathogenic or likely pathogenic in ClinVar. Rare in gnomAD (AF &lt; 0.001).</td>
+          <td>CFTR deltaF508 (rs113993960), carrier for cystic fibrosis</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-drug">Tier 2</span></td>
+          <td>Drug response variant or established risk factor. CPIC-actionable.</td>
+          <td>VKORC1 rs9923231 TT, warfarin high sensitivity</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-risk">Tier 3</span></td>
+          <td>Variant of uncertain significance. Insufficient evidence to classify.</td>
+          <td>Rare missense variants with no ClinVar entry</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-benign">Tier 4</span></td>
+          <td>Benign or likely benign. Common in populations (&gt; 1% frequency).</td>
+          <td>MTHFR A1298C (rs1801131), common polymorphism</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:2.5rem; margin-bottom:1rem;">Key findings from the Corpasome</h3>
+
+    <div class="slide-deck">
+      <div class="slide" data-num="Finding 1">
+        <h3>Factor V Leiden (rs6025) <span class="badge badge-path">Tier 1</span></h3>
+        <p><strong>Gene:</strong> F5 (coagulation factor V). <strong>Genotype:</strong> heterozygous carrier.<br>
+        <strong>Clinical meaning:</strong> 3-8x increased risk of venous thromboembolism (blood clots). The most common inherited thrombophilia in Europeans (~5% carrier frequency). Relevant for oral contraceptive prescribing, surgery planning, and long-haul travel advice.<br>
+        <strong>Action:</strong> Reportable finding. Genetic counselling recommended for family cascade testing.</p>
+      </div>
+
+      <div class="slide" data-num="Finding 2">
+        <h3>HFE C282Y (rs1800562) <span class="badge badge-path">Tier 1</span></h3>
+        <p><strong>Gene:</strong> HFE (homeostatic iron regulator). <strong>Genotype:</strong> heterozygous carrier.<br>
+        <strong>Clinical meaning:</strong> Carrier for hereditary haemochromatosis. Homozygotes (C282Y/C282Y) accumulate excess iron, leading to liver damage, diabetes, and heart failure if untreated. Heterozygous carriers have mildly elevated iron but rarely develop clinical disease.<br>
+        <strong>Action:</strong> Monitor serum ferritin periodically. No treatment needed for carriers.</p>
+      </div>
+
+      <div class="slide" data-num="Finding 3">
+        <h3>CFTR deltaF508 (rs113993960) <span class="badge badge-path">Tier 1</span></h3>
+        <p><strong>Gene:</strong> CFTR (cystic fibrosis transmembrane conductance regulator). <strong>Genotype:</strong> heterozygous carrier.<br>
+        <strong>Clinical meaning:</strong> Carrier for cystic fibrosis, the most common lethal autosomal recessive condition in Europeans (~1 in 25 carrier frequency). Two copies needed for disease. Relevant for reproductive planning.<br>
+        <strong>Action:</strong> Partner testing recommended before family planning.</p>
+      </div>
+
+      <div class="slide" data-num="Finding 4">
+        <h3>Warfarin: CYP2C9 + VKORC1 <span class="badge badge-drug">Tier 2</span></h3>
+        <p><strong>Genes:</strong> CYP2C9 (*1/*2, intermediate metaboliser) + VKORC1 (rs9923231 TT, high sensitivity).<br>
+        <strong>Clinical meaning:</strong> This combination means warfarin is metabolised more slowly than average AND the drug target is more sensitive. Standard dosing would cause dangerously high drug levels and serious bleeding risk.<br>
+        <strong>CPIC recommendation:</strong> AVOID standard dose. Use pharmacogenomic-guided dosing algorithm or consider alternative anticoagulants (DOACs).<br>
+        <strong>Why this matters:</strong> Warfarin has a narrow therapeutic window. Too little means clotting; too much means haemorrhage. This is the textbook example of pharmacogenomics saving lives.</p>
+      </div>
+
+      <div class="slide" data-num="Finding 5">
+        <h3>APOE e3/e4 (rs429358 + rs7412) <span class="badge badge-risk">Risk factor</span></h3>
+        <p><strong>Gene:</strong> APOE (apolipoprotein E). <strong>Genotype:</strong> e3/e4.<br>
+        <strong>Clinical meaning:</strong> The e4 allele is the strongest common genetic risk factor for late-onset Alzheimer's disease. One copy (e3/e4) increases risk approximately 3-fold compared to e3/e3. Two copies (e4/e4) increase risk ~12-fold. However, many e4 carriers never develop Alzheimer's, and many Alzheimer's patients do not carry e4.<br>
+        <strong>Ethical note:</strong> APOE status is an ACMG secondary finding (SF v3.2). Disclosure is recommended but must be accompanied by counselling. The result is probabilistic, not deterministic.</p>
+      </div>
+
+      <div class="slide" data-num="Finding 6">
+        <h3>MTHFR C677T (rs1801133) <span class="badge badge-drug">Tier 2</span></h3>
+        <p><strong>Gene:</strong> MTHFR (methylenetetrahydrofolate reductase). <strong>Genotype:</strong> heterozygous.<br>
+        <strong>Clinical meaning:</strong> Reduced enzyme activity for folate metabolism. Heterozygotes retain ~65% activity (not clinically significant for most people). Homozygotes (~35% activity) may benefit from methylfolate supplementation, especially during pregnancy. The variant is extremely common (~30-40% of Europeans are carriers).<br>
+        <strong>Context:</strong> MTHFR is frequently over-interpreted in direct-to-consumer reports. Most carriers require no clinical action.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:2.5rem; margin-bottom:1rem;">Reading the annotated variants table</h3>
+    <p style="margin-bottom:1rem;">The TSV output contains one row per variant. Key columns:</p>
+    <table class="data-table">
+      <thead><tr><th>Column</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td><code>gene</code></td><td>Gene symbol (e.g., CYP2D6, CFTR)</td></tr>
+        <tr><td><code>consequence</code></td><td>Functional effect: missense_variant, synonymous, frameshift, etc.</td></tr>
+        <tr><td><code>impact</code></td><td>VEP impact tier: HIGH, MODERATE, LOW, MODIFIER</td></tr>
+        <tr><td><code>clinvar_significance</code></td><td>ClinVar classification: Pathogenic, Likely pathogenic, VUS, Benign, Drug response</td></tr>
+        <tr><td><code>gnomad_af</code></td><td>Global allele frequency in gnomAD. Values below 0.001 (0.1%) are considered rare.</td></tr>
+        <tr><td><code>priority_tier</code></td><td>ClawBio's computed tier (1-4) combining all evidence fields</td></tr>
+        <tr><td><code>priority_score</code></td><td>Numeric score for ranking within a tier. Higher means more clinically relevant.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout warn" style="margin-top:1.5rem;">
+      <strong>Important limitations</strong>
+      <p>Consumer genotyping arrays (23andMe, AncestryDNA) test ~600,000 of the genome's ~3 billion positions. They miss structural variants, most rare variants, and cannot reliably detect copy number changes. A "clear" report from a genotyping array does not mean the genome is free of pathogenic variants. Clinical-grade whole genome sequencing covers far more ground.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: TAKEAWAYS -->
+<section id="takeaways" class="alt-bg">
+  <div class="section-inner">
+    <p class="section-label">Summary</p>
+    <h2 class="section-title">Take-home messages</h2>
+
+    <div class="card-grid" style="grid-template-columns: 1fr;">
+
+      <div class="card" style="display:flex; gap:1.2rem; align-items:flex-start;">
+        <span style="font-size:1.8rem; flex-shrink:0;">1</span>
+        <div>
+          <h3>The fundamentals have not changed</h3>
+          <p>Variant interpretation still requires understanding of molecular biology, population genetics, clinical context, and the ACMG framework. AI accelerates the mechanical steps (annotation, database lookups, prioritisation), but it does not replace the human judgement needed to decide whether a variant is clinically actionable.</p>
+        </div>
+      </div>
+
+      <div class="card" style="display:flex; gap:1.2rem; align-items:flex-start;">
+        <span style="font-size:1.8rem; flex-shrink:0;">2</span>
+        <div>
+          <h3>Speed has changed dramatically</h3>
+          <p>What used to take a bioinformatician days (downloading tools, configuring environments, running VEP, parsing output, cross-referencing databases) now takes minutes with agent-driven skills. The bottleneck shifts from data processing to interpretation and clinical decision-making.</p>
+        </div>
+      </div>
+
+      <div class="card" style="display:flex; gap:1.2rem; align-items:flex-start;">
+        <span style="font-size:1.8rem; flex-shrink:0;">3</span>
+        <div>
+          <h3>Pharmacogenomics is actionable today</h3>
+          <p>Drug-gene interactions like warfarin/CYP2C9/VKORC1 are well-established, guideline-supported, and directly affect prescribing decisions. This is not hypothetical future medicine. It is already implemented in leading hospitals through pre-emptive PGx testing.</p>
+        </div>
+      </div>
+
+      <div class="card" style="display:flex; gap:1.2rem; align-items:flex-start;">
+        <span style="font-size:1.8rem; flex-shrink:0;">4</span>
+        <div>
+          <h3>VUS is the honest answer</h3>
+          <p>Over half of all variants in ClinVar are classified as VUS. The backlog is growing faster than reclassification efforts. Communicating uncertainty to patients, rather than overpromising on what genomics can deliver, is a core skill for anyone working in this field.</p>
+        </div>
+      </div>
+
+      <div class="card" style="display:flex; gap:1.2rem; align-items:flex-start;">
+        <span style="font-size:1.8rem; flex-shrink:0;">5</span>
+        <div>
+          <h3>Equity gaps are real and growing</h3>
+          <p>AI systems trained on biased data amplify existing disparities. A variant that appears benign in European databases may be pathogenic in an understudied population. Every genomic analysis should consider the ancestry context of the individual and the reference databases being queried.</p>
+        </div>
+      </div>
+
+      <div class="card" style="display:flex; gap:1.2rem; align-items:flex-start;">
+        <span style="font-size:1.8rem; flex-shrink:0;">6</span>
+        <div>
+          <h3>Open data enables open science</h3>
+          <p>This entire workshop runs on a CC0-licensed genome, open-source skills, free public APIs, and a free Colab notebook. Reproducible, accessible, and transparent. Anyone in the world can run the same analysis and get the same results. That is the standard to aim for.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout danger" style="margin-top:2rem;">
+      <strong>Medical disclaimer</strong>
+      <p>ClawBio is a research and educational tool. It is not a medical device and does not provide clinical diagnoses. The findings discussed in this workshop are for educational purposes only. Consult a healthcare professional before making any medical decisions based on genetic data.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: NEXT STEPS -->
+<section>
+  <div class="section-inner" style="text-align:center;">
+    <p class="section-label">Get involved</p>
+    <h2 class="section-title">Continue exploring</h2>
+    <p class="section-sub" style="margin:0 auto 2rem;">ClawBio has 39 skills covering pharmacogenomics, ancestry analysis, equity scoring, single-cell RNA-seq, GWAS, proteomics, metagenomics, and more.</p>
+    <div class="hero-ctas">
+      <a href="https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-variant-interpretation.ipynb" class="btn btn-primary" target="_blank">Open the Colab Notebook</a>
+      <a href="https://github.com/ClawBio/ClawBio" class="btn btn-secondary" target="_blank">Browse Skills on GitHub</a>
+      <a href="https://discord.gg/DHpmptyv" class="btn btn-secondary" target="_blank">Join the Discord</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    <a href="https://github.com/ClawBio/ClawBio">GitHub</a> &middot;
+    <a href="https://discord.gg/DHpmptyv">Discord</a> &middot;
+    <a href="https://t.me/ClawBioContributors">Telegram</a> &middot;
+    <a href="https://t.me/RoboTerri_bot">Try RoboTerri</a>
+  </p>
+  <p style="margin-top:0.8rem;">ClawBio is open-source under MIT licence. Made by the ClawBio community.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+label,stars,forks,age_months,stars_per_month,forks_per_month,days_idle,category
+ClawBio,974,197,3.6,267.1,54.0,1,clawbio
+OpenClaw Medical Skills,2705,375,3.3,823.4,114.2,81,agentic
+Snakemake,2816,653,80.4,35.0,8.1,1,established
+Biopython,5078,1912,207.0,24.5,9.2,8,established
+Scanpy,2491,750,112.5,22.1,6.7,1,established
+Nextflow,3414,784,158.6,21.5,4.9,1,established
+nf-core/rnaseq,1312,877,98.6,13.3,8.9,4,established
+Galaxy,1791,1157,135.7,13.2,8.5,0,established
+samtools,1915,611,171.2,11.2,3.6,26,established
+pysam,895,298,148.3,6.0,2.0,13,established

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workshop: Exploring a 30x Whole-Genome Sequence | ClawBio</title>
+  <meta name="description" content="Hands-on workshop: explore a real 30x whole-genome sequence using ClawBio's AI agent skills in Google Colab. SNPs, indels, structural variants, CNVs. University of Westminster, 2026.">
+  <meta property="og:title" content="Workshop: Exploring a Personal Genome at 30x Depth">
+  <meta property="og:description" content="Go beyond SNP chips. Explore 3.7 million SNPs, 912,000 indels, and 8,925 structural variants from a real human genome.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/ClawBio/ClawBio/main/img/clawbio-social-preview.png">
+  <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../assets/clawbio-logo.jpeg">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+      --border: #30363d; --text: #e6edf3; --text-muted: #8b949e;
+      --accent: #3fb950; --accent2: #58a6ff; --warn: #d29922; --danger: #f85149;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; line-height: 1.7; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(13,17,23,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; font-size: 1.15rem; text-decoration: none; color: var(--text); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero { text-align: center; padding: 5rem 2rem 4rem; background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(63,185,80,0.12) 0%, transparent 70%); }
+    .hero-badge { display: inline-block; background: rgba(63,185,80,0.15); border: 1px solid rgba(63,185,80,0.4); color: var(--accent); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.9rem; border-radius: 999px; margin-bottom: 1.2rem; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero p.lead { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--text-muted); max-width: 660px; margin: 0 auto 1.5rem; }
+    .hero-meta { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; }
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.4rem; border-radius: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; }
+    .btn-primary { background: var(--accent); color: #0d1117; }
+    .btn-primary:hover { background: #56d364; transform: translateY(-1px); }
+    .btn-secondary { background: var(--bg3); color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--text-muted); transform: translateY(-1px); }
+
+    /* SECTIONS */
+    section { padding: 4rem 2rem; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+    .section-title { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; margin-bottom: 0.8rem; }
+    .section-sub { color: var(--text-muted); max-width: 640px; margin-bottom: 2rem; font-size: 1.05rem; }
+    .alt-bg { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    /* CARDS */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+    .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; transition: border-color 0.2s; }
+    .card:hover { border-color: var(--accent); }
+    .card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .card p { color: var(--text-muted); font-size: 0.92rem; }
+    .card .emoji { font-size: 1.6rem; margin-bottom: 0.6rem; display: block; }
+
+    /* SLIDE DECK */
+    .slide-deck { display: grid; gap: 1.5rem; }
+    .slide { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; position: relative; }
+    .slide::before { content: attr(data-num); position: absolute; top: 1rem; right: 1.5rem; font-size: 0.75rem; font-weight: 700; color: var(--accent); background: rgba(63,185,80,0.12); padding: 0.15rem 0.6rem; border-radius: 999px; }
+    .slide h3 { font-size: 1.2rem; margin-bottom: 0.6rem; }
+    .slide p, .slide ul { color: var(--text-muted); font-size: 0.95rem; }
+    .slide ul { padding-left: 1.2rem; margin-top: 0.4rem; }
+    .slide ul li { margin-bottom: 0.3rem; }
+    .slide .highlight { color: var(--accent); font-weight: 600; }
+    .slide .stat { font-size: 2rem; font-weight: 800; color: var(--accent); display: block; margin: 0.5rem 0; }
+
+    /* STATS ROW */
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 2rem 0; }
+    .stat-box { text-align: center; padding: 1.2rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; }
+    .stat-box .num { font-size: 2rem; font-weight: 800; color: var(--accent); display: block; }
+    .stat-box .label { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+    /* TIMELINE */
+    .timeline { border-left: 2px solid var(--border); padding-left: 1.5rem; margin: 1.5rem 0; }
+    .timeline-item { position: relative; margin-bottom: 1.5rem; }
+    .timeline-item::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); position: absolute; left: -1.85rem; top: 0.5rem; }
+    .timeline-item h4 { font-size: 1rem; margin-bottom: 0.2rem; }
+    .timeline-item p { color: var(--text-muted); font-size: 0.9rem; }
+    .timeline-item .date { font-size: 0.78rem; color: var(--accent2); }
+
+    /* CODE */
+    .code-block { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.5rem; font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 0.85rem; line-height: 1.8; overflow-x: auto; margin: 1rem 0; }
+    .code-block .comment { color: #8b949e; }
+    .code-block .cmd { color: var(--accent2); }
+    .code-block .out { color: var(--accent); }
+
+    /* TABLE */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 1rem 0; }
+    .data-table th { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 2px solid var(--border); color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .data-table td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); }
+    .data-table tr:hover { background: rgba(63,185,80,0.04); }
+    .badge { font-size: 0.72rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .badge-path { background: rgba(248,81,73,0.15); color: var(--danger); border: 1px solid rgba(248,81,73,0.3); }
+    .badge-drug { background: rgba(210,153,34,0.15); color: var(--warn); border: 1px solid rgba(210,153,34,0.3); }
+    .badge-risk { background: rgba(88,166,255,0.15); color: var(--accent2); border: 1px solid rgba(88,166,255,0.3); }
+    .badge-benign { background: rgba(63,185,80,0.12); color: var(--accent); border: 1px solid rgba(63,185,80,0.3); }
+
+    /* CALLOUT */
+    .callout { border-left: 3px solid var(--accent); background: rgba(63,185,80,0.06); padding: 1rem 1.2rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+    .callout.warn { border-left-color: var(--warn); background: rgba(210,153,34,0.06); }
+    .callout.danger { border-left-color: var(--danger); background: rgba(248,81,73,0.06); }
+    .callout strong { display: block; margin-bottom: 0.3rem; }
+    .callout p { color: var(--text-muted); font-size: 0.92rem; }
+
+    /* CHECKLIST */
+    .checklist { list-style: none; margin: 1rem 0; }
+    .checklist li { padding: 0.5rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 0.6rem; align-items: flex-start; }
+    .checklist li::before { content: ''; width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; margin-top: 3px; }
+    .checklist li.done::before { background: var(--accent); border-color: var(--accent); }
+
+    /* FOOTER */
+    footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem; }
+    footer a { color: var(--accent2); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* TOC */
+    .toc { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem 2rem; margin: 2rem 0; }
+    .toc h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 0.8rem; }
+    .toc ol { padding-left: 1.2rem; }
+    .toc li { margin-bottom: 0.35rem; }
+    .toc a { color: var(--accent2); text-decoration: none; font-size: 0.92rem; }
+    .toc a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      section { padding: 2.5rem 1.2rem; }
+      .slide { padding: 1.2rem; }
+      .card-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../../" class="nav-logo">ClawBio</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#background">Background</a></li>
+    <li><a href="#materials">Materials</a></li>
+    <li><a href="#walkthrough">Walkthrough</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#takeaways">Takeaways</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Whole-Genome Sequencing Workshop</div>
+  <h1>Exploring a <em>Personal Genome</em> at 30x Depth</h1>
+  <p class="lead">Go beyond SNP chips. Explore 3.7 million SNPs, 912,000 indels, and 8,925 structural variants from a real human genome. Everything runs in Google Colab. No installation, no API keys, no cost.</p>
+  <p class="hero-meta">Dr Manuel Corpas &middot; University of Westminster &middot; 2026</p>
+  <div class="hero-ctas">
+    <a href="https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/workshop-30x-wgs.ipynb" class="btn btn-primary" target="_blank">Open in Google Colab</a>
+    <a href="https://github.com/ClawBio/ClawBio" class="btn btn-secondary" target="_blank">GitHub Repository</a>
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<section>
+  <div class="section-inner">
+    <div class="toc">
+      <h3>Contents</h3>
+      <ol>
+        <li><a href="#about">What is this dataset?</a></li>
+        <li><a href="#background">Background: WGS Quality and Structural Variants</a></li>
+        <li><a href="#materials">Workshop Materials and Links</a></li>
+        <li><a href="#walkthrough">Step-by-Step Walkthrough</a></li>
+        <li><a href="#results">Understanding Your Results</a></li>
+        <li><a href="#takeaways">Take-Home Messages</a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 1: WHAT IS THIS DATASET -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label">The dataset</p>
+    <h2 class="section-title">What is this dataset?</h2>
+    <p class="section-sub">A complete human genome, sequenced at 30x depth, published under open access. What SNP arrays miss, WGS captures.</p>
+
+    <div class="stats-row">
+      <div class="stat-box"><span class="num">3.7M</span><span class="label">SNPs</span></div>
+      <div class="stat-box"><span class="num">912K</span><span class="label">Indels</span></div>
+      <div class="stat-box"><span class="num">8,925</span><span class="label">Structural Variants</span></div>
+      <div class="stat-box"><span class="num">1,387</span><span class="label">CNVs</span></div>
+    </div>
+
+    <div class="slide-deck">
+      <div class="slide" data-num="1">
+        <h3>A real genome, fully open</h3>
+        <p>Manuel Corpas published his 30x whole-genome sequence under CC0 (public domain) on Zenodo (DOI: <a href="https://doi.org/10.5281/zenodo.19297389" style="color:var(--accent2);">10.5281/zenodo.19297389</a>). The genome was sequenced by Dante Labs on an Illumina platform and aligned to the GRCh37 reference.</p>
+        <p style="margin-top:0.6rem;">The dataset contains SNPs, indels, and structural variants (DEL, DUP, INV, BND, INS), plus copy number variant calls. This is a complete picture of one human genome, not a sparse sampling of pre-selected positions.</p>
+        <div class="callout" style="margin-top:1rem;">
+          <strong>Research and educational use</strong>
+          <p>This dataset is provided for research and educational purposes only. It is not intended for clinical decision-making.</p>
+        </div>
+      </div>
+
+      <div class="slide" data-num="2">
+        <h3>What WGS captures that SNP arrays miss</h3>
+        <p>SNP chips test approximately 600,000 pre-selected positions. WGS sequences every base pair across the entire genome. The difference is not incremental; it is a different category of data.</p>
+        <table class="data-table" style="margin-top:0.8rem;">
+          <thead><tr><th>Metric</th><th>SNP Array</th><th>30x WGS</th></tr></thead>
+          <tbody>
+            <tr><td><strong>SNPs</strong></td><td>~600,000</td><td>~3,716,648</td></tr>
+            <tr><td><strong>Indels</strong></td><td>0</td><td>~912,009</td></tr>
+            <tr><td><strong>Structural variants</strong></td><td>0</td><td>8,925</td></tr>
+            <tr><td><strong>CNVs</strong></td><td>0</td><td>1,387</td></tr>
+            <tr><td><strong>Gene coverage</strong></td><td>Sparse (pre-selected)</td><td>Complete</td></tr>
+            <tr><td><strong>Ti/Tv ratio</strong></td><td>N/A</td><td>2.03</td></tr>
+            <tr><td><strong>Het/Hom ratio</strong></td><td>N/A</td><td>1.63</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:0.8rem;">SNP arrays are useful for population-scale screening, but they are blind to insertions, deletions, inversions, duplications, and novel variants not on the chip. WGS sees all of these.</p>
+      </div>
+
+      <div class="slide" data-num="3">
+        <h3>Pre-built subsets for instant analysis</h3>
+        <p>The full genome VCF is large. For this workshop, we provide pre-extracted subsets committed to the repository. No bulk download needed for the tutorial.</p>
+        <table class="data-table" style="margin-top:0.8rem;">
+          <thead><tr><th>Subset</th><th>Contents</th><th>File</th></tr></thead>
+          <tbody>
+            <tr><td><strong>chr20</strong></td><td>SNPs + indels from chromosome 20 (tutorial focus)</td><td><code>corpas-30x/subsets/chr20_snps_indels.vcf.gz</code></td></tr>
+            <tr><td><strong>PGx loci</strong></td><td>5 pharmacogenomic variants</td><td><code>corpas-30x/subsets/pgx_loci.vcf.gz</code></td></tr>
+            <tr><td><strong>NutriGx loci</strong></td><td>11 nutrigenomic variants</td><td><code>corpas-30x/subsets/nutrigx_loci.vcf.gz</code></td></tr>
+            <tr><td><strong>SV calls</strong></td><td>8,925 structural variant calls</td><td><code>corpas-30x/subsets/sv_calls.vcf.gz</code></td></tr>
+            <tr><td><strong>CNV calls</strong></td><td>1,387 copy number variant calls</td><td><code>corpas-30x/subsets/cnv_calls.vcf.gz</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: BACKGROUND -->
+<section id="background" class="alt-bg">
+  <div class="section-inner">
+    <p class="section-label">Background</p>
+    <h2 class="section-title">WGS quality, structural variants, and clinical context</h2>
+    <p class="section-sub">The concepts you need before running the practical.</p>
+
+    <div class="slide-deck">
+      <div class="slide" data-num="4">
+        <h3>QC metrics: how to tell if a genome is good</h3>
+        <p>Three numbers tell you most of what you need to know about a WGS callset:</p>
+        <ul>
+          <li><span class="highlight">Ti/Tv ratio</span>: transitions vs transversions. Expected value for WGS is ~2.0. A ratio well below 2.0 suggests contamination, alignment artefacts, or low-quality variant calls.</li>
+          <li><span class="highlight">Het/Hom ratio</span>: heterozygous vs homozygous variant calls. Expected range for a single individual is 1.5 to 1.7. Values outside this range may indicate sample contamination (too high) or consanguinity (too low).</li>
+          <li><span class="highlight">Total variant count</span>: a European genome typically carries 3.5 to 4.5 million SNPs relative to GRCh37. Counts far outside this range warrant investigation.</li>
+        </ul>
+        <p style="margin-top:0.6rem;">This genome: Ti/Tv = <span class="highlight">2.03</span>, Het/Hom = <span class="highlight">1.63</span>, total SNPs = <span class="highlight">3,716,648</span>. All within expected ranges.</p>
+      </div>
+
+      <div class="slide" data-num="5">
+        <h3>Structural variants: the hidden layer</h3>
+        <p>Structural variants (SVs) are genomic rearrangements of 50 bp or larger. They are harder to detect than SNPs and indels, require specialised callers, and are frequently missed by standard short-read pipelines. Yet SVs contribute disproportionately to rare disease.</p>
+        <table class="data-table" style="margin-top:0.8rem;">
+          <thead><tr><th>SV Type</th><th>Description</th><th>Count in this genome</th></tr></thead>
+          <tbody>
+            <tr><td><strong>DEL</strong></td><td>Deletion: segment of DNA removed</td><td>5,854</td></tr>
+            <tr><td><strong>BND</strong></td><td>Breakend / translocation: rearrangement across chromosomes</td><td>1,413</td></tr>
+            <tr><td><strong>DUP</strong></td><td>Duplication: segment of DNA copied</td><td>778</td></tr>
+            <tr><td><strong>INV</strong></td><td>Inversion: segment flipped in orientation</td><td>673</td></tr>
+            <tr><td><strong>INS</strong></td><td>Insertion: new segment of DNA added</td><td>207</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:0.8rem;">SVs range in size from 50 bp to megabases. An estimated 20% of rare disease cases involve structural variants, but most clinical pipelines still focus primarily on SNPs and small indels.</p>
+      </div>
+
+      <div class="slide" data-num="6">
+        <h3>From SNP chip to WGS: what changes clinically</h3>
+        <p>Moving from a genotyping array to whole-genome sequencing does not just increase the variant count. It opens entire categories of analysis that are impossible with arrays:</p>
+        <ul>
+          <li><strong>Full CYP2D6 haplotyping</strong>: gene deletions and duplications that change metaboliser status are invisible to SNP chips. WGS detects the structural rearrangements directly.</li>
+          <li><strong>HLA typing</strong>: the HLA region is too polymorphic and structurally complex for array-based genotyping. WGS reads through the full region.</li>
+          <li><strong>Novel variant discovery</strong>: arrays only test known positions. WGS finds variants that have never been catalogued before.</li>
+          <li><strong>Coding indels</strong>: frameshift insertions and deletions in protein-coding genes are a major source of loss-of-function. Arrays do not detect them.</li>
+          <li><strong>SVs disrupting gene function</strong>: large deletions or inversions that break genes are only visible with sequencing data.</li>
+        </ul>
+      </div>
+
+      <div class="slide" data-num="7">
+        <h3>The Corpasome: 13 years of open genomics</h3>
+        <p>The Corpasome is one of the longest-running open personal genome projects:</p>
+        <ul>
+          <li><span class="highlight">2013</span>: Manuel Corpas published his 23andMe genotype data under CC0 (public domain). One of the first fully open personal genomes. Used in dozens of studies and teaching exercises worldwide.</li>
+          <li><span class="highlight">2026</span>: The same individual, now sequenced at 30x depth by Dante Labs. Full WGS data released under CC0 on Zenodo.</li>
+        </ul>
+        <p style="margin-top:0.6rem;">Two datasets, same genome, 13 years apart. The 23andMe file has ~600,000 SNPs. The WGS file has 3.7 million SNPs, 912,000 indels, and 8,925 structural variants. Same person, radically different resolution.</p>
+        <p style="margin-top:0.6rem;">Citations:<br>
+        Corpas, M. (2013). Crowdsourcing the Corpasome. <em>Source Code for Biology and Medicine</em>, 8, 13. <a href="https://doi.org/10.1186/1751-0473-8-13" style="color:var(--accent2);">doi:10.1186/1751-0473-8-13</a><br>
+        Corpas, M. (2026). 30x WGS of the Corpasome. Zenodo. <a href="https://doi.org/10.5281/zenodo.19297389" style="color:var(--accent2);">doi:10.5281/zenodo.19297389</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: MATERIALS -->
+<section id="materials">
+  <div class="section-inner">
+    <p class="section-label">Materials</p>
+    <h2 class="section-title">Workshop materials and links</h2>
+    <p class="section-sub">Everything you need to run the practical. No local installation required.</p>
+
+    <h3 style="margin-bottom:1rem;">Essential links</h3>
+    <table class="data-table">
+      <thead><tr><th>Resource</th><th>Link</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Google Colab notebook</strong></td>
+          <td><a href="https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/workshop-30x-wgs.ipynb" style="color:var(--accent2);" target="_blank">Open in Colab</a></td>
+          <td>Main practical. Runs in browser, free tier.</td>
+        </tr>
+        <tr>
+          <td><strong>Zenodo dataset</strong></td>
+          <td><a href="https://doi.org/10.5281/zenodo.19297389" style="color:var(--accent2);" target="_blank">doi:10.5281/zenodo.19297389</a></td>
+          <td>Full 30x WGS VCF (CC0 licence)</td>
+        </tr>
+        <tr>
+          <td><strong>ClawBio GitHub</strong></td>
+          <td><a href="https://github.com/ClawBio/ClawBio" style="color:var(--accent2);" target="_blank">github.com/ClawBio/ClawBio</a></td>
+          <td>Source code, skills, documentation</td>
+        </tr>
+        <tr>
+          <td><strong>Variant interpretation workshop</strong></td>
+          <td><a href="../variant-interpretation-workshop/" style="color:var(--accent2);">Previous workshop</a></td>
+          <td>SNP chip analysis with 23andMe data</td>
+        </tr>
+        <tr>
+          <td><strong>Ensembl VEP</strong></td>
+          <td><a href="https://www.ensembl.org/info/docs/tools/vep/index.html" style="color:var(--accent2);" target="_blank">ensembl.org/vep</a></td>
+          <td>Variant Effect Predictor (public REST API)</td>
+        </tr>
+        <tr>
+          <td><strong>ClinVar</strong></td>
+          <td><a href="https://www.ncbi.nlm.nih.gov/clinvar/" style="color:var(--accent2);" target="_blank">ncbi.nlm.nih.gov/clinvar</a></td>
+          <td>Variant-disease associations database</td>
+        </tr>
+        <tr>
+          <td><strong>gnomAD</strong></td>
+          <td><a href="https://gnomad.broadinstitute.org/" style="color:var(--accent2);" target="_blank">gnomad.broadinstitute.org</a></td>
+          <td>Population allele frequency data</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:2.5rem; margin-bottom:1rem;">Skills used in this workshop</h3>
+    <div class="card-grid">
+      <div class="card">
+        <h3>variant-annotation</h3>
+        <p>Annotates VCF variants via Ensembl VEP REST API. Extracts ClinVar significance, gnomAD frequencies, and assigns Tier 1-4 priority. Outputs report, TSV, and JSON.</p>
+      </div>
+      <div class="card">
+        <h3>pharmgx-reporter</h3>
+        <p>Pharmacogenomic report from genotype data. 12 genes, 31 SNPs, 51 drugs. CPIC-grounded, zero external dependencies, runs offline. Now compatible with WGS VCF input.</p>
+      </div>
+      <div class="card">
+        <h3>bio-orchestrator</h3>
+        <p>Routes queries to the right skill automatically. Handles multi-step analyses that span variant annotation, pharmacogenomics, and structural variant exploration.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:2.5rem; margin-bottom:1rem;">Requirements</h3>
+    <ul class="checklist">
+      <li>A Google account (for Colab access)</li>
+      <li>A web browser (Chrome, Firefox, or Safari)</li>
+      <li>No installation, no API keys, no payment required</li>
+      <li>Approximately 40 minutes for the guided practical</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SECTION 4: WALKTHROUGH -->
+<section id="walkthrough" class="alt-bg">
+  <div class="section-inner">
+    <p class="section-label">Walkthrough</p>
+    <h2 class="section-title">Step-by-step workshop instructions</h2>
+    <p class="section-sub">Open the <a href="https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/workshop-30x-wgs.ipynb" style="color:var(--accent2);" target="_blank">Colab notebook</a> and follow along.</p>
+
+    <div class="slide-deck">
+
+      <div class="slide" data-num="Step 0">
+        <h3>Setup (2 minutes)</h3>
+        <p>Run the first two code cells. They clone the ClawBio repository and install dependencies (<code>pysam</code>, <code>requests</code>, <code>pandas</code>, <code>matplotlib</code>). You should see:</p>
+        <div class="code-block">
+          <span class="out">ClawBio loaded successfully</span><br>
+          <span class="out">Skills available: 39</span><br>
+          <span class="out">WGS subsets found: chr20, pgx_loci, nutrigx_loci, sv_calls, cnv_calls</span>
+        </div>
+        <div class="callout warn">
+          <strong>If Colab is slow</strong>
+          <p>The git clone takes 10-20 seconds. If it times out, click "Runtime > Restart and run all". The Colab free tier occasionally throttles new sessions.</p>
+        </div>
+      </div>
+
+      <div class="slide" data-num="Step 1">
+        <h3>Load and explore the chr20 subset (5 minutes)</h3>
+        <p>The notebook loads the chromosome 20 VCF subset. This is a manageable slice of the full genome, small enough to process quickly but large enough to demonstrate real WGS data. You will see:</p>
+        <ul>
+          <li>Total variant count on chr20 (SNPs + indels)</li>
+          <li>Breakdown by variant type: SNPs vs insertions vs deletions</li>
+          <li>Ti/Tv ratio for chr20 (should be close to 2.0)</li>
+          <li>Het/Hom ratio for chr20 (should be close to 1.6)</li>
+        </ul>
+        <div class="code-block">
+          <span class="comment"># Example output</span><br>
+          <span class="cmd">chr20 variants loaded: 98,412</span><br>
+          <span class="cmd">SNPs: 84,291 | Insertions: 6,832 | Deletions: 7,289</span><br>
+          <span class="cmd">Ti/Tv: 2.05 | Het/Hom: 1.61</span>
+        </div>
+        <p style="margin-top:0.6rem;"><strong>Discussion point:</strong> Why is the Ti/Tv ratio a useful QC metric? (Transitions are biochemically more likely than transversions. A ratio near 2.0 indicates clean, unbiased variant calls.)</p>
+      </div>
+
+      <div class="slide" data-num="Step 2">
+        <h3>Explore structural variants (8 minutes)</h3>
+        <p>Load the SV VCF and examine the types, sizes, and chromosomal distribution of structural variants across the genome.</p>
+        <ul>
+          <li>Count variants by type: DEL, DUP, INV, BND, INS</li>
+          <li>Plot size distribution of deletions and duplications</li>
+          <li>Identify the largest deletion and the largest duplication</li>
+          <li>Check which genes overlap with large SVs</li>
+        </ul>
+        <div class="code-block">
+          <span class="comment"># SV type counts</span><br>
+          <span class="cmd">DEL:  5,854</span><br>
+          <span class="cmd">BND:  1,413</span><br>
+          <span class="cmd">DUP:    778</span><br>
+          <span class="cmd">INV:    673</span><br>
+          <span class="cmd">INS:    207</span><br>
+          <span class="cmd">Total: 8,925</span>
+        </div>
+        <p style="margin-top:0.6rem;"><strong>Discussion point:</strong> Why are deletions the most common SV type? (Deletions are easier to detect from short reads than insertions or complex rearrangements. This is partly biological and partly a detection bias.)</p>
+      </div>
+
+      <div class="slide" data-num="Step 3">
+        <h3>Extract pharmacogenomic variants from WGS (5 minutes)</h3>
+        <p>Load the PGx loci subset extracted from the WGS data. Compare what the whole-genome sequence found at pharmacogenomic loci with what the original 23andMe chip reported.</p>
+        <ul>
+          <li>Load the 5 PGx variants from the WGS subset</li>
+          <li>Cross-reference with the 23andMe findings from the <a href="../variant-interpretation-workshop/" style="color:var(--accent2);">previous workshop</a></li>
+          <li>Identify any variants that WGS captured but the SNP chip missed</li>
+          <li>Note differences in genotype calling between platforms</li>
+        </ul>
+        <div class="callout">
+          <strong>Why this matters</strong>
+          <p>SNP arrays can only report on positions that are physically printed on the chip. If a pharmacogenomic variant is not on the chip design, it will never appear in results, regardless of whether the patient carries it. WGS has no such blind spots.</p>
+        </div>
+      </div>
+
+      <div class="slide" data-num="Step 4">
+        <h3>Annotate chr20 variants (5 minutes)</h3>
+        <p>Run the <code>variant-annotation</code> skill on a selection of chr20 variants. The Ensembl VEP REST API has a limit of 200 variants per batch, so the notebook selects a clinically relevant subset.</p>
+        <ul>
+          <li>Select variants in coding regions on chr20</li>
+          <li>Submit to VEP for functional annotation</li>
+          <li>Retrieve ClinVar significance and gnomAD frequencies</li>
+          <li>Review the prioritised output: Tier 1 through Tier 4</li>
+        </ul>
+        <div class="code-block">
+          <span class="comment"># Run annotation on chr20 coding variants</span><br>
+          <span class="cmd">python clawbio.py run variant-annotation --input chr20_coding.vcf --output report/</span><br>
+          <span class="out">Annotated 87 variants. 1 Tier 1 (pathogenic). 4 Tier 2 (drug response). Report saved.</span>
+        </div>
+      </div>
+
+      <div class="slide" data-num="Step 5">
+        <h3>Exercises (15 minutes, independent work)</h3>
+        <p>Three exercises for students:</p>
+        <table class="data-table" style="margin-top:0.8rem;">
+          <thead><tr><th>Exercise</th><th>Task</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>5a</strong></td><td>Compare WGS PGx findings with the 23andMe PGx results from the previous workshop. Which variants are shared? Which are unique to WGS?</td><td>Required</td></tr>
+            <tr><td><strong>5b</strong></td><td>Pick the largest structural variant (by size) from the SV callset. What genes does it overlap? What is the likely functional impact? Search ClinVar and gnomAD for supporting evidence.</td><td>Required</td></tr>
+            <tr><td><strong>5c</strong></td><td>From the chr20 annotation results, identify any variants not present in ClinVar. These are novel or unclassified. Would you report them? What additional evidence would you need?</td><td>Optional</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: UNDERSTANDING RESULTS -->
+<section id="results">
+  <div class="section-inner">
+    <p class="section-label">Results guide</p>
+    <h2 class="section-title">Understanding your results</h2>
+    <p class="section-sub">How to interpret QC metrics, structural variant types, and the key findings from this genome.</p>
+
+    <h3 style="margin-bottom:1rem;">QC interpretation guide</h3>
+    <table class="data-table">
+      <thead><tr><th>Metric</th><th>Expected range</th><th>This genome</th><th>What abnormal values mean</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Ti/Tv ratio</strong></td>
+          <td>~2.0 for WGS</td>
+          <td><span class="highlight">2.03</span></td>
+          <td>Below 1.5: possible contamination or alignment errors. Above 2.5: possible reference bias.</td>
+        </tr>
+        <tr>
+          <td><strong>Het/Hom ratio</strong></td>
+          <td>1.5 to 1.7</td>
+          <td><span class="highlight">1.63</span></td>
+          <td>Above 2.0: possible sample contamination. Below 1.2: possible consanguinity or inbreeding.</td>
+        </tr>
+        <tr>
+          <td><strong>Total SNPs</strong></td>
+          <td>3.5M to 4.5M (European)</td>
+          <td><span class="highlight">3,716,648</span></td>
+          <td>Counts far outside range: possible ancestry mismatch, contamination, or pipeline error.</td>
+        </tr>
+        <tr>
+          <td><strong>Total indels</strong></td>
+          <td>700K to 1.2M</td>
+          <td><span class="highlight">912,009</span></td>
+          <td>Very low counts may indicate caller sensitivity issues.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:2.5rem; margin-bottom:1rem;">Structural variant type guide</h3>
+    <table class="data-table">
+      <thead><tr><th>Type</th><th>What it means</th><th>Biological significance</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-path">DEL</span></td>
+          <td>A segment of DNA is missing compared to the reference</td>
+          <td>Can remove entire exons or genes. Common cause of loss-of-function. Relevant to carrier screening and rare disease.</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-drug">DUP</span></td>
+          <td>A segment of DNA is duplicated (extra copy)</td>
+          <td>Gene duplications can increase gene dosage. In CYP2D6, extra copies create ultra-rapid metabolisers who burn through drugs too fast.</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-risk">INV</span></td>
+          <td>A segment is flipped in orientation (reversed)</td>
+          <td>Can disrupt genes at breakpoints or alter regulatory elements. Some inversions are polymorphic and benign.</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-risk">BND</span></td>
+          <td>A breakend: one side of a rearrangement, often a translocation</td>
+          <td>Suggests complex rearrangement across chromosomes. Can create fusion genes (relevant in cancer).</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-benign">INS</span></td>
+          <td>New DNA inserted relative to the reference</td>
+          <td>Can be mobile element insertions (Alu, LINE) or novel sequence. Hardest SV type to detect from short reads.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:2.5rem; margin-bottom:1rem;">Key statistics from this genome</h3>
+    <div class="stats-row">
+      <div class="stat-box"><span class="num">3.7M</span><span class="label">SNPs</span></div>
+      <div class="stat-box"><span class="num">912K</span><span class="label">Indels</span></div>
+      <div class="stat-box"><span class="num">8,925</span><span class="label">SVs</span></div>
+      <div class="stat-box"><span class="num">1,387</span><span class="label">CNVs</span></div>
+      <div class="stat-box"><span class="num">2.03</span><span class="label">Ti/Tv</span></div>
+      <div class="stat-box"><span class="num">1.63</span><span class="label">Het/Hom</span></div>
+    </div>
+
+    <div class="callout" style="margin-top:1.5rem;">
+      <strong>What WGS found that the SNP chip missed</strong>
+      <p>The 23andMe chip reported ~600,000 SNPs from this individual. The 30x WGS found over 3.7 million SNPs (6x more), plus 912,000 indels and 8,925 structural variants that were completely invisible to the array. The indels alone include frameshift variants in coding genes, and the structural variants include deletions spanning multiple exons. None of this information exists in a SNP chip report.</p>
+    </div>
+
+    <div class="callout warn" style="margin-top:1rem;">
+      <strong>Important limitations</strong>
+      <p>Short-read WGS (like this Illumina dataset) still has blind spots. Highly repetitive regions, segmental duplications, and some complex SVs are better resolved by long-read sequencing (PacBio, Oxford Nanopore). The SV callset here is conservative; the true number of structural variants is likely higher.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: TAKEAWAYS -->
+<section id="takeaways" class="alt-bg">
+  <div class="section-inner">
+    <p class="section-label">Summary</p>
+    <h2 class="section-title">Take-home messages</h2>
+
+    <div class="card-grid" style="grid-template-columns: 1fr;">
+
+      <div class="card" style="display:flex; gap:1.2rem; align-items:flex-start;">
+        <span style="font-size:1.8rem; flex-shrink:0;">1</span>
+        <div>
+          <h3>WGS is the gold standard for variant discovery</h3>
+          <p>Whole-genome sequencing captures SNPs, indels, structural variants, and CNVs in a single assay. No pre-selection bias. No missing positions. If a variant exists in the genome, WGS can find it. SNP arrays, by contrast, only interrogate a fixed set of known positions.</p>
+        </div>
+      </div>
+
+      <div class="card" style="display:flex; gap:1.2rem; align-items:flex-start;">
+        <span style="font-size:1.8rem; flex-shrink:0;">2</span>
+        <div>
+          <h3>Structural variants are clinically significant but underexplored</h3>
+          <p>SVs account for an estimated 20% of rare disease diagnoses, yet they are routinely overlooked in standard analysis pipelines. Deletions can remove entire genes. Duplications can double gene dosage. Inversions can disrupt regulatory elements. This genome alone carries 8,925 SVs, most of which have never been individually characterised.</p>
+        </div>
+      </div>
+
+      <div class="card" style="display:flex; gap:1.2rem; align-items:flex-start;">
+        <span style="font-size:1.8rem; flex-shrink:0;">3</span>
+        <div>
+          <h3>QC metrics are your first line of defence</h3>
+          <p>Before interpreting a single variant, check Ti/Tv, Het/Hom, and total variant counts. These three numbers catch contamination, pipeline errors, and sample mix-ups faster than any downstream analysis. If the QC is wrong, everything built on top of it is unreliable.</p>
+        </div>
+      </div>
+
+      <div class="card" style="display:flex; gap:1.2rem; align-items:flex-start;">
+        <span style="font-size:1.8rem; flex-shrink:0;">4</span>
+        <div>
+          <h3>The same genome tells different stories at different resolution</h3>
+          <p>A 23andMe chip sees 600,000 SNPs and reports carrier status for a handful of conditions. A 30x WGS of the same person reveals 3.7 million SNPs, 912,000 indels, and thousands of structural variants. The biology did not change. The resolution did. Clinical interpretation depends entirely on what you measure.</p>
+        </div>
+      </div>
+
+      <div class="card" style="display:flex; gap:1.2rem; align-items:flex-start;">
+        <span style="font-size:1.8rem; flex-shrink:0;">5</span>
+        <div>
+          <h3>Open data accelerates science</h3>
+          <p>This genome was published under CC0 in 2013 (23andMe) and again in 2026 (30x WGS). Both datasets are freely available for anyone to download, analyse, and build upon. Open data enables reproducible science, independent validation, and educational use at no cost. This entire workshop exists because one person chose to share their genome.</p>
+        </div>
+      </div>
+
+      <div class="card" style="display:flex; gap:1.2rem; align-items:flex-start;">
+        <span style="font-size:1.8rem; flex-shrink:0;">6</span>
+        <div>
+          <h3>Agent-driven analysis makes WGS accessible</h3>
+          <p>WGS data is large and complex. Analysing it traditionally requires bioinformatics expertise, command-line tools, and significant compute. Agent-driven skills reduce this barrier. The AI routes to the right tool, the tool runs the grounded analysis, and the user reviews structured output. WGS interpretation is no longer limited to specialist bioinformaticians.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout danger" style="margin-top:2rem;">
+      <strong>Medical disclaimer</strong>
+      <p>ClawBio is a research and educational tool. It is not a medical device and does not provide clinical diagnoses. The findings discussed in this workshop are for educational purposes only. Consult a healthcare professional before making any medical decisions based on genetic data.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: NEXT STEPS -->
+<section>
+  <div class="section-inner" style="text-align:center;">
+    <p class="section-label">Get involved</p>
+    <h2 class="section-title">Continue exploring</h2>
+    <p class="section-sub" style="margin:0 auto 2rem;">ClawBio has 39 skills covering pharmacogenomics, ancestry analysis, equity scoring, single-cell RNA-seq, GWAS, proteomics, metagenomics, and more.</p>
+    <div class="hero-ctas">
+      <a href="https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/workshop-30x-wgs.ipynb" class="btn btn-primary" target="_blank">Open the Colab Notebook</a>
+      <a href="https://github.com/ClawBio/ClawBio" class="btn btn-secondary" target="_blank">Browse Skills on GitHub</a>
+      <a href="https://discord.gg/DHpmptyv" class="btn btn-secondary" target="_blank">Join the Discord</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    <a href="https://github.com/ClawBio/ClawBio">GitHub</a> &middot;
+    <a href="https://discord.gg/DHpmptyv">Discord</a> &middot;
+    <a href="https://t.me/ClawBioContributors">Telegram</a> &middot;
+    <a href="https://t.me/RoboTerri_bot">Try RoboTerri</a>
+  </p>
+  <p style="margin-top:0.8rem;">ClawBio is open-source under MIT licence. Made by the ClawBio community.</p>
+</footer>
+
+</body>
+</html>
