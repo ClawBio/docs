@@ -6,6 +6,8 @@ This lecture asks what changes when a scientist can express a biological questio
 
 [Download the slides as a PDF](Salerno-Agentic-Genomics-Slides.pdf){ .md-button .md-button--primary }
 
+[Watch the full lecture on YouTube](https://www.youtube.com/watch?v=ZFKgqE7Ku8Y){ .md-button }
+
 ## Three ideas to remember
 
 1. Agentic execution is now a question of when, not if.
