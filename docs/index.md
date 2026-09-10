@@ -5,9 +5,9 @@ description: Technical documentation, tutorials, and skill reference for ClawBio
 
 <div class="hero">
   <h1 class="hero__title">ClawBio Documentation</h1>
-  <p class="hero__subtitle">Run a guided demo in your browser, then explore the skills, tutorials and scientific evidence.</p>
+  <p class="hero__subtitle">Ask ClawBio in your browser. Watch an AI agent read a scientific skill, run its tools and explain the evidence.</p>
   <p>
-    <a href="tutorials/run-your-first-skill/" class="md-button">Try ClawBio in Colab</a>
+    <a href="tutorials/ask-clawbio/" class="md-button">Ask ClawBio in your browser</a>
     &nbsp;
     <a href="https://clawbio.ai" class="md-button">ClawBio Home</a>
     &nbsp;
@@ -19,13 +19,13 @@ description: Technical documentation, tutorials, and skill reference for ClawBio
 
 <div class="tutorial-cards">
 
-<a class="tutorial-card" href="tutorials/run-your-first-skill/">
+<a class="tutorial-card" href="tutorials/ask-clawbio/">
   <div class="tutorial-card__header">
     <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
     <span class="time-estimate">15 min</span>
   </div>
-  <h3 class="tutorial-card__title">Try ClawBio in Colab</h3>
-  <p class="tutorial-card__desc">Run PharmGx on synthetic teaching data, inspect uncertainty and download your evidence. No AI account or API key.</p>
+  <h3 class="tutorial-card__title">Ask ClawBio in your browser</h3>
+  <p class="tutorial-card__desc">Live agent prototype in Google Colab: type a request, inspect real tool calls and ask follow-up questions. Google sign-in; no separate API key. Live Gemini verification pending.</p>
 </a>
 
 <a class="tutorial-card" href="hackathon/berlin/">
