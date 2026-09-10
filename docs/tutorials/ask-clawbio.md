@@ -6,7 +6,7 @@ This prototype demonstrates agentic skill execution in a terminal-style Google C
 
 [Open the agent prototype in Colab](https://colab.research.google.com/github/ClawBio/ClawBio/blob/fix/colab-first-skill-demo/docs/tutorial-agent.ipynb){ .md-button }
 
-**Prototype status:** local tool-loop tests pass. Live Gemini access and a complete agent conversation still need verification in Colab. The link currently targets the development branch.
+**Prototype status:** local tool-loop tests pass. Keyless Gemini selected and read the skill in Colab. Google then returned HTTP 429 (heavy load), so a complete live agent conversation remains unverified. The link currently targets the development branch.
 
 ## What you will do
 
