@@ -18,7 +18,9 @@ The app combines live ClawBio skill execution with precomputed findings. The cod
 
 Genome-wide findings and panel-based analyses use different inputs. Do not interpret a panel result as comprehensive whole-genome analysis. The whole-genome source linked by the app is [Manuel Corpas’s public sequencing deposit](https://doi.org/10.5281/zenodo.19326528).
 
-**Provenance limitation:** the PGx implementation uses a stored genotype subset attributed to the Corpasome. Its cited deposit contains family VCF and metagenomic files; the exact extraction and allele-orientation history has not been independently verified in this review. Results should be treated as demonstration output, not clinically validated findings.
+**Input provenance checked:** all 23 stored PGx genotype strings match the [public genotype file at this pinned ClawBio revision](https://github.com/ClawBio/ClawBio/blob/7290841dfc9c7e817c12af38a2dd1479f0babe8e/skills/genome-compare/data/manuel_corpas_23andme.txt.gz). This was checked on 10 September 2026. The app’s older Figshare citation identifies the broader Corpasome deposit; the linked file provides the direct input reference.
+
+**Interpretation limitation:** this app passes rsID/genotype pairs directly to the PharmGx API. It does not perform the file reader’s reference-coordinate check, which withholds interpretations for this file in the Colab prototype. Matching the genotype strings establishes input provenance, not reference-build compatibility, allele-orientation validation or clinical validity. Treat the outputs as an educational demonstration.
 
 ## Inspect execution yourself
 
