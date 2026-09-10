@@ -5,9 +5,11 @@ description: Technical documentation, tutorials, and skill reference for ClawBio
 
 <div class="hero">
   <h1 class="hero__title">ClawBio Documentation</h1>
-  <p class="hero__subtitle">Technical docs, tutorials, and presentations for the bioinformatics AI skill library</p>
+  <p class="hero__subtitle">Run a guided demo in your browser, then explore the skills, tutorials and scientific evidence.</p>
   <p>
-    <a href="https://clawbio.ai" class="md-button md-button--primary">ClawBio Home</a>
+    <a href="tutorials/run-your-first-skill/" class="md-button">Try ClawBio in Colab</a>
+    &nbsp;
+    <a href="https://clawbio.ai" class="md-button">ClawBio Home</a>
     &nbsp;
     <a href="https://github.com/ClawBio/ClawBio" class="md-button">GitHub</a>
   </p>
@@ -17,9 +19,18 @@ description: Technical documentation, tutorials, and skill reference for ClawBio
 
 <div class="tutorial-cards">
 
+<a class="tutorial-card" href="tutorials/run-your-first-skill/">
+  <div class="tutorial-card__header">
+    <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
+    <span class="time-estimate">15 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Try ClawBio in Colab</h3>
+  <p class="tutorial-card__desc">Run PharmGx on synthetic teaching data, inspect uncertainty and download your evidence. No AI account or API key.</p>
+</a>
+
 <a class="tutorial-card" href="hackathon/berlin/">
   <div class="tutorial-card__header">
-    <span class="difficulty-badge difficulty-badge--event">Next event</span>
+    <span class="difficulty-badge difficulty-badge--event">Past workshop</span>
     <span class="time-estimate">Tue 18 Aug 2026</span>
   </div>
   <h3 class="tutorial-card__title">ClawBio + Nebius Hackathon Berlin</h3>
@@ -35,14 +46,7 @@ description: Technical documentation, tutorials, and skill reference for ClawBio
   <p class="tutorial-card__desc">Install an AI coding agent, connect it to a model provider, and run your first prompt.</p>
 </a>
 
-<a class="tutorial-card" href="tutorials/run-your-first-skill/">
-  <div class="tutorial-card__header">
-    <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
-    <span class="time-estimate">15 min</span>
-  </div>
-  <h3 class="tutorial-card__title">Run Your First Skill</h3>
-  <p class="tutorial-card__desc">Run PharmGx, Equity Scorer, or NutriGx with demo data and explore the output.</p>
-</a>
+
 
 <a class="tutorial-card" href="tutorials/build-a-skill/">
   <div class="tutorial-card__header">
@@ -97,7 +101,6 @@ description: Technical documentation, tutorials, and skill reference for ClawBio
 
 </div>
 
----
 
 ## Quick Install
 
@@ -124,6 +127,5 @@ uv sync
 uv run python clawbio.py run pharmgx --demo
 ```
 
----
 
 [Skill Library](skills/index.md) · [SKILL.md Spec](reference/skillmd-spec.md) · [Contributing](contributing/index.md) · [All Tutorials](tutorials/index.md) · [Presentations](presentations/index.md)
