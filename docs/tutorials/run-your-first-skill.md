@@ -7,7 +7,7 @@ description: Run a guided PharmGx demo on synthetic teaching data, inspect the e
 
 Run a pharmacogenomics analysis in your browser, inspect its results, and test what happens when evidence is missing.
 
-[Open the ClawBio demo in Colab](https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-first-skill.ipynb){ .md-button }
+[Open the ClawBio demo in Colab](https://colab.research.google.com/github/ClawBio/ClawBio/blob/0c93203d74932a70cd36b8f1ad331e357d3b26e0/docs/tutorial-first-skill.ipynb){ .md-button }
 
 **You need a Google account. No AI account, API key, GPU or paid Colab plan is required for this exercise.** Colab's free computing resources are subject to availability. The notebook downloads its code and dependencies during setup, then runs the analysis using bundled rules with online evidence enrichment disabled.
 

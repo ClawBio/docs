@@ -4,9 +4,9 @@
 
 This prototype demonstrates agentic skill execution in a terminal-style Google Colab notebook. Colab provides the sandbox, its keyless Gemini integration supplies the model, and ClawBio supplies the scientific skill and analysis tools.
 
-[Open the agent prototype in Colab](https://colab.research.google.com/github/ClawBio/ClawBio/blob/fix/colab-first-skill-demo/docs/tutorial-agent.ipynb){ .md-button }
+[Open the agent prototype in Colab](https://colab.research.google.com/github/ClawBio/ClawBio/blob/1e3df6c/docs/tutorial-agent.ipynb){ .md-button }
 
-**Prototype status:** local tool-loop tests pass. Keyless Gemini selected and read the skill in Colab. Google then returned HTTP 429 (heavy load), so a complete live agent conversation remains unverified. The link currently targets the development branch.
+**Prototype status:** local tool-loop tests pass. Keyless Gemini selected and read the skill in Colab. Google then returned HTTP 429 (heavy load), so a complete live agent conversation remains unverified. The link targets a fixed prototype revision.
 
 ## Start the demo: you must click Run
 
