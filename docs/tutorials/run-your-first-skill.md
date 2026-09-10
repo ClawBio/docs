@@ -1,115 +1,63 @@
 ---
-title: "Run Your First Skill"
-description: Run a ClawBio skill demo in Google Colab — no installation, no terminal, no cost.
+title: "Try ClawBio in Google Colab"
+description: Run a guided PharmGx demo on synthetic teaching data, inspect the evidence, and download your results. No AI account or API key required.
 ---
 
-# Run Your First Skill
+# Try ClawBio in Google Colab
 
-<div class="tutorial-card__header">
-  <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
-  <span class="time-estimate">~15 min</span>
-</div>
+Run a pharmacogenomics analysis in your browser, inspect its results, and test what happens when evidence is missing.
 
-**No installation. No terminal. No cost.** Everything runs in your browser via Google Colab. All you need is a Google account.
+[Open the ClawBio demo in Colab](https://colab.research.google.com/github/ClawBio/ClawBio/blob/0c93203d74932a70cd36b8f1ad331e357d3b26e0/docs/tutorial-first-skill.ipynb){ .md-button }
 
-[:material-open-in-new: Launch in Google Colab](https://colab.research.google.com/github/ClawBio/ClawBio/blob/main/docs/tutorial-first-skill.ipynb){ .md-button .md-button--primary }
+**You need a Google account. No AI account, API key, GPU or paid Colab plan is required for this exercise.** Colab's free computing resources are subject to availability. The notebook downloads its code and dependencies during setup, then runs the analysis using bundled rules with online evidence enrichment disabled.
 
----
+The input is synthetic teaching data. You do not need to upload personal genetic data or connect Google Drive.
 
-## 1. Install ClawBio
+## 1. Open and run
 
-Open a new Google Colab notebook and run:
+1. Open the notebook using the button above and sign into Google if prompted.
+2. Select **Connect** if Colab asks you to choose a runtime. Use a standard CPU runtime.
+3. Select **Runtime > Run all**, or click the play button beside each code cell in order.
+4. If Colab asks whether you trust this public notebook, review the code before continuing.
 
-```python
-!git clone https://github.com/ClawBio/ClawBio.git
-%cd ClawBio
-!pip install -q -e .
-```
+The first cell prepares a pinned ClawBio revision and its locked dependencies in a separate environment. Allow several minutes for the first download. Setup errors stop execution; a success message appears only when setup has completed.
 
-We clone the repository here rather than `pip install clawbio`, because this tutorial runs
-the skill scripts directly from `skills/` and uses their bundled demo data.
+## 2. Inspect the result
 
-That is it. ClawBio is ready to use.
+The PharmGx demo produces an inline report and a structured `result.json`. The displayed counts and gene profiles are computed during your run.
 
-## 2. Run the PharmGx Demo
+Find **CYP2C19** in the report. The bundled teaching example has a phase-ambiguous allele combination, so the pinned implementation reports uncertainty. The notebook checks that this uncertainty is present rather than silently presenting a definite call.
 
-Every ClawBio skill ships with synthetic demo data. Run the **PharmGx Reporter** — it generates a pharmacogenomics report from a sample 23andMe-format file:
+This demonstrates the behaviour of a fixed software version. It does not establish clinical validity or provide treatment advice.
 
-```python
-!python3 skills/pharmgx-reporter/pharmgx_reporter.py \
-  --input skills/pharmgx-reporter/demo_patient.txt \
-  --output /tmp/pharmgx-demo
-```
+## 3. Test missing evidence
 
-You should see output like:
+The next cell copies the teaching input and removes its three CYP2C19 markers. It preserves the original file and runs the same analysis again.
 
-```
-✓ Loaded 47 variants from demo_patient.txt
-✓ Matched 12 actionable pharmacogenes
-✓ Report written to /tmp/pharmgx-demo/report.md
-✓ Summary written to /tmp/pharmgx-demo/summary.json
-```
+Compare the two outputs. CYP2C19 should now be `NOT_TESTED`. The notebook also checks that the DPYD gene profile remains unchanged.
 
-## 3. Inspect the Output
+**The lesson: missing genotype evidence must not be interpreted as a normal genotype.**
 
-```python
-!cat /tmp/pharmgx-demo/report.md
-```
+## 4. Download your evidence
 
-The report includes:
+The final cell downloads a ZIP containing:
 
-- **Patient summary** — matched pharmacogenes and star alleles
-- **Drug-gene interactions** — CPIC guideline-backed recommendations
-- **Safety warnings** — flagged high-risk variants (e.g. DPYD*2A for fluorouracil toxicity)
-- **Research-use disclaimer** — ClawBio is not a medical device
+- Both generated reports and structured results.
+- The modified teaching input.
+- A tutorial provenance record with the code revision, exact commands and file checksums.
 
-View the structured JSON:
+Colab runtimes are temporary. Download results you want to retain before leaving.
 
-```python
-import json
-with open("/tmp/pharmgx-demo/summary.json") as f:
-    data = json.load(f)
-print(json.dumps(data, indent=2))
-```
+## Repeat or reset
 
-## 4. Try Another Skill
+Rerunning the analysis cells creates new output folders. If setup was interrupted, rerun the setup cell first. For a fully clean start, choose **Runtime > Disconnect and delete runtime**, reconnect, then **Run all**.
 
-Run any other skill with `--demo`:
+## What this sandbox demonstrates
 
-```python
-# Polygenic risk scores
-!python3 skills/gwas-prs/gwas_prs.py --demo --output /tmp/prs-demo
+ClawBio skills execute scientific procedures and produce inspectable outputs. An AI agent can call those same skills, but this first exercise runs directly without a language model.
 
-# Per-variant population equity audit
-!python3 skills/population-equity-auditor/population_equity_auditor.py --demo --output /tmp/equity-demo
+The notebook uses a fixed source revision and a locked environment. Its automated notebook check executes the lesson and verifies the missing-evidence behaviour. Live Colab resource availability remains outside that check.
 
-# GWAS variant lookup across 9 databases
-!python3 skills/gwas-lookup/gwas_lookup.py --demo --output /tmp/gwas-demo
+ClawBio is a research and educational tool. It is not a medical device and does not provide clinical diagnoses. Consult a healthcare professional before making any medical decisions.
 
-# Single-cell RNA-seq pipeline (needs one extra install first)
-!pip install -q scanpy
-!python3 skills/scrna-orchestrator/scrna_orchestrator.py --demo --output /tmp/scrna-demo
-```
-
-!!! note "Not every skill has a `--demo`"
-
-    Most do. Some need real input by design: `equity-scorer`, for instance, computes
-    cohort-level HEIM metrics and takes `--input` with a multi-sample VCF, so there is
-    nothing sensible for it to invent. `--help` on any skill tells you which it is.
-
-## 5. Understand the Flow
-
-Every ClawBio skill follows the same pattern:
-
-1. **SKILL.md** defines the contract — inputs, outputs, domain decisions, safety rules
-2. **Python script** implements the analysis — reads inputs, runs the pipeline, writes outputs
-3. **Demo data** provides synthetic test data — no real patient data needed
-4. **An AI agent** (optional) dispatches the skill, passes parameters, and explains the results
-
-The agent reads the SKILL.md to understand what the skill does and how to call it. The agent **never overrides** domain decisions or safety rules defined in the SKILL.md.
-
----
-
-**Next step:** [Build a Skill](build-a-skill.md) — create your own skill from scratch.
-
-**Full workshop sequence:** Run Your First Skill :material-arrow-right: [Build a Skill](build-a-skill.md) :material-arrow-right: [Variant Interpretation](variant-interpretation-workshop.md) :material-arrow-right: [GWAS](gwas-workshop.md) :material-arrow-right: [30x WGS](30x-wgs-workshop.md)
+**Next:** [Build a Skill](build-a-skill.md), or continue to the [Variant Interpretation Workshop](variant-interpretation-workshop.md).
