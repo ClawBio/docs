@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClawBio Hackathon: Agentic Genomics — 19 March 2026</title>
+<meta name="description" content="ClawBio Hackathon presentation at Imperial College London. Build bioinformatics AI agent skills.">
+<meta property="og:title" content="ClawBio Hackathon: Agentic Genomics">
+<meta property="og:image" content="https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=1200,height=630/event-covers/ue/48e9b48f-4f12-493c-8740-d1b7fe78b6ff.png">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #0d1117;
+  --bg2:     #161b22;
+  --bg3:     #21262d;
+  --border:  #30363d;
+  --text:    #e6edf3;
+  --muted:   #8b949e;
+  --green:   #3fb950;
+  --green2:  #56d364;
+  --blue:    #58a6ff;
+  --red:     #f85149;
+  --purple:  #bc8cff;
+  --orange:  #d29922;
+}
+
+html, body {
+  height: 100%; width: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: var(--green); transition: width 0.4s ease; z-index: 200;
+}
+
+#counter {
+  position: fixed; bottom: 1.4rem; right: 1.8rem;
+  font-size: 0.8rem; color: var(--muted); z-index: 200;
+  letter-spacing: 0.05em;
+}
+
+.nav-btn {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  color: var(--muted); width: 40px; height: 40px; border-radius: 50%;
+  cursor: pointer; font-size: 1.1rem; display: flex; align-items: center;
+  justify-content: center; transition: all 0.2s; z-index: 200;
+}
+.nav-btn:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+#btn-prev { left: 1rem; }
+#btn-next { right: 1rem; }
+
+.deck { width: 100vw; height: 100vh; position: relative; }
+
+.slide {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 5vh 8vw;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  transform: translateX(30px);
+}
+.slide.active { opacity: 1; visibility: visible; transform: translateX(0); }
+.slide.exit { opacity: 0; transform: translateX(-30px); }
+
+.label {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--green); margin-bottom: 0.6rem;
+}
+.title {
+  font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 800;
+  line-height: 1.15; letter-spacing: -0.02em; text-align: center;
+  margin-bottom: 1rem;
+}
+.em { color: var(--green); }
+.em-blue { color: var(--blue); }
+.em-red { color: var(--red); }
+.em-purple { color: var(--purple); }
+
+.title-brand {
+  font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900;
+  letter-spacing: -0.03em; color: var(--text); margin-bottom: 0.3rem;
+}
+.title-hook {
+  font-size: clamp(1.1rem, 2vw, 1.5rem); color: var(--muted);
+  max-width: 700px; text-align: center; line-height: 1.6; margin-bottom: 0.4rem;
+}
+.title-hook strong { color: var(--text); }
+.title-sub {
+  font-size: clamp(0.85rem, 1.2vw, 1rem); color: var(--muted);
+  text-align: center; font-style: italic; margin-bottom: 2rem;
+}
+
+.stats-row { display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center; }
+.stat { text-align: center; }
+.stat-num {
+  font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 800;
+  color: var(--green); line-height: 1;
+}
+.stat-label {
+  font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+
+.card-grid-3 {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem; width: 100%; max-width: 960px; margin-top: 0.5rem;
+}
+.card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.6rem 1.4rem;
+  display: flex; flex-direction: column; gap: 0.6rem;
+}
+.card-icon { font-size: 2rem; }
+.card-heading { font-size: 1rem; font-weight: 700; color: var(--text); }
+.card-body { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+.traction-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem; width: 100%; max-width: 900px; margin-bottom: 2rem;
+}
+.traction-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.4rem 1rem; text-align: center;
+}
+.traction-num {
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem); font-weight: 900;
+  color: var(--green); line-height: 1;
+}
+.traction-label {
+  font-size: 0.82rem; font-weight: 700; color: var(--text);
+  margin: 0.4rem 0 0.2rem;
+}
+.traction-sub { font-size: 0.75rem; color: var(--muted); }
+
+.theme-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem; width: 100%; max-width: 960px; margin-top: 0.5rem;
+}
+.theme-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.6rem 1.4rem; text-align: center;
+}
+.theme-num {
+  font-size: 2.5rem; font-weight: 900; color: var(--green);
+  line-height: 1; margin-bottom: 0.6rem;
+}
+.theme-heading { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.theme-body { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+.track-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 1rem; width: 100%; max-width: 1000px; margin-top: 0.5rem;
+}
+.track-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.2rem 1rem; text-align: center;
+}
+.track-letter {
+  font-size: 1.8rem; font-weight: 900; line-height: 1; margin-bottom: 0.4rem;
+}
+.track-name { font-size: 0.82rem; font-weight: 700; margin-bottom: 0.3rem; }
+.track-desc { font-size: 0.72rem; color: var(--muted); line-height: 1.5; }
+
+.link-row {
+  display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1.5rem;
+}
+.link-btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.55rem 1.2rem; border-radius: 8px;
+  text-decoration: none; font-size: 0.85rem; font-weight: 600;
+  transition: all 0.2s;
+}
+.link-btn-green {
+  background: var(--green); color: var(--bg); border: 1px solid var(--green);
+}
+.link-btn-green:hover { background: var(--green2); }
+.link-btn-outline {
+  background: var(--bg3); color: var(--text); border: 1px solid var(--border);
+}
+.link-btn-outline:hover { background: var(--bg2); border-color: var(--muted); }
+
+.big-quote {
+  font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 700;
+  text-align: center; max-width: 800px; line-height: 1.5;
+  margin: 1.5rem 0;
+}
+
+.footnote {
+  font-size: 0.72rem; color: var(--muted); text-align: center;
+  margin-top: 1.5rem; font-style: italic; max-width: 600px;
+}
+
+#hint {
+  position: fixed; bottom: 1.4rem; left: 50%; transform: translateX(-50%);
+  font-size: 0.72rem; color: var(--muted); z-index: 200;
+  opacity: 1; transition: opacity 1s ease;
+}
+#hint.hidden { opacity: 0; pointer-events: none; }
+
+@media (max-width: 768px) {
+  .card-grid-3, .theme-grid { grid-template-columns: 1fr; overflow-y: auto; max-height: 70vh; }
+  .traction-grid { grid-template-columns: repeat(2, 1fr); }
+  .track-grid { grid-template-columns: repeat(2, 1fr); }
+  .slide { padding: 3vh 5vw; justify-content: flex-start; padding-top: 4vh; overflow-y: auto; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="counter">1 / 11</div>
+<div id="hint">arrow keys or swipe to navigate</div>
+
+<button class="nav-btn" id="btn-prev" aria-label="Previous">&#8592;</button>
+<button class="nav-btn" id="btn-next" aria-label="Next">&#8594;</button>
+
+<div class="deck" id="deck">
+
+  <!-- SLIDE 0: TITLE -->
+  <div class="slide active" id="slide-0">
+    <div style="margin-bottom:1rem;">
+      <img src="https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=120,height=120/event-covers/ue/48e9b48f-4f12-493c-8740-d1b7fe78b6ff.png" alt="ClawBio Hackathon" style="width:100px;height:100px;border-radius:20px;object-fit:cover;">
+    </div>
+    <div class="title-brand">Agentic Genomics</div>
+    <p class="title-hook">
+      <strong>Build a bioinformatics skill that any AI agent can run.</strong><br>
+      One afternoon. Real biology. Real code. Real impact.
+    </p>
+    <p class="title-sub">Sir Michael Uren Hub, Imperial College London &middot; 19 March 2026</p>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-num">444</div><div class="stat-label">GitHub Stars</div></div>
+      <div class="stat"><div class="stat-num">3,100+</div><div class="stat-label">Clones</div></div>
+      <div class="stat"><div class="stat-num">28</div><div class="stat-label">Skills</div></div>
+      <div class="stat"><div class="stat-num">3&nbsp;weeks</div><div class="stat-label">Since launch</div></div>
+    </div>
+    <div style="margin-top:1.8rem;font-size:0.85rem;color:var(--muted);">Jay Moore &middot; Manuel Corpas &middot; Nathan Skene &middot; Josh Beale</div>
+  </div>
+
+  <!-- SLIDE 1: OVERVIEW OF THE DAY -->
+  <div class="slide" id="slide-1">
+    <div class="label">Overview of the Day</div>
+    <h2 class="title">7 hours. <span class="em">One skill.</span></h2>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:0.4rem 1.5rem;max-width:700px;width:100%;font-size:0.92rem;line-height:2.2;">
+      <div style="color:var(--green);font-weight:700;font-variant-numeric:tabular-nums;">12:00</div><div style="color:var(--muted);">Doors open, get set up</div>
+      <div style="color:var(--green);font-weight:700;">12:30</div><div>Welcome <span style="color:var(--muted);">&mdash; Nathan &amp; Manuel</span></div>
+      <div style="color:var(--green);font-weight:700;">12:45</div><div>Overview of the day <span style="color:var(--muted);">&mdash; you are here</span></div>
+      <div style="color:var(--blue);font-weight:700;">13:15</div><div>Databricks <span style="color:var(--muted);">&mdash; Toz Ozturk, genomics on Databricks</span></div>
+      <div style="color:var(--orange);font-weight:700;">13:30</div><div>Pizza &#127829;</div>
+      <div style="color:var(--green);font-weight:700;">14:00</div><div>Guided tutorial with helpers</div>
+      <div style="color:var(--green);font-weight:700;">14:30</div><div><strong>Build</strong> <span style="color:var(--muted);">&mdash; solo or teams, helpers circulate</span></div>
+      <div style="color:var(--blue);font-weight:700;">15:30</div><div>Breakout tables <span style="color:var(--muted);">&mdash; reproducibility, sensitive biodata, open theme</span></div>
+      <div style="color:var(--green);font-weight:700;">16:30</div><div><strong>Build</strong> <span style="color:var(--muted);">&mdash; final stretch, polish SKILL.md</span></div>
+      <div style="color:var(--purple);font-weight:700;">17:30</div><div><strong>Show and Tell</strong> <span style="color:var(--muted);">&mdash; ~3 min per team</span></div>
+      <div style="color:var(--purple);font-weight:700;">18:30</div><div>Menti Poll &amp; wrap-up</div>
+    </div>
+    <div style="display:flex;gap:2rem;margin-top:2rem;font-size:0.85rem;">
+      <div style="text-align:center;"><div style="font-size:1.5rem;margin-bottom:0.2rem;">&#128214;</div><strong style="color:var(--blue);">docs.clawbio.ai/hackathon</strong><br><span style="color:var(--muted);">ClawBio tutorial</span></div>
+      <div style="text-align:center;"><div style="font-size:1.5rem;margin-bottom:0.2rem;">&#129514;</div><strong style="color:var(--blue);">Skills Cookbook</strong><br><span style="color:var(--muted);">Jay Moore's agentic tutorial</span></div>
+      <div style="text-align:center;"><div style="font-size:1.5rem;margin-bottom:0.2rem;">&#128172;</div><strong style="color:var(--blue);">WhatsApp + Discord</strong><br><span style="color:var(--muted);">Ask anything, anytime</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: THE PROBLEM -->
+  <div class="slide" id="slide-2">
+    <div class="label">The Problem</div>
+    <h2 class="title">Biology is trapped in PDFs.<br><span class="em">AI hallucinates the rest.</span></h2>
+    <div class="card-grid-3">
+      <div class="card">
+        <div class="card-icon">&#128196;</div>
+        <div class="card-heading">26% reproducibility</div>
+        <div class="card-body">Only <strong style="color:var(--text);">1 in 4</strong> computational biology papers can be reproduced without emailing the authors. The rest? Broken links, wrong Python versions, hardcoded paths.<br><span style="font-size:0.7rem;color:var(--muted);margin-top:0.3rem;display:block;">Garijo et al., PLOS ONE 2013; Collberg &amp; Proebsting 2016</span></div>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#129302;</div>
+        <div class="card-heading">LLMs hallucinate biology</div>
+        <div class="card-body">ChatGPT calls CYP2D6 *4 <em>"reduced function"</em>. It is <strong style="color:var(--red);">no function</strong>. For a patient on codeine, that is the difference between pain relief and <strong style="color:var(--red);">nothing</strong>.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#128274;</div>
+        <div class="card-heading">Data cannot leave</div>
+        <div class="card-body"><strong style="color:var(--text);">Genomic data stays on-device.</strong> Cloud-only platforms are a non-starter. Every analysis must run locally and produce a verifiable audit trail.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: THE HUMAN COST -->
+  <div class="slide" id="slide-3">
+    <div class="label">Why This Matters</div>
+    <h2 class="title">These are not hypothetical risks.</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:860px;width:100%;margin-top:1rem;">
+      <div class="card" style="border-color:var(--red);">
+        <div style="font-size:clamp(3rem,5vw,4.5rem);font-weight:900;color:var(--red);line-height:1;">7%</div>
+        <div class="card-heading">CYP2D6 Poor Metabolisers</div>
+        <div class="card-body">Codeine gives them <strong style="color:var(--text);">zero pain relief</strong> but they keep getting prescribed it. ~1 in 14 people. ClawBio catches this in <strong style="color:var(--green);">under one second</strong> from a consumer genetic test.</div>
+      </div>
+      <div class="card" style="border-color:var(--red);">
+        <div style="font-size:clamp(3rem,5vw,4.5rem);font-weight:900;color:var(--red);line-height:1;">0.5%</div>
+        <div class="card-heading">DPYD Variant Carriers</div>
+        <div class="card-body">A standard fluorouracil chemotherapy dose can be <strong style="color:var(--red);">lethal</strong>. Half a percent of the population. These variants are known, testable, and <strong style="color:var(--green);">actionable today</strong>.</div>
+      </div>
+    </div>
+    <div class="big-quote" style="margin-top:2rem;">
+      Published papers should ship as<br><span class="em">executable skills</span>, not PDFs.
+    </div>
+  </div>
+
+  <!-- SLIDE 4: ANATOMY OF A SKILL -->
+  <div class="slide" id="slide-4">
+    <div class="label">What You Are Building</div>
+    <h2 class="title">Anatomy of a <span class="em">ClawBio skill</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:800px;width:100%;margin-top:0.5rem;">
+      <div class="card" style="border-top:3px solid var(--green);">
+        <div class="card-heading">SKILL.md</div>
+        <div class="card-body">The contract. YAML frontmatter (name, inputs, outputs) plus three sections: <strong style="color:var(--text);">Domain Decisions</strong>, <strong style="color:var(--text);">Safety Rules</strong>, <strong style="color:var(--text);">Agent Boundary</strong>. This is the part that makes it a skill and not just a script.</div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--blue);">
+        <div class="card-heading">Demo Data</div>
+        <div class="card-body">Synthetic test data so anyone can run the skill without their own files. Never real patient data. Should exercise at least one edge case.</div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--purple);">
+        <div class="card-heading">Python Script</div>
+        <div class="card-body"><code style="color:var(--green);">--input</code>, <code style="color:var(--green);">--output</code>, <code style="color:var(--green);">--demo</code> flags. Reads input, runs analysis, writes a report. Paths derived from <code>__file__</code>, never hardcoded.</div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--orange);">
+        <div class="card-heading">Pull Request</div>
+        <div class="card-body">Fork the repo, add your skill directory, open a PR. Terminal or GitHub web interface, both work. That is your submission.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: THE SOLUTION -->
+  <div class="slide" id="slide-5">
+    <div class="label">The Solution</div>
+    <h2 class="title">ClawBio: <span class="em">the execution layer</span> for biological AI.</h2>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.5rem 2rem;max-width:700px;width:100%;font-family:'Cascadia Code','Fira Code',monospace;font-size:0.9rem;line-height:2;margin-bottom:1.5rem;">
+      <div style="color:var(--muted);"># One command. 12 genes. 51 drugs. CPIC guidelines.</div>
+      <div style="color:var(--blue);">$ python3 pharmgx_reporter.py --input my_23andme.txt</div>
+      <br>
+      <div style="color:var(--green);font-weight:700;">&#10003; Report generated in 0.8 seconds</div>
+      <div style="color:var(--green);">&#10003; 10 drugs AVOID &middot; 20 drugs CAUTION &middot; 21 drugs OK</div>
+      <div style="color:var(--green);">&#10003; SHA-256 verified &middot; Fully reproducible</div>
+    </div>
+    <div style="display:flex;gap:2.5rem;flex-wrap:wrap;justify-content:center;font-size:0.9rem;">
+      <div style="text-align:center;"><div style="font-size:1.8rem;margin-bottom:0.3rem;">&#127968;</div><strong>Local-first</strong><br><span style="color:var(--muted);font-size:0.8rem;">Data never leaves your machine</span></div>
+      <div style="text-align:center;"><div style="font-size:1.8rem;margin-bottom:0.3rem;">&#128270;</div><strong>Inspectable</strong><br><span style="color:var(--muted);font-size:0.8rem;">SKILL.md encodes every decision</span></div>
+      <div style="text-align:center;"><div style="font-size:1.8rem;margin-bottom:0.3rem;">&#128257;</div><strong>Reproducible</strong><br><span style="color:var(--muted);font-size:0.8rem;">commands.sh + checksums.sha256</span></div>
+      <div style="text-align:center;"><div style="font-size:1.8rem;margin-bottom:0.3rem;">&#129302;</div><strong>Agent-native</strong><br><span style="color:var(--muted);font-size:0.8rem;">Any AI agent can discover + run</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: TRACTION -->
+  <div class="slide" id="slide-6">
+    <div class="label">Traction &middot; 3 weeks since launch</div>
+    <h2 class="title">11,000 views. 444 stars. <span class="em">Zero marketing.</span></h2>
+    <div class="traction-grid">
+      <div class="traction-card" style="border-color:var(--green);">
+        <div class="traction-num">444</div>
+        <div class="traction-label">GitHub Stars</div>
+        <div class="traction-sub">all organic</div>
+      </div>
+      <div class="traction-card">
+        <div class="traction-num">3,100+</div>
+        <div class="traction-label">Clones</div>
+        <div class="traction-sub">645 unique cloners</div>
+      </div>
+      <div class="traction-card">
+        <div class="traction-num">28</div>
+        <div class="traction-label">Skills</div>
+        <div class="traction-sub">5 domains covered</div>
+      </div>
+      <div class="traction-card">
+        <div class="traction-num">70+</div>
+        <div class="traction-label">Here Today</div>
+        <div class="traction-sub">Imperial, KCL, Crick, UCL</div>
+      </div>
+    </div>
+    <div style="max-width:700px;text-align:center;font-size:0.95rem;color:var(--muted);line-height:1.8;">
+      First community PR merged within <strong style="color:var(--text);">48 hours</strong> of launch.
+      Presented at the London Bioinformatics Meetup, DoraHacks Imperial, and the Galaxy ML SIG.
+      Contributors across <strong style="color:var(--text);">3 countries</strong>.
+      Traffic from LinkedIn, Google, GitHub, Slack, and Teams &mdash; people are finding it and sharing it at work.
+    </div>
+  </div>
+
+  <!-- SLIDE 6: THREE THEMES -->
+  <div class="slide" id="slide-7">
+    <div class="label">Today's Challenge</div>
+    <h2 class="title">Three themes. <span class="em">Your skill.</span></h2>
+    <div class="theme-grid">
+      <div class="theme-card" style="border-top:3px solid var(--green);">
+        <div class="theme-num">1</div>
+        <div class="theme-heading">Gaps in Genomics Tools</div>
+        <div class="theme-body">What analyses are still manual, brittle, or unreproducible? Build a skill that fills one of those gaps. Proteomics, clinical diagnostics, variant annotation, pathway analysis.</div>
+      </div>
+      <div class="theme-card" style="border-top:3px solid var(--blue);">
+        <div class="theme-num">2</div>
+        <div class="theme-heading">Trustworthy Agentic Approaches</div>
+        <div class="theme-body">How do we make AI agents safe for biology? Encode domain decisions and safety rules into SKILL.md so agents execute with proven logic, not hallucinations.</div>
+      </div>
+      <div class="theme-card" style="border-top:3px solid var(--purple);">
+        <div class="theme-num">3</div>
+        <div class="theme-heading">Accessible Complexity</div>
+        <div class="theme-body">Genomics data is vast and complex. Build skills that present results so clearly that a clinician, a patient, or a policy-maker can act on them.</div>
+      </div>
+    </div>
+    <div style="margin-top:1.5rem;font-size:0.92rem;color:var(--muted);text-align:center;max-width:700px;line-height:1.7;">
+      You do not need a genomics background for every track.<br>
+      <strong style="color:var(--text);">AI engineers + domain experts = the most powerful combination.</strong>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: TRACKS -->
+  <div class="slide" id="slide-8">
+    <div class="label">Choose Your Track</div>
+    <h2 class="title">Five tracks. <span class="em">All levels welcome.</span></h2>
+    <div class="track-grid">
+      <div class="track-card" style="border-top:3px solid var(--green);">
+        <div class="track-letter" style="color:var(--green);">A</div>
+        <div class="track-name">AI Engineers</div>
+        <div class="track-desc">No genomics needed. Wire public APIs (PubMed, gnomAD, ClinicalTrials.gov) into skills.</div>
+      </div>
+      <div class="track-card" style="border-top:3px solid var(--blue);">
+        <div class="track-letter" style="color:var(--blue);">B</div>
+        <div class="track-name">Genomics Researchers</div>
+        <div class="track-desc">Wrap your existing workflows (VCF annotation, QC, DE) into reproducible skills.</div>
+      </div>
+      <div class="track-card" style="border-top:3px solid var(--purple);">
+        <div class="track-letter" style="color:var(--purple);">C</div>
+        <div class="track-name">Proteomics</div>
+        <div class="track-desc">Zero proteomics skills exist in ClawBio. Build the first one. High impact.</div>
+      </div>
+      <div class="track-card" style="border-top:3px solid var(--orange);">
+        <div class="track-letter" style="color:var(--orange);">D</div>
+        <div class="track-name">Clinical</div>
+        <div class="track-desc">ACMG classification, drug interactions, tumour mutational burden, rare disease matching.</div>
+      </div>
+      <div class="track-card" style="border-top:3px solid var(--red);">
+        <div class="track-letter" style="color:var(--red);">E</div>
+        <div class="track-name">Epidemiology</div>
+        <div class="track-desc">Outbreak clustering, vaccine equity, AMR profiling, GBD visualisation.</div>
+      </div>
+    </div>
+    <div style="margin-top:1.2rem;font-size:0.88rem;color:var(--muted);text-align:center;">
+      Full skill ideas and step-by-step guide at <strong style="color:var(--blue);">docs.clawbio.ai/hackathon</strong>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: WHAT COUNTS -->
+  <div class="slide" id="slide-9">
+    <div class="label">Minimum Viable Submission</div>
+    <h2 class="title">What counts as <span class="em">done</span>?</h2>
+    <div style="max-width:600px;width:100%;margin-top:1rem;">
+      <div style="display:flex;flex-direction:column;gap:1rem;font-size:1rem;">
+        <div style="display:flex;align-items:center;gap:1rem;"><div style="width:36px;height:36px;border-radius:8px;background:var(--bg2);border:1px solid var(--green);display:flex;align-items:center;justify-content:center;color:var(--green);font-weight:700;font-size:1.1rem;">&#10003;</div><div>A new <code style="background:var(--bg2);padding:0.15rem 0.5rem;border-radius:4px;border:1px solid var(--border);">skills/your-skill/</code> directory</div></div>
+        <div style="display:flex;align-items:center;gap:1rem;"><div style="width:36px;height:36px;border-radius:8px;background:var(--bg2);border:1px solid var(--green);display:flex;align-items:center;justify-content:center;color:var(--green);font-weight:700;font-size:1.1rem;">&#10003;</div><div><strong>SKILL.md</strong> with Domain Decisions, Safety Rules, Agent Boundary</div></div>
+        <div style="display:flex;align-items:center;gap:1rem;"><div style="width:36px;height:36px;border-radius:8px;background:var(--bg2);border:1px solid var(--green);display:flex;align-items:center;justify-content:center;color:var(--green);font-weight:700;font-size:1.1rem;">&#10003;</div><div><strong>Synthetic demo data</strong> (never real patient data)</div></div>
+        <div style="display:flex;align-items:center;gap:1rem;"><div style="width:36px;height:36px;border-radius:8px;background:var(--bg2);border:1px solid var(--green);display:flex;align-items:center;justify-content:center;color:var(--green);font-weight:700;font-size:1.1rem;">&#10003;</div><div>A runnable <code style="background:var(--bg2);padding:0.15rem 0.5rem;border-radius:4px;border:1px solid var(--border);">--demo</code> command that produces output</div></div>
+        <div style="display:flex;align-items:center;gap:1rem;"><div style="width:36px;height:36px;border-radius:8px;background:var(--bg2);border:1px solid var(--green);display:flex;align-items:center;justify-content:center;color:var(--green);font-weight:700;font-size:1.1rem;">&#10003;</div><div>A <strong>pull request</strong> to ClawBio/ClawBio</div></div>
+      </div>
+    </div>
+    <div style="margin-top:2rem;font-size:0.95rem;color:var(--muted);text-align:center;max-width:600px;">
+      A focused, well-documented skill with clear domain decisions is better than an ambitious but incomplete one.
+    </div>
+  </div>
+
+  <!-- SLIDE 10: GO BUILD -->
+  <div class="slide" id="slide-10">
+    <div class="label">Let's Go</div>
+    <div class="title" style="font-size:clamp(2.2rem,4vw,3.5rem);">The best skills come from<br><span class="em">scratching your own itch.</span></div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.5rem 2rem;max-width:600px;width:100%;font-family:'Cascadia Code','Fira Code',monospace;font-size:0.85rem;line-height:2.2;margin-bottom:1.5rem;">
+      <div style="color:var(--blue);">$ git clone https://github.com/ClawBio/ClawBio.git</div>
+      <div style="color:var(--blue);">$ cd ClawBio && pip3 install -r requirements.txt</div>
+      <div style="color:var(--blue);">$ python3 skills/pharmgx-reporter/pharmgx_reporter.py --demo</div>
+      <div style="color:var(--green);font-weight:700;">&#10003; You're in. Now build something.</div>
+    </div>
+    <div class="link-row">
+      <a href="https://docs.clawbio.ai/hackathon/setup/" class="link-btn link-btn-green">Tutorial</a>
+      <a href="https://neurogenomics.github.io/agentic-life-sciences-tutorial/" class="link-btn link-btn-outline">Skills Cookbook</a>
+      <a href="https://github.com/ClawBio/ClawBio" class="link-btn link-btn-outline">GitHub</a>
+      <a href="https://discord.gg/EEp4Neaz" class="link-btn link-btn-outline">Discord</a>
+      <a href="https://docs.clawbio.ai" class="link-btn link-btn-outline">docs.clawbio.ai</a>
+    </div>
+    <div class="footnote">
+      ClawBio is a research and educational tool. It is not a medical device and does not provide clinical diagnoses.
+    </div>
+  </div>
+
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+
+function goTo(n) {
+  if (n < 0 || n >= total) return;
+  slides[current].classList.remove('active');
+  slides[current].classList.add('exit');
+  const prev = current;
+  setTimeout(() => slides[prev].classList.remove('exit'), 450);
+  current = n;
+  slides[current].classList.add('active');
+  document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
+  document.getElementById('progress-bar').style.width = ((current + 1) / total * 100) + '%';
+  if (current > 0) document.getElementById('hint').classList.add('hidden');
+}
+
+document.getElementById('btn-prev').addEventListener('click', () => goTo(current - 1));
+document.getElementById('btn-next').addEventListener('click', () => goTo(current + 1));
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') { e.preventDefault(); goTo(current + 1); }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); goTo(current - 1); }
+});
+
+let tx = 0;
+document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive: true});
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  if (Math.abs(dx) > 50) dx < 0 ? goTo(current + 1) : goTo(current - 1);
+}, {passive: true});
+
+document.getElementById('progress-bar').style.width = (1 / total * 100) + '%';
+</script>
+</body>
+</html>

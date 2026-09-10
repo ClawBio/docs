@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agents for Health: ClawBio Hackathon | 23 April 2026</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+      --border: #30363d; --text: #e6edf3; --muted: #8b949e;
+      --accent: #3fb950; --accent2: #58a6ff; --warn: #d29922; --danger: #f85149;
+      --purple: #bc8cff;
+    }
+    html, body { height: 100%; overflow: hidden; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+
+    .deck { position: relative; width: 100%; height: 100%; }
+    .slide {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      padding: 4rem 6rem; opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+    }
+    .slide.active { opacity: 1; pointer-events: auto; }
+    .slide-inner { max-width: 960px; width: 100%; }
+
+    h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    h1 em { font-style: normal; color: var(--accent); }
+    h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; margin-bottom: 1rem; color: var(--accent); }
+    h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.6rem; color: var(--accent2); }
+    p { font-size: 1.15rem; line-height: 1.7; color: var(--muted); margin-bottom: 0.8rem; }
+    p.big { font-size: 1.35rem; }
+    .bright { color: var(--text); }
+    .green { color: var(--accent); }
+    .blue { color: var(--accent2); }
+    .yellow { color: var(--warn); }
+    .red { color: var(--danger); }
+    .purple { color: var(--purple); }
+    strong { color: var(--text); }
+
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { font-size: 1.1rem; line-height: 1.7; color: var(--muted); margin-bottom: 0.5rem; }
+    li strong { color: var(--text); }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin: 1.5rem 0; }
+    .stat { text-align: center; padding: 1.5rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; }
+    .stat .num { font-size: 2.5rem; font-weight: 800; color: var(--accent); display: block; }
+    .stat .label { font-size: 0.85rem; color: var(--muted); margin-top: 0.3rem; }
+
+    .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1rem 0; }
+    .card-grid.three { grid-template-columns: repeat(3, 1fr); }
+    .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.5rem; }
+    .card h3 { margin-bottom: 0.4rem; }
+    .card p { font-size: 0.95rem; margin-bottom: 0; }
+    .card.highlight { border-color: var(--purple); background: rgba(188,140,255,0.06); }
+    .card.highlight h3 { color: var(--purple); }
+
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th { text-align: left; padding: 0.7rem 1rem; background: var(--bg2); color: var(--text); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid var(--border); }
+    td { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 1rem; }
+
+    .pipeline { display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin: 2rem 0; }
+    .pipeline-step { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 0.8rem 1.2rem; font-weight: 600; font-size: 1rem; color: var(--text); }
+    .pipeline-step.active-step { border-color: var(--accent); color: var(--accent); background: rgba(63,185,80,0.08); }
+    .pipeline-arrow { color: var(--muted); font-size: 1.3rem; }
+
+    .callout { border-left: 4px solid var(--accent); background: rgba(63,185,80,0.06); padding: 1.2rem 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+    .callout.warn { border-left-color: var(--warn); background: rgba(210,153,34,0.06); }
+    .callout.danger { border-left-color: var(--danger); background: rgba(248,81,73,0.06); }
+    .callout.purple { border-left-color: var(--purple); background: rgba(188,140,255,0.06); }
+    .callout p { margin-bottom: 0; }
+
+    code { background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; padding: 0.15rem 0.4rem; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.9em; color: var(--accent2); }
+    pre { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem 1.5rem; overflow-x: auto; margin: 1rem 0; }
+    pre code { background: none; border: none; padding: 0; font-size: 0.95rem; color: var(--text); }
+
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1rem 0; }
+    .compare-col { padding: 1.5rem; border-radius: 10px; }
+    .compare-col.old { background: rgba(248,81,73,0.06); border: 1px solid rgba(248,81,73,0.2); }
+    .compare-col.new { background: rgba(63,185,80,0.06); border: 1px solid rgba(63,185,80,0.2); }
+
+    blockquote { border-left: 4px solid var(--accent2); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(88,166,255,0.04); border-radius: 0 8px 8px 0; }
+    blockquote p { font-size: 1.1rem; font-style: italic; color: var(--text); margin-bottom: 0; }
+
+    .center { text-align: center; }
+    .center h1, .center h2, .center p { text-align: center; }
+
+    .controls { position: fixed; bottom: 1.5rem; right: 2rem; display: flex; gap: 0.5rem; z-index: 100; }
+    .controls button { background: var(--bg2); border: 1px solid var(--border); color: var(--text); padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
+    .controls button:hover { background: var(--bg3); }
+    .controls button:disabled { opacity: 0.3; cursor: default; }
+    .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); z-index: 100; transition: width 0.3s; }
+    .counter { position: fixed; bottom: 1.7rem; left: 2rem; font-size: 0.85rem; color: var(--muted); z-index: 100; }
+
+    .title-slide { background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(63,185,80,0.12) 0%, transparent 70%); }
+    .title-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(63,185,80,0.15); border: 1px solid rgba(63,185,80,0.4); color: var(--accent); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 1rem; border-radius: 999px; margin-bottom: 1.5rem; }
+    .title-badge img { height: 1.4rem; width: 1.4rem; border-radius: 50%; object-fit: cover; }
+    .section-slide { background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(88,166,255,0.08) 0%, transparent 70%); }
+
+    @media (max-width: 768px) {
+      .slide { padding: 2rem; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .card-grid, .card-grid.three { grid-template-columns: 1fr; }
+      .compare { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter"></div>
+
+<div class="deck" id="deck">
+
+  <!-- 1: Title -->
+  <div class="slide title-slide center active" data-n="1">
+    <div class="slide-inner">
+      <div class="title-badge"><img src="../../assets/clawbio-logo.jpeg" alt="ClawBio logo">ClawBio Hackathon</div>
+      <h1>AI Agents for <em>Health</em></h1>
+      <p class="big">Build agents for genomics, pharmacogenomics, and digital health</p>
+      <p>23 April 2026 &middot; University of Westminster &middot; 115 New Cavendish St, London</p>
+    </div>
+  </div>
+
+  <!-- 2: Agentic engineering = new frontier -->
+  <div class="slide" data-n="2">
+    <div class="slide-inner">
+      <h2>Agentic engineering: the new frontier</h2>
+      <p class="big bright">Biology has become a data-saturated science. The tools to analyse it have not kept up.</p>
+      <p>A single human genome produces three billion base pairs. Clinical interpretation requires alignment, variant calling, functional annotation, literature cross-referencing, and synthesis into actionable reports. Each step has its own software, dependencies, version history, and configuration.</p>
+      <p>Workflow managers (Nextflow, Snakemake, Galaxy) emerged because manual orchestration is unsustainable. But the barrier to entry remains high. A biologist who wants to analyse their own sequencing data must learn to code, hire someone who can, or rely on graphical interfaces that may not support the analysis they need.</p>
+    </div>
+  </div>
+
+  <!-- 3: The models are good enough, the harness isn't -->
+  <div class="slide" data-n="3">
+    <div class="slide-inner">
+      <h2>The models are good enough. The harness is not.</h2>
+      <p>Modern LLMs can write, debug, and execute code. They can plan multi-step operations, adapt based on intermediate results, and coordinate dozens of tools.</p>
+      <p>But a general-purpose LLM generating bioinformatics code from scratch is unreliable. Output varies between sessions. It lacks the specificity that domain experts build into workflows over years. It halluccinates gene-drug associations and invents variant classifications.</p>
+      <div class="callout danger">
+        <p><strong>The problem is not the model.</strong> The problem is the harness: what constrains the model, what tools it can call, what guardrails prevent silent errors. Agentic engineering is the discipline of building that harness.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4: What is agentic AI -->
+  <div class="slide" data-n="4">
+    <div class="slide-inner">
+      <h2>What is agentic AI?</h2>
+      <p>The first wave of LLMs in the life sciences was <strong>information retrieval</strong>: summarising papers, answering questions about pathways, extracting structured data from text. Useful but incremental.</p>
+      <p>The second wave is qualitatively different. When connected to file systems, databases, and command-line tools, LLMs become <strong>autonomous agents</strong> that plan multi-step operations, execute them, and adapt based on intermediate results.</p>
+      <div class="callout">
+        <p><strong>The shift:</strong> from AI that <em>tells you things</em> to AI that <em>does things</em>. The researcher's role shifts from constructing the analysis to evaluating it. From production to judgement.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5: What is an agent -->
+  <div class="slide" data-n="5">
+    <div class="slide-inner">
+      <h2>What is an agent?</h2>
+      <blockquote>
+        <p>Agentic genomics is the use of autonomous AI agents, powered by large language models and operating within domain-constrained skill libraries, to discover, plan, execute, and iteratively refine multi-step genomic analyses, where the agent exercises runtime decision-making over tool selection, parameterisation, error handling, and output evaluation.</p>
+      </blockquote>
+      <p style="font-size:0.9rem;color:var(--muted);margin-top:0.5rem;">Corpas, Fatumo, Guio. "Agentic Genomics: From Pipeline Automation to Autonomous Validation." Cell Genomics (submitted).</p>
+      <p style="margin-top:1rem;">Four necessary conditions: <strong>autonomy</strong> (runtime decisions), <strong>domain constraint</strong> (skill libraries, not ad hoc code), <strong>iterative refinement</strong> (error diagnosis and self-repair), and <strong>natural language mediation</strong> (no programming required).</p>
+    </div>
+  </div>
+
+  <!-- 6: How does it work -->
+  <div class="slide" data-n="6">
+    <div class="slide-inner">
+      <h2>How does it work?</h2>
+      <div class="compare">
+        <div class="compare-col old">
+          <h3 class="red">Traditional workflow</h3>
+          <ul>
+            <li>Researcher writes code</li>
+            <li>Configures tools manually</li>
+            <li>Runs pipeline</li>
+            <li>Interprets results</li>
+          </ul>
+          <p><strong class="red">Bottleneck: code production</strong></p>
+        </div>
+        <div class="compare-col new">
+          <h3 class="green">Agentic workflow</h3>
+          <ul>
+            <li>Researcher describes intent in natural language</li>
+            <li>Agent discovers and executes skills from a library</li>
+            <li>Agent handles errors and adapts</li>
+            <li>Researcher validates results</li>
+          </ul>
+          <p><strong class="green">Bottleneck: validation and judgement</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7: What is it NOT -->
+  <div class="slide" data-n="7">
+    <div class="slide-inner">
+      <h2>What agentic genomics is not</h2>
+      <div class="card-grid" style="margin-top:1rem;">
+        <div class="card">
+          <h3>Not workflow automation</h3>
+          <p>Nextflow and Snakemake execute a fixed DAG specified by a human. The workflow manager does not decide at runtime which tools to use. Agentic genomics builds on workflow infrastructure but is not reducible to it.</p>
+        </div>
+        <div class="card">
+          <h3>Not AutoML</h3>
+          <p>Systems that search over hyperparameters operate within a fixed search space defined by a human engineer. They optimise within constraints; they do not formulate the analysis strategy.</p>
+        </div>
+        <div class="card">
+          <h3>Not LLM-assisted scripting</h3>
+          <p>Using a chatbot to generate a Python script for variant filtering is useful but is not agentic. The LLM produces code; the human executes it. Sometimes called "vibe coding," it is a precursor but lacks the defining properties.</p>
+        </div>
+        <div class="card">
+          <h3>Not a chatbot</h3>
+          <p>Biomedical AI copilots that answer clinical questions operate as information retrieval systems. They do not execute multi-step computational analyses against real data.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8: Why is it useful -->
+  <div class="slide" data-n="8">
+    <div class="slide-inner">
+      <h2>Why is it useful?</h2>
+      <table>
+        <thead><tr><th>Metric</th><th>Human-directed</th><th>Agent-mediated</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Setup time</strong></td><td>2-4 hours</td><td>5-15 minutes</td></tr>
+          <tr><td><strong>Monitoring required</strong></td><td>Continuous</td><td>Minimal (agent handles errors)</td></tr>
+          <tr><td><strong>Reproducibility</strong></td><td>Variable</td><td>High (skill specification fixed)</td></tr>
+          <tr><td><strong>Error recovery</strong></td><td>Manual debugging</td><td>Automated diagnosis and repair</td></tr>
+          <tr><td><strong>Prerequisite expertise</strong></td><td>Bioinformatics training</td><td>Domain knowledge for validation</td></tr>
+          <tr><td><strong>Primary failure mode</strong></td><td>Config errors, version conflicts</td><td>Silent plausible-looking errors</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.9rem;">Based on exome and scRNA-seq comparisons across multiple independent systems (Corpas et al., Cell Genomics).</p>
+    </div>
+  </div>
+
+  <!-- 9: Section - Genomics -->
+  <div class="slide section-slide center" data-n="9">
+    <div class="slide-inner">
+      <h1>How does this apply to <em>genomics</em>?</h1>
+    </div>
+  </div>
+
+  <!-- 10: The emerging ecosystem -->
+  <div class="slide" data-n="10">
+    <div class="slide-inner">
+      <h2>An emerging ecosystem</h2>
+      <p>Several independent groups have converged on architectures that share the core properties of agentic genomics:</p>
+      <div class="card-grid" style="margin-top:1rem;">
+        <div class="card">
+          <h3>CellAtria (AstraZeneca)</h3>
+          <p>Agentic framework for single-cell RNA-seq. Dialogue-driven, document-to-analysis automation. Prioritises reproducibility over flexibility.</p>
+        </div>
+        <div class="card">
+          <h3>AutoBA</h3>
+          <p>Autonomous agent for multi-omic analyses. Users supply minimal input; agent plans, generates, executes, and self-repairs code.</p>
+        </div>
+        <div class="card">
+          <h3>Bio-Copilot</h3>
+          <p>Multi-agent system with self-reflection protocols, shared knowledge database, and structured human-agent collaboration.</p>
+        </div>
+        <div class="card">
+          <h3>ClawBio</h3>
+          <p>Community-driven skill library. Domain experts encode knowledge into agent-executable modules without needing to become software engineers.</p>
+        </div>
+      </div>
+      <p style="margin-top:1rem;">This convergence from independent groups, using different architectures but arriving at similar design principles, is evidence that agentic genomics reflects a genuine structural shift.</p>
+    </div>
+  </div>
+
+  <!-- 11: What is ClawBio -->
+  <div class="slide" data-n="11">
+    <div class="slide-inner">
+      <h2>What is ClawBio?</h2>
+      <p class="big bright">An open-source toolkit of AI agent skills for genomic analysis.</p>
+      <p>A skill is a self-contained, versioned unit of bioinformatics functionality: a SKILL.md contract that encapsulates code, configuration, data references, I/O specifications, and test suites. Skills are designed to be discovered and executed by AI agents through semantic search and natural language invocation.</p>
+      <div class="stats" style="margin-top:1rem;">
+        <div class="stat"><span class="num">40+</span><span class="label">bioinformatics skills</span></div>
+        <div class="stat"><span class="num">737+</span><span class="label">GitHub stars</span></div>
+        <div class="stat"><span class="num">141</span><span class="label">forks</span></div>
+        <div class="stat"><span class="num">17</span><span class="label">contributors</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12: How ClawBio helps research -->
+  <div class="slide" data-n="12">
+    <div class="slide-inner">
+      <h2>How can it help me do better research?</h2>
+      <div class="card-grid three" style="margin-top:1rem;">
+        <div class="card">
+          <h3>Variant interpretation</h3>
+          <p>VEP, ClinVar, gnomAD, ACMG classification, pharmacogenomics (CPIC). One command, structured report.</p>
+        </div>
+        <div class="card">
+          <h3>GWAS + PRS</h3>
+          <p>Query 9 databases in parallel, compute polygenic risk scores, fine-map loci with SuSiE. All from summary statistics.</p>
+        </div>
+        <div class="card">
+          <h3>scRNA-seq</h3>
+          <p>QC, doublet removal, clustering, marker genes. Scanpy pipeline wrapped in a single skill with demo data.</p>
+        </div>
+        <div class="card">
+          <h3>Equity audits</h3>
+          <p>HEIM equity scorer measures how well a dataset represents diverse populations. Flags ancestry bias in analyses.</p>
+        </div>
+        <div class="card">
+          <h3>Literature + databases</h3>
+          <p>PubMed summariser, UKB Navigator, Galaxy Bridge, protocols.io. Connect your analysis to the knowledge layer.</p>
+        </div>
+        <div class="card">
+          <h3>Clinical reports</h3>
+          <p>WES clinical reports (English and Spanish), profile reports. From raw variants to PDF, with disclaimers and provenance.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 13: Limitations -->
+  <div class="slide" data-n="13">
+    <div class="slide-inner">
+      <h2>What are the limitations?</h2>
+      <p>Agentic genomics lowers the barrier to <em>generating</em> analyses. It does not lower the barrier to <em>evaluating</em> them.</p>
+      <div class="card-grid" style="margin-top:1rem;">
+        <div class="card">
+          <h3>Silent plausible errors</h3>
+          <p>The primary failure mode across all agentic systems: results that look correct but are not. One skill returned "all normal" pharmacogenomics for an empty input file.</p>
+        </div>
+        <div class="card">
+          <h3>Hallucination</h3>
+          <p>Agents can cite non-existent gene-disease associations, fabricate references, or generate variant annotations that conflate unrelated loci. Skill constraints reduce but do not eliminate this.</p>
+        </div>
+        <div class="card">
+          <h3>Equity bias</h3>
+          <p>Agents default to European-ancestry resources unless explicitly constrained. 86% of GWAS data is European. Agentic genomics can automate existing biases at unprecedented scale.</p>
+        </div>
+        <div class="card">
+          <h3>Validation gap</h3>
+          <p>Domain expertise, familiarity with common failure modes, intuition about plausible results: these are built over years and cannot be shortcut by AI. A novice user will not catch the errors.</p>
+        </div>
+      </div>
+      <div class="callout warn" style="margin-top:1rem;">
+        <p><strong>The democratisation is real, but partial.</strong> It expands the capacity to produce; it does not expand the capacity to judge.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14: Section - Hackathon -->
+  <div class="slide section-slide center" data-n="14">
+    <div class="slide-inner">
+      <h1>How do I <em>get started</em>?</h1>
+      <p class="big">Today. Right now. In this room.</p>
+    </div>
+  </div>
+
+  <!-- 15: Challenge tracks -->
+  <div class="slide" data-n="15">
+    <div class="slide-inner">
+      <h2>Challenge tracks</h2>
+      <div class="card-grid three" style="margin-top:1rem;">
+        <div class="card">
+          <h3>Track 1: New skill</h3>
+          <p>Add a bioinformatics skill to ClawBio. Variant annotation, pathway analysis, clinical reporting, or your own idea. Must conform to SKILL.md template with demo data and tests.</p>
+        </div>
+        <div class="card">
+          <h3>Track 2: Agent workflows</h3>
+          <p>Chain multiple skills to solve a multi-step genomics question. Produce something no single skill could produce alone.</p>
+        </div>
+        <div class="card">
+          <h3>Track 3: Equity hack</h3>
+          <p>Use the HEIM equity framework to audit representation gaps. Score a GWAS, compare PRS accuracy across populations, or build an equity dashboard.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 16: Schedule -->
+  <div class="slide" data-n="16">
+    <div class="slide-inner">
+      <h2>Schedule</h2>
+      <table>
+        <thead><tr><th>Time</th><th>Activity</th></tr></thead>
+        <tbody>
+          <tr><td><strong>12:00</strong></td><td>Arrival and setup</td></tr>
+          <tr><td><strong>12:30</strong></td><td>Introduction to ClawBio and challenge briefing</td></tr>
+          <tr><td><strong>13:00</strong></td><td>Team formation and hacking begins</td></tr>
+          <tr><td><strong>16:30</strong></td><td>Demos and judging</td></tr>
+          <tr><td><strong>17:30</strong></td><td>Prizes and networking</td></tr>
+          <tr><td><strong>19:00</strong></td><td>Close</td></tr>
+        </tbody>
+      </table>
+      <div class="callout">
+        <p><strong>Team formation:</strong> We will pair domain experts (biologists, clinicians) with developers. No bioinformatics experience required. Teams of 2-4.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 17: Setup -->
+  <div class="slide" data-n="17">
+    <div class="slide-inner">
+      <h2>Setup</h2>
+      <pre><code>git clone https://github.com/ClawBio/ClawBio.git
+cd ClawBio
+pip install -r requirements.txt
+python skills/bio-orchestrator/orchestrator.py --list-skills</code></pre>
+      <h2 style="margin-top:2rem;">Judging criteria</h2>
+      <table>
+        <thead><tr><th>Criterion</th><th>Weight</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Does it work?</strong> <code>--demo</code> runs without errors</td><td>30%</td></tr>
+          <tr><td><strong>Real-world impact.</strong> Solves a genuine problem</td><td>25%</td></tr>
+          <tr><td><strong>SKILL.md quality.</strong> Complete, follows template, gotchas documented</td><td>20%</td></tr>
+          <tr><td><strong>Tests.</strong> At least one test file, edge cases considered</td><td>15%</td></tr>
+          <tr><td><strong>Presentation.</strong> Clear 3-minute demo</td><td>10%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 18: Submission -->
+  <div class="slide" data-n="18">
+    <div class="slide-inner">
+      <h2>How to submit</h2>
+      <ol>
+        <li><strong>Fork</strong> <a href="https://github.com/ClawBio/ClawBio" style="color:var(--accent2)">ClawBio/ClawBio</a> on GitHub</li>
+        <li><strong>Create a branch</strong> named <code>hackathon/your-team-name</code></li>
+        <li><strong>Add your skill</strong> under <code>skills/your-skill-name/</code></li>
+        <li><strong>Open a PR</strong> before 16:30 with a description of what it does</li>
+        <li><strong>Demo live</strong> in 3 minutes: show the problem, run the skill, show the output</li>
+      </ol>
+      <div class="callout">
+        <p><strong>Prizes:</strong> Best new skill, best agent workflow, best equity hack. All winning skills will be merged into ClawBio with full attribution.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 19: Community -->
+  <div class="slide" data-n="19">
+    <div class="slide-inner center">
+      <h2>Join the community</h2>
+      <div class="card-grid three" style="margin-top:1rem;">
+        <div class="card">
+          <h3>WhatsApp</h3>
+          <p>Questions, updates, team-finding.</p>
+          <p style="margin-top:0.5rem;"><a href="https://chat.whatsapp.com/FInuUxJa00G7Ql3T28kW4I" style="color:var(--accent2)">WhatsApp Group</a></p>
+        </div>
+        <div class="card">
+          <h3>Discord</h3>
+          <p>Chat with RoboTerri, share results, get help during the hack.</p>
+          <p style="margin-top:0.5rem;"><a href="https://discord.gg/DHpmptyv" style="color:var(--accent2)">Discord Server</a></p>
+        </div>
+        <div class="card">
+          <h3>GitHub</h3>
+          <p>Star the repo, read the docs, explore existing skills.</p>
+          <p style="margin-top:0.5rem;"><a href="https://github.com/ClawBio/ClawBio" style="color:var(--accent2)">ClawBio/ClawBio</a></p>
+        </div>
+      </div>
+      <p style="margin-top:2rem;"><strong class="green" style="font-size:1.3rem;">Let's build.</strong></p>
+    </div>
+  </div>
+
+</div>
+
+<div class="controls">
+  <button id="prev" onclick="go(-1)">&larr; Prev</button>
+  <button id="next" onclick="go(1)">Next &rarr;</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  function show(n) {
+    slides.forEach((s, i) => s.classList.toggle('active', i === n));
+    document.getElementById('progress').style.width = ((n + 1) / total * 100) + '%';
+    document.getElementById('counter').textContent = (n + 1) + ' / ' + total;
+    document.getElementById('prev').disabled = n === 0;
+    document.getElementById('next').disabled = n === total - 1;
+  }
+
+  function go(dir) {
+    current = Math.max(0, Math.min(total - 1, current + dir));
+    show(current);
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+    if (e.key === 'Home') { e.preventDefault(); current = 0; show(0); }
+    if (e.key === 'End') { e.preventDefault(); current = total - 1; show(current); }
+  });
+
+  let touchX = 0;
+  document.addEventListener('touchstart', e => touchX = e.touches[0].clientX);
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+  });
+
+  show(0);
+</script>
+
+</body>
+</html>
