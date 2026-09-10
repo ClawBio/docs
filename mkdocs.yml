@@ -53,7 +53,7 @@ nav:
     - Galaxy Bridge: skills/galaxy-bridge.md
     - RNA-seq DE: skills/rnaseq-de.md
   - Tutorials:
-      - Ask ClawBio in your browser: tutorials/ask-clawbio.md
+    - Ask ClawBio in your browser: tutorials/ask-clawbio.md
     - Overview: tutorials/index.md
     - Basics:
       - Setup: tutorials/setup.md
