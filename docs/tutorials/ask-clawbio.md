@@ -8,6 +8,10 @@ This prototype demonstrates agentic skill execution in a terminal-style Google C
 
 **Prototype status:** local tool-loop tests pass. Keyless Gemini selected and read the skill in Colab. Google then returned HTTP 429 (heavy load), so a complete live agent conversation remains unverified. The link currently targets the development branch.
 
+## Start the demo: you must click Run
+
+**Opening the notebook does not start ClawBio. Click the ▶ play button to the left of “Launch ClawBio”.** Alternatively, select **Runtime > Run all**. If prompted, choose **Run anyway**, then wait for the console to appear. No code editing is needed.
+
 ## What you will do
 
 1. Sign into Google and click the play button beside **Launch ClawBio**. The implementation code is hidden. Colab connects and prepares the console; if prompted, choose **Run anyway**.
