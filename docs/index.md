@@ -25,7 +25,7 @@ description: Technical documentation, tutorials, and skill reference for ClawBio
     <span class="time-estimate">15 min</span>
   </div>
   <h3 class="tutorial-card__title">Ask ClawBio in your browser</h3>
-  <p class="tutorial-card__desc">Live agent prototype in Google Colab: type a request, inspect real tool calls and ask follow-up questions. Google sign-in; no separate API key. Live Gemini verification pending.</p>
+  <p class="tutorial-card__desc">Analyse Manuel Corpas’s public genotype data with a live agent in Google Colab: type a request, inspect real tool calls and ask follow-up questions. Google sign-in; no separate API key. Live Gemini verification pending.</p>
 </a>
 
 <a class="tutorial-card" href="hackathon/berlin/">
