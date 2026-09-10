@@ -5,9 +5,9 @@ description: Technical documentation, tutorials, and skill reference for ClawBio
 
 <div class="hero">
   <h1 class="hero__title">ClawBio Documentation</h1>
-  <p class="hero__subtitle">Ask ClawBio in your browser. Watch an AI agent read a scientific skill, run its tools and explain the evidence.</p>
+  <p class="hero__subtitle">Explore Manuel Corpas’s public genome through conversation, then inspect how ClawBio skills execute.</p>
   <p>
-    <a href="tutorials/ask-clawbio/" class="md-button">Ask ClawBio in your browser</a>
+    <a href="tutorials/conversational-genome/" class="md-button">Try Conversational Genome</a>
     &nbsp;
     <a href="https://clawbio.ai" class="md-button">ClawBio Home</a>
     &nbsp;
@@ -19,13 +19,13 @@ description: Technical documentation, tutorials, and skill reference for ClawBio
 
 <div class="tutorial-cards">
 
-<a class="tutorial-card" href="tutorials/ask-clawbio/">
+<a class="tutorial-card" href="tutorials/conversational-genome/">
   <div class="tutorial-card__header">
     <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
     <span class="time-estimate">15 min</span>
   </div>
-  <h3 class="tutorial-card__title">Ask ClawBio in your browser</h3>
-  <p class="tutorial-card__desc">Analyse Manuel Corpas’s public genotype data with a live agent in Google Colab: type a request, inspect real tool calls and ask follow-up questions. Google sign-in; no separate API key. Live Gemini verification pending.</p>
+  <h3 class="tutorial-card__title">Try Conversational Genome</h3>
+  <p class="tutorial-card__desc">Ask questions about a public genome in a hosted chat. No notebook setup. Includes live skill execution and precomputed findings, with limitations explained.</p>
 </a>
 
 <a class="tutorial-card" href="hackathon/berlin/">
