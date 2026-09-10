@@ -5,7 +5,7 @@ description: Technical documentation, tutorials, and skill reference for ClawBio
 
 <div class="hero">
   <h1 class="hero__title">ClawBio Documentation</h1>
-  <p class="hero__subtitle">Explore Manuel Corpas’s public genome through conversation, then inspect how ClawBio skills execute.</p>
+  <p class="hero__subtitle">Explore a public genome through conversation, then inspect how ClawBio skills execute.</p>
   <p>
     <a href="tutorials/conversational-genome/" class="md-button">Try Conversational Genome</a>
     &nbsp;
