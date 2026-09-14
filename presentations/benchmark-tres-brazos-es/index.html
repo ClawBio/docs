@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Futuro de la Biología es Agéntico (mecanismos) | Manuel Corpas (versión castellano)</title>
+<meta property="og:title" content="El Futuro de la Biología es Agéntico: tres mecanismos arquitectónicos">
+<meta property="og:description" content="Benchmark factorial de tres brazos, 26.730 evaluaciones. Tres mecanismos arquitectónicos por los que el contrato cumple los requisitos de calidad clínica que la recuperación de la guía no alcanza. Versión en castellano.">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0d1117; color: #e6edf3; }
+.deck { position: relative; width: 100vw; height: 100vh; }
+.slide {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 4vh 6vw; opacity: 0; visibility: hidden; transition: opacity 0.4s ease;
+}
+.slide.active { opacity: 1; visibility: visible; }
+h1 { font-size: clamp(1.8rem, 3.8vw, 3.2rem); font-weight: 700; text-align: center; line-height: 1.2; margin-bottom: 1.5rem; }
+h2 { font-size: clamp(1.5rem, 2.8vw, 2.4rem); font-weight: 600; text-align: center; line-height: 1.3; margin-bottom: 1.2rem; }
+h3 { font-size: clamp(1.1rem, 1.8vw, 1.6rem); font-weight: 500; color: #adbac7; text-align: center; margin-bottom: 1rem; }
+p, li { font-size: clamp(0.95rem, 1.6vw, 1.3rem); line-height: 1.6; }
+ul { list-style: none; text-align: left; max-width: 85%; }
+ul li { padding: 0.4em 0; padding-left: 1.5em; position: relative; }
+ul li::before { content: "\2192"; position: absolute; left: 0; color: #58a6ff; }
+.small { font-size: clamp(0.8rem, 1.3vw, 1rem); color: #adbac7; }
+.accent { color: #58a6ff; }
+.green { color: #56d364; }
+.orange { color: #e3b341; }
+.red { color: #ffa198; }
+.purple { color: #d2a8ff; }
+.muted { color: #6e7681; }
+.highlight { background: rgba(88,166,255,0.15); padding: 0.15em 0.4em; border-radius: 4px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3vw; width: 92%; align-items: start; }
+.two-col > * { text-align: left; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2vw; width: 92%; }
+.center { text-align: center; }
+.content { width: 92%; max-width: 1200px; }
+.gap { margin-top: 1.5rem; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 1.2em; text-align: center; }
+.card h3 { font-size: clamp(0.95rem, 1.5vw, 1.2rem); color: #e6edf3; margin-bottom: 0.5rem; }
+.card p { font-size: clamp(0.78rem, 1.15vw, 1.0rem); color: #adbac7; line-height: 1.55; text-align: left; }
+.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5vw; width: 92%; margin-top: 1rem; }
+.stat { text-align: center; }
+.stat .num { font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 800; color: #56d364; }
+.stat .label { font-size: clamp(0.7rem, 1.1vw, 0.95rem); color: #adbac7; margin-top: 0.3rem; }
+code { font-family: 'SF Mono', 'Fira Code', monospace; color: #56d364; background: #161b22; padding: 0.05em 0.4em; border-radius: 4px; font-size: 0.9em; }
+.section-label { display: inline-block; background: #58a6ff; color: #0d1117; font-size: clamp(0.7rem, 1.2vw, 1rem); font-weight: 700; padding: 0.25em 0.75em; border-radius: 20px; margin-bottom: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.progress { position: fixed; bottom: 0; left: 0; height: 3px; background: #58a6ff; transition: width 0.3s; z-index: 100; }
+.counter { position: fixed; bottom: 12px; right: 20px; font-size: 0.85rem; color: #768390; z-index: 100; }
+.notes { display: none; }
+.title-slide h1 { font-size: clamp(1.8rem, 3.8vw, 3.4rem); }
+.title-slide .subtitle { font-size: clamp(0.95rem, 1.6vw, 1.35rem); color: #adbac7; margin-top: 0.5rem; max-width: 85%; line-height: 1.5; }
+.title-slide .author { margin-top: 2rem; font-size: clamp(1rem, 1.5vw, 1.2rem); color: #58a6ff; }
+.title-slide .meta { margin-top: 0.5rem; font-size: clamp(0.8rem, 1.2vw, 0.95rem); color: #768390; text-align: center; line-height: 1.6; }
+.fig-caption { margin-top: 0.8rem; font-size: clamp(0.75rem, 1.1vw, 0.95rem); color: #adbac7; max-width: 88%; text-align: center; line-height: 1.5; }
+.principle-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2vw; width: 92%; margin-top: 1rem; }
+.principle { background: #161b22; border-left: 3px solid #58a6ff; padding: 0.9em 1.1em; border-radius: 4px; }
+.principle h4 { font-size: clamp(0.9rem, 1.4vw, 1.1rem); color: #58a6ff; font-weight: 700; margin-bottom: 0.3em; }
+.principle p { font-size: clamp(0.78rem, 1.15vw, 1rem); color: #adbac7; line-height: 1.5; }
+.talk-handle { position: fixed; bottom: 12px; left: 20px; font-size: 0.85rem; color: #8b949e; z-index: 99; font-family: 'SF Mono', 'Fira Code', monospace; letter-spacing: 0.02em; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- 1. TITLE -->
+<section class="slide title-slide active">
+    <h1>El Futuro de la Biología<br>es <span class="green">Agéntico</span></h1>
+    <div class="subtitle">Tres mecanismos arquitectónicos por los que la especificación cumple los requisitos de calidad clínica que la recuperación de la guía no alcanza</div>
+    <div class="author">Manuel Corpas</div>
+    <div class="meta">
+        Senior Lecturer in Genomics, AI, and Data Science<br>
+        University of Westminster<br>
+        Versión en castellano &middot; benchmark factorial de tres brazos &middot; 2026
+    </div>
+    <div class="notes">
+        Companion deck to the LatinOMICS introductory deck. That deck establishes
+        the framework and the spec-vs-no-spec comparison. This deck unpacks the
+        three-arm comparison (sin spec / recuperación de la guía / con spec
+        SKILL.md) and the three architectural mechanisms that only the contract
+        resolves: ambigüedad (gen, fármaco), traducción (fenotipo to acción),
+        determinismo frente a redistribución. 26,730 evaluations on the locked
+        dataset. TIMING: 1 min.
+    </div>
+</section>
+
+<!-- 2. THE THREE CONDITIONS -->
+<section class="slide">
+    <div class="section-label">Tres formas de hacer responder a un LLM clínico</div>
+    <h2>Tres condiciones, <span class="green">tres mecanismos distintos</span></h2>
+    <p style="max-width:80%; text-align:center; color:#adbac7; margin-bottom:1.2rem;">La pregunta: ¿cómo se compara una especificación versionada frente a las dos formas habituales de aterrizar un LLM en evidencia clínica?</p>
+    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2vw; width: 92%; max-width: 1200px;">
+        <div class="card" style="border-color:#ffa198;">
+            <div style="font-family:'SF Mono',monospace; font-size:clamp(0.7rem,1.05vw,0.85rem); color:#ffa198; letter-spacing:0.08em; margin-bottom:0.4em;">SIN ESPECIFICACIÓN</div>
+            <h3 style="color:#ffa198;">Pregunta libre al modelo</h3>
+            <p>Una consulta en lenguaje natural. Sin contexto auxiliar. Mide el conocimiento previo que el modelo aprendió durante el entrenamiento.</p>
+        </div>
+        <div class="card" style="border-color:#e3b341;">
+            <div style="font-family:'SF Mono',monospace; font-size:clamp(0.7rem,1.05vw,0.85rem); color:#e3b341; letter-spacing:0.08em; margin-bottom:0.4em;">CON LA GUÍA CARGADA</div>
+            <h3 style="color:#e3b341;">Recuperación de la guía CPIC</h3>
+            <p>La consulta se enriquece con fragmentos relevantes recuperados automáticamente de las guías CPIC. La forma habitual de "aterrizar" un modelo en evidencia clínica.</p>
+        </div>
+        <div class="card" style="border-color:#56d364;">
+            <div style="font-family:'SF Mono',monospace; font-size:clamp(0.7rem,1.05vw,0.85rem); color:#56d364; letter-spacing:0.08em; margin-bottom:0.4em;">CON ESPECIFICACIÓN</div>
+            <h3 style="color:#56d364;">Contrato declarativo ClawBio</h3>
+            <p>La consulta va acompañada de un <code>SKILL.md</code> versionado que codifica el mapeo (genotipo, fenotipo, fármaco) &rarr; acción. El modelo ejecuta el contrato, no genera la respuesta.</p>
+        </div>
+    </div>
+    <p class="gap" style="max-width:80%; text-align:center; font-size:clamp(0.95rem,1.45vw,1.2rem);">Tres condiciones, tres mecanismos. <span class="green">No son puntos en un mismo gradiente de exactitud.</span></p>
+    <div class="notes">
+        Set up the empirical question. The middle condition is the standard
+        recipe in clinical LLM applications: load relevant guideline text into
+        the prompt context. We want to know whether it meets the clinical-grade
+        requirements (determinism, auditability, traceability, population
+        invariance) or whether the contract mechanism adds something distinct.
+        TIMING: 1.5 min.
+    </div>
+</section>
+
+<!-- 3. THE CLINICAL-GRADE BAR -->
+<section class="slide">
+    <div class="section-label">El listón clínico</div>
+    <h2>Cuatro requisitos no negociables</h2>
+    <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1.2vw; width:92%; max-width:1200px; margin-top:0.6rem;">
+        <div class="card" style="border-color:#58a6ff;">
+            <h3 class="accent">Determinismo</h3>
+            <p>La misma entrada produce la misma salida en cada ejecución. Sin deriva estocástica.</p>
+        </div>
+        <div class="card" style="border-color:#58a6ff;">
+            <h3 class="accent">Auditabilidad</h3>
+            <p>La salida se puede rastrear hasta una decisión humana concreta, no a la distribución del entrenamiento.</p>
+        </div>
+        <div class="card" style="border-color:#58a6ff;">
+            <h3 class="accent">Trazabilidad</h3>
+            <p>Las salidas se pueden vincular a versiones específicas y firmadas de los componentes.</p>
+        </div>
+        <div class="card" style="border-color:#58a6ff;">
+            <h3 class="accent">Invariancia poblacional</h3>
+            <p>El rendimiento no degrada en poblaciones infrarrepresentadas en el entrenamiento.</p>
+        </div>
+    </div>
+    <p class="gap" style="max-width:80%; text-align:center; font-size:clamp(0.95rem,1.45vw,1.2rem);">Si una técnica de aterrizaje clínico no cumple los cuatro, <span class="red">no está lista para el paciente</span>, por bien que mida en exactitud media.</p>
+    <p class="small muted" style="margin-top:1rem; max-width:85%; text-align:center;">Corpas, Fatumo, Guio. <em>Cell Genomics</em> (en revisión), 2026 &middot; Tabla 1.</p>
+    <div class="notes">
+        These four are the prerequisites the Perspective lays out. The next slides
+        test which conditions meet which prerequisites. Spoiler: RAG meets none of
+        the four cleanly, and the failure modes are architectural rather than
+        model-specific. TIMING: 1 min.
+    </div>
+</section>
+
+<!-- 4. FACTORIAL DESIGN -->
+<section class="slide">
+    <div class="section-label">Diseño experimental</div>
+    <h2><span class="green">26.730</span> evaluaciones: factorial de tres brazos</h2>
+    <svg viewBox="0 0 1160 200" style="width: 95%; max-width: 1300px; height: auto; max-height: 50vh; display: block; margin: 1.4rem auto 0.8rem;" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="40" width="155" height="120" rx="10" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+        <text x="87" y="92" text-anchor="middle" fill="#58a6ff" font-family="Segoe UI, sans-serif" font-size="42" font-weight="800">9</text>
+        <text x="87" y="120" text-anchor="middle" fill="#adbac7" font-family="Segoe UI, sans-serif" font-size="15">LLM de frontera</text>
+        <text x="87" y="142" text-anchor="middle" fill="#6e7681" font-family="Segoe UI, sans-serif" font-size="13">5 proveedores</text>
+        <text x="184" y="108" text-anchor="middle" fill="#adbac7" font-family="Segoe UI, sans-serif" font-size="32" font-weight="600">&#xD7;</text>
+        <rect x="205" y="40" width="155" height="120" rx="10" fill="#161b22" stroke="#56d364" stroke-width="2"/>
+        <text x="282" y="92" text-anchor="middle" fill="#56d364" font-family="Segoe UI, sans-serif" font-size="42" font-weight="800">110</text>
+        <text x="282" y="120" text-anchor="middle" fill="#adbac7" font-family="Segoe UI, sans-serif" font-size="15">casos CPIC Nivel A</text>
+        <text x="282" y="142" text-anchor="middle" fill="#6e7681" font-family="Segoe UI, sans-serif" font-size="13">21 marcadores &middot; 35 pares gen-fármaco</text>
+        <text x="379" y="108" text-anchor="middle" fill="#adbac7" font-family="Segoe UI, sans-serif" font-size="32" font-weight="600">&#xD7;</text>
+        <rect x="400" y="40" width="155" height="120" rx="10" fill="#161b22" stroke="#e3b341" stroke-width="2"/>
+        <text x="477" y="92" text-anchor="middle" fill="#e3b341" font-family="Segoe UI, sans-serif" font-size="42" font-weight="800">3</text>
+        <text x="477" y="120" text-anchor="middle" fill="#adbac7" font-family="Segoe UI, sans-serif" font-size="15">poblaciones</text>
+        <text x="477" y="142" text-anchor="middle" fill="#6e7681" font-family="Segoe UI, sans-serif" font-size="13">EUR / AMR / AFR</text>
+        <text x="574" y="108" text-anchor="middle" fill="#adbac7" font-family="Segoe UI, sans-serif" font-size="32" font-weight="600">&#xD7;</text>
+        <rect x="595" y="40" width="155" height="120" rx="10" fill="#161b22" stroke="#d2a8ff" stroke-width="2"/>
+        <text x="672" y="92" text-anchor="middle" fill="#d2a8ff" font-family="Segoe UI, sans-serif" font-size="42" font-weight="800">3</text>
+        <text x="672" y="120" text-anchor="middle" fill="#adbac7" font-family="Segoe UI, sans-serif" font-size="15">condiciones</text>
+        <text x="672" y="142" text-anchor="middle" fill="#6e7681" font-family="Segoe UI, sans-serif" font-size="13">sin spec / con guía / con spec</text>
+        <text x="769" y="108" text-anchor="middle" fill="#adbac7" font-family="Segoe UI, sans-serif" font-size="32" font-weight="600">&#xD7;</text>
+        <rect x="790" y="40" width="155" height="120" rx="10" fill="#161b22" stroke="#ffa198" stroke-width="2"/>
+        <text x="867" y="92" text-anchor="middle" fill="#ffa198" font-family="Segoe UI, sans-serif" font-size="42" font-weight="800">3</text>
+        <text x="867" y="120" text-anchor="middle" fill="#adbac7" font-family="Segoe UI, sans-serif" font-size="15">ejecuciones independientes</text>
+        <text x="867" y="142" text-anchor="middle" fill="#6e7681" font-family="Segoe UI, sans-serif" font-size="13">test estocástico</text>
+        <text x="964" y="108" text-anchor="middle" fill="#adbac7" font-family="Segoe UI, sans-serif" font-size="32" font-weight="600">=</text>
+        <rect x="985" y="20" width="155" height="160" rx="14" fill="#56d364" fill-opacity="0.14" stroke="#56d364" stroke-width="3"/>
+        <text x="1062" y="98" text-anchor="middle" fill="#56d364" font-family="Segoe UI, sans-serif" font-size="40" font-weight="800">26.730</text>
+        <text x="1062" y="128" text-anchor="middle" fill="#adbac7" font-family="Segoe UI, sans-serif" font-size="15">total</text>
+        <text x="1062" y="148" text-anchor="middle" fill="#6e7681" font-family="Segoe UI, sans-serif" font-size="13">evaluaciones</text>
+        <text x="565" y="20" text-anchor="middle" fill="#adbac7" font-family="Segoe UI, sans-serif" font-size="14" font-weight="600" letter-spacing="0.08em">DISEÑO FACTORIAL DE TRES BRAZOS</text>
+        <text x="565" y="190" text-anchor="middle" fill="#6e7681" font-family="Segoe UI, sans-serif" font-size="13" font-style="italic">Cada celda evaluada en tres dimensiones: fenotipo (A1), recomendación de fármaco (A2), acción de seguridad letal (A3).</text>
+    </svg>
+    <p style="max-width:90%; margin-top:0.8rem; text-align:center; color:#adbac7; font-size:clamp(0.85rem,1.3vw,1.1rem);"><strong style="color:#e6edf3;">Modelos:</strong> Claude Opus 4, Sonnet 4 &middot; GPT-5.2, GPT-4.1, o3, o4-mini &middot; Gemini 2.5 Flash &middot; DeepSeek V3 &middot; Mistral Large 2.</p>
+    <p class="small muted" style="margin-top:0.8rem; text-align:center; max-width:90%;">Corpus de guías construido a partir del bundle PharmGKB de las guías CPIC, dividido por gen. <code style="background:none; padding:0; color:#56d364;">pharmgx-reporter</code>, ClawBio v0.5.0.</p>
+    <div class="notes">
+        Three-arm factorial. The guideline corpus is the PharmGKB bundle of CPIC
+        guidelines, chunked by gene. Each (model, case, population) cell is
+        run three times per condition. The locked dataset is 26,730
+        evaluations. TIMING: 1 min.
+    </div>
+</section>
+
+<!-- 5. HEADLINE: THE ANOMALY -->
+<section class="slide">
+    <div class="section-label">Resultado principal</div>
+    <h2>Cargar la guía mejora el fenotipo, pero <span class="red">aumenta los errores letales</span></h2>
+    <svg viewBox="0 0 1100 280" style="width:90%; max-width:1100px; height:auto; max-height:50vh; display:block; margin:0.8rem auto 0.4rem;" xmlns="http://www.w3.org/2000/svg">
+        <text x="550" y="22" text-anchor="middle" fill="#adbac7" font-family="Segoe UI, sans-serif" font-size="13" font-weight="600" letter-spacing="0.08em">PROMEDIOS AGREGADOS</text>
+        <!-- Group: A1 -->
+        <text x="120" y="60" text-anchor="middle" fill="#adbac7" font-size="14" font-weight="700">A1 (fenotipo)</text>
+        <rect x="40" y="80" width="50" height="80" fill="#ffa198"/><text x="65" y="175" text-anchor="middle" fill="#adbac7" font-size="13">80,6%</text>
+        <rect x="100" y="65" width="50" height="95" fill="#e3b341"/><text x="125" y="175" text-anchor="middle" fill="#adbac7" font-size="13">89,5%</text>
+        <rect x="160" y="50" width="50" height="110" fill="#56d364"/><text x="185" y="175" text-anchor="middle" fill="#adbac7" font-size="13">100%</text>
+        <!-- Group: A2 -->
+        <text x="400" y="60" text-anchor="middle" fill="#adbac7" font-size="14" font-weight="700">A2 (recomendación)</text>
+        <rect x="310" y="100" width="50" height="60" fill="#ffa198"/><text x="335" y="175" text-anchor="middle" fill="#adbac7" font-size="13">61,6%</text>
+        <rect x="370" y="105" width="50" height="55" fill="#e3b341"/><text x="395" y="175" text-anchor="middle" fill="#adbac7" font-size="13">53,0%</text>
+        <rect x="430" y="50" width="50" height="110" fill="#56d364"/><text x="455" y="175" text-anchor="middle" fill="#adbac7" font-size="13">100%</text>
+        <!-- Group: A3 -->
+        <text x="680" y="60" text-anchor="middle" fill="#adbac7" font-size="14" font-weight="700">A3 (seguridad)</text>
+        <rect x="600" y="55" width="50" height="105" fill="#ffa198"/><text x="625" y="175" text-anchor="middle" fill="#adbac7" font-size="13">96,9%</text>
+        <rect x="660" y="58" width="50" height="102" fill="#e3b341"/><text x="685" y="175" text-anchor="middle" fill="#adbac7" font-size="13">95,3%</text>
+        <rect x="720" y="50" width="50" height="110" fill="#56d364"/><text x="745" y="175" text-anchor="middle" fill="#adbac7" font-size="13">100%</text>
+        <!-- Lethal A3 errors panel -->
+        <rect x="850" y="60" width="240" height="180" rx="10" fill="#161b22" stroke="#ffa198" stroke-width="2"/>
+        <text x="970" y="82" text-anchor="middle" fill="#adbac7" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" letter-spacing="0.06em">ERRORES LETALES A3</text>
+        <text x="970" y="100" text-anchor="middle" fill="#6e7681" font-family="Segoe UI, sans-serif" font-size="11">clase letal (~1.100 celdas)</text>
+        <text x="900" y="140" text-anchor="middle" fill="#ffa198" font-family="Segoe UI, sans-serif" font-size="28" font-weight="800">270</text>
+        <text x="900" y="160" text-anchor="middle" fill="#6e7681" font-size="11">sin spec</text>
+        <text x="970" y="165" text-anchor="middle" fill="#adbac7" font-size="20" font-weight="600">&rarr;</text>
+        <text x="1040" y="140" text-anchor="middle" fill="#ffa198" font-family="Segoe UI, sans-serif" font-size="28" font-weight="800">414</text>
+        <text x="1040" y="160" text-anchor="middle" fill="#6e7681" font-size="11">con guía</text>
+        <text x="970" y="195" text-anchor="middle" fill="#adbac7" font-size="20" font-weight="600">&darr;</text>
+        <text x="970" y="220" text-anchor="middle" fill="#56d364" font-family="Segoe UI, sans-serif" font-size="32" font-weight="800">0</text>
+        <text x="970" y="238" text-anchor="middle" fill="#6e7681" font-size="11">con spec</text>
+        <!-- Legend -->
+        <rect x="40" y="240" width="14" height="14" fill="#ffa198"/><text x="60" y="252" fill="#adbac7" font-size="12">sin spec</text>
+        <rect x="140" y="240" width="14" height="14" fill="#e3b341"/><text x="160" y="252" fill="#adbac7" font-size="12">con guía cargada</text>
+        <rect x="290" y="240" width="14" height="14" fill="#56d364"/><text x="310" y="252" fill="#adbac7" font-size="12">con spec</text>
+    </svg>
+    <p style="max-width:85%; text-align:center; margin-top:0.8rem; font-size:clamp(0.95rem,1.45vw,1.2rem);">Cargar la guía cierra el <span class="green">46%</span> de la brecha de fenotipo, pero <span class="red">regresiona la recomendación en 8,6 puntos</span> y aumenta los errores letales un 53%. La especificación cierra todas las brechas a la vez.</p>
+    <div class="notes">
+        The central anomaly. Higher A1 should imply higher A3, but it doesn't.
+        A2 regresses outright. The rest of the deck explains why: loading the
+        guideline into the prompt introduces three distinct architectural
+        problems that the no_spec baseline does not have, and only the
+        contract resolves all three. TIMING: 1.5 min.
+    </div>
+</section>
+
+<!-- 6. MECHANISM 1: DRUG-DISAMBIGUATION -->
+<section class="slide">
+    <div class="section-label">Mecanismo 1: el contrato resuelve la ambigüedad (gen, fármaco)</div>
+    <h2>Cargar la guía no basta: <span class="red">el fragmento contiene varios fármacos</span></h2>
+    <p style="max-width:88%; text-align:center; color:#adbac7; margin-bottom:1rem;">Las guías CPIC se organizan por gen, no por par (gen, fármaco). Un fragmento recuperado para CYP2D6 contiene recomendaciones para codeína, tamoxifeno, ondansetrón, paroxetina y amitriptilina, todas a la vez. El modelo elige el primer fármaco del fragmento, no el que se preguntó. El contrato declara el mapeo (gen, fármaco) &rarr; acción uno a uno: la ambigüedad desaparece.</p>
+    <div class="stat-grid">
+        <div class="stat"><div class="num" style="color:#ffa198">973</div><div class="label">Celdas con guía cargada<br>donde A2 baja</div></div>
+        <div class="stat"><div class="num" style="color:#ffa198">470</div><div class="label">Respuesta sobre<br>otro fármaco (48,3%)</div></div>
+        <div class="stat"><div class="num" style="color:#ffa198">922</div><div class="label">Confusión estructural<br>combinada (94,8%)</div></div>
+        <div class="stat"><div class="num" style="color:#56d364">51</div><div class="label">Equivalencia fraseológica<br>del scorer (5,2%)</div></div>
+    </div>
+    <p class="gap" style="max-width:85%; text-align:center; font-size:clamp(0.95rem,1.45vw,1.2rem);">El 94,8% de las regresiones son <span class="red">confusión estructural del fragmento</span>, no desacuerdo clínico. Es un problema del esquema documental, no del modelo, y sólo el contrato lo resuelve.</p>
+    <p class="small muted" style="margin-top:0.6rem; text-align:center; max-width:90%;">Clasificador 3 ejecuciones bloqueado &middot; <code style="background:none; padding:0; color:#56d364;">33-classify-a2-regressions.py</code></p>
+    <div class="notes">
+        470 of 973 = 48.3% drug substitution. Combined structural confusion
+        (drug sub + wrong direction + other) = 922/973 = 94.8%. Only 5.2% is
+        scorer phrasing miss; the regression is real and architectural.
+        TIMING: 1.5 min.
+    </div>
+</section>
+
+<!-- 7. WORKED EXAMPLE -->
+<section class="slide">
+    <div class="section-label">Ejemplo concreto</div>
+    <h2>CYP2D6 / tamoxifeno (IM, EUR) &middot; <span class="accent">Claude Sonnet 4</span> &middot; con la guía cargada</h2>
+    <div style="background:#fbf2ee; border:1.5px solid #7a3a32; border-radius:12px; padding:1.4em 1.8em; width:90%; max-width:1100px; color:#5a2820;">
+        <div style="margin-bottom:1em;">
+            <div style="font-weight:700; color:#333; margin-bottom:0.2em;">Fármaco consultado:</div>
+            <div style="font-family:'SF Mono',monospace; color:#333;">tamoxifeno</div>
+        </div>
+        <div style="margin-bottom:1em;">
+            <div style="font-weight:700; color:#2a5a2a; margin-bottom:0.2em;">Verdad CPIC:</div>
+            <div style="font-family:'SF Mono',monospace; color:#2a5a2a; font-size:clamp(0.85rem,1.3vw,1.05rem);">tamoxifen: consider higher dose or alternative; reduced endoxifen formation</div>
+        </div>
+        <div style="margin-bottom:1em;">
+            <div style="font-weight:700; color:#7a3a32; margin-bottom:0.2em;">Respuesta del modelo:</div>
+            <div style="font-family:'SF Mono',monospace; color:#7a3a32; font-size:clamp(0.85rem,1.3vw,1.05rem);">codeine: Use codeine label recommended age- or weight-specific dosing</div>
+        </div>
+        <div style="background:rgba(122,58,50,0.08); padding:0.8em 1em; border-radius:6px; margin-top:0.6em;">
+            <div style="font-weight:700; color:#333; margin-bottom:0.4em;">Mecanismo:</div>
+            <p style="text-align:left; color:#333; font-size:clamp(0.85rem,1.3vw,1.05rem);">El fragmento recuperado para CYP2D6 lleva recomendaciones para codeína, tamoxifeno, ondansetrón, paroxetina y amitriptilina. El modelo eligió la recomendación del primer fármaco del fragmento (codeína) en lugar del consultado (tamoxifeno). A2 = 0 porque la respuesta no es sobre el fármaco preguntado.</p>
+        </div>
+    </div>
+    <p class="gap" style="max-width:80%; text-align:center; font-size:clamp(0.9rem,1.4vw,1.15rem);">Mismo modelo. Misma consulta. <span class="red">El fragmento decide el fármaco que el modelo responde, no la pregunta del usuario.</span></p>
+    <div class="notes">
+        Real cpic_rag response on the cyp2d6_tamox_im case under Claude Sonnet 4
+        in the EUR population. Pulled verbatim from
+        v3_three_arm_a2_regression_classified.csv. TIMING: 1 min.
+    </div>
+</section>
+
+<!-- 8. PER-GENE PATTERN -->
+<section class="slide">
+    <div class="section-label">Distribución por gen</div>
+    <h2>Cargar la guía ayuda en algunos genes, <span class="red">perjudica catastróficamente en otros</span></h2>
+    <div class="two-col" style="margin-top:0.6rem;">
+        <div>
+            <h3 style="text-align:left; color:#ffa198;">Genes donde cargar la guía perjudica</h3>
+            <ul style="font-size:clamp(0.9rem,1.4vw,1.15rem);">
+                <li><strong>IFNL3:</strong> 100% respuestas sobre otro fármaco</li>
+                <li><strong>RYR1:</strong> 100% sobre otro fármaco</li>
+                <li><strong>NUDT15:</strong> 100% sobre otro fármaco</li>
+                <li><strong>CYP2C19:</strong> 80% sobre otro fármaco (107/130 regresiones)</li>
+                <li><strong>CYP2D6:</strong> 56% sobre otro fármaco</li>
+                <li><strong>CYP2C9, UGT1A1, SLCO1B1:</strong> entre 47% y 55%</li>
+            </ul>
+            <p class="small muted" style="text-align:left; margin-top:0.5em;">Genes con muchos fármacos por fragmento en la guía CPIC.</p>
+        </div>
+        <div>
+            <h3 style="text-align:left; color:#56d364;">Genes donde cargar la guía ayuda</h3>
+            <ul style="font-size:clamp(0.9rem,1.4vw,1.15rem);">
+                <li><strong>HLA-A*31:01:</strong> mejora clara</li>
+                <li><strong>HLA-B*15:02:</strong> mejora clara</li>
+                <li><strong>HLA-B*58:01:</strong> sube fenotipo y acción</li>
+                <li><strong>CYP3A5:</strong> mejora marginal</li>
+            </ul>
+            <p class="small muted" style="text-align:left; margin-top:0.5em;">Genes con un único fármaco por entrada CPIC.</p>
+        </div>
+    </div>
+    <p class="gap" style="max-width:85%; text-align:center; font-size:clamp(0.95rem,1.45vw,1.2rem);">La tasa de error por gen sigue la <span class="highlight">multiplicidad de fármacos del fragmento CPIC</span>: es una propiedad del documento y del esquema de recuperación, no del modelo.</p>
+    <div class="notes">
+        The pattern is mechanical: single-drug HLA loci show negligible
+        substitution; multi-drug loci show 48-100%. Consistent across all 9
+        models, indicating an index property not a model property. TIMING: 1 min.
+    </div>
+</section>
+
+<!-- 9. MECHANISM 2: PHENOTYPE-TO-ACTION TRANSLATION -->
+<section class="slide">
+    <div class="section-label">Mecanismo 2: el contrato impone (fenotipo &rarr; acción)</div>
+    <h2>El modelo sabe el fenotipo pero <span class="red">no emite la acción correcta</span></h2>
+    <p style="max-width:88%; text-align:center; color:#adbac7; margin-bottom:1rem;">En tres alelos HLA de alto riesgo, cargar la guía hace que el modelo identifique el fenotipo perfectamente, pero no emita la recomendación canónica AVOID. El fragmento recuperado lleva la fraseología clínica suavizada ("contraindicado", "probar antes de prescribir", "usar con cautela") y el modelo la copia sin comprometerse con la acción categórica.</p>
+    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1.2vw; width:92%; max-width:1100px;">
+        <div class="card" style="border-color:#7a2820;">
+            <h3 style="color:#7a2820;">HLA-B*57:01 / abacavir</h3>
+            <p style="text-align:center;">A1 = <span class="green">1,000</span><br>A3 = <span class="red">0,111</span></p>
+            <p style="font-size:0.85em; color:#6e7681; text-align:center;">Fenotipo correcto en cada celda. Acción AVOID emitida sólo en el 11% de los casos letales.</p>
+        </div>
+        <div class="card" style="border-color:#7a2820;">
+            <h3 style="color:#7a2820;">HLA-B*15:02 / carbamazepina</h3>
+            <p style="text-align:center;">A1 = <span class="green">0,994</span><br>A3 = <span class="red">0,130</span></p>
+            <p style="font-size:0.85em; color:#6e7681; text-align:center;">87% de los casos letales reciben una recomendación distinta a AVOID, pese a identificar correctamente el riesgo SJS.</p>
+        </div>
+        <div class="card" style="border-color:#7a2820;">
+            <h3 style="color:#7a2820;">HLA-A*31:01 / carbamazepina</h3>
+            <p style="text-align:center;">A1 = <span class="green">1,000</span><br>A3 = <span class="red">0,321</span></p>
+            <p style="font-size:0.85em; color:#6e7681; text-align:center;">68% de los casos letales sin AVOID. El fenotipo y la acción están desacoplados.</p>
+        </div>
+    </div>
+    <p class="gap" style="max-width:85%; text-align:center; font-size:clamp(0.95rem,1.45vw,1.2rem);">Conocer la respuesta correcta <span class="red">no equivale</span> a emitirla. Cargar la guía aterriza la información; sólo el contrato impone la traducción (fenotipo &rarr; acción).</p>
+    <div class="notes">
+        Three loci showing the canonical info-without-action pattern. The
+        HLA-B*58:01 locus, in contrast, improves cleanly when the guideline is
+        loaded (A1 0.988 / A3 1.000); the failure is locus-specific, depending
+        on how the CPIC chunk phrases the action. TIMING: 1.5 min.
+    </div>
+</section>
+
+<!-- 10. WHERE THE TRANSLATION FAILS -->
+<section class="slide">
+    <div class="section-label">El paso que falla</div>
+    <h2>El contrato cierra el bucle (fenotipo &rarr; acción)</h2>
+    <svg viewBox="0 0 1100 280" style="width:90%; max-width:1100px; height:auto; max-height:50vh; display:block; margin:0.6rem auto 0.4rem;" xmlns="http://www.w3.org/2000/svg">
+        <text x="550" y="22" text-anchor="middle" fill="#adbac7" font-size="13" font-weight="600" letter-spacing="0.08em">EL EJE FENOTIPO &rarr; ACCIÓN EN LOS ALELOS HLA LETALES</text>
+        <!-- no_spec -->
+        <rect x="40" y="60" width="300" height="180" rx="12" fill="#161b22" stroke="#ffa198" stroke-width="2"/>
+        <text x="190" y="92" text-anchor="middle" fill="#ffa198" font-size="14" font-weight="700" letter-spacing="0.06em">SIN SPEC</text>
+        <text x="190" y="138" text-anchor="middle" fill="#adbac7" font-size="13">Fenotipo: priors del entrenamiento</text>
+        <text x="190" y="160" text-anchor="middle" fill="#adbac7" font-size="13">Acción: priors del entrenamiento</text>
+        <text x="190" y="200" text-anchor="middle" fill="#ffa198" font-size="36" font-weight="800">157 / 826</text>
+        <text x="190" y="222" text-anchor="middle" fill="#6e7681" font-size="12">desalineadas (A3=1 con A1&lt;1)</text>
+        <!-- guideline-loaded -->
+        <rect x="380" y="60" width="300" height="180" rx="12" fill="#161b22" stroke="#e3b341" stroke-width="2"/>
+        <text x="530" y="92" text-anchor="middle" fill="#e3b341" font-size="14" font-weight="700" letter-spacing="0.06em">CON LA GUÍA CARGADA</text>
+        <text x="530" y="138" text-anchor="middle" fill="#adbac7" font-size="13">Fenotipo: fragmento recuperado &check;</text>
+        <text x="530" y="160" text-anchor="middle" fill="#adbac7" font-size="13">Acción: fraseología del fragmento</text>
+        <text x="530" y="200" text-anchor="middle" fill="#e3b341" font-size="36" font-weight="800">82 / 716</text>
+        <text x="530" y="222" text-anchor="middle" fill="#6e7681" font-size="12">desalineadas (A3=1 con A1&lt;1)</text>
+        <!-- with_spec -->
+        <rect x="720" y="60" width="300" height="180" rx="12" fill="#161b22" stroke="#56d364" stroke-width="3"/>
+        <text x="870" y="92" text-anchor="middle" fill="#56d364" font-size="14" font-weight="700" letter-spacing="0.06em">CON SPEC</text>
+        <text x="870" y="138" text-anchor="middle" fill="#adbac7" font-size="13">Fenotipo: contrato &check;</text>
+        <text x="870" y="160" text-anchor="middle" fill="#adbac7" font-size="13">Acción: contrato &check;</text>
+        <text x="870" y="200" text-anchor="middle" fill="#56d364" font-size="36" font-weight="800">0 / 1.134</text>
+        <text x="870" y="222" text-anchor="middle" fill="#6e7681" font-size="12">desalineadas</text>
+        <text x="550" y="270" text-anchor="middle" fill="#6e7681" font-size="12" font-style="italic">El SKILL.md codifica la regla: si PHENOTYPE = Positive, entonces DRUG = AVOID. Sin paso de generación libre.</text>
+    </svg>
+    <p style="max-width:85%; text-align:center; margin-top:0.4rem; font-size:clamp(0.95rem,1.45vw,1.2rem);">Las tres condiciones ecoan su fuente: el modelo libre ecoa el entrenamiento, el modelo con la guía cargada ecoa el fragmento, el modelo con spec ejecuta el contrato. Sólo el contrato <span class="green">impone</span> la traducción.</p>
+    <div class="notes">
+        Within lethal-class A3 = 1 cells, free-prompted has 19.0% misaligned
+        (action correct but phenotype wrong); RAG halves to 11.5%; spec
+        eliminates to 0%. The mechanism is that the contract encodes both A1
+        and the A1-to-A3 mapping deterministically. TIMING: 1 min.
+    </div>
+</section>
+
+<!-- 11. MECHANISM 3: DETERMINISTIC EXECUTION -->
+<section class="slide">
+    <div class="section-label">Mecanismo 3: el contrato no redistribuye errores, los elimina</div>
+    <h2>Cargar la guía <span class="red">redistribuye</span> los errores, no los reduce</h2>
+    <p style="max-width:88%; text-align:center; color:#adbac7; margin-bottom:1rem;">Si partimos las celdas letales en cuatro cuadrantes según el cruce de fenotipo y acción, cargar la guía <em>no</em> elimina errores: los mueve. La métrica agregada de seguridad lo esconde.</p>
+    <svg viewBox="0 0 1000 280" style="width:90%; max-width:1000px; height:auto; max-height:48vh; display:block; margin:0.6rem auto 0.4rem;" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sin spec stacked -->
+        <text x="150" y="30" text-anchor="middle" fill="#adbac7" font-size="13" font-weight="700">SIN SPEC (n=1.096)</text>
+        <rect x="50" y="50" width="200" height="120" fill="#2a6a2a"/><text x="150" y="115" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Q1: 669 (61%)</text>
+        <rect x="50" y="170" width="200" height="30" fill="#c1a04a"/><text x="150" y="190" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Q2: 157 (14%)</text>
+        <rect x="50" y="200" width="200" height="22" fill="#c47a3a"/><text x="150" y="218" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Q3: 122 (11%)</text>
+        <rect x="50" y="222" width="200" height="28" fill="#8b2e26"/><text x="150" y="241" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Q4: 148 (14%)</text>
+        <!-- RAG stacked -->
+        <text x="500" y="30" text-anchor="middle" fill="#adbac7" font-size="13" font-weight="700">CON LA GUÍA CARGADA (n=1.130)</text>
+        <rect x="400" y="50" width="200" height="112" fill="#2a6a2a"/><text x="500" y="110" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Q1: 634 (56%)</text>
+        <rect x="400" y="162" width="200" height="14" fill="#c1a04a"/><text x="500" y="173" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Q2: 82 (7%)</text>
+        <rect x="400" y="176" width="200" height="60" fill="#c47a3a"/><text x="500" y="210" text-anchor="middle" fill="#fff" font-size="14" font-weight="800">Q3: 341 (30%)</text>
+        <rect x="400" y="236" width="200" height="14" fill="#8b2e26"/><text x="500" y="247" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Q4: 73 (6%)</text>
+        <!-- With spec stacked -->
+        <text x="850" y="30" text-anchor="middle" fill="#adbac7" font-size="13" font-weight="700">CON SPEC (n=1.134)</text>
+        <rect x="750" y="50" width="200" height="200" fill="#2a6a2a"/><text x="850" y="155" text-anchor="middle" fill="#fff" font-size="16" font-weight="800">Q1: 1.134 (100%)</text>
+        <!-- Legend below -->
+        <rect x="20" y="262" width="14" height="14" fill="#2a6a2a"/><text x="40" y="274" fill="#adbac7" font-size="11">Q1 correcto alineado</text>
+        <rect x="200" y="262" width="14" height="14" fill="#c1a04a"/><text x="220" y="274" fill="#adbac7" font-size="11">Q2 acción sin información</text>
+        <rect x="420" y="262" width="14" height="14" fill="#c47a3a"/><text x="440" y="274" fill="#adbac7" font-size="11">Q3 información sin acción</text>
+        <rect x="640" y="262" width="14" height="14" fill="#8b2e26"/><text x="660" y="274" fill="#adbac7" font-size="11">Q4 ambos incorrectos</text>
+    </svg>
+    <p class="gap" style="max-width:85%; text-align:center; font-size:clamp(0.95rem,1.45vw,1.2rem);">Q2 cae a la mitad. Q4 cae a la mitad. <span class="red">Q3 se triplica</span> (122 &rarr; 341). El total de errores letales A3 sube de 270 a 414.</p>
+    <div class="notes">
+        Key insight from the 4-quadrant analysis. RAG appears to halve some
+        error modes but actually triples the information-without-action
+        quadrant. The aggregate A3 metric hides this redistribution. Only spec
+        collapses all four quadrants into Q1. TIMING: 1.5 min.
+    </div>
+</section>
+
+<!-- 12. WHY SPEC IS DIFFERENT -->
+<section class="slide">
+    <div class="section-label">Por qué el contrato es distinto</div>
+    <h2>Las tres condiciones <span class="accent">ecoan</span> su fuente</h2>
+    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1.5vw; width:92%; max-width:1200px; margin-top:0.6rem;">
+        <div class="card" style="border-color:#ffa198;">
+            <div style="font-family:'SF Mono',monospace; font-size:0.8rem; color:#ffa198; letter-spacing:0.08em; margin-bottom:0.4em;">SIN ESPECIFICACIÓN</div>
+            <h3 style="color:#ffa198;">Eco del entrenamiento</h3>
+            <p>El modelo recurre al prior que tenga sobre el par (gen, fármaco) concreto. Funciona para los pares más representados; falla en silencio para los menos.</p>
+        </div>
+        <div class="card" style="border-color:#e3b341;">
+            <div style="font-family:'SF Mono',monospace; font-size:0.8rem; color:#e3b341; letter-spacing:0.08em; margin-bottom:0.4em;">CON LA GUÍA CARGADA</div>
+            <h3 style="color:#e3b341;">Eco del fragmento</h3>
+            <p>El modelo ecoa la fraseología natural del fragmento recuperado, incluida la ambigüedad multi-fármaco y el suavizado prescriptivo.</p>
+        </div>
+        <div class="card" style="border-color:#56d364;">
+            <div style="font-family:'SF Mono',monospace; font-size:0.8rem; color:#56d364; letter-spacing:0.08em; margin-bottom:0.4em;">CON ESPECIFICACIÓN</div>
+            <h3 style="color:#56d364;">Ejecución del contrato</h3>
+            <p>El modelo ejecuta el mapeo declarado (genotipo, fenotipo, fármaco) &rarr; acción. La traducción se resuelve en la spec, no en el modelo.</p>
+        </div>
+    </div>
+    <p class="gap" style="max-width:85%; text-align:center; font-size:clamp(0.95rem,1.45vw,1.2rem);">De las tres, sólo el contrato impone un mapeo determinista (fenotipo, acción). Es la diferencia entre <span class="muted">conocer la respuesta correcta</span> y <span class="green">emitirla con certeza</span>.</p>
+    <div class="notes">
+        This is the central interpretive frame for the deck. All three modes
+        echo a source; the choice of source determines what can be audited.
+        Training distribution is unauditable; retrieved chunks are partially
+        auditable; declared contracts are fully auditable. TIMING: 1 min.
+    </div>
+</section>
+
+<!-- 13. ADVERSARIAL VALIDATION -->
+<section class="slide">
+    <div class="section-label">Validación adversaria</div>
+    <h2>Confirmación: <span class="red">45 / 45</span> ecoan la spec corrupta</h2>
+    <p style="max-width:88%; text-align:center; color:#adbac7; margin-bottom:1rem;">Corrompimos deliberadamente el SKILL.md para cinco casos letales: PHENOTYPE de "Poor Metaboliser" a "Normal Metaboliser"; DRUG de "AVOID" a "standard dosing". Tres LLM de frontera (Claude Opus 4, DeepSeek V3, GPT-5.2), tres ejecuciones cada uno = 45 llamadas.</p>
+    <div class="stat-grid">
+        <div class="stat"><div class="num" style="color:#ffa198">43</div><div class="label">Ecos verbatim<br>de la spec corrupta</div></div>
+        <div class="stat"><div class="num" style="color:#e3b341">2</div><div class="label">Con hedging,<br>todavía ecos en los campos clave</div></div>
+        <div class="stat"><div class="num" style="color:#56d364">0</div><div class="label">Anulaciones<br>hacia la verdad CPIC</div></div>
+        <div class="stat"><div class="num" style="color:#56d364">135/135</div><div class="label">Spec intacta<br>A3 = 1,0 en cada celda</div></div>
+    </div>
+    <p class="gap" style="max-width:85%; text-align:center; font-size:clamp(0.95rem,1.45vw,1.2rem);">El techo del 100% bajo spec refleja <span class="green">ejecución del contrato</span>, no conocimiento previo del modelo. Mismo modelo, mismo prompt, distinta spec, distinta salida.</p>
+    <p class="small muted" style="margin-top:0.6rem; text-align:center; max-width:90%;">Corolario de seguridad: una spec defectuosa propaga al output. La autoría de la spec es una operación crítica para la seguridad clínica, sometida a las mismas disciplinas de revisión, control de versiones y test de regresión que cualquier software clínico.</p>
+    <div class="notes">
+        Adversarial validation slide. Establishes that the with_spec ceiling is
+        contract execution, not coincident model knowledge. The flip side:
+        defective specs propagate to outputs, so spec authoring is itself
+        safety-critical. TIMING: 1 min.
+    </div>
+</section>
+
+<!-- 14. CLOSING THESIS -->
+<section class="slide">
+    <div class="section-label">Conclusión</div>
+    <h2>Tres lecciones para una <span class="green">genómica agéntica clínica</span></h2>
+    <div class="principle-grid">
+        <div class="principle">
+            <h4>01 &middot; El fragmento no es el contrato</h4>
+            <p>Cargar la guía no equivale a ejecutarla. Si el fragmento lleva varios fármacos, el modelo se equivoca de fármaco. Si lleva acción suavizada, el modelo la copia.</p>
+        </div>
+        <div class="principle">
+            <h4>02 &middot; Fenotipo &rarr; acción es un paso aparte</h4>
+            <p>Identificar el fenotipo es necesario pero no suficiente. La traducción a la acción canónica debe imponerse, no esperarse de la generación libre.</p>
+        </div>
+        <div class="principle">
+            <h4>03 &middot; Las métricas agregadas esconden la redistribución</h4>
+            <p>El promedio sugiere que cargar la guía se parece a no cargarla. Los cuadrantes muestran que los errores se mueven, no desaparecen.</p>
+        </div>
+    </div>
+    <div style="background: linear-gradient(180deg, rgba(86,211,100,0.08), rgba(86,211,100,0.02)); border: 1.5px solid #56d364; border-radius: 12px; padding: 1.4em 1.8em; width: 92%; max-width: 1100px; margin-top: 1.4rem; text-align:center;">
+        <div style="color:#56d364; font-size:clamp(0.7rem, 1.1vw, 0.85rem); letter-spacing:0.12em; font-weight:700; margin-bottom:0.5em;">TESIS CENTRAL</div>
+        <p style="font-size:clamp(1rem, 1.7vw, 1.4rem); color:#e6edf3; line-height:1.5; max-width: 100%;">El futuro clínico de la biología agéntica no se decide por la cantidad de evidencia que un modelo lee, sino por la <span class="green">forma del compromiso</span> con esa evidencia: ¿el modelo ejecuta un contrato declarativo o ecoa una fuente narrativa? <span class="green">Sólo el contrato cumple los cuatro requisitos de calidad clínica simultáneamente</span>.</p>
+    </div>
+    <p class="small muted" style="max-width:90%; margin-top:1rem; text-align:center;">Corpas, Iacoangeli, Bourdenx, Fatumo, Guio. <em>Cell Genomics</em>, en envío 2026 &middot; benchmark de tres brazos, 26.730 evaluaciones &middot; <code style="background:none; padding:0; color:#56d364;">github.com/ClawBio/ClawBio</code></p>
+    <div class="notes">
+        Close on the three lessons and the agentic-biology thesis. The mechanism
+        that closes the gap is contract execution, not larger or more elaborate
+        retrieval. TIMING: 1.5 min.
+    </div>
+</section>
+
+</div>
+
+<div class="progress" id="progress" style="width: 0;"></div>
+<div class="counter" id="counter">1 / 14</div>
+<div class="talk-handle">manuelcorpas &middot; el futuro de la biología es agéntico (mecanismos) &middot; versión castellano</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+const total = slides.length;
+function show(n) {
+    if (n < 0 || n >= total) return;
+    slides[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    document.getElementById('progress').style.width = ((current + 1) / total * 100) + '%';
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
+}
+document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
+    if (e.key === 'n') { const notes = slides[current].querySelector('.notes'); if (notes) console.log('NOTES [' + (current+1) + ']:', notes.textContent.trim()); }
+});
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+document.addEventListener('touchend', e => { const dx = e.changedTouches[0].screenX - touchStartX; if (dx < -50) show(current + 1); if (dx > 50) show(current - 1); });
+document.addEventListener('click', e => { if (e.target.closest('a, pre, code')) return; if (e.clientX > window.innerWidth / 2) show(current + 1); else show(current - 1); });
+show(0);
+</script>
+</body>
+</html>
+</content>
+</invoke>
