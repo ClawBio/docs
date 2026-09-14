@@ -1,88 +1,182 @@
 ---
-title: "Getting Started with AI Coding Tools"
-description: Install an AI coding agent, connect to a provider, and run your first prompt.
+title: "Set Up an AI Coding Agent"
+description: Choose an AI agent, install it, sign in, and run your first ClawBio analysis. Written for biologists who have never used a terminal.
 ---
 
-# Getting Started with AI Coding Tools
+# Set Up an AI Coding Agent
 
 <div class="tutorial-card__header">
   <span class="difficulty-badge difficulty-badge--beginner">Beginner</span>
-  <span class="time-estimate">~20 min</span>
+  <span class="time-estimate">~15 min</span>
 </div>
 
-Coding agents are distinct from chatbots because they can read and write files on your computer. This tutorial explains the stack and gets you set up.
-
-[:fontawesome-brands-youtube: Watch the video tutorial](https://www.youtube.com/watch?v=qXYD9_I7_A0){ .md-button }
+An AI agent is the fastest way into ClawBio if you do not code. You describe what you want in English; the agent installs the software, runs the analysis and reads the output back to you. This page explains what an agent is, helps you pick one, and gets it installed and signed in. The [landing page](../index.md#start-here) has the five-step short version; this is the full one.
 
 ---
 
-## How AI Coding Tools Work
+## What an agent is
 
-A coding agent is not a single thing — it is a stack of three layers:
+A chatbot answers questions. An agent also acts on your computer: it can read and write files in a folder, run programs, and check what they produced. Under the hood there are three layers.
 
-![Agent → Provider → Model](../assets/images/stack-of-agents.svg){ .svg-light-bg }
+![Agent, Provider, Model](../assets/images/stack-of-agents.svg){ .svg-light-bg }
 
-- **Agent** — the program on your computer (or in the cloud) that reads your files, runs commands, and writes code. Examples: GitHub Copilot, Claude Code, OpenCode.
-- **Provider** — the service that hosts and serves the AI model. Examples: GitHub, Anthropic, OpenRouter.
-- **Model** — the large language model that actually generates the code. Examples: Claude Opus 4.5, GPT-4.1, Kimi K2.5.
+- **Agent**: the program on your machine that reads files and runs commands. Claude Code, Codex, GitHub Copilot and OpenCode are agents.
+- **Provider**: the company serving the model. Anthropic, OpenAI, GitHub, OpenRouter.
+- **Model**: the language model doing the reasoning. Claude, GPT, Gemini, and open-weight models such as Qwen.
 
-You choose an agent, connect it to a provider, and pick a model. Different combinations have different privacy and cost implications:
+Most people pick the agent from the company they already pay, and never think about the other two layers. That is fine.
 
-![Privacy comparison across providers](../assets/images/table-of-privacy.svg){ .svg-light-bg }
-
-!!! note
-    Free models on OpenRouter may train on your interactions. If data privacy is important, use a paid model or check the model's training policy on OpenRouter before use.
+!!! note "Privacy"
+    Your prompts and any file the agent reads go to the provider. Paid consumer plans from Anthropic and OpenAI state that they do not train on your data by default; check the current policy before uploading anything sensitive. Free models on OpenRouter may train on your interactions. Never give an agent a genome you are not allowed to share; the ClawBio demos ship with public data for exactly this reason.
 
 ---
 
-## Tools
+## Choose an agent
 
-There are three AI coding tools worth knowing about. "Downloading" one of these tools means installing a program on your computer that can read and write files in your project folder, run terminal commands, and interact with APIs — it is not just a chatbot, it is a coding agent that operates on your local files.
+| Agent | Made by | You need | Best for |
+|---|---|---|---|
+| **Claude Code** | Anthropic | Claude Pro, Max, Team or Enterprise | The route the ClawBio tutorials assume. Skills install as a plugin. |
+| **Codex** | OpenAI | ChatGPT Plus, Pro, Business or Enterprise | Same idea, OpenAI's models. |
+| **GitHub Copilot** | GitHub | A GitHub account; free for students via [GitHub Education](https://education.github.com) | Students. Runs inside VS Code with a graphical chat panel. |
+| **OpenCode** | Open source | Any provider key, including [OpenRouter](https://openrouter.ai) | Open-weight or free models, or no vendor lock-in. |
 
----
-
-### GitHub Copilot (Recommended — free for students)
-
-[GitHub Copilot](https://github.com/features/copilot) is GitHub's AI coding assistant. It runs inside VS Code and gives you access to top models (Claude Opus 4.5, GPT-4.1, Gemini) through your GitHub account — no separate API key needed.
-
-**What downloading it means:** You install the GitHub Copilot extension inside VS Code. This adds an AI chat panel and inline code suggestions directly in your editor. The models run on GitHub's servers; the extension just connects your editor to them.
-
-**Why we recommend it:** Free with [GitHub Education](https://education.github.com), gives access to multiple frontier models, and integrates directly into VS Code where you already write code.
+Free Claude and free ChatGPT plans do not include the agent. If you are a student, Copilot is the zero-cost option and the [GitHub Education guide](github-education.md) walks through the sign-up with screenshots.
 
 ---
 
-### GitHub Codex
+## Install
 
-[Codex](https://github.com/features/codex) is GitHub's cloud-based coding agent. Unlike Copilot (which works alongside you in VS Code), Codex runs autonomously in a cloud sandbox — you give it a task and it works independently, then opens a pull request with its changes.
+You need a terminal for one or two commands. On a Mac press ++cmd+space++, type **Terminal**, press ++enter++. On Windows press the Windows key, type **PowerShell**, press ++enter++ (your prompt starts with `PS C:\`). On Linux press ++ctrl+alt+t++.
 
-**What downloading it means:** There is nothing to download. Codex runs entirely in the browser at github.com. You open a repository on GitHub, click the Codex tab, and assign it tasks. It clones your repo into a cloud environment, makes changes, and submits them as a PR for you to review.
+=== "Claude Code"
+
+    **Mac, Linux, WSL**
+
+    ```bash
+    curl -fsSL https://claude.ai/install.sh | bash
+    ```
+
+    **Windows PowerShell**
+
+    ```powershell
+    irm https://claude.ai/install.ps1 | iex
+    ```
+
+    Also available as `brew install --cask claude-code` on a Mac and `winget install Anthropic.ClaudeCode` on Windows. The native installer above updates itself; the other two do not.
+
+    Open a **new** terminal and confirm:
+
+    ```bash
+    claude --version
+    ```
+
+    Prefer not to use a terminal at all? The [Claude Code desktop app](https://claude.com/download) gives you the same agent with a window and buttons.
+
+    Requirements: macOS 13+, Windows 10 or later, or Ubuntu 20.04+; 4 GB RAM; an internet connection. Official docs: [code.claude.com/docs](https://code.claude.com/docs/en/setup).
+
+=== "Codex"
+
+    **Mac, Linux, WSL**
+
+    ```bash
+    curl -fsSL https://chatgpt.com/codex/install.sh | sh
+    ```
+
+    **Windows, or any machine with Node.js already installed**
+
+    ```powershell
+    npm install -g @openai/codex
+    ```
+
+    Open a **new** terminal and confirm:
+
+    ```bash
+    codex --version
+    ```
+
+    Official docs: [learn.chatgpt.com/docs/codex/cli](https://learn.chatgpt.com/docs/codex/cli).
+
+=== "GitHub Copilot"
+
+    1. If you are a student, get Copilot Pro free through [GitHub Education](https://education.github.com); the [step-by-step guide](github-education.md) covers it.
+    2. Install [VS Code](https://code.visualstudio.com/).
+    3. In VS Code open **Extensions** (left sidebar), search **GitHub Copilot**, click **Install**.
+    4. Sign in with your GitHub account when asked.
+    5. Open the Copilot Chat panel (++ctrl+shift+i++ on Windows and Linux, ++cmd+shift+i++ on a Mac) and switch it to **Agent** mode using the dropdown at the bottom of the chat box.
+    6. Pick a model from the model picker. Claude models are available here too.
+
+    There is no terminal command to install; the extension is the agent.
+
+=== "OpenCode"
+
+    Download the app from [opencode.ai](https://opencode.ai/), then add a provider. OpenRouter gives one key for many models, including free ones. Follow the app's own setup screen; the rest of this page applies unchanged.
 
 ---
 
-### Claude Code
+## First session
 
-[Claude Code](https://docs.anthropic.com/en/docs/claude-code) is Anthropic's terminal-based coding agent. It runs in your terminal (command line) and operates directly on your local files.
+Agents work inside one folder at a time. Make an empty one and start the agent in it. The first start opens your browser to sign in.
 
-**What downloading it means:** You install a command-line program (via `npm install -g @anthropic-ai/claude-code`). When you run `claude` in a terminal inside your project folder, it starts an interactive session where you chat with Claude and it can read, edit, and create files on your machine. Requires a paid Anthropic API subscription or access through a provider.
+=== "Claude Code"
+
+    ```bash
+    mkdir clawbio-lab
+    cd clawbio-lab
+    claude
+    ```
+
+=== "Codex"
+
+    ```bash
+    mkdir clawbio-lab
+    cd clawbio-lab
+    codex
+    ```
+
+=== "Copilot"
+
+    In VS Code choose **File, Open Folder**, create a folder called `clawbio-lab`, open it, then open the Copilot Chat panel.
+
+Now paste this into the agent. It installs Python if you do not have it, installs ClawBio, runs a pharmacogenomics report on bundled public data, and explains it. Approve each action the agent proposes; that approval step is the safety rail, so read what it says before you say yes.
+
+```text
+I am a biologist with no programming experience. Please set up ClawBio for me
+and run its first demo, explaining what you are doing in plain language.
+
+1. Check whether Python 3.11 or newer is installed. If it is not, install it
+   for my operating system and confirm it works.
+2. Install ClawBio with: pip install clawbio
+3. Run: clawbio run pharmgx --demo
+4. Open the report it produces and explain the findings to me as you would to
+   a colleague: which genes were tested, what each result means, and what the
+   reproducibility bundle is for.
+5. Then run: clawbio list
+   and tell me which three skills you think I should try next and why.
+```
+
+The PharmGx demo runs in under two seconds and writes a Markdown report plus a `reproducibility/` folder holding the exact commands, environment and SHA-256 checksums. Every ClawBio skill produces that bundle; it is how you show a reviewer what was run.
+
+### Let the agent know the skills exist
+
+Once ClawBio is installed, any agent can run every skill through the `clawbio` command. To have the agent choose the right skill on its own:
+
+- **Claude Code**: inside the session type `/plugin marketplace add ClawBio/ClawBio`, then `/plugin install clawbio`.
+- **Codex, Cursor, VS Code, Zed**: each skill is a plain [Agent Skills](https://agentskills.io) folder. Copy the ones you want from `skills/` in the [repository](https://github.com/ClawBio/ClawBio) into `~/.agents/skills/`.
 
 ---
 
-### OpenCode + OpenRouter (alternative)
+## If something goes wrong
 
-[OpenCode](https://opencode.ai/) is an open-source desktop app that provides a similar agent interface. It can connect to many model providers, including [OpenRouter](https://openrouter.ai) (a single subscription to access many models) and GitHub Copilot.
-
-**What downloading it means:** You download a desktop application. It provides a chat interface that can read and write files in your project, similar to Claude Code but with a graphical interface and support for multiple providers.
+- **`command not found` right after installing.** Close the terminal and open a new one; the installer changed a setting the old window has not read.
+- **On Windows the install line prints an error about `&&` or `irm`.** You are in the other shell. `PS C:\` means PowerShell, plain `C:\` means CMD. Use the PowerShell command above from PowerShell.
+- **The agent says Python is missing.** Let it install Python; that is what step 1 of the prompt is for. If it asks which version, say 3.12.
+- **The browser sign-in never opens.** Copy the URL the agent prints into a browser yourself.
+- **You are asked for an API key.** You do not need one on a Claude or ChatGPT subscription. Press ++esc++ and choose the sign-in-with-account option instead.
 
 ---
 
-## Installation — GitHub Copilot (Recommended)
+## Next steps
 
-> For a detailed step-by-step walkthrough with screenshots — including applying for GitHub Education, redeeming your Copilot Pro coupon, and enabling the coding agent — see the [GitHub Education guide](github-education.md).
-
-1. Sign up for [GitHub Education](https://education.github.com) with your university email to get Copilot Pro free
-2. Install [VS Code](https://code.visualstudio.com/) if you don't have it
-3. Open VS Code → Extensions (sidebar) → search "GitHub Copilot" → Install
-4. Sign in with your GitHub account when prompted
-5. Open the Copilot Chat panel (sidebar icon or `Ctrl+Shift+I` / `Cmd+Shift+I`)
-6. Select a model (e.g. Claude Opus 4.5) from the model picker at the top of the chat
-7. Make a new folder to begin — e.g. create a `testing AI` folder in your Documents, then open it in VS Code (`File → Open Folder`)
+- [Run Your First Skill](run-your-first-skill.md): the ClawBio tutorial series starts here.
+- [Variant Interpretation Workshop](variant-interpretation-workshop.md): a real human genome in Google Colab, no install at all.
+- [Skill Library](../skills/index.md): every skill with its demo command.
