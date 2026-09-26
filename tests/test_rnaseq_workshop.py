@@ -25,6 +25,16 @@ class WorkshopPublicationTests(unittest.TestCase):
         self.assertNotIn('manuelcorpas1', text)
         self.assertNotIn('drjlgross@gmail.com', text)
 
+    def test_redesign_preserves_deck_and_adds_accessible_branding(self):
+        text = (ROOT / 'docs/presentations' / SLUG / 'index.html').read_text()
+        self.assertEqual(len(re.findall(r'<section class="slide(?: [^"]*)?"', text)), 15)
+        self.assertIn('class="brand-mark"', text)
+        self.assertIn('alt="ClawBio logo"', text)
+        self.assertIn('class="hero-logo"', text)
+        self.assertIn('prefers-reduced-motion', text)
+        for label in ('Title', 'Plot', 'Failure', 'Worksheet', 'Close'):
+            self.assertIn('aria-label="' + label + '"', text)
+
     def test_guide_has_reproducible_contract_and_scoping(self):
         text = (ROOT / 'docs/tutorials' / (SLUG + '.md')).read_text()
         for term in ('~ batch + condition', 'condition,treated,control', '--backend pydeseq2', 'input_checksum', 'worksheet', '0ba950565ee6a0fe9da3bde2164f6c814bd57dc9'):
