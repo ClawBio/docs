@@ -70,6 +70,7 @@ nav:
       - tmux Sessions: tutorials/tmux-sessions.md
       - Telegram Bot: tutorials/telegram-bot.md
     - ClawBio:
+      - RNA-seq Skill Workshop: tutorials/rnaseq-de-workshop.md
       - "Step 1 — Run Your First Skill": tutorials/run-your-first-skill.md
       - "Step 2 — Build a Skill": tutorials/build-a-skill.md
       - "Step 3 — Variant Interpretation": tutorials/variant-interpretation-workshop.md

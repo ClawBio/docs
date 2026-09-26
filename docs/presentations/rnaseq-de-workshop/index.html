@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Learn to inspect, run and verify ClawBio rnaseq-de, then scope one useful hackathon contribution.">
+<title>Build one useful, verifiable skill | ClawBio</title>
+<style>
+* {box-sizing:border-box;margin:0;padding:0}
+:root {--bg:#0d1117;--bg2:#161b22;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--accent:#3fb950;--blue:#58a6ff;--warn:#d29922}
+html,body {height:100%;overflow:hidden}
+body {background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,sans-serif}
+.slide {position:absolute;inset:0;display:none;align-items:center;justify-content:center;padding:64px 8vw 84px;overflow:auto}
+.slide.active {display:flex}
+.slide-inner {max-width:1120px;width:100%}
+h1 {font-size:clamp(40px,5.1vw,72px);line-height:1.12;letter-spacing:-.025em;margin:16px 0 24px;font-weight:800}
+h1 em {color:var(--accent);font-style:normal}
+h2 {font-size:clamp(28px,3.2vw,44px);line-height:1.18;letter-spacing:-.02em;color:var(--accent);margin-bottom:28px}
+p,li {font-size:clamp(20px,1.9vw,26px);line-height:1.5;color:var(--muted)}
+p {margin-bottom:18px} strong {color:var(--text)}
+ul,ol {padding-left:1.3em} li {margin-bottom:16px}
+a {color:var(--blue);text-underline-offset:4px} a:hover {color:var(--accent)}
+.eyebrow {font-size:16px;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);font-weight:700}
+.meta,.small {font-size:17px;line-height:1.5}.meta {margin-top:36px}
+code,pre {font-family:'SF Mono',Consolas,monospace}
+code {color:var(--accent);font-size:.85em;overflow-wrap:anywhere}
+pre {background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:24px;font-size:clamp(15px,1.65vw,22px);line-height:1.65;overflow:auto;margin:22px 0;color:var(--text)}
+pre code {font-size:inherit;overflow-wrap:normal}
+.columns {display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+h3 {color:var(--blue);font-size:25px;margin-bottom:16px}
+.flow {font-size:clamp(25px,3vw,40px);color:var(--text);line-height:1.6;margin:30px 0}
+.flow span {color:var(--accent)}
+.statement {font-size:clamp(26px,3.3vw,44px);line-height:1.45;color:var(--text)}
+.warn {color:var(--warn)}
+.plot {width:100%;max-height:53vh;object-fit:contain;background:white;border-radius:6px}
+.notes {display:none}.notes.open {display:block;position:fixed;z-index:20;inset:auto 8vw 80px;background:var(--bg2);border:1px solid var(--border);padding:24px;max-height:40vh;overflow:auto;font-size:18px;line-height:1.5}
+footer {position:fixed;bottom:20px;left:24px;right:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;color:var(--muted);font-size:14px;z-index:10;background:var(--bg)}
+.controls {display:flex;align-items:center;gap:12px} button {background:var(--bg2);border:1px solid var(--border);border-radius:5px;color:var(--text);font-size:18px;padding:5px 14px;cursor:pointer} button:disabled {opacity:.35;cursor:default}button:focus-visible,a:focus-visible {outline:2px solid var(--accent);outline-offset:4px}
+.progress {position:fixed;bottom:0;left:0;height:3px;background:var(--accent)}
+@media(max-width:700px) {.slide {padding:32px 24px 96px;align-items:flex-start}.slide-inner {margin:auto 0}.columns {grid-template-columns:1fr;gap:20px}h2 {margin-bottom:20px}li {margin-bottom:12px}pre {padding:16px;font-size:14px}.small,.meta {font-size:15px}footer {left:16px;right:16px}.hint {display:none}.plot {max-height:35vh}}
+@media print {html,body {height:auto;overflow:visible}.slide,.slide.active {display:flex;position:relative;min-height:100vh;page-break-after:always;overflow:visible}footer,.progress,.notes {display:none!important}}
+</style>
+</head>
+<body>
+<noscript><style>html,body{height:auto;overflow:auto}.slide{display:flex;position:relative;min-height:100vh}footer,.progress{display:none}</style><p>JavaScript is disabled. Scroll to view the slides.</p></noscript>
+<main class="deck" aria-label="Workshop presentation">
+<section class="slide active" aria-label="Title"><div class="slide-inner">
+<p class="eyebrow">ClawBio / Hands-on workshop</p>
+<h1>Build one useful,<br><em>verifiable skill.</em></h1>
+<p>Inspect rnaseq-de. Run it. Check it.<br>Then scope your own contribution.</p>
+<p class="meta">Manuel Corpas · ClawBio</p>
+<aside class="notes">Facilitator: this is a first-hour opening, followed by team formation. Protect time for the scoping exercise. The worked example is rnaseq-de; diff-visualizer is optional.</aside>
+</div></section>
+<section class="slide" aria-label="Outcome"><div class="slide-inner">
+<h2>Make the result checkable</h2>
+<p class="statement">One defined input.<br>One useful output.<br><span style="color:var(--accent)">One observable check.</span></p>
+<p class="meta">An agent can execute a command. You still own the question, the design and the judgement.</p>
+</div></section>
+<section class="slide" aria-label="Skill folder"><div class="slide-inner">
+<h2>Start with the actual folder</h2>
+<div class="columns"><pre>skills/rnaseq-de/
+  SKILL.md
+  rnaseq_de.py
+  examples/
+    demo_counts.csv
+    demo_metadata.csv</pre><div><p><strong>Read the contract</strong> in the instructions.</p><p><strong>Inspect the data</strong> before running it.</p><p><strong>Find the implementation</strong> that produces the result.</p></div></div>
+<p class="small"><a href="https://github.com/ClawBio/ClawBio/tree/0ba950565ee6a0fe9da3bde2164f6c814bd57dc9/skills/rnaseq-de" target="_blank" rel="noopener">Open the pinned skill folder</a></p>
+</div></section>
+<section class="slide" aria-label="Input contract"><div class="slide-inner">
+<h2>Two tables define this example</h2>
+<div class="columns"><div><h3>Counts</h3><p>Genes in rows.<br>Samples in columns.<br>Count-like values.</p></div><div><h3>Sample metadata</h3><p>Matching sample identifiers.<br>Control or treated.<br>Recorded batch.</p></div></div>
+<p class="flow">Counts + metadata <span>→</span> differential expression</p>
+<p class="small warn">Bundled toy data: 10 genes, 6 samples. No biological discovery is claimed.</p>
+</div></section>
+<section class="slide" aria-label="Design"><div class="slide-inner">
+<h2>Name the comparison before running</h2>
+<pre>Design:    ~ batch + condition
+Contrast:  condition,treated,control
+Backend:   pydeseq2</pre>
+<p><strong>Positive log2 fold change:</strong> higher in treated.</p>
+<p>Does the experimental design let you separate batch from condition?</p>
+<aside class="notes">The demo sets this formula and contrast explicitly. Raw FASTQ processing is upstream and outside this opening. Inspect the actual metadata, not just these labels.</aside>
+</div></section>
+<section class="slide" aria-label="Run"><div class="slide-inner">
+<h2>Run the skill with a named backend</h2>
+<pre><code>MPLBACKEND=Agg python skills/rnaseq-de/rnaseq_de.py \
+  --demo \
+  --backend pydeseq2 \
+  --output /tmp/clawbio-workshop-rnaseq</code></pre>
+<p>Run from the checkout root with a prepared environment.<br>Use a fresh output folder for each run.</p>
+<p class="small">Rehearsed with PyDESeq2 0.5.4. <a href="../../tutorials/rnaseq-de-workshop/">Setup, source pin and full commands</a></p>
+</div></section>
+<section class="slide" aria-label="Verification"><div class="slide-inner">
+<h2>Read the table before the plot</h2>
+<ol><li><strong>Match samples:</strong> counts and metadata agree.</li><li><strong>Confirm execution:</strong> result.json names pydeseq2.</li><li><strong>Check direction:</strong> GeneA positive, GeneB negative in this fixture.</li><li><strong>Check identifiers:</strong> all 10 expected genes appear.</li></ol>
+<p class="small">Directional sanity checks support this demonstration. They do not validate every dataset or model assumption.</p>
+</div></section>
+<section class="slide" aria-label="Plot"><div class="slide-inner">
+<h2>A plot still needs an explanation</h2>
+<img class="plot" src="volcano.png" alt="Volcano plot from the ten-gene toy rehearsal, showing both positive and negative fold changes.">
+<p class="small" style="margin-top:14px">Actual toy rehearsal output. Inspect the table and warnings before interpreting significance.</p>
+</div></section>
+<section class="slide" aria-label="Limits"><div class="slide-inner">
+<h2>A successful run has limits</h2>
+<ul><li><strong>The tiny fixture emitted warnings:</strong> low residual degrees of freedom and numerical issues.</li><li><strong>Nine manifest hashes were verified.</strong> The separate checksum file supplies evidence.</li><li><strong>Some provenance fields were empty:</strong> input_checksum and datasets in result.json.</li></ul>
+<p class="warn">Execution success is not statistical or biological validation.</p>
+<aside class="notes">These observations refer to the local rehearsal on 26 September 2026 at pinned commit 0ba950565ee6a0fe9da3bde2164f6c814bd57dc9. The reported backend was PyDESeq2 0.5.4, with LFC shrinkage applied.</aside>
+</div></section>
+<section class="slide" aria-label="Failure"><div class="slide-inner">
+<h2>Check when the skill should stop</h2>
+<p>Remove one sample row from a <strong>copy</strong> of the metadata.<br>Run with the unchanged count table.</p>
+<pre class="warn">Metadata missing samples</pre>
+<p><strong>Restore the correct metadata or stop.</strong><br>Do not invent the missing label.</p>
+<p class="small">This specific rejection was tested. It is not evidence that every invalid input is handled.</p>
+</div></section>
+<section class="slide" aria-label="Composition"><div class="slide-inner">
+<h2>Connect skills through a real contract</h2>
+<p class="flow">rnaseq-de <span>→</span> de_results.csv <span>→</span> diff-visualizer</p>
+<p>Required columns: <code>gene</code>, <code>log2FoldChange</code>,<br>and <code>padj</code> or <code>pvalue</code>.</p>
+<p><strong>A new visualisation does not change the inference.</strong><br>Check identifiers, units and meaning as well as file format.</p>
+<p class="small">Optional demonstration. <a href="https://github.com/ClawBio/ClawBio/tree/0ba950565ee6a0fe9da3bde2164f6c814bd57dc9/skills/diff-visualizer">Pinned source</a></p>
+<aside class="notes">Allow at most five minutes. The rehearsed directory hand-off completed, with a plotting layout warning. Skip this step if it would consume the scoping exercise.</aside>
+</div></section>
+<section class="slide" aria-label="Contribution"><div class="slide-inner">
+<h2>Find a gap before building</h2>
+<p>Inspect existing skills and tests. Reuse what already works.</p>
+<ul><li>A small adapter with an equivalence check.</li><li>A regression fixture for a reproducible failure.</li><li>A missing validation check, if it is truly missing.</li><li>A documentation fix or a precise bug report.</li></ul>
+<p class="small">These are candidate contribution types, not claims of known gaps in rnaseq-de.</p>
+</div></section>
+<section class="slide" aria-label="Worksheet"><div class="slide-inner">
+<h2>Write your smallest useful contribution</h2>
+<div class="columns"><div><h3>Define it</h3><ul><li>Who needs the result?</li><li>Exact input and output.</li><li>Existing tool to reuse.</li><li>Work you will leave out.</li></ul></div><div><h3>Make it testable</h3><ul><li>One known-answer check.</li><li>One invalid-input check.</li><li>Builder and reviewer.</li><li>First runnable checkpoint.</li></ul></div></div>
+<p class="small"><a href="../../tutorials/rnaseq-de-workshop/#team-scoping-worksheet">Open the full worksheet</a></p>
+<aside class="notes">Allow fifteen minutes for individual scoping and paired review. Team formation follows once the proposal is small, useful and checkable.</aside>
+</div></section>
+<section class="slide" aria-label="Pair review"><div class="slide-inner">
+<h2>Ask a partner to explain your scope</h2>
+<p class="statement">Given <span style="color:var(--accent)">[input]</span>, we produce <span style="color:var(--accent)">[output]</span>.<br>We know it worked when <span style="color:var(--accent)">[check]</span>.<br>We leave out <span style="color:var(--accent)">[excluded work]</span>.</p>
+<p class="meta">If your partner has to invent a missing detail, make the scope more concrete.</p>
+</div></section>
+<section class="slide" aria-label="Close"><div class="slide-inner">
+<p class="eyebrow">Your demo</p>
+<h1>Show the input.<br>The result. <em>The check.</em></h1>
+<p>Explain one limitation.<br>A reproducible failure can be a useful contribution.</p>
+<p class="meta"><a href="../../tutorials/rnaseq-de-workshop/">Workshop guide + worksheet</a> · <a href="../../tutorials/build-a-skill/">Build a skill</a></p>
+</div></section>
+</main>
+<footer><a href="../../">ClawBio</a><span class="hint">Arrow keys / Space · F fullscreen · S notes</span><div class="controls"><button id="prev" aria-label="Previous slide">‹</button><span id="counter" aria-live="polite"></span><button id="next" aria-label="Next slide">›</button></div></footer>
+<div class="progress" id="progress"></div>
+<script>
+const slides = [...document.querySelectorAll('.slide')];
+let current = 0;
+function show(n) {
+  current = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach((slide,i) => {slide.classList.toggle('active',i===current);slide.setAttribute('aria-hidden',i!==current);slide.querySelector('.notes')?.classList.remove('open');});
+  document.getElementById('counter').textContent = `${current + 1} / ${slides.length}`;
+  document.getElementById('progress').style.width = `${(current + 1) / slides.length * 100}%`;
+  document.getElementById('prev').disabled = current === 0;
+  document.getElementById('next').disabled = current === slides.length - 1;
+  history.replaceState(null,'',`#${current + 1}`);
+}
+document.getElementById('prev').onclick=()=>show(current-1);
+document.getElementById('next').onclick=()=>show(current+1);
+document.addEventListener('keydown',e=>{
+  if(e.target.closest('button,a') && (e.key===' '||e.key==='Enter'))return;
+  if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1);}
+  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1);}
+  if(e.key==='Home'){e.preventDefault();show(0);}
+  if(e.key==='End'){e.preventDefault();show(slides.length-1);}
+  if(e.key.toLowerCase()==='s')slides[current].querySelector('.notes')?.classList.toggle('open');
+  if(e.key.toLowerCase()==='f'){if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen?.();}
+});
+let touchX=0;
+document.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].screenX;},{passive:true});
+document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-touchX;if(Math.abs(dx)>60)show(current+(dx<0?1:-1));},{passive:true});
+function showFromHash(){const requested=Number(location.hash.slice(1));show(Number.isInteger(requested)&&requested>0?requested-1:0);}
+window.addEventListener('hashchange',showFromHash);showFromHash();
+</script>
+</body>
+</html>

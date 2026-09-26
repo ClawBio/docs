@@ -119,6 +119,16 @@ Hands-on guides to get productive with AI coding tools and ClawBio. Each tutoria
 
 <div class="tutorial-cards">
 
+<a class="tutorial-card" href="rnaseq-de-workshop/">
+  <div class="tutorial-card__header">
+    <span class="difficulty-badge difficulty-badge--intermediate">Hands-on workshop</span>
+    <span class="time-estimate">60 min</span>
+  </div>
+  <h3 class="tutorial-card__title">Build One Useful, Verifiable Skill</h3>
+  <p class="tutorial-card__desc">Inspect and run rnaseq-de, check its evidence, test a failure and scope your own contribution. Includes slides and a team worksheet.</p>
+</a>
+
+
 <a class="tutorial-card" href="run-your-first-skill/">
   <div class="tutorial-card__header">
     <span class="tutorial-card__step">STEP 1</span>
