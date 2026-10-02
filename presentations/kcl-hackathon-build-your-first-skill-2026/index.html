@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build Your First Skill | ClawBio — KCL Hackathon</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+      --border: #30363d; --text: #e6edf3; --muted: #8b949e;
+      --accent: #3fb950; --accent2: #58a6ff; --warn: #d29922; --danger: #f85149;
+    }
+    html, body { height: 100%; overflow: hidden; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+
+    .deck { position: relative; width: 100%; height: 100%; }
+    .slide {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      padding: 4rem 6rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .slide.active { opacity: 1; pointer-events: auto; }
+    .slide-inner { max-width: 960px; width: 100%; }
+
+    h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    h1 em { font-style: normal; color: var(--accent); }
+    h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; margin-bottom: 1rem; color: var(--accent); }
+    h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.6rem; color: var(--accent2); }
+    p { font-size: 1.15rem; line-height: 1.7; color: var(--muted); margin-bottom: 0.8rem; }
+    p.big { font-size: 1.35rem; }
+    .green { color: var(--accent); }
+    .blue { color: var(--accent2); }
+    .yellow { color: var(--warn); }
+    strong { color: var(--text); }
+
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { font-size: 1.1rem; line-height: 1.7; color: var(--muted); margin-bottom: 0.5rem; }
+    li strong { color: var(--text); }
+
+    code {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      background: var(--bg2); border: 1px solid var(--border);
+      padding: 0.15em 0.45em; border-radius: 4px; font-size: 0.92em;
+      color: var(--accent);
+    }
+
+    pre {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.2em 1.5em;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: clamp(0.85rem, 1.4vw, 1.05rem); line-height: 1.6;
+      color: var(--text); overflow-x: auto; margin-bottom: 1rem;
+      text-align: left;
+    }
+    pre .comment { color: var(--muted); }
+    pre .cmd { color: var(--accent); }
+    pre .flag { color: var(--accent2); }
+
+    .hero-sub { font-size: clamp(1rem, 2vw, 1.4rem); color: var(--muted); margin-top: 0.5rem; }
+    .hero-meta { margin-top: 2rem; font-size: 1rem; color: var(--muted); }
+    .hero-meta span { color: var(--accent); }
+
+    .four-cards {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem; margin-top: 1.5rem; margin-bottom: 1rem;
+    }
+    .card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.2em 1em; text-align: center;
+    }
+    .card .icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .card h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+    .card p { font-size: 0.9rem; line-height: 1.5; }
+
+    .rules-list { list-style: none; padding: 0; }
+    .rules-list li {
+      font-size: 1.2rem; padding: 0.6em 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .rules-list li:last-child { border-bottom: none; }
+    .rules-list .num { color: var(--accent); font-weight: 800; margin-right: 0.8rem; font-family: 'SF Mono', monospace; }
+
+    .mission-list { list-style: none; padding: 0; counter-reset: mission; }
+    .mission-list li {
+      font-size: 1.3rem; padding: 0.7em 0; padding-left: 2.5rem;
+      position: relative; border-bottom: 1px solid var(--border);
+    }
+    .mission-list li:last-child { border-bottom: none; }
+    .mission-list li::before {
+      counter-increment: mission; content: counter(mission);
+      position: absolute; left: 0; color: var(--accent); font-weight: 800;
+      font-family: 'SF Mono', monospace; font-size: 1.4rem;
+    }
+
+    .bottom-note {
+      margin-top: 2rem; padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 1rem; color: var(--muted); text-align: center;
+    }
+
+    .reveal li { opacity: 0; transition: opacity 0.3s ease; }
+    .reveal li.visible { opacity: 1; }
+
+    .progress { position: fixed; bottom: 0; left: 0; height: 3px; background: var(--accent); transition: width 0.3s; z-index: 100; }
+    .counter { position: fixed; bottom: 12px; right: 20px; font-size: 0.85rem; color: var(--muted); z-index: 100; }
+    .talk-handle { position: fixed; bottom: 12px; left: 20px; font-size: 0.85rem; color: var(--muted); z-index: 99; font-family: 'SF Mono', monospace; }
+
+    .links-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; margin-top: 1.5rem; width: 100%;
+    }
+    .link-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.5em; text-align: center;
+    }
+    .link-card h3 { margin-bottom: 0.5rem; }
+    .link-card p { font-size: 0.95rem; }
+    .link-card code { font-size: 0.85rem; border: none; background: none; padding: 0; }
+
+    @media (max-width: 768px) {
+      .slide { padding: 2rem 2rem; }
+      .four-cards { grid-template-columns: repeat(2, 1fr); }
+      .links-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- SLIDE 1: Title -->
+  <div class="slide active">
+    <div class="slide-inner" style="text-align:center;">
+      <h1>Build Your<br>First <em>Skill</em></h1>
+      <p class="hero-sub">From zero to MVP in one afternoon</p>
+      <p class="hero-meta">Cameron Lloyd &nbsp;·&nbsp; <span>ClawBio</span></p>
+      <p style="margin-top:0.5rem; font-size:0.95rem; color:var(--muted);">KCL Hackathon &middot; 18 June 2026</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: Why skills? -->
+  <div class="slide">
+    <div class="slide-inner">
+      <h2>Why skills?</h2>
+      <ul>
+        <li>You know things the agent doesn't &mdash; skills let you <strong>teach it your expertise</strong></li>
+        <li>Doing it manually works once. A skill makes it <strong>repeatable and shareable</strong> with your whole team</li>
+        <li>A skill is a <strong>folder</strong> &mdash; a <code>SKILL.md</code> that the agent discovers, plus code, tests, and demo data</li>
+        <li>Write it once, run it on any agent &mdash; <strong>Claude Code</strong>, <strong>Codex</strong>, <strong>Gemini CLI</strong>, <strong>Cursor</strong>, and <a href="https://agentskills.io" style="color:var(--accent2);">many more</a></li>
+      </ul>
+      <p class="bottom-note">ClawBio skills follow the open <strong>Agent Skills</strong> specification (<a href="https://agentskills.io" style="color:var(--accent2);">agentskills.io</a>), originally developed by Anthropic</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: Working with your coding agent -->
+  <div class="slide">
+    <div class="slide-inner">
+      <h2>Working with your coding agent</h2>
+      <p style="margin-bottom:1.2rem;">You need a coding agent: <strong>Claude Code</strong>, <strong>Codex</strong>, <strong>Gemini CLI</strong>, or similar. They all read the project instructions.</p>
+      <ul class="reveal">
+        <li>You will press <strong>Enter</strong> a lot. <strong style="color:var(--warn);">Read what you're approving.</strong> The agent runs commands and edits files on your behalf &mdash; you are responsible.</li>
+        <li>The agent will <strong>agree with you</strong> a lot. Push back &mdash; it often changes its mind and finds a better answer when challenged.</li>
+        <li><code class="green">/plan</code> &mdash; planning before coding saves tokens, saves time, and catches bad ideas early.</li>
+        <li><code class="blue">/compact</code> &mdash; long conversations cause <strong>context rot</strong>: the agent forgets earlier details. Compacting summarises the history so it can keep going.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: Get set up -->
+  <div class="slide">
+    <div class="slide-inner">
+      <h2>Get set up</h2>
+      <p style="margin-bottom:0.4rem;"><a href="https://docs.clawbio.ai/tutorials/setup" style="color:var(--accent2);">docs.clawbio.ai/tutorials/setup</a></p>
+      <p style="margin-bottom:1rem;"><a href="https://docs.clawbio.ai/tutorials/build-a-skill" style="color:var(--accent2);">docs.clawbio.ai/tutorials/build-a-skill</a></p>
+      <pre><span class="comment"># 1. You need a GitHub account (github.com/join)</span>
+<span class="comment">#    So you can push code and open a pull request</span>
+<span class="comment"># 2. Fork ClawBio/ClawBio on GitHub and clone your fork</span>
+<span class="comment">#    Your agent works locally on your copy of the repo</span></pre>
+      <p style="margin-top:0.8rem; font-size:1rem; color:var(--muted);">Your agent can help with all of this &mdash; forking, cloning, pushing code, opening PRs.</p>
+    </div>
+  </div>
+
+  <!-- SLIDE: Planning exercise -->
+  <div class="slide">
+    <div class="slide-inner">
+      <h2 style="color:var(--text);">Plan as a team <span style="color:var(--accent);">&mdash; at least 15 minutes</span></h2>
+      <p class="big" style="margin-bottom:0.6rem;">The most important thing today isn't the AI &mdash; it's everyone in this room. Share your domain expertise.</p>
+      <p style="margin-bottom:1.5rem;">Before you write any code, discuss with the people around you:</p>
+      <ol class="mission-list">
+        <li><strong>What problem does your skill solve?</strong> <span style="color:var(--muted);">One sentence. One thing done really well.</span></li>
+        <li><strong>What goes in? What comes out?</strong> <span style="color:var(--muted);">Use open file formats. Output something another ClawBio skill can take as input.</span></li>
+        <li><strong>What could go wrong?</strong> <span style="color:var(--muted);">Think about edge cases. Be defensive &mdash; add guardrails.</span></li>
+      </ol>
+      <p style="font-size:1.1rem; color:var(--text);">Aim for an MVP. A plan prevents scope creep. If you can't explain it in one sentence, it's too big.</p>
+      <p class="bottom-note" style="font-size:1.15rem;"><strong style="color:var(--warn);">Do this before you touch any code.</strong></p>
+    </div>
+  </div>
+
+  <!-- SLIDE: No idea? -->
+  <div class="slide">
+    <div class="slide-inner">
+      <h2>Not sure what to build?</h2>
+      <p style="margin-bottom:1.2rem;">You don't have to write a new skill from scratch. Pick any of these:</p>
+      <ul>
+        <li>Look at GitHub issues for wanted skills</li>
+        <li>Audit or red-team an existing skill</li>
+        <li>Test a skill with real, publicly-available data</li>
+        <li>Translate a skill to another language</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE: Go build -->
+  <div class="slide">
+    <div class="slide-inner">
+      <h2>Go build</h2>
+      <pre><span class="comment"># 1. Open an issue for your skill</span>
+<span class="cmd">"Open an issue on ClawBio/ClawBio using the new skill proposal template"</span>
+
+<span class="comment"># 2. Start building</span>
+<span class="cmd">"I want to build a new ClawBio skill that &lt;solves your problem&gt;.
+ Ask me any clarifying questions."</span></pre>
+      <p style="margin-top:1rem; font-size:1rem; color:var(--muted);"><strong style="color:var(--text);">Respect original works.</strong> Cite research properly &mdash; LLMs hallucinate references. Never assume scientific correctness &mdash; validate against the original.</p>
+      <p class="bottom-note">See <a href="https://rewrites.bio" style="color:var(--accent2);">rewrites.bio</a> by Seqera &nbsp;&middot;&nbsp; Stuck? Raise your hand &mdash; helpers are here.</p>
+    </div>
+  </div>
+
+  <!-- SLIDE: Supercharge with skills -->
+  <div class="slide">
+    <div class="slide-inner">
+      <h2>Supercharge your agent <span style="font-size:0.7em; color:var(--muted); font-weight:400;">(optional &mdash; try later)</span></h2>
+      <p style="margin-bottom:1.2rem;">Agent skills teach your coding agent <em style="font-style:normal; color:var(--text);">how</em> to work. Install them with <code>npx skills add</code>.</p>
+      <ul>
+        <li><strong class="green">Superpowers</strong> (<code>obra/superpowers</code>) &mdash; brainstorming, TDD, planning, debugging. A full dev workflow.</li>
+        <li><strong class="blue">Grilling</strong> (<code>mattpocock/skills@grilling</code>) &mdash; the agent interviews you about every aspect of your plan, one question at a time, until the design is solid.</li>
+      </ul>
+      <p style="margin-top:1.2rem;">Use skills to help write your own skills more effectively &mdash; Superpowers enforces TDD and planning, Grilling sharpens your spec before you start.</p>
+      <p class="bottom-note">Browse more at <code>skills.sh</code> &mdash; or <code>npx skills find &lt;query&gt;</code></p>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: Keep going -->
+  <div class="slide">
+    <div class="slide-inner" style="text-align:center;">
+      <h1>Open a <em>PR</em><br>before you leave.</h1>
+      <p style="font-size:1.3rem; color:var(--muted); margin-top:1.5rem;">Unfinished is fine. Unpushed is lost.</p>
+      <p style="margin-top:1.5rem; font-size:1rem; color:var(--muted);"><span class="green">github.com/ClawBio/ClawBio</span> &nbsp;&middot;&nbsp; <span class="green">clawbio.ai</span></p>
+    </div>
+  </div>
+
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter"></div>
+<div class="talk-handle">clawbio.ai</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+const total = slides.length;
+function show(n) {
+  if (n < 0 || n >= total) return;
+  slides[current].classList.remove('active');
+  current = n;
+  slides[current].classList.add('active');
+  document.getElementById('progress').style.width = ((current + 1) / total * 100) + '%';
+  document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
+}
+function revealItems(slide) {
+  return Array.from(slide.querySelectorAll('.reveal li:not(.visible)'));
+}
+function advance() {
+  const pending = revealItems(slides[current]);
+  if (pending.length > 0) { pending[0].classList.add('visible'); return; }
+  show(current + 1);
+}
+function retreat() {
+  const visible = Array.from(slides[current].querySelectorAll('.reveal li.visible'));
+  if (visible.length > 0) { visible[visible.length - 1].classList.remove('visible'); return; }
+  show(current - 1);
+  const prev = slides[current].querySelectorAll('.reveal li');
+  prev.forEach(li => li.classList.add('visible'));
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); advance(); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); retreat(); }
+  if (e.key === 'Home') { e.preventDefault(); show(0); }
+  if (e.key === 'End') {
+    e.preventDefault(); show(total - 1);
+    slides[current].querySelectorAll('.reveal li').forEach(li => li.classList.add('visible'));
+  }
+});
+let tsx = 0;
+document.addEventListener('touchstart', e => { tsx = e.changedTouches[0].screenX; });
+document.addEventListener('touchend', e => { const dx = e.changedTouches[0].screenX - tsx; if (dx < -50) advance(); if (dx > 50) retreat(); });
+document.addEventListener('click', e => { if (e.target.closest('a, pre, code')) return; if (e.clientX > window.innerWidth / 2) advance(); else retreat(); });
+show(0);
+</script>
+
+</body>
+</html>

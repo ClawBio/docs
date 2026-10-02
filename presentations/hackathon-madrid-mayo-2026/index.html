@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hackathon ClawBio Madrid | Agentes de IA para Salud y Genómica | 20 mayo 2026</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+      --border: #30363d; --text: #e6edf3; --muted: #8b949e;
+      --accent: #3fb950; --accent2: #58a6ff; --warn: #d29922; --danger: #f85149;
+    }
+    html, body { height: 100%; overflow: hidden; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+
+    .deck { position: relative; width: 100%; height: 100%; }
+    .slide {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      padding: 4rem 6rem; opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+    }
+    .slide.active { opacity: 1; pointer-events: auto; }
+    .slide-inner { max-width: 960px; width: 100%; }
+
+    h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    h1 em { font-style: normal; color: var(--accent); }
+    h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; margin-bottom: 1rem; color: var(--accent); }
+    h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.6rem; color: var(--accent2); }
+    p { font-size: 1.15rem; line-height: 1.7; color: var(--muted); margin-bottom: 0.8rem; }
+    p.big { font-size: 1.35rem; }
+    .bright { color: var(--text); }
+    .green { color: var(--accent); }
+    .blue { color: var(--accent2); }
+    .yellow { color: var(--warn); }
+    .red { color: var(--danger); }
+    strong { color: var(--text); }
+
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { font-size: 1.1rem; line-height: 1.7; color: var(--muted); margin-bottom: 0.5rem; }
+    li strong { color: var(--text); }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin: 1.5rem 0; }
+    .stat { text-align: center; padding: 1.5rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; }
+    .stat .num { font-size: 2.5rem; font-weight: 800; color: var(--accent); display: block; }
+    .stat .label { font-size: 0.85rem; color: var(--muted); margin-top: 0.3rem; }
+
+    .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1rem 0; }
+    .card-grid.three { grid-template-columns: repeat(3, 1fr); }
+    .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.5rem; }
+    .card h3 { margin-bottom: 0.4rem; }
+    .card p { font-size: 0.95rem; margin-bottom: 0; }
+
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th { text-align: left; padding: 0.7rem 1rem; background: var(--bg2); color: var(--text); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid var(--border); }
+    td { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 1rem; }
+
+    .pipeline { display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin: 2rem 0; }
+    .pipeline-step { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 0.8rem 1.2rem; font-weight: 600; font-size: 1rem; color: var(--text); }
+    .pipeline-step.active-step { border-color: var(--accent); color: var(--accent); background: rgba(63,185,80,0.08); }
+    .pipeline-arrow { color: var(--muted); font-size: 1.3rem; }
+
+    .callout { border-left: 4px solid var(--accent); background: rgba(63,185,80,0.06); padding: 1.2rem 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+    .callout.warn { border-left-color: var(--warn); background: rgba(210,153,34,0.06); }
+    .callout.danger { border-left-color: var(--danger); background: rgba(248,81,73,0.06); }
+    .callout p { margin-bottom: 0; }
+
+    blockquote { border-left: 4px solid var(--accent2); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(88,166,255,0.04); border-radius: 0 8px 8px 0; }
+    blockquote p { font-size: 1.05rem; font-style: italic; color: var(--text); margin-bottom: 0; }
+
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1rem 0; }
+    .compare-col { padding: 1.5rem; border-radius: 10px; }
+    .compare-col.old { background: rgba(248,81,73,0.06); border: 1px solid rgba(248,81,73,0.2); }
+    .compare-col.new { background: rgba(63,185,80,0.06); border: 1px solid rgba(63,185,80,0.2); }
+
+    .center { text-align: center; }
+    .center h1, .center h2, .center p { text-align: center; }
+
+    .controls { position: fixed; bottom: 1.5rem; right: 2rem; display: flex; gap: 0.5rem; z-index: 100; }
+    .controls button { background: var(--bg2); border: 1px solid var(--border); color: var(--text); padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
+    .controls button:hover { background: var(--bg3); }
+    .controls button:disabled { opacity: 0.3; cursor: default; }
+    .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); z-index: 100; transition: width 0.3s; }
+    .counter { position: fixed; bottom: 1.7rem; left: 2rem; font-size: 0.85rem; color: var(--muted); z-index: 100; }
+
+    .title-slide { background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(63,185,80,0.12) 0%, transparent 70%); }
+    .title-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(63,185,80,0.15); border: 1px solid rgba(63,185,80,0.4); color: var(--accent); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 1rem; border-radius: 999px; margin-bottom: 1.5rem; }
+    .title-badge img { height: 1.4rem; width: 1.4rem; border-radius: 50%; object-fit: cover; }
+    .section-slide { background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(88,166,255,0.08) 0%, transparent 70%); }
+
+    @media (max-width: 768px) {
+      .slide { padding: 2rem; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .card-grid, .card-grid.three { grid-template-columns: 1fr; }
+      .compare { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter"></div>
+
+<div class="deck" id="deck">
+
+  <!-- 1: Title -->
+  <div class="slide title-slide center active" data-n="1">
+    <div class="slide-inner">
+      <div class="title-badge"><img src="../../assets/clawbio-logo.jpeg" alt="ClawBio logo">Hackathon ClawBio Madrid</div>
+      <h1>Genómica <em>Agéntica</em></h1>
+      <p class="big">Agentes de IA para Salud y Genómica</p>
+      <p>Dr. Manuel Corpas, University of Westminster, 20 de mayo de 2026, Madrid</p>
+    </div>
+  </div>
+
+  <!-- 2: Agentic engineering = new frontier -->
+  <div class="slide" data-n="2">
+    <div class="slide-inner">
+      <h2>Ingeniería agéntica: la nueva frontera</h2>
+      <p class="big bright">La biología se ha convertido en una ciencia saturada de datos. Las herramientas para analizarlos no han seguido el ritmo.</p>
+      <p>Un solo genoma humano produce tres mil millones de pares de bases. La interpretación clínica requiere alineamiento, llamada de variantes, anotación funcional, cruce con la literatura y síntesis en informes accionables. Cada paso depende de software especializado con sus propias dependencias, historiales de versión y requisitos de configuración.</p>
+      <p>Los gestores de flujos de trabajo (Nextflow, Snakemake, Galaxy) surgieron porque la orquestación manual es insostenible. Aun así, un biólogo que quiera analizar sus propios datos de secuenciación debe aprender a programar, contratar a alguien que sepa, o depender de interfaces gráficas que pueden no soportar el análisis que necesita.</p>
+    </div>
+  </div>
+
+  <!-- 3: The models are good enough -->
+  <div class="slide" data-n="3">
+    <div class="slide-inner">
+      <h2>Los modelos ya son suficientemente buenos. El arnés, no.</h2>
+      <p>Los LLM modernos pueden escribir, depurar y ejecutar código. Pueden planificar operaciones de varios pasos, adaptarse en función de resultados intermedios y coordinar decenas de herramientas.</p>
+      <p>Pero un LLM de propósito general generando código de bioinformática desde cero es poco fiable. La salida varía entre sesiones. Carece de la especificidad que los expertos del dominio incorporan a los flujos de trabajo durante años. Alucina asociaciones gen-fármaco e inventa clasificaciones de variantes.</p>
+      <div class="callout danger">
+        <p><strong>El problema no es el modelo.</strong> El problema es el arnés: qué restringe al modelo, qué herramientas puede invocar, qué barreras evitan errores silenciosos. La ingeniería agéntica es la disciplina de construir ese arnés.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4: What is agentic AI -->
+  <div class="slide" data-n="4">
+    <div class="slide-inner">
+      <h2>¿Qué es la IA agéntica?</h2>
+      <p>La primera ola de LLM en ciencias de la vida fue <strong>recuperación de información</strong>: resumir artículos, responder preguntas sobre rutas metabólicas, extraer datos estructurados de texto. Útil, pero incremental.</p>
+      <p>La segunda ola es cualitativamente distinta. Cuando se conectan a sistemas de archivos, bases de datos y herramientas de línea de comandos, los LLM se convierten en <strong>agentes autónomos</strong> que planifican operaciones de varios pasos, las ejecutan y se adaptan en función de resultados intermedios.</p>
+      <div class="callout">
+        <p><strong>El cambio:</strong> de una IA que <em>te cuenta cosas</em> a una IA que <em>hace cosas</em>. El papel del investigador pasa de construir el análisis a evaluarlo.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5: What is an agent -->
+  <div class="slide" data-n="5">
+    <div class="slide-inner">
+      <h2>¿Qué es un agente?</h2>
+      <blockquote>
+        <p>La genómica agéntica es el uso de agentes de IA autónomos, impulsados por grandes modelos de lenguaje y operando dentro de bibliotecas de skills restringidas al dominio, para descubrir, planificar, ejecutar y refinar de forma iterativa análisis genómicos de varios pasos, en los que el agente decide en tiempo de ejecución sobre la selección de herramientas, la parametrización, el manejo de errores y la evaluación de resultados.</p>
+      </blockquote>
+      <p style="font-size:0.9rem;color:var(--muted);margin-top:0.5rem;">Corpas, Fatumo, Guio. "Agentic Genomics: From Pipeline Automation to Autonomous Validation."</p>
+      <p style="margin-top:1rem;">Cuatro condiciones necesarias: <strong>autonomía</strong> (decisiones en tiempo de ejecución), <strong>restricción al dominio</strong> (bibliotecas de skills, no código ad hoc), <strong>refinamiento iterativo</strong> (diagnóstico y auto-reparación de errores) y <strong>mediación en lenguaje natural</strong> (no se requiere programar).</p>
+    </div>
+  </div>
+
+  <!-- 6: How does it work -->
+  <div class="slide" data-n="6">
+    <div class="slide-inner">
+      <h2>¿Cómo funciona?</h2>
+      <div class="compare">
+        <div class="compare-col old">
+          <h3 class="red">Flujo tradicional</h3>
+          <ul>
+            <li>El investigador escribe el código</li>
+            <li>Configura las herramientas a mano</li>
+            <li>Ejecuta el pipeline</li>
+            <li>Interpreta los resultados</li>
+          </ul>
+          <p><strong class="red">Cuello de botella: producir código</strong></p>
+        </div>
+        <div class="compare-col new">
+          <h3 class="green">Flujo agéntico</h3>
+          <ul>
+            <li>El investigador describe la intención en lenguaje natural</li>
+            <li>El agente descubre y ejecuta skills de una biblioteca</li>
+            <li>El agente gestiona errores y se adapta</li>
+            <li>El investigador valida los resultados</li>
+          </ul>
+          <p><strong class="green">Cuello de botella: validación y juicio</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7: Why is it useful -->
+  <div class="slide" data-n="7">
+    <div class="slide-inner">
+      <h2>¿Por qué resulta útil?</h2>
+      <table>
+        <thead><tr><th>Métrica</th><th>Dirigido por persona</th><th>Mediado por agente</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Tiempo de puesta en marcha</strong></td><td>2 a 4 horas</td><td>5 a 15 minutos</td></tr>
+          <tr><td><strong>Supervisión requerida</strong></td><td>Continua</td><td>Mínima (el agente gestiona errores)</td></tr>
+          <tr><td><strong>Reproducibilidad</strong></td><td>Variable</td><td>Alta (la especificación del skill es fija)</td></tr>
+          <tr><td><strong>Recuperación ante errores</strong></td><td>Depuración manual</td><td>Diagnóstico y reparación automáticos</td></tr>
+          <tr><td><strong>Experiencia previa necesaria</strong></td><td>Formación en bioinformática</td><td>Conocimiento del dominio para validar</td></tr>
+          <tr><td><strong>Modo principal de fallo</strong></td><td>Errores de configuración, conflictos de versión</td><td>Errores silenciosos con apariencia plausible</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.9rem;">Análisis comparativo sobre flujos de exoma y scRNA-seq (Corpas, Fatumo, Guio).</p>
+    </div>
+  </div>
+
+  <!-- 8: Section - Genomics -->
+  <div class="slide section-slide center" data-n="8">
+    <div class="slide-inner">
+      <h1>¿Cómo se aplica esto a la <em>genómica</em>?</h1>
+    </div>
+  </div>
+
+  <!-- 9: What is ClawBio -->
+  <div class="slide" data-n="9">
+    <div class="slide-inner">
+      <h2>¿Qué es ClawBio?</h2>
+      <p class="big bright">Un toolkit open-source de skills para agentes de IA aplicados al análisis genómico.</p>
+      <p>Un skill es una unidad autocontenida y versionada de funcionalidad bioinformática: un contrato SKILL.md que encapsula código, configuración, referencias a datos, especificaciones de entrada y salida, y suites de tests. La IA lee el contrato; nunca lo sobrescribe.</p>
+      <div class="stats" style="margin-top:1rem;">
+        <div class="stat"><span class="num">40+</span><span class="label">skills bioinformáticos</span></div>
+        <div class="stat"><span class="num">750+</span><span class="label">estrellas en GitHub</span></div>
+        <div class="stat"><span class="num">200</span><span class="label">plazas hoy en Madrid</span></div>
+        <div class="stat"><span class="num">0</span><span class="label">coste</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10: Hackathon tracks -->
+  <div class="slide" data-n="10">
+    <div class="slide-inner">
+      <h2>Tracks del hackathon de hoy</h2>
+      <div class="card-grid three" style="margin-top:1rem;">
+        <div class="card">
+          <h3>Desarrollo de nuevos skills</h3>
+          <p>Añade un skill bioinformático a ClawBio: anotación de variantes, análisis de rutas, informes clínicos, farmacogenómica, o tu propia idea.</p>
+        </div>
+        <div class="card">
+          <h3>Flujos de trabajo con agentes</h3>
+          <p>Encadena varios skills para resolver una pregunta genómica de varios pasos, de la muestra al informe.</p>
+        </div>
+        <div class="card">
+          <h3>Equidad y acceso</h3>
+          <p>Usa el framework HEIM de puntuación de equidad para auditar brechas de representación en datasets genómicos.</p>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:1rem;">
+        <p><strong>No se requiere experiencia previa en bioinformática.</strong> Emparejamos expertos del dominio con personas que saben programar. Trae portátil y ganas de aprender.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11: Limitations -->
+  <div class="slide" data-n="11">
+    <div class="slide-inner">
+      <h2>¿Cuáles son las limitaciones?</h2>
+      <p>La genómica agéntica reduce la barrera para <em>generar</em> análisis. No reduce la barrera para <em>evaluarlos</em>.</p>
+      <div class="card-grid" style="margin-top:1rem;">
+        <div class="card">
+          <h3>Errores silenciosos plausibles</h3>
+          <p>El modo de fallo principal: resultados que parecen correctos pero no lo son. Un skill devolvió "todo normal" en farmacogenómica para un archivo de entrada vacío.</p>
+        </div>
+        <div class="card">
+          <h3>Alucinación</h3>
+          <p>Los agentes pueden citar asociaciones gen-enfermedad inexistentes, fabricar referencias o generar anotaciones que mezclan loci no relacionados.</p>
+        </div>
+        <div class="card">
+          <h3>Sesgo de equidad</h3>
+          <p>Los agentes recurren por defecto a recursos de ancestría europea. El 86% de los datos GWAS son europeos. La genómica agéntica puede automatizar sesgos existentes a escala.</p>
+        </div>
+        <div class="card">
+          <h3>Brecha de validación</h3>
+          <p>La experiencia del dominio que se construye en años no se atajan con IA. Un usuario novato no detectará los errores que sí vería un analista experimentado.</p>
+        </div>
+      </div>
+      <div class="callout warn" style="margin-top:1rem;">
+        <p><strong>La democratización es real, pero parcial.</strong> Amplía la capacidad de producir; no amplía la capacidad de juzgar.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12: Democratising genomics -->
+  <div class="slide" data-n="12">
+    <div class="slide-inner">
+      <h2>Democratizando la genómica</h2>
+      <p class="big bright">La barrera de infraestructura ya no existe.</p>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Sin HPC</h3>
+          <p>Todo corre en tu propio portátil o en Google Colab gratuito.</p>
+        </div>
+        <div class="card">
+          <h3>Sin acuerdos de acceso a datos</h3>
+          <p>Las estadísticas resumen son públicas. Sin solicitudes, sin esperas.</p>
+        </div>
+        <div class="card">
+          <h3>Sin equipo de bioinformática</h3>
+          <p>ClawBio envuelve el pipeline completo. Un comando por análisis.</p>
+        </div>
+        <div class="card">
+          <h3>Sin coste</h3>
+          <p>Licencia MIT. Bases de datos públicas. Cero gasto en infraestructura.</p>
+        </div>
+      </div>
+      <div class="callout">
+        <p><strong>Un investigador en Lima, Kampala o Madrid puede correr los mismos análisis que uno en el Broad Institute. Hoy.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 13: Global South -->
+  <div class="slide" data-n="13">
+    <div class="slide-inner">
+      <h2>Pensado con el Sur Global en mente</h2>
+      <p>Este hackathon se apoya en investigación desarrollada con <strong>Prof. Segun Fatumo</strong> (Queen Mary University of London, PHURI) y la red LatinOMICS, en torno a eliminar las barreras que mantienen la genómica concentrada en instituciones ricas:</p>
+      <div class="card-grid three" style="margin-top:1rem;">
+        <div class="card">
+          <h3>Infraestructura HPC</h3>
+          <p>Reemplazada por portátil o Google Colab. Cero setup, cero coste, funciona en cualquier sitio con navegador.</p>
+        </div>
+        <div class="card">
+          <h3>Acceso a datos</h3>
+          <p>Las estadísticas resumen públicas cubren la mayoría de análisis comunes. Sin filtros institucionales.</p>
+        </div>
+        <div class="card">
+          <h3>Formación</h3>
+          <p>Talleres abiertos, materiales abiertos, código abierto. Cualquier investigador puede correr análisis con calidad publicable.</p>
+        </div>
+      </div>
+      <div class="callout">
+        <p><strong>Mañana y pasado, en esta misma sede, el III Congreso Español de Medicina Genómica incluye la sesión LatinOMICS 2 completa y la Declaración de Medellín.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14: Section - Hands-on -->
+  <div class="slide section-slide center" data-n="14">
+    <div class="slide-inner">
+      <p class="big" style="color:var(--accent2);">Manos a la obra</p>
+      <h1>¿Cómo <em>empiezo</em>?</h1>
+      <p class="big">Instala ClawBio y entra en el grupo de WhatsApp</p>
+    </div>
+  </div>
+
+  <!-- 15: Schedule -->
+  <div class="slide" data-n="15">
+    <div class="slide-inner">
+      <h2>Programa de hoy</h2>
+      <table>
+        <thead><tr><th>Hora</th><th>Qué pasa</th></tr></thead>
+        <tbody>
+          <tr><td><strong>12:00</strong></td><td>Llegada y registro</td></tr>
+          <tr><td><strong>12:30</strong></td><td>Introducción a ClawBio y briefing de los retos</td></tr>
+          <tr><td><strong>13:00</strong></td><td>Formación de equipos y comienza el hackathon</td></tr>
+          <tr><td><strong>15:00</strong></td><td>Pausa café</td></tr>
+          <tr><td><strong>15:15</strong></td><td>Continúa el hackathon</td></tr>
+          <tr><td><strong>16:30</strong></td><td>Demos y evaluación</td></tr>
+          <tr><td><strong>17:30</strong></td><td>Premios y networking</td></tr>
+          <tr><td><strong>18:00</strong></td><td>Cierre</td></tr>
+        </tbody>
+      </table>
+      <div class="callout">
+        <p><strong>Premios:</strong> mejor nuevo skill, mejor flujo de trabajo con agentes y mejor hack de equidad. Detalles a las 16:30.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 16: Getting started -->
+  <div class="slide" data-n="16">
+    <div class="slide-inner">
+      <h2>Cómo empezar ahora mismo</h2>
+      <p class="big bright">Tres enlaces, abre cada uno en una pestaña nueva:</p>
+      <div class="card-grid three" style="margin-top:1rem;">
+        <div class="card">
+          <h3>Introducción a ClawBio</h3>
+          <p>Presentación técnica en castellano sobre genómica agéntica, validación y el benchmark de farmacogenómica.</p>
+          <p style="margin-top:0.5rem;"><a href="https://docs.clawbio.ai/presentations/genomica-agentica-es/" style="color:var(--accent2)">presentations/genomica-agentica-es</a></p>
+        </div>
+        <div class="card">
+          <h3>Taller práctico</h3>
+          <p>Anota un genoma humano real en Google Colab. Sin instalación. En castellano.</p>
+          <p style="margin-top:0.5rem;"><a href="https://docs.clawbio.ai/tutorials/variant-interpretation-workshop-es/" style="color:var(--accent2)">tutorials/variant-interpretation-workshop-es</a></p>
+        </div>
+        <div class="card">
+          <h3>Repositorio de ClawBio</h3>
+          <p>El código que vais a extender hoy. Pon estrella, clona, instala.</p>
+          <p style="margin-top:0.5rem;"><a href="https://github.com/ClawBio/ClawBio" style="color:var(--accent2)">github.com/ClawBio/ClawBio</a></p>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:1rem;">
+        <p><strong>Grupo de WhatsApp del hackathon:</strong> <a href="https://chat.whatsapp.com/FInuUxJa00G7Ql3T28kW4I" style="color:var(--accent2)">chat.whatsapp.com/FInuUxJa00G7Ql3T28kW4I</a>. Comparte ahí cualquier duda y los enlaces a tu repo.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 17: Take-home messages -->
+  <div class="slide" data-n="17">
+    <div class="slide-inner">
+      <h2>Mensajes para llevarte a casa</h2>
+      <ol>
+        <li><strong>La IA acelera los pasos mecánicos</strong>, pero la experiencia del dominio en biología molecular, genética y contexto clínico sigue siendo imprescindible.</li>
+        <li><strong>La farmacogenómica salva vidas hoy.</strong> Interacciones como warfarina/CYP2C9/VKORC1 ya están implementadas en hospitales.</li>
+        <li><strong>"Aún no lo sabemos" es una respuesta válida.</strong> Más de la mitad de las variantes son de significado incierto. La incertidumbre honesta es una fortaleza.</li>
+        <li><strong>El análisis transancestral no es opcional.</strong> Comprueba siempre si los hallazgos se transfieren entre poblaciones.</li>
+        <li><strong>La infraestructura ya no es la barrera.</strong> ClawBio en tu portátil más Google Colab dan análisis de calidad publicable, gratis, en cualquier sitio.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- 18: Community -->
+  <div class="slide" data-n="18">
+    <div class="slide-inner center">
+      <h2>Únete a la comunidad</h2>
+      <div class="card-grid three" style="margin-top:1rem;">
+        <div class="card">
+          <h3>WhatsApp</h3>
+          <p>Únete al grupo para dudas, actualizaciones y futuros eventos.</p>
+          <p style="margin-top:0.5rem;"><a href="https://chat.whatsapp.com/FInuUxJa00G7Ql3T28kW4I" style="color:var(--accent2)">Grupo de WhatsApp</a></p>
+        </div>
+        <div class="card">
+          <h3>Discord</h3>
+          <p>Habla con RoboTerri, comparte resultados y colabora con otros usuarios.</p>
+          <p style="margin-top:0.5rem;"><a href="https://discord.gg/DHpmptyv" style="color:var(--accent2)">Servidor de Discord</a></p>
+        </div>
+        <div class="card">
+          <h3>GitHub</h3>
+          <p>Pon estrella al repo, abre issues, contribuye skills. Todo bajo licencia MIT.</p>
+          <p style="margin-top:0.5rem;"><a href="https://github.com/ClawBio/ClawBio" style="color:var(--accent2)">ClawBio/ClawBio</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 19: Y mañana, el congreso -->
+  <div class="slide" data-n="19">
+    <div class="slide-inner">
+      <h2>Mañana y pasado, en esta misma sede</h2>
+      <p class="big bright">III Congreso Español de Medicina Genómica, 21 y 22 de mayo.</p>
+      <p>Si ya estás en Madrid, dos días más cubren tres tracks: medicina genómica clínica, LatinOMICS y IA con infraestructuras europeas.</p>
+      <div class="card-grid" style="margin-top:1rem;">
+        <div class="card">
+          <h3>Ponentes destacados</h3>
+          <p>Ángel Carracedo (USC), Alfonso Valencia (BSC), Khalid Fakhro (Sidra Medicine, Qatar), Carmen Ayuso (Fundación Jiménez Díaz), Pablo Lapunzina (La Paz), Alfredo Iacoangeli (KCL), Silvia Alvarez (Regeneron).</p>
+        </div>
+        <div class="card">
+          <h3>Precios reducidos</h3>
+          <p>Presencial 95 EUR, online 60 EUR. Precio único, sin categorías.</p>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:1rem;">
+        <p><strong>Inscripción:</strong> <a href="https://congresogenomica.com/inscripcion/" style="color:var(--accent2)">congresogenomica.com/inscripcion</a> &nbsp;|&nbsp; <strong>Programa:</strong> <a href="https://congresogenomica.com/programa_congreso/" style="color:var(--accent2)">congresogenomica.com/programa_congreso</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 20: Resources -->
+  <div class="slide center" data-n="20">
+    <div class="slide-inner">
+      <h2>Recursos</h2>
+      <table>
+        <thead><tr><th>Recurso</th><th>Enlace</th></tr></thead>
+        <tbody>
+          <tr><td>Esta presentación (hackathon)</td><td><a href="https://docs.clawbio.ai/presentations/hackathon-madrid-mayo-2026/" style="color:var(--accent2)">presentations/hackathon-madrid-mayo-2026</a></td></tr>
+          <tr><td>Introducción a ClawBio (charla técnica)</td><td><a href="https://docs.clawbio.ai/presentations/genomica-agentica-es/" style="color:var(--accent2)">presentations/genomica-agentica-es</a></td></tr>
+          <tr><td>Taller práctico (Colab + código)</td><td><a href="https://docs.clawbio.ai/tutorials/variant-interpretation-workshop-es/" style="color:var(--accent2)">tutorials/variant-interpretation-workshop-es</a></td></tr>
+          <tr><td>ClawBio en GitHub</td><td><a href="https://github.com/ClawBio/ClawBio" style="color:var(--accent2)">github.com/ClawBio/ClawBio</a></td></tr>
+          <tr><td>Corpasome (Zenodo)</td><td><a href="https://doi.org/10.5281/zenodo.19297389" style="color:var(--accent2)">doi:10.5281/zenodo.19297389</a></td></tr>
+          <tr><td>Grupo de WhatsApp</td><td><a href="https://chat.whatsapp.com/FInuUxJa00G7Ql3T28kW4I" style="color:var(--accent2)">WhatsApp</a></td></tr>
+          <tr><td>Congreso Genómica 2026</td><td><a href="https://congresogenomica.com/inscripcion/" style="color:var(--accent2)">congresogenomica.com</a></td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:2rem;"><strong class="green" style="font-size:1.3rem;">github.com/ClawBio/ClawBio</strong></p>
+    </div>
+  </div>
+
+</div>
+
+<div class="controls">
+  <button id="prev" onclick="go(-1)">&larr; Atrás</button>
+  <button id="next" onclick="go(1)">Siguiente &rarr;</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  function show(n) {
+    slides.forEach((s, i) => s.classList.toggle('active', i === n));
+    document.getElementById('progress').style.width = ((n + 1) / total * 100) + '%';
+    document.getElementById('counter').textContent = (n + 1) + ' / ' + total;
+    document.getElementById('prev').disabled = n === 0;
+    document.getElementById('next').disabled = n === total - 1;
+  }
+  function go(dir) { current = Math.max(0, Math.min(total - 1, current + dir)); show(current); }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+    if (e.key === 'Home') { e.preventDefault(); current = 0; show(0); }
+    if (e.key === 'End') { e.preventDefault(); current = total - 1; show(current); }
+  });
+  let touchX = 0;
+  document.addEventListener('touchstart', e => touchX = e.touches[0].clientX);
+  document.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - touchX; if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1); });
+  show(0);
+</script>
+</body>
+</html>
