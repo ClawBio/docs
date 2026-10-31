@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg [
+<!ENTITY middot "&#183;"><!ENTITY rarr "&#8594;"><!ENTITY times "&#215;"><!ENTITY mdash "&#8212;"><!ENTITY ndash "&#8211;"><!ENTITY approx "&#8776;">
+]>
+<svg width="1000" height="360" viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <style>
+                .lbl { font-family: 'Segoe UI', sans-serif; }
+            </style>
+        </defs>
+
+        <!-- ===== OLD WORKFLOW LANE ===== -->
+        <text x="30" y="34" class="lbl" fill="#adbac7" font-size="15" font-weight="700" letter-spacing="0.06em">OLD WORKFLOW &middot; the human writes the code</text>
+
+        <!-- box 1 -->
+        <rect x="30" y="50" width="150" height="62" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+        <text x="105" y="86" text-anchor="middle" class="lbl" fill="#e6edf3" font-size="14">Research question</text>
+        <!-- arrow -->
+        <line x1="180" y1="81" x2="238" y2="81" stroke="#6e7681" stroke-width="2"/>
+        <polygon points="245,81 236,76 236,86" fill="#6e7681"/>
+        <!-- box 2: OLD BOTTLENECK -->
+        <rect x="245" y="46" width="150" height="70" rx="8" fill="rgba(227,179,65,0.10)" stroke="#e3b341" stroke-width="2.5"/>
+        <text x="320" y="73" text-anchor="middle" class="lbl" fill="#e6edf3" font-size="14" font-weight="600">Write &amp; debug</text>
+        <text x="320" y="91" text-anchor="middle" class="lbl" fill="#e6edf3" font-size="14" font-weight="600">pipeline</text>
+        <text x="320" y="135" text-anchor="middle" class="lbl" fill="#e3b341" font-size="12" font-weight="700">SLOW &middot; expensive</text>
+        <!-- arrow -->
+        <line x1="395" y1="81" x2="453" y2="81" stroke="#6e7681" stroke-width="2"/>
+        <polygon points="460,81 451,76 451,86" fill="#6e7681"/>
+        <!-- box 3 -->
+        <rect x="460" y="50" width="150" height="62" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+        <text x="535" y="86" text-anchor="middle" class="lbl" fill="#e6edf3" font-size="14">Run</text>
+        <!-- arrow -->
+        <line x1="610" y1="81" x2="668" y2="81" stroke="#6e7681" stroke-width="2"/>
+        <polygon points="675,81 666,76 666,86" fill="#6e7681"/>
+        <!-- box 4 -->
+        <rect x="675" y="50" width="150" height="62" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+        <text x="750" y="86" text-anchor="middle" class="lbl" fill="#e6edf3" font-size="14">Result</text>
+        <!-- outcome note -->
+        <text x="845" y="74" class="lbl" fill="#adbac7" font-size="13" font-weight="700">If wrong:</text>
+        <text x="845" y="93" class="lbl" fill="#6e7681" font-size="12.5">it crashes &mdash;</text>
+        <text x="845" y="109" class="lbl" fill="#6e7681" font-size="12.5">fails loudly</text>
+
+        <!-- ===== bottleneck-moves connector ===== -->
+        <path d="M 320 118 C 320 178, 750 178, 750 212" fill="none" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="7 5"/>
+        <polygon points="750,214 743,203 757,203" fill="#58a6ff"/>
+        <rect x="398" y="158" width="204" height="30" rx="15" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/>
+        <text x="500" y="178" text-anchor="middle" class="lbl" fill="#58a6ff" font-size="13" font-weight="700">the bottleneck moves to the end</text>
+
+        <!-- ===== NEW WORKFLOW LANE ===== -->
+        <text x="30" y="244" class="lbl" fill="#56d364" font-size="15" font-weight="700" letter-spacing="0.06em">NEW WORKFLOW &middot; the agent writes the code</text>
+
+        <!-- box 1 -->
+        <rect x="30" y="260" width="150" height="62" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+        <text x="105" y="296" text-anchor="middle" class="lbl" fill="#e6edf3" font-size="14">Research question</text>
+        <line x1="180" y1="291" x2="238" y2="291" stroke="#6e7681" stroke-width="2"/>
+        <polygon points="245,291 236,286 236,296" fill="#6e7681"/>
+        <!-- box 2: now fast -->
+        <rect x="245" y="260" width="150" height="62" rx="8" fill="rgba(86,211,100,0.08)" stroke="#56d364" stroke-width="1.5"/>
+        <text x="320" y="288" text-anchor="middle" class="lbl" fill="#e6edf3" font-size="14" font-weight="600">Agent writes</text>
+        <text x="320" y="306" text-anchor="middle" class="lbl" fill="#56d364" font-size="12.5" font-weight="700">minutes</text>
+        <line x1="395" y1="291" x2="453" y2="291" stroke="#6e7681" stroke-width="2"/>
+        <polygon points="460,291 451,286 451,296" fill="#6e7681"/>
+        <!-- box 3 -->
+        <rect x="460" y="260" width="150" height="62" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+        <text x="535" y="296" text-anchor="middle" class="lbl" fill="#e6edf3" font-size="14">Runs cleanly</text>
+        <line x1="610" y1="291" x2="668" y2="291" stroke="#6e7681" stroke-width="2"/>
+        <polygon points="675,291 666,286 666,296" fill="#6e7681"/>
+        <!-- box 4: NEW BOTTLENECK -->
+        <rect x="675" y="256" width="150" height="70" rx="8" fill="rgba(255,161,152,0.10)" stroke="#ffa198" stroke-width="2.5"/>
+        <text x="750" y="283" text-anchor="middle" class="lbl" fill="#e6edf3" font-size="14" font-weight="600">Validate &amp;</text>
+        <text x="750" y="301" text-anchor="middle" class="lbl" fill="#e6edf3" font-size="14" font-weight="600">trust output</text>
+        <text x="750" y="345" text-anchor="middle" class="lbl" fill="#ffa198" font-size="12" font-weight="700">THE NEW BOTTLENECK</text>
+        <!-- outcome note -->
+        <text x="845" y="284" class="lbl" fill="#ffa198" font-size="13" font-weight="700">If wrong:</text>
+        <text x="845" y="303" class="lbl" fill="#ffa198" font-size="12.5">runs clean,</text>
+        <text x="845" y="319" class="lbl" fill="#ffa198" font-size="12.5">looks right</text>
+    </svg>

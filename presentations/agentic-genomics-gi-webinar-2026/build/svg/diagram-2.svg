@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg [
+<!ENTITY middot "&#183;"><!ENTITY rarr "&#8594;"><!ENTITY times "&#215;"><!ENTITY mdash "&#8212;"><!ENTITY ndash "&#8211;"><!ENTITY approx "&#8776;">
+]>
+<svg width="1000" height="300" viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg">
+        <style>.lbl { font-family: 'Segoe UI', sans-serif; }</style>
+
+        <!-- input box -->
+        <text x="135" y="118" text-anchor="middle" class="lbl" fill="#58a6ff" font-size="13" font-weight="700" letter-spacing="0.05em">YOU ADD</text>
+        <rect x="30" y="124" width="210" height="78" rx="10" fill="rgba(88,166,255,0.10)" stroke="#58a6ff" stroke-width="2"/>
+        <text x="135" y="156" text-anchor="middle" class="lbl" fill="#e6edf3" font-size="15" font-weight="600">The correct CPIC</text>
+        <text x="135" y="177" text-anchor="middle" class="lbl" fill="#e6edf3" font-size="15" font-weight="600">guideline</text>
+        <text x="135" y="194" text-anchor="middle" class="lbl" fill="#adbac7" font-size="12">as free-text context</text>
+
+        <!-- branch lines -->
+        <path d="M 240 163 C 370 163, 400 78, 538 78" fill="none" stroke="#56d364" stroke-width="2.5"/>
+        <polygon points="542,78 531,72 531,84" fill="#56d364"/>
+        <path d="M 240 163 C 370 163, 400 228, 538 228" fill="none" stroke="#ffa198" stroke-width="2.5"/>
+        <polygon points="542,228 531,222 531,234" fill="#ffa198"/>
+        <text x="392" y="104" text-anchor="middle" class="lbl" fill="#6e7681" font-size="12" font-style="italic">most cases</text>
+        <text x="392" y="206" text-anchor="middle" class="lbl" fill="#6e7681" font-size="12" font-style="italic">a minority</text>
+
+        <!-- green outcome -->
+        <rect x="540" y="42" width="430" height="72" rx="10" fill="rgba(86,211,100,0.08)" stroke="#56d364" stroke-width="1.8"/>
+        <text x="566" y="86" class="lbl" fill="#56d364" font-size="26" font-weight="800">&#x2713;</text>
+        <text x="600" y="74" class="lbl" fill="#e6edf3" font-size="15" font-weight="600">Average accuracy went up</text>
+        <text x="600" y="96" class="lbl" fill="#adbac7" font-size="13">the headline number looks better</text>
+
+        <!-- red outcome (the surprise) -->
+        <rect x="540" y="180" width="430" height="92" rx="10" fill="rgba(255,161,152,0.10)" stroke="#ffa198" stroke-width="2.8"/>
+        <text x="566" y="232" class="lbl" fill="#ffa198" font-size="26" font-weight="800">&#x2717;</text>
+        <text x="600" y="212" class="lbl" fill="#e6edf3" font-size="15" font-weight="600">Previously SAFE answers flipped to</text>
+        <text x="600" y="234" class="lbl" fill="#ffa198" font-size="15" font-weight="700">confident, and WRONG</text>
+        <text x="600" y="256" class="lbl" fill="#adbac7" font-size="13">a brand-new failure mode the average hides</text>
+        <rect x="838" y="186" width="124" height="22" rx="11" fill="#ffa198"/>
+        <text x="900" y="201" text-anchor="middle" class="lbl" fill="#0d1117" font-size="11" font-weight="800" letter-spacing="0.04em">THE SURPRISE</text>
+    </svg>
