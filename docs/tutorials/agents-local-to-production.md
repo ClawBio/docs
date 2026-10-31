@@ -1,18 +1,22 @@
-# Build an AI agent locally, then test it like you mean it
+---
+title: "Agents: Local to Production"
+description: Build an AI agent on a local open model, inspect every step, move its tools into an MCP server, and test how its behaviour changes when you swap the model.
+---
 
-*A hands-on primer: four lessons, about two hours, one laptop. Written on 31 October 2026 while preparing for a workshop on taking agents from local to production cloud.*
+# Build an AI Agent Locally, Then Test It Like You Mean It
 
-Building an agent that works in a demo is easy. Knowing what it does when it is wrong is the hard part. I spent the morning before a workshop working through the stack from the bottom up: a local open model, a framework, tools, a protocol for sharing tools, and a comparison across models. Every lesson below is something I ran, and every surprising result is something that actually happened.
+<div class="tutorial-card__header">
+  <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
+  <span class="time-estimate">~2 hours</span>
+</div>
 
-The stack:
+Build a pharmacogene agent on a local open model, watch every step of its loop, move its tools into a separate server, and find out what changes when you swap the model underneath it.
 
-- **Google ADK** (Agent Development Kit) 2.13 as the agent framework
-- **LiteLLM** as the adapter, so one agent can talk to any model
-- **Gemma 4 (e4b)** running locally in **LM Studio**, no cloud at all
-- **FastMCP** for serving tools over the Model Context Protocol
-- **Claude Sonnet 5.5** as the hosted comparison
+**You need a Mac or Linux machine with at least 16 GB of RAM and about 10 GB of free disk. No cloud account is required for sections 1 to 4. Section 5 uses an Anthropic API key for the hosted comparison.**
 
-## Setup (15 minutes)
+The gene data in this tutorial is a three-gene teaching table, not a clinical reference. The agents' answers demonstrate behaviour, not clinical validity.
+
+## 1. Set up (15 minutes)
 
 ```bash
 brew install uv
@@ -25,7 +29,7 @@ adk --version
 
 In LM Studio, download `google/gemma-4-e4b` (6.9 GB), turn on Developer Mode, load the model and start the server. It now answers OpenAI-format requests on `http://localhost:1234/v1`. Two settings worth a thought: leave "start on login" off unless you mean to run another always-on service, and skip LM Link (remote model sharing) if you already reach your other machines over SSH.
 
-## Lesson 1: the anatomy of an agent
+## 2. Build and test an agent
 
 Every agent framework has the same four parts. Here is the whole thing in one file.
 
@@ -76,13 +80,13 @@ sys.exit(asyncio.run(main()))
 
 The test is the part worth copying. It passes only if the tool was called **and** the answer contains a value no model could guess. A test that checks "the agent said something plausible" passes on a hallucination.
 
-**What I learned by breaking it.**
+**What happens when you break it.** These results are from a real run on 31 October 2026.
 
 - The docstring line does nothing when Python runs the function. It is still the only description of the tool the model receives. You can print exactly what the model sees with `FunctionTool(fn)._get_declaration()`.
 - Deleting the docstring did not break it. Replacing it with a lie ("Return the weather for a city") and removing the hint from the instruction did not break it either. The model weighs the name, the parameters and the description together, and `lookup_gene_code(gene: str)` was a strong enough signal on its own. The dangerous case is the reverse: a vague name like `run` or `query`, a misleading description, and twenty tools to choose between. A lying docstring passed this test, which means a test like this would never catch one.
 - Three runs gave three answer formats: the bare code, a sentence, and once the model's own reasoning followed by the code. The instruction said "reply with the code only". Small models follow format instructions loosely. If the format matters, enforce it in code.
 
-## Lesson 2: watch the loop
+## 3. Watch the loop in the ADK web UI
 
 ADK ships a web interface that shows every event. It needs one folder per agent, an `agent.py`, and a variable named exactly `root_agent`.
 
@@ -95,7 +99,7 @@ lesson2/gene_agent/agent.py      ->  root_agent = Agent(..., tools=[lookup_gene,
 cd lesson2 && adk web --port 8000
 ```
 
-I gave the agent two tools over three pharmacogenes (CYP2D6, CYP2C19, DPYD), so the model had to choose. Three findings:
+Give the agent two tools over three pharmacogenes (CYP2D6, CYP2C19, DPYD), so the model has to choose. Three findings from the reference run:
 
 - **Session memory changes the path.** Asked about BRCA1 after an earlier "which genes do you know?", the model answered correctly without calling any tool, because the gene list was already in the conversation.
 - **The stated reasoning is not a record of the action.** In that same turn, its thought said "I should first try to see if BRCA1 is in my known gene list". It never called the tool. Audit the event log, not the narration.
@@ -103,7 +107,7 @@ I gave the agent two tools over three pharmacogenes (CYP2D6, CYP2C19, DPYD), so 
 
 One hidden detail: the thought quoted "You are an agent. Your internal name is 'gene_agent'. The description about you is...". ADK builds that sentence from the agent's `name` and `description` and adds it to the system prompt. Those fields are prompt text, not labels.
 
-## Lesson 3: move the tools out with MCP
+## 4. Move the tools into an MCP server
 
 The Model Context Protocol puts tools in their own server, so any client (ADK, Claude Code, Claude Desktop, Cursor) can use them.
 
@@ -129,9 +133,9 @@ tools=[McpToolset(connection_params=StdioConnectionParams(
 
 From the model's side nothing changes: the events are identical. In the graph view the two named tools become one `McpToolset` box, because the agent now discovers its tools at runtime.
 
-**The best failure of the day.** I added TPMT to the server, saved, opened a new session and asked about it. The agent called the tool, got a clean `not_found` and honestly said it did not know. Every layer behaved correctly and the answer was still wrong, because `adk web` keeps one server process alive across sessions and that process still held the old gene list. After a restart: "TPMT is located on chromosome 6. Its role is to metabolise thiopurines, such as azathioprine." Updating the code is not updating the service. In the cloud this is the old container still serving traffic. It was caught by asking for a value only the new code could produce.
+**Try this: add a gene while the UI is running.** In the reference run, TPMT was added to the server, the file saved, a new session opened and the question asked. The agent called the tool, got a clean `not_found` and honestly said it did not know. Every layer behaved correctly and the answer was still wrong, because `adk web` keeps one server process alive across sessions and that process still held the old gene list. After a restart: "TPMT is located on chromosome 6. Its role is to metabolise thiopurines, such as azathioprine." Updating the code is not updating the service. In the cloud this is the old container still serving traffic. It was caught by asking for a value only the new code could produce.
 
-## Lesson 4: swap the model, keep the test
+## 5. Swap the model, keep the test
 
 Same agent, same tools, same instruction, four questions. Only the model string changed.
 
@@ -148,7 +152,7 @@ The fourth question was built to sit just past the edge of the tools: they know 
 
 **The swap really is one string. The behaviour is not portable.** Every model change needs the test suite rerun.
 
-## What I take into production
+## What this tutorial demonstrates
 
 1. **Test with a positive control.** A value only the tool could produce, checked in code.
 2. **The tool contract is the name, the parameters and the description together.** Keep them true to the code; nothing else will catch drift.
@@ -157,6 +161,4 @@ The fourth question was built to sit just past the edge of the tools: they know 
 5. **A tool server is a running service.** A code change does nothing until the process restarts.
 6. **Probe the boundary.** The dangerous agent is not the one that refuses. It is the one that blends tool evidence and memory into one confident clinical answer, with the join invisible. For genomics, give it a tool that holds the guideline, and make it cite which result each claim came from.
 
-These are the same questions ClawBio is built around: inspectable execution, evidence you can trace, and refusal when the evidence runs out.
-
-*Manuel Corpas*
+These are the questions ClawBio is built around: inspectable execution, evidence you can trace, and refusal when the evidence runs out.

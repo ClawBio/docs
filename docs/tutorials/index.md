@@ -104,6 +104,15 @@ Hands-on guides to get productive with AI coding tools and ClawBio. Each tutoria
   <p class="tutorial-card__desc">Create specialised AI agents with custom instructions, temperature settings, and tool access.</p>
 </a>
 
+<a class="tutorial-card" href="agents-local-to-production/">
+  <div class="tutorial-card__header">
+    <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
+    <span class="time-estimate">2 hours</span>
+  </div>
+  <h3 class="tutorial-card__title">Agents: Local to Production</h3>
+  <p class="tutorial-card__desc">Build an agent on local Gemma 4 with Google ADK, serve its tools over MCP, and test how behaviour changes when you swap the model.</p>
+</a>
+
 <a class="tutorial-card" href="tmux-sessions/">
   <div class="tutorial-card__header">
     <span class="difficulty-badge difficulty-badge--intermediate">Intermediate</span>
