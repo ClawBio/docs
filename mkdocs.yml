@@ -67,6 +67,7 @@ nav:
       - Rules and Memory: tutorials/rules.md
       - GitHub Education: tutorials/github-education.md
       - Building Custom Agents: tutorials/making-agents.md
+      - "Agents: Local to Production": tutorials/agents-local-to-production.md
       - tmux Sessions: tutorials/tmux-sessions.md
       - Telegram Bot: tutorials/telegram-bot.md
     - ClawBio:
